@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class AppStyles {
-  static TextStyle urbanistReqular16(context) {
+  static TextStyle urbanistReqular16(BuildContext context) {
     return TextStyle(
         color: Colors.black,
         fontSize: getResposiveFontSize(context, fontsize: 16),
@@ -9,7 +9,7 @@ abstract class AppStyles {
         fontWeight: FontWeight.w400);
   }
 
-  static TextStyle urbanistReqular14(context) {
+  static TextStyle urbanistReqular14(BuildContext context) {
     return TextStyle(
         color: Colors.black,
         fontSize: getResposiveFontSize(context, fontsize: 14),
@@ -17,7 +17,7 @@ abstract class AppStyles {
         fontWeight: FontWeight.w400);
   }
 
-  static TextStyle urbanistMedium14(context) {
+  static TextStyle urbanistMedium14(BuildContext context) {
     return TextStyle(
         color: Colors.black,
         fontSize: getResposiveFontSize(context, fontsize: 14),
@@ -25,7 +25,7 @@ abstract class AppStyles {
         fontWeight: FontWeight.w500);
   }
 
-  static TextStyle urbanistSemiBold14(context) {
+  static TextStyle urbanistSemiBold14(BuildContext context) {
     return TextStyle(
         color: Colors.black,
         fontSize: getResposiveFontSize(context, fontsize: 14),
@@ -33,7 +33,7 @@ abstract class AppStyles {
         fontWeight: FontWeight.w600);
   }
 
-  static TextStyle urbanistItalic18(context) {
+  static TextStyle urbanistItalic18(BuildContext context) {
     return TextStyle(
         fontStyle: FontStyle.italic,
         color: Colors.black,
@@ -42,7 +42,7 @@ abstract class AppStyles {
         fontWeight: FontWeight.w400);
   }
 
-  static TextStyle urbanistMedium22(context) {
+  static TextStyle urbanistMedium22(BuildContext context) {
     return TextStyle(
         color: const Color(0xff16A99F),
         fontSize: getResposiveFontSize(context, fontsize: 22),
@@ -50,7 +50,7 @@ abstract class AppStyles {
         fontWeight: FontWeight.w500);
   }
 
-  static TextStyle urbanistReqular32(context) {
+  static TextStyle urbanistReqular32(BuildContext context) {
     return TextStyle(
         color: Colors.black,
         fontSize: getResposiveFontSize(context, fontsize: 32),
@@ -58,7 +58,7 @@ abstract class AppStyles {
         fontWeight: FontWeight.w400);
   }
 
-  static TextStyle sansReqular48(context) {
+  static TextStyle sansReqular48(BuildContext context) {
     return TextStyle(
         color: Colors.black,
         fontSize: getResposiveFontSize(context, fontsize: 48),
