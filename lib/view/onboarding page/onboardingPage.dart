@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/view/onboarding%20page/widgets/dotsIndicator.dart';
 import 'package:graduation_project/view/onboarding%20page/widgets/headerOfPage.dart';
@@ -37,7 +39,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           //
           //Header of the page
           //
-          Headerofpage(),
+          HeaderOnboardingpage(),
           //
           //body
           //
@@ -72,6 +74,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
               child: Custombutton(
                 text: 'Get Started',
                 width: MediaQuery.sizeOf(context).width,
+                onTap: () {
+                  Get.toNamed("/signinpage");
+                },
               ),
             ),
           )
