@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 
-class HeaderOnboardingpage extends StatelessWidget {
-  const HeaderOnboardingpage({super.key});
+class HeaderSignInpage extends StatelessWidget {
+  const HeaderSignInpage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: -250,
+      top: -150,
       right: -60,
       left: -60,
       child: ClipOval(
@@ -18,13 +17,15 @@ class HeaderOnboardingpage extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: 500,
           child: Transform.translate(
-            offset: Offset(0, 120),
-            child: FittedBox(
-              fit: BoxFit.none,
-              child: SvgPicture.asset(
-                Assets.imagesLogoInverse,
-                width: 100,
-                height: 100,
+            offset: Offset(0, -10),
+            child: Positioned(
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Image.asset(
+                  Assets.imagesLoginPhoto,
+                  width: 100,
+                  height: 100,
+                ),
               ),
             ),
           ),
