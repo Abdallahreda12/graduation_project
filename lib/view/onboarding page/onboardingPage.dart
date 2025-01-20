@@ -43,22 +43,30 @@ class _OnboardingPageState extends State<OnboardingPage> {
           //
           //body
           //
-          Transform.translate(
-            offset: Offset(0, 300),
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 300,
-                    child: Pageviewcontent(
-                      pageController: pageController,
+          Positioned(
+            top: 280,
+            left: 0,
+            right: 0,
+            bottom: 105,
+            child: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 300,
+                      child: Pageviewcontent(
+                        pageController: pageController,
+                      ),
                     ),
-                  ),
-                  DotsIndicator(
-                    currentCardIndex: currentCardIndex,
-                  ),
-                ],
+                    SizedBox(
+                      height: 20,
+                    ),
+                    DotsIndicator(
+                      currentCardIndex: currentCardIndex,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
