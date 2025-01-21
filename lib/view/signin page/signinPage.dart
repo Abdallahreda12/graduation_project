@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signin%20page/widgets/headerpage.dart';
 
-class Signinpage extends StatefulWidget {
-  const Signinpage({super.key});
+class SigninPage extends StatefulWidget {
+  const SigninPage({super.key});
 
   @override
-  State<Signinpage> createState() => _SigninpageState();
+  State<SigninPage> createState() => _SigninPageState();
 }
 
-class _SigninpageState extends State<Signinpage> {
+class _SigninPageState extends State<SigninPage> {
   late String gmail;
   late String pass;
   final GlobalKey<FormState> globalKey = GlobalKey();
@@ -223,7 +224,9 @@ class _SigninpageState extends State<Signinpage> {
                               style: AppStyles.urbanistReqular14(context),
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed("/signuppage");
+                              },
                               child: Text(
                                 "sign up now",
                                 style: AppStyles.urbanistMedium14(context)

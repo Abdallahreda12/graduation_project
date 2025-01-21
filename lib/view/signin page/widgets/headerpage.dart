@@ -18,14 +18,12 @@ class HeaderSignInpage extends StatelessWidget {
           height: 500,
           child: Transform.translate(
             offset: Offset(0, -10),
-            child: Positioned(
-              child: FittedBox(
-                fit: BoxFit.fill,
-                child: Image.asset(
-                  Assets.imagesLoginPhoto,
-                  width: 100,
-                  height: 100,
-                ),
+            child: FittedBox(
+              fit: BoxFit.fill,
+              child: Image.asset(
+                Assets.imagesLoginPhoto,
+                width: 100,
+                height: 100,
               ),
             ),
           ),
