@@ -4,7 +4,10 @@ import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/util/colors.dart';
 
 class ButtonsRow extends StatelessWidget {
-  const ButtonsRow({super.key});
+  const ButtonsRow(
+      {super.key, this.firstButton = 'Back', this.secondButton = 'Next'});
+  final String firstButton;
+  final String secondButton;
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +17,17 @@ class ButtonsRow extends StatelessWidget {
         Custombutton(
           backGroundColor: ColorsApp.backGroundColor,
           textColor: ColorsApp.primaryColor,
-          text: "Back to Sign in",
+          text: firstButton,
           width: (MediaQuery.sizeOf(context).width - 70) / 2,
           onTap: () {
             Get.back();
           },
         ),
         Custombutton(
-          text: "Next",
+          text: secondButton,
           width: (MediaQuery.sizeOf(context).width - 70) / 2,
           onTap: () {
-            Get.back();
+            Get.toNamed("/signup2page");
           },
         )
       ],

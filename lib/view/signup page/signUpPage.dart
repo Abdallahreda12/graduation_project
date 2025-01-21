@@ -37,7 +37,9 @@ class _SignupPageState extends State<SignupPage> {
             //
             //Count Steps
             //
-            StepsRow(),
+            StepsRow(
+              currentIndex: 1,
+            ),
             SizedBox(
               height: 25,
             ),
@@ -224,7 +226,9 @@ class _SignupPageState extends State<SignupPage> {
             //
             //Buttons
             //
-            ButtonsRow()
+            ButtonsRow(
+              firstButton: "Back to Sign in",
+            )
           ],
         ),
       ),

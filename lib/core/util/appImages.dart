@@ -8,7 +8,7 @@ class Assets {
 
   /// Assets for imagesHeart
   /// assets/images/Heart.svg
-  static const String imagesHeart = "assets/images/Heart.svg";
+  static const String imagesInstitution = "assets/images/institutionLogo.svg";
 
   /// Assets for imagesLoginPhoto
   /// assets/images/LoginPhoto.svg
