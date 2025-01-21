@@ -7,4 +7,5 @@ abstract class ColorsApp {
   static const Color primaryColorOpicaty = Color.fromRGBO(22, 159, 169, 20);
   static const Color secondaryColorOpicaty = Color.fromRGBO(220, 89, 131, 20);
   static const Color backGroundColor = Color(0xffE8F7F6);
+  static const Color backGroundGreyColor = Color(0xffD9D9D9);
 }

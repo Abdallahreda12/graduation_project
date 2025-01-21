@@ -34,7 +34,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return Scaffold(
       body: Stack(
         clipBehavior: Clip.none,
-        fit: StackFit.expand,
         children: [
           //
           //Header of the page
@@ -54,7 +53,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 300,
+                      height: 400,
                       child: Pageviewcontent(
                         pageController: pageController,
                       ),

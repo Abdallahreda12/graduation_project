@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/view/onboarding%20page/onboardingPage.dart';
 import 'package:graduation_project/view/signin%20page/signinPage.dart';
+import 'package:graduation_project/view/signup%20page/signUpPage.dart';
 
 void main() {
   runApp(const MainApp());
@@ -17,7 +18,8 @@ class MainApp extends StatelessWidget {
       home: OnboardingPage(),
       getPages: [
         GetPage(name: "/onboarding", page: () => OnboardingPage()),
-        GetPage(name: "/signinpage", page: () => Signinpage())
+        GetPage(name: "/signinpage", page: () => SigninPage()),
+        GetPage(name: "/signuppage", page: () => SignupPage()),
       ],
     );
   }
