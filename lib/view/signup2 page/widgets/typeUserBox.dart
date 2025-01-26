@@ -5,11 +5,16 @@ import 'package:graduation_project/core/util/styles.dart';
 
 class TypeUserBox extends StatelessWidget {
   const TypeUserBox(
-      {super.key, required this.onDataChanged, required this.text, required this.icon});
+      {super.key,
+      required this.onDataChanged,
+      required this.text,
+      required this.icon,
+      this.isSelected = false});
   //function will give it body in the parent widget and call it in the child widget
   final Function(String) onDataChanged;
   final String text;
   final String icon;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +26,16 @@ class TypeUserBox extends StatelessWidget {
         width: 160,
         height: 160,
         decoration: BoxDecoration(
+          boxShadow: isSelected
+              ? null
+              : [
+                  BoxShadow(
+                    color: Colors.grey.withAlpha(120), // Shadow color
+                    spreadRadius: 3, // Spread of the shadow
+                    blurRadius: 4, // Softness of the shadow
+                    offset: Offset(0, 3), // Horizontal and vertical offset
+                  ),
+                ],
           color: ColorsApp.backGroundColor,
           borderRadius: BorderRadius.circular(25),
         ),

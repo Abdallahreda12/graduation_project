@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/ButtonsRow.dart';
@@ -228,6 +229,9 @@ class _SignupPageState extends State<SignupPage> {
             //
             ButtonsRow(
               firstButton: "Back to Sign in",
+              secondButtonAction: () {
+                Get.toNamed('/signup2page');
+              },
             )
           ],
         ),
