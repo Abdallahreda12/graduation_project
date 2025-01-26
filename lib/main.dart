@@ -5,6 +5,7 @@ import 'package:graduation_project/view/select%20lang%20page/selectLangPage.dart
 import 'package:graduation_project/view/signin%20page/signinPage.dart';
 import 'package:graduation_project/view/signup%20page/signUpPage.dart';
 import 'package:graduation_project/view/signup2%20page/signup2Page.dart';
+import 'package:graduation_project/view/signup3%20page/signup3Page.dart';
 import 'package:graduation_project/view/splash%20page/splashPage.dart';
 
 void main() {
@@ -26,6 +27,21 @@ class MainApp extends StatelessWidget {
         GetPage(name: "/signinpage", page: () => SigninPage()),
         GetPage(name: "/signuppage", page: () => SignupPage()),
         GetPage(name: "/signup2page", page: () => Signup2Page()),
+        GetPage(
+            name: "/signup3userpage",
+            page: () => Signup3Page(
+                  typeOfUser: 'User',
+                )),
+        GetPage(
+            name: "/signup3doctorpage",
+            page: () => Signup3Page(
+                  typeOfUser: 'Doctor',
+                )),
+        GetPage(
+            name: "/signup3institutionpage",
+            page: () => Signup3Page(
+                  typeOfUser: 'Institution',
+                )),
       ],
     );
   }

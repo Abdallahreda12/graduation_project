@@ -5,9 +5,15 @@ import 'package:graduation_project/core/util/colors.dart';
 
 class ButtonsRow extends StatelessWidget {
   const ButtonsRow(
-      {super.key, this.firstButton = 'Back', this.secondButton = 'Next'});
+      {super.key,
+      this.firstButton = 'Back',
+      this.secondButton = 'Next',
+      this.activeNextButton = true,
+      required this.secondButtonAction});
   final String firstButton;
   final String secondButton;
+  final bool activeNextButton;
+  final VoidCallback secondButtonAction;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +29,16 @@ class ButtonsRow extends StatelessWidget {
             Get.back();
           },
         ),
-        Custombutton(
-          text: secondButton,
-          width: (MediaQuery.sizeOf(context).width - 70) / 2,
-          onTap: () {
-            Get.toNamed("/signup2page");
-          },
+        AbsorbPointer(
+          absorbing: !activeNextButton,
+          child: Custombutton(
+            backGroundColor: activeNextButton
+                ? ColorsApp.primaryColor
+                : ColorsApp.primaryColor.withAlpha(120),
+            text: secondButton,
+            width: (MediaQuery.sizeOf(context).width - 70) / 2,
+            onTap: secondButtonAction,
+          ),
         )
       ],
     );

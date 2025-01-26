@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/ButtonsRow.dart';
@@ -13,12 +14,14 @@ class Signup2Page extends StatefulWidget {
 }
 
 class _Signup2PageState extends State<Signup2Page> {
-  late String typeUser;
+  late String typeUser = "";
+  bool isSelected = false;
 
   //when data is changed in typeUserBox will calling and update typeUser variable
   void updateData(String data) {
     setState(() {
       typeUser = data;
+      isSelected = true;
     });
   }
 
@@ -63,16 +66,19 @@ class _Signup2PageState extends State<Signup2Page> {
                 direction: Axis.horizontal,
                 children: [
                   TypeUserBox(
+                    isSelected: typeUser == "User",
                     onDataChanged: updateData,
                     text: "User",
                     icon: Assets.imagesUser,
                   ),
                   TypeUserBox(
+                    isSelected: typeUser == "Doctor",
                     onDataChanged: updateData,
                     text: "Doctor",
                     icon: Assets.imagesDoctor,
                   ),
                   TypeUserBox(
+                    isSelected: typeUser == "Institution",
                     onDataChanged: updateData,
                     text: "Institution",
                     icon: Assets.imagesInstitution,
@@ -84,7 +90,18 @@ class _Signup2PageState extends State<Signup2Page> {
             //
             //Buttons
             //
-            ButtonsRow()
+            ButtonsRow(
+              activeNextButton: isSelected,
+              secondButtonAction: () {
+                if (typeUser == "User") {
+                  Get.toNamed("/signup3userpage");
+                } else if (typeUser == "Doctor") {
+                  Get.toNamed("/signup3doctorpage");
+                } else if (typeUser == "Institution") {
+                  Get.toNamed("/signup3institutionpage");
+                }
+              },
+            )
           ],
         ),
       ),
