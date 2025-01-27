@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
 import 'package:graduation_project/core/util/appImages.dart';
@@ -6,7 +8,6 @@ import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/buttonsRow.dart';
 import 'package:graduation_project/view/signup%20page/widgets/stepsRow.dart';
-import 'package:graduation_project/view/signup2%20page/widgets/typeUserBox.dart';
 import 'package:intl/intl.dart';
 
 class Signup3Page extends StatefulWidget {
@@ -276,8 +277,9 @@ class _Signup3PageState extends State<Signup3Page> {
                     ButtonsRow(
                       secondButtonAction: () {
                         //if (userGlobalKey.currentState!.validate()) {
-                        //Get.toNamed("\")
+                        // Get.toNamed("/signup4userpage");
                         //}
+                        Get.toNamed("/signup4userpage");
                       },
                     ),
                   ],
@@ -366,7 +368,11 @@ class _Signup3PageState extends State<Signup3Page> {
                           child: Column(
                             children: <Widget>[
                               CustomTextField(
-                                onDataChanged: updateData,
+                                onDataChanged: (p0) {
+                                  setState(() {
+                                    doctorName = p0;
+                                  });
+                                },
                                 text: "Full Name",
                                 hintText: "What is your full name",
                                 borderradius: 20,
@@ -509,7 +515,10 @@ class _Signup3PageState extends State<Signup3Page> {
                         //
                         ButtonsRow(
                           secondButtonAction: () {
-                           // if (doctorGlobalKey.currentState!.validate()) {}
+                            // if (doctorGlobalKey.currentState!.validate()) {
+                            // Get.toNamed("/signup4doctorpage");
+                            //}
+                            Get.toNamed("/signup4doctorpage");
                           },
                         ),
                       ],
@@ -650,7 +659,10 @@ class _Signup3PageState extends State<Signup3Page> {
                         //
                         ButtonsRow(
                           secondButtonAction: () {
-                           // if (userGlobalKey.currentState!.validate()) {}
+                            // if (userGlobalKey.currentState!.validate()) {
+                            //Get.toNamed("/signup4institutionpage");
+                            //}
+                            Get.toNamed("/signup4institutionpage");
                           },
                         ),
                       ],
@@ -660,3 +672,4 @@ class _Signup3PageState extends State<Signup3Page> {
               );
   }
 }
+
