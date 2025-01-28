@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:graduation_project/core/Widgets/customCheckBoxList.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
 import 'package:graduation_project/core/util/styles.dart';
@@ -144,9 +146,8 @@ class _Signup4PageState extends State<Signup4Page> {
                   left: 0,
                   child: ButtonsRow(
                     secondButtonAction: () {
-                      //if (userGlobalKey.currentState!.validate()) {
-                      //Get.toNamed("\")
-                      //}
+                      //if (userGlobalKey.currentState!.validate()) {}
+                      Get.toNamed("/signup5userpage");
                     },
                   ),
                 ),
@@ -298,6 +299,7 @@ class _Signup4PageState extends State<Signup4Page> {
                         child: ButtonsRow(
                           secondButtonAction: () {
                             // if (doctorGlobalKey.currentState!.validate()) {}
+                            Get.toNamed("/signup5doctorpage");
                           },
                         ),
                       ),
@@ -424,6 +426,7 @@ class _Signup4PageState extends State<Signup4Page> {
                       child: ButtonsRow(
                         secondButtonAction: () {
                           // if (doctorGlobalKey.currentState!.validate()) {}
+                          Get.toNamed("/signup5institutionpage");
                         },
                       ),
                     ),
