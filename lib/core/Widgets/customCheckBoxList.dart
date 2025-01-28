@@ -25,7 +25,7 @@ class _CustomCheckListTileState extends State<CustomCheckListTile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Age Range of animals that you preferred',
+          widget.question,
           style: AppStyles.urbanistMedium16(context),
         ),
         SizedBox(height: 5),
