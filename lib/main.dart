@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:graduation_project/view/onboarding%20page/onboardingPage.dart';
 import 'package:graduation_project/view/select%20lang%20page/selectLangPage.dart';
 import 'package:graduation_project/view/signin%20page/signinPage.dart';
+import 'package:graduation_project/view/signup%20completed%20page/signupCompletedPage.dart';
 import 'package:graduation_project/view/signup%20page/signUpPage.dart';
 import 'package:graduation_project/view/signup2%20page/signup2Page.dart';
 import 'package:graduation_project/view/signup3%20page/signup3Page.dart';
@@ -74,6 +75,9 @@ class MainApp extends StatelessWidget {
             page: () => Signup5Page(
                   typeOfUser: 'Institution',
                 )),
+        GetPage(
+            name: "/signupcompletedpage",
+            page: () =>SignupCompletedPage()),
       ],
     );
   }
