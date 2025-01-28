@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/Widgets/customCheckBoxList.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
-import 'package:graduation_project/core/util/appImages.dart';
-import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/buttonsRow.dart';
 import 'package:graduation_project/view/signup%20page/widgets/stepsRow.dart';
-import 'package:intl/intl.dart';
 
 class Signup4Page extends StatefulWidget {
   const Signup4Page({super.key, this.typeOfUser = ""});
@@ -17,7 +13,7 @@ class Signup4Page extends StatefulWidget {
 }
 
 class _Signup4PageState extends State<Signup4Page> {
-  //variables used in signup3 page for user
+  //variables used in signup4 page for user
   late String ageRangeOfAnimal;
   late String areYouHelper;
   late String lookingForAdoption;
@@ -25,24 +21,20 @@ class _Signup4PageState extends State<Signup4Page> {
   late String haveYouAdoptBefore;
   late String haveExperienceWithAnimalCare;
   ////////////////////////////////////////
-  //variables used in signup3 page for doctor
-  final GlobalKey<FormState> doctorGlobalKey = GlobalKey();
-  TextEditingController doctorDateofBirthController = TextEditingController();
-  DateTime? doctorSelectedDate;
-  late String doctorName;
-  String? doctorSelectedGender;
-  late String doctorEmailAddress;
-  late String doctorPhoneNumber;
+  //variables used in signup4 page for doctor
+  late String doctorSpecialization;
+  late String doctorDegrees;
+  late String doctorLicensing;
+  late String doctorYearsExperience;
+  late String clinicName;
+  late String clinicAddress;
   ////////////////////////////////////////
-  /////variables used in signup3 page for institution
-  final GlobalKey<FormState> institutionGlobalKey = GlobalKey();
-  late String institutionName;
-  late String institutionDescription;
-  late String institutionRegistrationDetails;
-  late String institutionWebsite;
-  late String institutionFacebookLink;
-  late String institutionEmailAddress;
-  late String institutionPhoneNumber;
+  /////variables used in signup4 page for institution
+  late String institutionOperatingHours;
+  late String institutionTypesAnimals;
+  late String institutionServiceAreas;
+  late String institutionMissionStatment;
+  late String institutionAdoptonPolicies;
   /////////////////////////////////////////
   void updateData(String data) {
     setState(() {
@@ -54,478 +46,388 @@ class _Signup4PageState extends State<Signup4Page> {
   Widget build(BuildContext context) {
     return widget.typeOfUser == "User"
         //
-        //signup3 page for user
+        //signup4 page for user
         //
         ? Scaffold(
             resizeToAvoidBottomInset: true,
             body: Padding(
               padding: const EdgeInsets.all(25),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 25),
-                    //
-                    //Steps Row
-                    //
-                    StepsRow(currentIndex: 4),
-                    const SizedBox(height: 25),
-                    Text(
-                      "Personal Information",
-                      style: AppStyles.urbanistMedium22(context),
-                    ),
-                    const SizedBox(height: 25),
-                    CustomCheckListTile(
-                      options: ["Puppy/Kitten", "Young", "Adult"],
-                      question: "Age Range of animals that you preferred",
-                      onDataChanged: (String e) {
-                        setState(() {
-                          ageRangeOfAnimal = e;
-                        });
-                      },
-                    ),
-                    CustomCheckListTile(
-                      options: [
-                        "Yes",
-                        "No",
-                      ],
-                      question: "Are you helper?",
-                      onDataChanged: (String e) {
-                        setState(() {
-                          areYouHelper = e;
-                        });
-                      },
-                    ),
-                    CustomCheckListTile(
-                      options: [
-                        "Yes",
-                        "No",
-                      ],
-                      question: "Are you looking for adoption?",
-                      onDataChanged: (String e) {
-                        setState(() {
-                          lookingForAdoption = e;
-                        });
-                      },
-                    ),
+              child: Stack(fit: StackFit.expand, children: [
+                SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 25),
+                      //
+                      //Steps Row
+                      //
+                      StepsRow(currentIndex: 4),
+                      const SizedBox(height: 25),
+                      Text(
+                        "Personal Information",
+                        style: AppStyles.urbanistMedium22(context),
+                      ),
+                      const SizedBox(height: 25),
+                      CustomCheckListTile(
+                        options: ["Puppy/Kitten", "Young", "Adult"],
+                        question: "Age Range of animals that you preferred",
+                        onDataChanged: (String e) {
+                          setState(() {
+                            ageRangeOfAnimal = e;
+                          });
+                        },
+                      ),
+                      CustomCheckListTile(
+                        options: [
+                          "Yes",
+                          "No",
+                        ],
+                        question: "Are you helper?",
+                        onDataChanged: (String e) {
+                          setState(() {
+                            areYouHelper = e;
+                          });
+                        },
+                      ),
+                      CustomCheckListTile(
+                        options: [
+                          "Yes",
+                          "No",
+                        ],
+                        question: "Are you looking for adoption?",
+                        onDataChanged: (String e) {
+                          setState(() {
+                            lookingForAdoption = e;
+                          });
+                        },
+                      ),
 
-                    CustomCheckListTile(
-                      options: ["Cat", "Dog", "Other (e.g., rabbit, bird)"],
-                      question: "Animals adoption preferred",
-                      onDataChanged: (String e) {
-                        setState(() {
-                          animalsAdoptionPreferred = e;
-                        });
-                      },
-                    ),
-                    CustomCheckListTile(
-                      options: [
-                        "Yes",
-                        "No",
-                      ],
-                      question: "Have you adopt before?",
-                      onDataChanged: (String e) {
-                        setState(() {
-                          haveYouAdoptBefore = e;
-                        });
-                      },
-                    ),
-                    CustomCheckListTile(
-                      options: ["Yes", "No", "Little knowledge"],
-                      question: "Do you have experience with animal care",
-                      onDataChanged: (String e) {
-                        setState(() {
-                          haveExperienceWithAnimalCare = e;
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 25),
-                    //
-                    // Buttons Row
-                    //
-                    ButtonsRow(
-                      secondButtonAction: () {
-                        //if (userGlobalKey.currentState!.validate()) {
-                        //Get.toNamed("\")
-                        //}
-                      },
-                    ),
-                  ],
+                      CustomCheckListTile(
+                        options: ["Cat", "Dog", "Other (e.g., rabbit, bird)"],
+                        question: "Animals adoption preferred",
+                        onDataChanged: (String e) {
+                          setState(() {
+                            animalsAdoptionPreferred = e;
+                          });
+                        },
+                      ),
+                      CustomCheckListTile(
+                        options: [
+                          "Yes",
+                          "No",
+                        ],
+                        question: "Have you adopt before?",
+                        onDataChanged: (String e) {
+                          setState(() {
+                            haveYouAdoptBefore = e;
+                          });
+                        },
+                      ),
+                      CustomCheckListTile(
+                        options: ["Yes", "No", "Little knowledge"],
+                        question: "Do you have experience with animal care",
+                        onDataChanged: (String e) {
+                          setState(() {
+                            haveExperienceWithAnimalCare = e;
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 25),
+                    ],
+                  ),
+                ), //
+                // Buttons Row
+                //
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  child: ButtonsRow(
+                    secondButtonAction: () {
+                      //if (userGlobalKey.currentState!.validate()) {
+                      //Get.toNamed("\")
+                      //}
+                    },
+                  ),
                 ),
-              ),
+              ]),
             ),
           )
         //
-        //signup3 page for doctor
+        //signup4 page for doctor
         //
         : widget.typeOfUser == "Doctor"
             ? Scaffold(
                 resizeToAvoidBottomInset: true,
                 body: Padding(
                   padding: const EdgeInsets.all(25),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 25),
-                        //
-                        //Steps Row
-                        //
-                        StepsRow(currentIndex: 3),
-                        const SizedBox(height: 25),
-                        Text(
-                          "Personal Information",
-                          style: AppStyles.urbanistMedium22(context),
-                        ),
-                        const SizedBox(height: 25),
-                        //
-                        //Upload photo
-                        //
-                        Center(
-                          child: Column(
-                            children: [
-                              // Avatar and Upload Button
-                              Container(
-                                width: 150,
-                                height: 150,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withAlpha(80),
-                                      spreadRadius: 5,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 5),
-                                    ),
-                                  ],
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 25),
+                            //
+                            //Steps Row
+                            //
+                            StepsRow(currentIndex: 4),
+                            //
+                            //Professional Credentials
+                            //
+                            const SizedBox(height: 25),
+                            Text(
+                              "Clinic Details",
+                              style: AppStyles.urbanistMedium22(context),
+                            ),
+                            const SizedBox(height: 25),
+                            CustomTextField(
+                              onDataChanged: (p0) {
+                                setState(() {
+                                  doctorSpecialization = p0;
+                                });
+                              },
+                              text: "Specialization",
+                              hintText: "What’s your Specialized?",
+                              borderradius: 20,
+                              validator: (value) {
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              onDataChanged: (p0) {
+                                setState(() {
+                                  doctorDegrees = p0;
+                                });
+                              },
+                              text: "Degrees and Certifications",
+                              hintText: "Your Academic degree",
+                              borderradius: 20,
+                              validator: (value) {
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              onDataChanged: (p0) {
+                                setState(() {
+                                  doctorLicensing = p0;
+                                });
+                              },
+                              text: "Licensing Information",
+                              hintText: "Your license number",
+                              borderradius: 20,
+                              validator: (value) {
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              onDataChanged: (p0) {
+                                setState(() {
+                                  doctorYearsExperience = p0;
+                                });
+                              },
+                              text: "Years Experience",
+                              hintText: "Years Experience",
+                              borderradius: 20,
+                              validator: (value) {
+                                return null;
+                              },
+                            ),
+                            //
+                            //Clinic Details
+                            //
+                            const SizedBox(height: 25),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Clinic Details",
+                                  style: AppStyles.urbanistMedium22(context),
                                 ),
-                                child: CircleAvatar(
-                                  backgroundColor: ColorsApp.primaryColor,
-                                  child:
-                                      Image.asset(Assets.imagesAnonymousAvatar),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                "Profile Photo",
-                                style: AppStyles.urbanistMedium22(context)
-                                    .copyWith(
-                                  color: Color(0xff004A5A),
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const SizedBox(height: 15),
-                              Custombutton(
-                                text: "Upload Picture",
-                                width: 180,
-                                onTap: () {
-                                  // Handle upload action
-                                },
-                                borderradius: 50,
-                              ),
-                            ],
-                          ),
+                                Text(
+                                  "Not required if you don't have clinic",
+                                  style: AppStyles.urbanistReqular14(context)
+                                      .copyWith(color: Colors.grey),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            CustomTextField(
+                              onDataChanged: (p0) {
+                                setState(() {
+                                  clinicName = p0;
+                                });
+                              },
+                              text: "Clinic Name",
+                              hintText: "What’s your clinic name?",
+                              borderradius: 20,
+                              validator: (value) {
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              onDataChanged: (p0) {
+                                setState(() {
+                                  clinicAddress = p0;
+                                });
+                              },
+                              text: "Clinic Address",
+                              hintText: "City/Pincode",
+                              borderradius: 20,
+                              validator: (value) {
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 25),
+                            //
+                            // Buttons Row
+                            //
+                          ],
                         ),
-                        const SizedBox(height: 25),
-                        //
-                        // Form Fields
-                        //
-                        Form(
-                          key: doctorGlobalKey,
-                          child: Column(
-                            children: <Widget>[
-                              CustomTextField(
-                                onDataChanged: updateData,
-                                text: "Full Name",
-                                hintText: "What is your full name",
-                                borderradius: 20,
-                                validator: (value) =>
-                                    value!.isEmpty ? "Name is required" : null,
-                              ),
-                              const SizedBox(height: 10),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Date of Birth",
-                                      style:
-                                          AppStyles.urbanistReqular14(context)),
-                                  const SizedBox(height: 5),
-                                  TextFormField(
-                                    controller: doctorDateofBirthController,
-                                    readOnly: true,
-                                    decoration: InputDecoration(
-                                      hintText: "Date of birth",
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(
-                                            color: ColorsApp.primaryColor),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(width: 2),
-                                      ),
-                                      suffixIcon: Icon(Icons.calendar_today),
-                                    ),
-                                    onTap: () async {
-                                      DateTime? pickedDate =
-                                          await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime(1950),
-                                        lastDate: DateTime.now(),
-                                      );
-                                      if (pickedDate != null) {
-                                        setState(
-                                          () {
-                                            doctorSelectedDate = pickedDate;
-                                            doctorDateofBirthController.text =
-                                                DateFormat('yyyy-MM-dd').format(
-                                                    doctorSelectedDate!);
-                                          },
-                                        );
-                                      }
-                                    },
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return "Please select your date of birth";
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 10),
-                              // Gender Dropdown
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Gender",
-                                    style: AppStyles.urbanistMedium14(context),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  DropdownButtonFormField(
-                                    decoration: InputDecoration(
-                                      hintText: "Select Gender",
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(
-                                            color: ColorsApp.primaryColor),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(width: 2),
-                                      ),
-                                    ),
-                                    value: doctorSelectedGender,
-                                    items: ['Male', 'Female']
-                                        .map((gender) => DropdownMenuItem(
-                                              value: gender,
-                                              child: Text(gender),
-                                            ))
-                                        .toList(),
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          doctorSelectedGender = value;
-                                        },
-                                      );
-                                    },
-                                    validator: (value) => value == null
-                                        ? "Please select your gender"
-                                        : null,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 10),
-                              // Email Field
-                              CustomTextField(
-                                onDataChanged: (value) {
-                                  setState(() {
-                                    doctorEmailAddress = value;
-                                  });
-                                },
-                                text: "Email Address",
-                                hintText: "What’s your email address",
-                                borderradius: 20,
-                                validator: (value) => value!.contains('@')
-                                    ? null
-                                    : "Please enter a valid email",
-                              ),
-                              const SizedBox(height: 10),
-                              // Phone Number Field
-                              CustomTextField(
-                                onDataChanged: (value) {
-                                  setState(() {
-                                    doctorPhoneNumber = value;
-                                  });
-                                },
-                                text: "Phone Number",
-                                hintText: "What’s your phone number",
-                                borderradius: 20,
-                                validator: (value) => value!.length <= 11
-                                    ? "Please enter a valid phone number"
-                                    : null,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 25),
-                        //
-                        // Buttons Row
-                        //
-                        ButtonsRow(
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: ButtonsRow(
                           secondButtonAction: () {
                             // if (doctorGlobalKey.currentState!.validate()) {}
                           },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               )
             //
-            //signup3 page for institution
+            //signup4 page for institution
             //
             : Scaffold(
                 resizeToAvoidBottomInset: true,
                 body: Padding(
                   padding: const EdgeInsets.all(25),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 25),
-                        //
-                        //Steps Row
-                        //
-                        StepsRow(currentIndex: 3),
-                        const SizedBox(height: 25),
-                        Text(
-                          "Institution Information",
-                          style: AppStyles.urbanistMedium22(context),
-                        ),
-                        const SizedBox(height: 25),
-                        //
-                        // Form Fields
-                        //
-                        Form(
-                          key: institutionGlobalKey,
-                          child: Column(
-                            children: [
-                              CustomTextField(
-                                onDataChanged: (p0) {
-                                  setState(() {
-                                    institutionName = p0;
-                                  });
-                                },
-                                text: "Name of Institution",
-                                hintText: "What is your institution name",
-                                borderradius: 20,
-                                validator: (value) =>
-                                    value!.isEmpty ? "Name is required" : null,
-                              ),
-                              const SizedBox(height: 10),
-                              CustomTextField(
-                                onDataChanged: (p0) {
-                                  //
-                                  //if there is here logic error this is previos code
-                                  // onDataChanged: updateData
-                                  setState(() {
-                                    institutionDescription = p0;
-                                  });
-                                },
-                                text: "Description",
-                                hintText:
-                                    "Describe the purpose of the institution",
-                                borderradius: 20,
-                                validator: (value) => value!.isEmpty
-                                    ? "required to provide summrization about institution"
-                                    : null,
-                              ),
-                              const SizedBox(height: 10),
-                              CustomTextField(
-                                onDataChanged: (p0) {
-                                  setState(() {
-                                    institutionRegistrationDetails = p0;
-                                  });
-                                },
-                                text: "Registration Details",
-                                hintText: "License or registration number",
-                                borderradius: 20,
-                                validator: (value) => value!.isEmpty
-                                    ? "please provide your License number"
-                                    : null,
-                              ),
-                              const SizedBox(height: 10),
-                              CustomTextField(
-                                onDataChanged: (value) {},
-                                text: "Email Address",
-                                hintText: "What’s your email address",
-                                borderradius: 20,
-                                validator: (value) => value!.contains('@')
-                                    ? null
-                                    : "Please enter a valid email",
-                              ),
-                              const SizedBox(height: 10),
-                              // Phone Number Field
-                              CustomTextField(
-                                onDataChanged: (value) {},
-                                text: "Phone Number",
-                                hintText: "What’s your phone number",
-                                borderradius: 20,
-                                validator: (value) => value!.length <= 11
-                                    ? "Please enter a valid phone number"
-                                    : null,
-                              ),
-                              const SizedBox(height: 10),
-                              CustomTextField(
-                                onDataChanged: (p0) {
-                                  setState(() {
-                                    institutionWebsite = p0;
-                                  });
-                                },
-                                text: "Website",
-                                hintText: "Institution’s Website",
-                                borderradius: 20,
-                                validator: (value) {
-                                  return null;
-                                },
-                              ),
-                              const SizedBox(height: 10),
-                              CustomTextField(
-                                onDataChanged: (p0) {
-                                  setState(() {
-                                    institutionFacebookLink = p0;
-                                  });
-                                },
-                                text: "Facebook link",
-                                hintText: "Institution’s faceBook link",
-                                borderradius: 20,
-                                validator: (value) {
-                                  return null;
-                                },
-                              ),
-                            ],
+                  child: Stack(fit: StackFit.expand, children: [
+                    SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 25),
+                          //
+                          //Steps Row
+                          //
+                          StepsRow(currentIndex: 4),
+                          //
+                          //Professional Credentials
+                          //
+                          const SizedBox(height: 25),
+                          Text(
+                            "Operational Details",
+                            style: AppStyles.urbanistMedium22(context),
                           ),
-                        ),
-                        const SizedBox(height: 40),
-                        //
-                        // Buttons Row
-                        //
-                        ButtonsRow(
-                          secondButtonAction: () {
-                            // if (userGlobalKey.currentState!.validate()) {}
-                          },
-                        ),
-                      ],
+                          const SizedBox(height: 25),
+                          CustomTextField(
+                            onDataChanged: (p0) {
+                              setState(() {
+                                institutionOperatingHours = p0;
+                              });
+                            },
+                            text: "Operating Hours",
+                            hintText: "What’s your Operating Hours?",
+                            borderradius: 20,
+                            validator: (value) {
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          CustomTextField(
+                            onDataChanged: (p0) {
+                              setState(() {
+                                institutionTypesAnimals = p0;
+                              });
+                            },
+                            text: "Types of Animals",
+                            hintText:
+                                " Specify the types of animals they handle",
+                            borderradius: 20,
+                            validator: (value) {
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          CustomTextField(
+                            onDataChanged: (p0) {
+                              setState(() {
+                                institutionServiceAreas = p0;
+                              });
+                            },
+                            text: "Service Areas",
+                            hintText:
+                                "Geographic regions the institution serves",
+                            borderradius: 20,
+                            validator: (value) {
+                              return null;
+                            },
+                          ),
+                          //
+                          //Institution Mission and Policies
+                          //
+                          const SizedBox(height: 25),
+                          Text(
+                            "Institution Mission and Policies",
+                            style: AppStyles.urbanistMedium22(context),
+                          ),
+                          const SizedBox(height: 20),
+                          CustomTextField(
+                            onDataChanged: (p0) {
+                              setState(() {
+                                institutionMissionStatment = p0;
+                              });
+                            },
+                            text: "Mission Statement",
+                            hintText:
+                                "brief description of the institution's goals and values.",
+                            borderradius: 20,
+                            validator: (value) {
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          CustomTextField(
+                            onDataChanged: (p0) {
+                              setState(() {
+                                institutionAdoptonPolicies = p0;
+                              });
+                            },
+                            text: "Adoption Policies",
+                            hintText:
+                                "Rules regarding who can adopt and under what conditions.",
+                            borderradius: 20,
+                            validator: (value) {
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 25),
+                        ],
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: ButtonsRow(
+                        secondButtonAction: () {
+                          // if (doctorGlobalKey.currentState!.validate()) {}
+                        },
+                      ),
+                    ),
+                  ]),
                 ),
               );
   }
