@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/ButtonsRow.dart';
+import 'package:graduation_project/view/signup%20page/widgets/FormSignUpPage.dart';
 import 'package:graduation_project/view/signup%20page/widgets/stepsRow.dart';
 
 class SignupPage extends StatefulWidget {
@@ -17,12 +17,8 @@ class _SignupPageState extends State<SignupPage> {
   late String name;
   late String pass;
   final GlobalKey<FormState> globalKey = GlobalKey();
-
   final TextEditingController emailController = TextEditingController();
-
-  Color iconPassColor = Colors.grey;
-  Color iconGmailColor = Colors.grey;
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,174 +50,24 @@ class _SignupPageState extends State<SignupPage> {
             //
             //textFields
             //
-            Form(
-              key: globalKey,
-              //
-              //column contains all textfields
-              //
-              child: Column(
-                children: [
-                  //
-                  //first textfield
-                  //
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Name",
-                        style: AppStyles.urbanistMedium14(context),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        onChanged: (value) {
-                          setState(
-                            () {
-                              name = value;
-                            },
-                          );
-                        },
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorsApp.primaryColor),
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 2),
-                          ),
-                          hintText: "What’s your full name",
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  //
-                  //Second Textfield
-                  //
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Email",
-                        style: AppStyles.urbanistMedium14(context),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        controller: emailController,
-                        validator: (value) {
-                          bool validGmail =
-                              RegExp(r'^[a-zA-Z0-9._%+-]+@gmail\.com$')
-                                  .hasMatch(value!);
-                          if (value.isEmpty || validGmail == false) {
-                            return "invaild Email";
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          setState(
-                            () {
-                              gmail = value;
-                            },
-                          );
-                        },
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorsApp.primaryColor),
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 2),
-                          ),
-                          hintText: "YourGmail@gmail.com",
-                          suffixIcon: GestureDetector(
-                            child: Icon(
-                              Icons.alternate_email_sharp,
-                              color: iconGmailColor,
-                            ),
-                            onTap: () {
-                              setState(
-                                () {
-                                  if (iconGmailColor == Colors.grey) {
-                                    iconGmailColor = ColorsApp.primaryColor;
-                                    emailController.text = "@gmail.com";
-                                  } else {
-                                    iconGmailColor = Colors.grey;
-                                    emailController.text = "";
-                                  }
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  //
-                  //third textfield
-                  //
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Password",
-                        style: AppStyles.urbanistMedium14(context),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty || value.length < 6) {
-                            return "invaild Password";
-                          } else {
-                            setState(
-                              () {
-                                pass = value;
-                              },
-                            );
-                          }
-                          return null;
-                        },
-                        obscureText:
-                            iconPassColor == Colors.grey ? false : true,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorsApp.primaryColor),
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 2),
-                          ),
-                          hintText: "Strong Password Please",
-                          suffixIcon: GestureDetector(
-                            child: Icon(
-                              Icons.visibility_off,
-                              color: iconPassColor,
-                            ),
-                            onTap: () {
-                              iconPassColor == Colors.red
-                                  ? iconPassColor = Colors.grey
-                                  : iconPassColor = Colors.red;
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                ],
-              ),
+            FormSignUpPage(
+              globalKey: globalKey,
+              emailController: emailController,
+              onNameChanged: (p0) {
+                setState(() {
+                  name = p0;
+                });
+              },
+              onEmailChanged: (p0) {
+                setState(() {
+                  gmail = p0;
+                });
+              },
+              onPasswordChanged: (p0) {
+                setState(() {
+                  pass = p0;
+                });
+              },
             ),
             Expanded(child: SizedBox()),
             //
