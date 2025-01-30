@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:graduation_project/core/Widgets/customCheckBoxList.dart';
-import 'package:graduation_project/core/Widgets/customTextField.dart';
-import 'package:graduation_project/core/util/colors.dart';
-import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/buttonsRow.dart';
-import 'package:graduation_project/view/signup%20page/widgets/stepsRow.dart';
+import 'package:graduation_project/view/signup5%20page/widgets/custom%20signup5%20textfield%20column/customSignUp5TextFieldDoctorColumn.dart';
+import 'package:graduation_project/view/signup5%20page/widgets/custom%20signup5%20textfield%20column/customSignUp5TextFieldInstitutionColumn.dart';
+import 'package:graduation_project/view/signup5%20page/widgets/custom%20signup5%20textfield%20column/customSignup5TextFieldUserColumn.dart';
 
 class Signup5Page extends StatefulWidget {
   const Signup5Page({super.key, this.typeOfUser = ""});
@@ -18,18 +15,18 @@ class Signup5Page extends StatefulWidget {
 class _Signup5PageState extends State<Signup5Page> {
   //variables used in signup5 page for user
   late double usersliderValue = 23;
-  late String userturnOnNotification;
-  late String userLocation;
+  late String userturnOnNotification = "";
+  late String userLocation = "";
   ////////////////////////////////////////
   //variables used in signup5 page for doctor
   late double doctorSliderValue = 23;
-  late String doctorturnOnNotification;
-  late String doctorLocation;
-  late String doctorHomeVisits;
+  late String doctorturnOnNotification = "";
+  late String doctorLocation = "";
+  late String doctorHomeVisits = "";
   ////////////////////////////////////////
   /////variables used in signup5 page for institution
   late double institutionliderValue = 23;
-  late String institutionLocation;
+  late String institutionLocation = "";
   /////////////////////////////////////////
   void updateData(String data) {
     setState(
@@ -53,89 +50,28 @@ class _Signup5PageState extends State<Signup5Page> {
                 fit: StackFit.expand,
                 children: [
                   SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 25),
-                        //
-                        //Steps Row
-                        //
-                        StepsRow(currentIndex: 5),
-                        const SizedBox(height: 25),
-                        Text(
-                          "Additional Information",
-                          style: AppStyles.urbanistMedium22(context),
-                        ),
-                        const SizedBox(height: 25),
-                        CustomTextField(
-                          onDataChanged: (p0) {
-                            setState(
-                              () {
-                                userLocation = p0;
-                              },
-                            );
-                          },
-                          text: "location",
-                          hintText: "Where are you located? (City/ZIP Code)",
-                          borderradius: 20,
-                          validator: (value) {
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Radius",
-                              style: AppStyles.urbanistMedium14(context),
-                            ),
-                            Text(
-                              "How far are you willing to travel to adopt a pet or volunteer?",
-                              style: AppStyles.urbanistReqular14(context)
-                                  .copyWith(color: Colors.grey),
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              child: Slider(
-                                activeColor: ColorsApp.primaryColor,
-                                value: usersliderValue,
-                                min: 0,
-                                max: 200,
-                                divisions: 100,
-                                onChanged: (value) {
-                                  setState(
-                                    () {
-                                      usersliderValue = value;
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                            Text(
-                              "${usersliderValue.toInt().toString()} KM",
-                              style: AppStyles.urbanistReqular16(context)
-                                  .copyWith(color: ColorsApp.primaryColor),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        CustomCheckListTile(
-                          options: ["Yes", "No"],
-                          question: "Turn on notification ",
-                          onDataChanged: (p0) {
-                            setState(
-                              () {
-                                userturnOnNotification = p0;
-                              },
-                            );
-                          },
-                        ),
-                      ],
+                    child: CustomSignUp5TextFieldUserColumn(
+                      usersliderValue: usersliderValue,
+                      onSliderChanged: (value) {
+                        setState(() {
+                          usersliderValue = value;
+                        });
+                      },
+                      userLocation: userLocation,
+                      onLocationChanged: (value) {
+                        setState(() {
+                          userLocation = value;
+                        });
+                      },
+                      userturnOnNotification: userturnOnNotification,
+                      onNotificationChanged: (value) {
+                        setState(() {
+                          userturnOnNotification = value;
+                        });
+                      },
                     ),
-                  ), //
+                  ),
+                  //
                   // Buttons Row
                   //
                   Positioned(
@@ -166,100 +102,28 @@ class _Signup5PageState extends State<Signup5Page> {
                     fit: StackFit.expand,
                     children: [
                       SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 25),
-                            //
-                            //Steps Row
-                            //
-                            StepsRow(currentIndex: 5),
-                            const SizedBox(height: 25),
-                            Text(
-                              "Additional Information",
-                              style: AppStyles.urbanistMedium22(context),
-                            ),
-                            const SizedBox(height: 25),
-                            CustomTextField(
-                              onDataChanged: (p0) {
-                                setState(
-                                  () {
-                                    doctorLocation = p0;
-                                  },
-                                );
-                              },
-                              text: "location",
-                              hintText:
-                                  "Where are you located? (City/ZIP Code)",
-                              borderradius: 20,
-                              validator: (value) {
-                                return null;
-                              },
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Radius",
-                                  style: AppStyles.urbanistMedium14(context),
-                                ),
-                                Text(
-                                  "How far are you willing to travel to adopt a pet or volunteer?",
-                                  style: AppStyles.urbanistReqular14(context)
-                                      .copyWith(color: Colors.grey),
-                                ),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: Slider(
-                                    activeColor: ColorsApp.primaryColor,
-                                    value: doctorSliderValue,
-                                    min: 0,
-                                    max: 200,
-                                    divisions: 100,
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          doctorSliderValue = value;
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Text(
-                                  "${doctorSliderValue.toInt().toString()} KM",
-                                  style: AppStyles.urbanistReqular16(context)
-                                      .copyWith(color: ColorsApp.primaryColor),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            CustomCheckListTile(
-                              options: ["Yes", "No"],
-                              question: "Home Visits ",
-                              onDataChanged: (p0) {
-                                setState(
-                                  () {
-                                    doctorHomeVisits = p0;
-                                  },
-                                );
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                            CustomCheckListTile(
-                              options: ["Yes", "No"],
-                              question: "Turn on notification ",
-                              onDataChanged: (p0) {
-                                setState(
-                                  () {
-                                    doctorturnOnNotification = p0;
-                                  },
-                                );
-                              },
-                            ),
-                          ],
+                        child: CustomSignUp5TextFieldDoctorColumn(
+                          doctorSliderValue: doctorSliderValue,
+                          onSliderChanged: (value) {
+                            setState(() {
+                              doctorSliderValue = value;
+                            });
+                          },
+                          onLocationChanged: (value) {
+                            setState(() {
+                              doctorLocation = value;
+                            });
+                          },
+                          onHomeVisitsChanged: (value) {
+                            setState(() {
+                              doctorHomeVisits = value;
+                            });
+                          },
+                          onTurnOnNotificationChanged: (value) {
+                            setState(() {
+                              doctorturnOnNotification = value;
+                            });
+                          },
                         ),
                       ), //
                       // Buttons Row
@@ -292,78 +156,20 @@ class _Signup5PageState extends State<Signup5Page> {
                     fit: StackFit.expand,
                     children: [
                       SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 25),
-                            //
-                            //Steps Row
-                            //
-                            StepsRow(currentIndex: 5),
-                            const SizedBox(height: 25),
-                            Text(
-                              "Additional Information",
-                              style: AppStyles.urbanistMedium22(context),
-                            ),
-                            const SizedBox(height: 25),
-                            CustomTextField(
-                              onDataChanged: (p0) {
-                                setState(
-                                  () {
-                                    institutionLocation = p0;
-                                  },
-                                );
-                              },
-                              text: "location",
-                              hintText:
-                                  "Where are you located? (City/ZIP Code)",
-                              borderradius: 20,
-                              validator: (value) {
-                                return null;
-                              },
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Radius",
-                                  style: AppStyles.urbanistMedium14(context),
-                                ),
-                                Text(
-                                  "How far are you willing to travel to adopt a pet or volunteer?",
-                                  style: AppStyles.urbanistReqular14(context)
-                                      .copyWith(color: Colors.grey),
-                                ),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: Slider(
-                                    activeColor: ColorsApp.primaryColor,
-                                    value: institutionliderValue,
-                                    min: 0,
-                                    max: 200,
-                                    divisions: 100,
-                                    onChanged: (value) {
-                                      setState(
-                                        () {
-                                          institutionliderValue = value;
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Text(
-                                  "${doctorSliderValue.toInt().toString()} KM",
-                                  style: AppStyles.urbanistReqular16(context)
-                                      .copyWith(color: ColorsApp.primaryColor),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ), //
+                          child: CustomSignUp5TextFieldInstitutionColumn(
+                        institutionSliderValue: institutionliderValue,
+                        onSliderChanged: (value) {
+                          setState(() {
+                            institutionliderValue = value;
+                          });
+                        },
+                        onLocationChanged: (value) {
+                          setState(() {
+                            institutionLocation = value;
+                          });
+                        },
+                      )),
+                      //
                       // Buttons Row
                       //
                       Positioned(
