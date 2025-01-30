@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:graduation_project/core/Widgets/customButton.dart';
-import 'package:graduation_project/core/Widgets/customTextField.dart';
-import 'package:graduation_project/core/util/appImages.dart';
-import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/buttonsRow.dart';
 import 'package:graduation_project/view/signup%20page/widgets/stepsRow.dart';
-import 'package:intl/intl.dart';
+import 'package:graduation_project/view/signup3%20page/widgets/CustomUploadPhotoSignUp3DoctorPage.dart';
+import 'package:graduation_project/view/signup3%20page/widgets/CustomUploadPhotoSignUp3UserPage%20copy.dart';
+import 'package:graduation_project/view/signup3%20page/widgets/custom%20Signup3%20Form/customSignUp3FormDoctorPage.dart';
+import 'package:graduation_project/view/signup3%20page/widgets/custom%20Signup3%20Form/customSignUp3FormInstitutionPage.dart';
+import 'package:graduation_project/view/signup3%20page/widgets/custom%20Signup3%20Form/customSignUp3FormUserPage.dart';
 
 class Signup3Page extends StatefulWidget {
   const Signup3Page({super.key, this.typeOfUser = ""});
@@ -81,203 +80,35 @@ class _Signup3PageState extends State<Signup3Page> {
                       //
                       //Upload photo
                       //
-                      Center(
-                        child: Column(
-                          children: [
-                            // Avatar and Upload Button
-                            Container(
-                              width: 150,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withAlpha(80),
-                                    spreadRadius: 5,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 5),
-                                  ),
-                                ],
-                              ),
-                              child: CircleAvatar(
-                                backgroundColor: ColorsApp.primaryColor,
-                                child:
-                                    Image.asset(Assets.imagesAnonymousAvatar),
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Text(
-                              "Profile Photo",
-                              style:
-                                  AppStyles.urbanistMedium22(context).copyWith(
-                                color: Color(0xff004A5A),
-                                fontSize: 24,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SizedBox(height: 15),
-                            Custombutton(
-                              text: "Upload Picture",
-                              width: 180,
-                              onTap: () {
-                                // Handle upload action
-                              },
-                              borderradius: 50,
-                            ),
-                          ],
-                        ),
+                      CustomUploadPhotoSignUp3UserPage(
+                        onUploadPhoto: () {
+                          //Handle Upload photo
+                        },
                       ),
                       const SizedBox(height: 25),
                       //
                       // Form Fields
                       //
-                      Form(
-                        key: userGlobalKey,
-                        child: Column(
-                          children: [
-                            CustomTextField(
-                              onDataChanged: (p0) {
-                                userName = p0;
-                              },
-                              text: "Full Name",
-                              hintText: "What is your full name",
-                              borderradius: 20,
-                              validator: (value) =>
-                                  value!.isEmpty ? "Name is required" : null,
-                            ),
-                            const SizedBox(height: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Date of Birth",
-                                    style:
-                                        AppStyles.urbanistReqular14(context)),
-                                const SizedBox(height: 5),
-                                TextFormField(
-                                  controller: userDateofBirthController,
-                                  readOnly: true,
-                                  decoration: InputDecoration(
-                                    hintText: "Date of birth",
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
-                                          color: ColorsApp.primaryColor),
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(width: 2),
-                                    ),
-                                    suffixIcon: Icon(Icons.calendar_today),
-                                  ),
-                                  onTap: () async {
-                                    DateTime? pickedDate = await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(1950),
-                                      lastDate: DateTime.now(),
-                                    );
-                                    if (pickedDate != null) {
-                                      setState(
-                                        () {
-                                          userSelectedDate = pickedDate;
-                                          userDateofBirthController.text =
-                                              DateFormat('yyyy-MM-dd')
-                                                  .format(userSelectedDate!);
-                                        },
-                                      );
-                                    }
-                                  },
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Please select your date of birth";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            // Gender Dropdown
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Gender",
-                                  style: AppStyles.urbanistMedium14(context),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                DropdownButtonFormField(
-                                  decoration: InputDecoration(
-                                    hintText: "Select Gender",
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(
-                                          color: ColorsApp.primaryColor),
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      borderSide: BorderSide(width: 2),
-                                    ),
-                                  ),
-                                  value: userSelectedGender,
-                                  items: ['Male', 'Female']
-                                      .map((gender) => DropdownMenuItem(
-                                            value: gender,
-                                            child: Text(gender),
-                                          ))
-                                      .toList(),
-                                  onChanged: (value) {
-                                    setState(
-                                      () {
-                                        userSelectedGender = value;
-                                      },
-                                    );
-                                  },
-                                  validator: (value) => value == null
-                                      ? "Please select your gender"
-                                      : null,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            // Email Field
-                            CustomTextField(
-                              onDataChanged: (value) {
-                                setState(() {
-                                  userEmailAddress = value;
-                                });
-                              },
-                              text: "Email Address",
-                              hintText: "What’s your email address",
-                              borderradius: 20,
-                              validator: (value) => value!.contains('@')
-                                  ? null
-                                  : "Please enter a valid email",
-                            ),
-                            const SizedBox(height: 10),
-                            // Phone Number Field
-                            CustomTextField(
-                              onDataChanged: (value) {
-                                setState(() {
-                                  userPhoneNumber = value;
-                                });
-                              },
-                              text: "Phone Number",
-                              hintText: "What’s your phone number",
-                              borderradius: 20,
-                              validator: (value) => value!.length <= 11
-                                  ? "Please enter a valid phone number"
-                                  : null,
-                            ),
-                          ],
-                        ),
+                      CustomSignUp3FormUserPage(
+                        formKey: userGlobalKey,
+                        onNameChanged: (value) =>
+                            setState(() => userName = value),
+                        dateOfBirthController: userDateofBirthController,
+                        onDateSelected: (date) =>
+                            setState(() => userSelectedDate = date),
+                        onEmailChanged: (value) =>
+                            setState(() => userEmailAddress = value),
+                        onPhoneChanged: (value) =>
+                            setState(() => userPhoneNumber = value),
+                        selectedGender: userSelectedGender,
+                        onGenderChanged: (value) =>
+                            setState(() => userSelectedGender = value),
                       ),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 70),
                     ],
                   ),
-                ), //
+                ),
+                //
                 // Buttons Row
                 //
                 Positioned(
@@ -323,224 +154,35 @@ class _Signup3PageState extends State<Signup3Page> {
                           //
                           //Upload photo
                           //
-                          Center(
-                            child: Column(
-                              children: [
-                                // Avatar and Upload Button
-                                Container(
-                                  width: 150,
-                                  height: 150,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withAlpha(80),
-                                        spreadRadius: 5,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 5),
-                                      ),
-                                    ],
-                                  ),
-                                  child: CircleAvatar(
-                                    backgroundColor: ColorsApp.primaryColor,
-                                    child: Image.asset(
-                                        Assets.imagesAnonymousAvatar),
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  "Profile Photo",
-                                  style: AppStyles.urbanistMedium22(context)
-                                      .copyWith(
-                                    color: Color(0xff004A5A),
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                const SizedBox(height: 15),
-                                Custombutton(
-                                  text: "Upload Picture",
-                                  width: 180,
-                                  onTap: () {
-                                    // Handle upload action
-                                  },
-                                  borderradius: 50,
-                                ),
-                              ],
-                            ),
+                          CustomUploadPhotoSignUp3DoctorPage(
+                            onUploadPhoto: () {
+                              //Handle Upload photo
+                            },
                           ),
                           const SizedBox(height: 25),
                           //
                           // Form Fields
                           //
-                          Form(
-                            key: doctorGlobalKey,
-                            child: Column(
-                              children: <Widget>[
-                                CustomTextField(
-                                  onDataChanged: (p0) {
-                                    setState(() {
-                                      doctorName = p0;
-                                    });
-                                  },
-                                  text: "Full Name",
-                                  hintText: "What is your full name",
-                                  borderradius: 20,
-                                  validator: (value) => value!.isEmpty
-                                      ? "Name is required"
-                                      : null,
-                                ),
-                                const SizedBox(height: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Date of Birth",
-                                        style: AppStyles.urbanistReqular14(
-                                            context)),
-                                    const SizedBox(height: 5),
-                                    TextFormField(
-                                      controller: doctorDateofBirthController,
-                                      readOnly: true,
-                                      decoration: InputDecoration(
-                                        hintText: "Date of birth",
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: BorderSide(
-                                              color: ColorsApp.primaryColor),
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: BorderSide(width: 2),
-                                        ),
-                                        suffixIcon: Icon(Icons.calendar_today),
-                                      ),
-                                      onTap: () async {
-                                        DateTime? pickedDate =
-                                            await showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                          firstDate: DateTime(1950),
-                                          lastDate: DateTime.now(),
-                                        );
-                                        if (pickedDate != null) {
-                                          setState(
-                                            () {
-                                              doctorSelectedDate = pickedDate;
-                                              doctorDateofBirthController.text =
-                                                  DateFormat('yyyy-MM-dd')
-                                                      .format(
-                                                          doctorSelectedDate!);
-                                            },
-                                          );
-                                        }
-                                      },
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return "Please select your date of birth";
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                // Gender Dropdown
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Gender",
-                                      style:
-                                          AppStyles.urbanistMedium14(context),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    DropdownButtonFormField(
-                                      decoration: InputDecoration(
-                                        hintText: "Select Gender",
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: BorderSide(
-                                              color: ColorsApp.primaryColor),
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          borderSide: BorderSide(width: 2),
-                                        ),
-                                      ),
-                                      value: doctorSelectedGender,
-                                      items: ['Male', 'Female']
-                                          .map((gender) => DropdownMenuItem(
-                                                value: gender,
-                                                child: Text(gender),
-                                              ))
-                                          .toList(),
-                                      onChanged: (value) {
-                                        setState(
-                                          () {
-                                            doctorSelectedGender = value;
-                                          },
-                                        );
-                                      },
-                                      validator: (value) => value == null
-                                          ? "Please select your gender"
-                                          : null,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                // Email Field
-                                CustomTextField(
-                                  onDataChanged: (value) {
-                                    setState(() {
-                                      doctorEmailAddress = value;
-                                    });
-                                  },
-                                  text: "Email Address",
-                                  hintText: "What’s your email address",
-                                  borderradius: 20,
-                                  validator: (value) => value!.contains('@')
-                                      ? null
-                                      : "Please enter a valid email",
-                                ),
-                                const SizedBox(height: 10),
-                                // Phone Number Field
-                                CustomTextField(
-                                  onDataChanged: (value) {
-                                    setState(() {
-                                      doctorPhoneNumber = value;
-                                    });
-                                  },
-                                  text: "Phone Number",
-                                  hintText: "What’s your phone number",
-                                  borderradius: 20,
-                                  validator: (value) => value!.length <= 11
-                                      ? "Please enter a valid phone number"
-                                      : null,
-                                ),
-                              ],
-                            ),
+                          CustomSignUp3FormDoctorPage(
+                            formKey: doctorGlobalKey,
+                            onNameChanged: (value) =>
+                                setState(() => doctorName = value),
+                            onEmailChanged: (value) =>
+                                setState(() => doctorEmailAddress = value),
+                            onPhoneChanged: (value) =>
+                                setState(() => doctorPhoneNumber = value),
+                            dateController: doctorDateofBirthController,
+                            onDatePicked: (value) =>
+                                setState(() => doctorSelectedDate = value),
+                            onGenderSelected: (value) =>
+                                setState(() => doctorSelectedGender = value),
+                            selectedGender: doctorSelectedGender,
                           ),
-                          const SizedBox(height: 25),
-                          //
-                          // Buttons Row
-                          //
-                          ButtonsRow(
-                            secondButtonAction: () {
-                              // if (doctorGlobalKey.currentState!.validate()) {
-                              // Get.toNamed("/signup4doctorpage");
-                              //}
-                              Get.toNamed("/signup4doctorpage");
-                            },
-                          ),
+                          const SizedBox(height: 70),
                         ],
                       ),
-                    ), //
+                    ),
+                    //
                     // Buttons Row
                     //
                     Positioned(
@@ -587,107 +229,24 @@ class _Signup3PageState extends State<Signup3Page> {
                           //
                           // Form Fields
                           //
-                          Form(
-                            key: userGlobalKey,
-                            child: Column(
-                              children: [
-                                CustomTextField(
-                                  onDataChanged: (p0) {
-                                    setState(() {
-                                      institutionName = p0;
-                                    });
-                                  },
-                                  text: "Name of Institution",
-                                  hintText: "What is your institution name",
-                                  borderradius: 20,
-                                  validator: (value) => value!.isEmpty
-                                      ? "Name is required"
-                                      : null,
-                                ),
-                                const SizedBox(height: 10),
-                                CustomTextField(
-                                  onDataChanged: (p0) {
-                                    //
-                                    //if there is here logic error this is previos code
-                                    // onDataChanged: updateData
-                                    setState(() {
-                                      institutionDescription = p0;
-                                    });
-                                  },
-                                  text: "Description",
-                                  hintText:
-                                      "Describe the purpose of the institution",
-                                  borderradius: 20,
-                                  validator: (value) => value!.isEmpty
-                                      ? "required to provide summrization about institution"
-                                      : null,
-                                ),
-                                const SizedBox(height: 10),
-                                CustomTextField(
-                                  onDataChanged: (p0) {
-                                    setState(() {
-                                      institutionRegistrationDetails = p0;
-                                    });
-                                  },
-                                  text: "Registration Details",
-                                  hintText: "License or registration number",
-                                  borderradius: 20,
-                                  validator: (value) => value!.isEmpty
-                                      ? "please provide your License number"
-                                      : null,
-                                ),
-                                const SizedBox(height: 10),
-                                CustomTextField(
-                                  onDataChanged: (value) {},
-                                  text: "Email Address",
-                                  hintText: "What’s your email address",
-                                  borderradius: 20,
-                                  validator: (value) => value!.contains('@')
-                                      ? null
-                                      : "Please enter a valid email",
-                                ),
-                                const SizedBox(height: 10),
-                                // Phone Number Field
-                                CustomTextField(
-                                  onDataChanged: (value) {},
-                                  text: "Phone Number",
-                                  hintText: "What’s your phone number",
-                                  borderradius: 20,
-                                  validator: (value) => value!.length <= 11
-                                      ? "Please enter a valid phone number"
-                                      : null,
-                                ),
-                                const SizedBox(height: 10),
-                                CustomTextField(
-                                  onDataChanged: (p0) {
-                                    setState(() {
-                                      institutionWebsite = p0;
-                                    });
-                                  },
-                                  text: "Website",
-                                  hintText: "Institution’s Website",
-                                  borderradius: 20,
-                                  validator: (value) {
-                                    return null;
-                                  },
-                                ),
-                                const SizedBox(height: 10),
-                                CustomTextField(
-                                  onDataChanged: (p0) {
-                                    setState(() {
-                                      institutionFacebookLink = p0;
-                                    });
-                                  },
-                                  text: "Facebook link",
-                                  hintText: "Institution’s faceBook link",
-                                  borderradius: 20,
-                                  validator: (value) {
-                                    return null;
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
+                          CustomSignUp3FormInstitutionPage(
+                            formKey: userGlobalKey,
+                            onNameChanged: (value) => setState(() {
+                              institutionName = value;
+                            }),
+                            onDescriptionChanged: (value) => setState(() {
+                              institutionDescription = value;
+                            }),
+                            onRegistrationChanged: (value) => setState(() {
+                              institutionRegistrationDetails = value;
+                            }),
+                            onWebsiteChanged: (value) => setState(() {
+                              institutionWebsite = value;
+                            }),
+                            onFacebookChanged: (value) => setState(() {
+                              institutionFacebookLink = value;
+                            }),
+                          )
                         ],
                       ),
                     ),
