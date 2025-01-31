@@ -211,7 +211,9 @@ class _SigninPageState extends State<SigninPage> {
                         Custombutton(
                           text: "Sign In",
                           width: MediaQuery.of(context).size.width,
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed("/homepage");
+                          },
                         ),
                         SizedBox(
                           height: 16,

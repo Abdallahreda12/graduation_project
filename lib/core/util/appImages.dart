@@ -31,4 +31,6 @@ class Assets {
   /// Assets for imagesUser
   /// assets/images/User.svg
   static const String imagesUser = "assets/images/User.svg";
+
+  static var imagesNotificationIcon;
 }
