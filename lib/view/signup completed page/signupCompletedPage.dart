@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/styles.dart';
@@ -53,7 +55,7 @@ class SignupCompletedPage extends StatelessWidget {
                 text: 'Get Started',
                 width: MediaQuery.sizeOf(context).width,
                 onTap: () {
-                  //Get.toNamed("/signinpage");
+                  Get.toNamed("/homepage");
                 },
               ),
             ),

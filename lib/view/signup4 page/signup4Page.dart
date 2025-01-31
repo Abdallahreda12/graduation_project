@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:graduation_project/core/Widgets/customTextField.dart';
-import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/buttonsRow.dart';
-import 'package:graduation_project/view/signup%20page/widgets/stepsRow.dart';
 import 'package:graduation_project/view/signup4%20page/widgets/custom%20signup4%20textField%20column/customSignUp4TextFieldDoctorColumn.dart';
 import 'package:graduation_project/view/signup4%20page/widgets/custom%20signup4%20textField%20column/customSignUp4TextFieldInstitutionColumn.dart';
 import 'package:graduation_project/view/signup4%20page/widgets/custom%20signup4%20textField%20column/customSignUp4TextFieldUserColumn.dart';

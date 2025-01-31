@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/view/home%20page/homePage.dart';
 import 'package:graduation_project/view/onboarding%20page/onboardingPage.dart';
 import 'package:graduation_project/view/select%20lang%20page/selectLangPage.dart';
 import 'package:graduation_project/view/signin%20page/signinPage.dart';
@@ -76,8 +77,8 @@ class MainApp extends StatelessWidget {
                   typeOfUser: 'Institution',
                 )),
         GetPage(
-            name: "/signupcompletedpage",
-            page: () =>SignupCompletedPage()),
+            name: "/signupcompletedpage", page: () => SignupCompletedPage()),
+        GetPage(name: "/homepage", page: () => HomePage()),
       ],
     );
   }
