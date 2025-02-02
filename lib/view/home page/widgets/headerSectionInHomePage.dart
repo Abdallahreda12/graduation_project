@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
-import 'package:graduation_project/utils/appImages.dart';
+import 'package:graduation_project/core/util/appImages.dart';
 
 class HeaderSectionInHomePage extends StatelessWidget {
   const HeaderSectionInHomePage({super.key});

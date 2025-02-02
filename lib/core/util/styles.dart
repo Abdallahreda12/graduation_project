@@ -7,8 +7,8 @@ abstract class AppStyles {
         fontSize: getResposiveFontSize(context, fontsize: 16),
         fontFamily: 'Urbanist',
         fontWeight: FontWeight.w400);
-  } 
-  
+  }
+
   static TextStyle urbanistReqular18(BuildContext context) {
     return TextStyle(
         color: Colors.black,
@@ -37,6 +37,14 @@ abstract class AppStyles {
     return TextStyle(
         color: Colors.black,
         fontSize: getResposiveFontSize(context, fontsize: 14),
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w500);
+  }
+
+  static TextStyle urbanistMedium12(BuildContext context) {
+    return TextStyle(
+        color: Colors.black,
+        fontSize: getResposiveFontSize(context, fontsize: 12),
         fontFamily: 'Urbanist',
         fontWeight: FontWeight.w500);
   }
