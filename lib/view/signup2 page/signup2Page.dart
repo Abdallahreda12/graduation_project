@@ -81,7 +81,7 @@ class _Signup2PageState extends State<Signup2Page> {
                     isSelected: typeUser == "Institution",
                     onDataChanged: updateData,
                     text: "Institution",
-                    icon: Assets.imagesInstitution,
+                    icon: Assets.imagesInstitutionLogo,
                   ),
                 ],
               ),
