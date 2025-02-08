@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/view/AdoptionAndHelpPage/adoptionAndHelpPage.dart';
 import 'package:graduation_project/view/home%20page/homePage.dart';
 import 'package:graduation_project/view/onboarding%20page/onboardingPage.dart';
 import 'package:graduation_project/view/select%20lang%20page/selectLangPage.dart';
@@ -79,6 +80,7 @@ class MainApp extends StatelessWidget {
         GetPage(
             name: "/signupcompletedpage", page: () => SignupCompletedPage()),
         GetPage(name: "/homepage", page: () => HomePage()),
+        GetPage(name: "/adoptionandhelp", page: () => AdoptionAndHelpPage()),
       ],
     );
   }
