@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/core/util/appImages.dart';
@@ -16,7 +17,9 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/adoptionandhelp");
+                },
                 child: Container(
                   //28 -> 25 padding + 3 space between two item
                   width: (MediaQuery.of(context).size.width / 2) - 28,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 
@@ -27,7 +28,11 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (widget.currentPageIndex != 0) {
+                        Get.toNamed("/homepage");
+                      }
+                    },
                     icon: SvgPicture.asset(
                       Assets.imagesHomeAppBarIcon,
                       width: 24,
@@ -51,7 +56,11 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                           BlendMode.srcIn),
                     )),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (widget.currentPageIndex != 2) {
+                      Get.toNamed("/adoptionandhelp");
+                    }
+                  },
                   icon: SvgPicture.asset(
                     Assets.imagesPetsAppBarIcon,
                     width: 24,
