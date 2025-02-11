@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:graduation_project/core/Widgets/customBottomAppBar.dart';
 import 'package:graduation_project/core/Widgets/customPlusBottunInAppBar.dart';
 import 'package:graduation_project/core/util/appImages.dart';
-import 'package:graduation_project/view/adoptionAndHelpPage/widgets/adoptionAndHelpCard.dart';
-import 'package:graduation_project/view/adoptionAndHelpPage/widgets/headerOfAdotinAndHelpPage.dart';
-import 'package:graduation_project/view/adoptionAndHelpPage/widgets/searchBarInAdoptionAndHelpPage.dart';
+import 'package:graduation_project/core/util/colors.dart';
+import 'package:graduation_project/view/adoption%20And%20Help%20Page/widgets/adoptionAndHelpCard.dart';
+import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
+import 'package:graduation_project/view/adoption%20And%20Help%20Page/widgets/searchBarInAdoptionAndHelpPage.dart';
 
 class AdoptionAndHelpPage extends StatefulWidget {
   const AdoptionAndHelpPage({super.key});
@@ -73,7 +75,14 @@ class _AdoptionAndHelpPageState extends State<AdoptionAndHelpPage> {
             //
             //Header of page
             //
-            HeaderOfAdotinAndHelpPage(),
+            TextAndBackArrowHeader(
+              texts: ["adoption", " & ", "help"],
+              colorsOfTexts: [
+                ColorsApp.primaryColor,
+                Colors.black,
+                ColorsApp.secondaryColor
+              ],
+            ),
             SizedBox(
               height: 20,
             ),
@@ -98,6 +107,9 @@ class _AdoptionAndHelpPageState extends State<AdoptionAndHelpPage> {
                         'Found hiding under a car in the parking lot of Smiths Grocery Store',
                     typeOfCard: 'adoption',
                     contact: 'contact:555-987-6543 to claim',
+                    onTap: () {
+                      Get.toNamed("/adoptiondetailspage");
+                    },
                   );
                 },
               ),
