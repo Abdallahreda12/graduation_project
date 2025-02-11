@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
-import 'package:graduation_project/view/onboarding%20page/widgets/dotsIndicator.dart';
+import 'package:graduation_project/core/util/colors.dart';
+import 'package:graduation_project/core/Widgets/dotsIndicator.dart';
 import 'package:graduation_project/view/onboarding%20page/widgets/headerOfPage.dart';
 import 'package:graduation_project/view/onboarding%20page/widgets/pageViewContent.dart';
 
@@ -62,7 +63,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       height: 20,
                     ),
                     DotsIndicator(
+                      numOfDots: 3,
                       currentCardIndex: currentCardIndex,
+                      colorOfDots: ColorsApp.primaryColor,
                     ),
                   ],
                 ),
