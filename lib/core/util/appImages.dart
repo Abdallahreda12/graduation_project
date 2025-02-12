@@ -30,6 +30,8 @@ class Assets {
   /// assets/images/animalPhoto6.png
   static const String imagesAnimalPhoto6 = "assets/images/animalPhoto6.png";
 
+  static const String imagesProfilePhoto = "assets/images/profilePhoto.png";
+
   /// Assets for imagesAnonymousAvatar
   /// assets/images/anonymousAvatar.png
   static const String imagesAnonymousAvatar =
