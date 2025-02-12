@@ -33,15 +33,12 @@ class _CustomImagesSliderState extends State<CustomImagesSlider> {
             },
           ),
           items: widget.imagePaths.map((imagePath) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.fill,
-                  width: MediaQuery.of(context).size.width,
-                ),
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.fill,
+                width: MediaQuery.of(context).size.width,
               ),
             );
           }).toList(),

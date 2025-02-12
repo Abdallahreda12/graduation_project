@@ -17,10 +17,7 @@ class TextAndBackArrowHeader extends StatelessWidget {
           onTap: () {
             Get.back();
           },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5),
-            child: Icon(Icons.arrow_back_ios),
-          ),
+          child: Icon(Icons.arrow_back_ios),
         ),
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
