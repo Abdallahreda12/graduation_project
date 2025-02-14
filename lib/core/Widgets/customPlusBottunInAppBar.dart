@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 
@@ -14,7 +15,9 @@ class CustomPlusBottunInAppBar extends StatelessWidget {
       child: FloatingActionButton(
         elevation: 0,
         shape: CircleBorder(),
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed("/adoptionandhelprequestpage");
+        },
         backgroundColor: ColorsApp.primaryColor,
         child: SvgPicture.asset(
           Assets.imagesPlusAppBarIcon,
