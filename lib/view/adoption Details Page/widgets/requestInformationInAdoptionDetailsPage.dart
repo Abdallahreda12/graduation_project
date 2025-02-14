@@ -29,7 +29,7 @@ class RequestInformationInAdoptionDetailsPage extends StatelessWidget {
                 //37 -> 27 padding + 8 space between two item
                 width: (MediaQuery.of(context).size.width / 2) - 35,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                decoration: BoxDecoration(color: ColorsApp.backGroundColor),
+                decoration: BoxDecoration(color: ColorsApp.primaryColorOpicaty),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -49,7 +49,7 @@ class RequestInformationInAdoptionDetailsPage extends StatelessWidget {
                 //35 -> 27 padding + 8 space between two item
                 width: (MediaQuery.of(context).size.width / 2) - 35,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                decoration: BoxDecoration(color: ColorsApp.backGroundColor),
+                decoration: BoxDecoration(color: ColorsApp.primaryColorOpicaty),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -82,7 +82,7 @@ class RequestInformationInAdoptionDetailsPage extends StatelessWidget {
                 //37 -> 27 padding + 8 space between two item
                 width: (MediaQuery.of(context).size.width / 2) - 35,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                decoration: BoxDecoration(color: ColorsApp.backGroundColor),
+                decoration: BoxDecoration(color: ColorsApp.primaryColorOpicaty),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -102,7 +102,7 @@ class RequestInformationInAdoptionDetailsPage extends StatelessWidget {
                 //35 -> 27 padding + 8 space between two item
                 width: (MediaQuery.of(context).size.width / 2) - 35,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                decoration: BoxDecoration(color: ColorsApp.backGroundColor),
+                decoration: BoxDecoration(color: ColorsApp.primaryColorOpicaty),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -131,7 +131,7 @@ class RequestInformationInAdoptionDetailsPage extends StatelessWidget {
           //37 -> 27 padding + 8 space between two item
           width: (MediaQuery.of(context).size.width) - 35,
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-          decoration: BoxDecoration(color: ColorsApp.backGroundColor),
+          decoration: BoxDecoration(color: ColorsApp.primaryColorOpicaty),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
