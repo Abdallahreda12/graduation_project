@@ -105,9 +105,10 @@ class _AdoptionAndHelpPageState extends State<AdoptionAndHelpPage> {
                     title: 'Cat',
                     subtitle:
                         'Found hiding under a car in the parking lot of Smiths Grocery Store',
-                    typeOfCard: 'adoption',
+                    typeOfCard: 'help',
                     contact: 'contact:555-987-6543 to claim',
                     onTap: () {
+                      //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
                       Get.toNamed("/adoptiondetailspage");
                     },
                   );

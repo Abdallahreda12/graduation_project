@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/Widgets/customImageSlider.dart';
+import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
-import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/core/util/styles.dart';
-import 'package:graduation_project/view/adoption%20Details%20Page/widgets/aboutPetInAdoptionDetailsPage.dart';
 import 'package:graduation_project/view/adoption%20Details%20Page/widgets/personalCard.dart';
-import 'package:graduation_project/view/adoption%20Details%20Page/widgets/requestInformationInAdoptionDetailsPage.dart';
+import 'package:graduation_project/view/help%20Details%20page/widgets/aboutPetInAdoptionDetailsPage.dart';
+import 'package:graduation_project/view/help%20Details%20page/widgets/requestInformationInAdoptionDetailsPage.dart';
 
-class AdoptionDetailsPage extends StatefulWidget {
-  const AdoptionDetailsPage({super.key});
+class HelpDetailsPage extends StatefulWidget {
+  const HelpDetailsPage({super.key});
 
   @override
-  State<AdoptionDetailsPage> createState() => _AdoptionDetailsPageState();
+  State<HelpDetailsPage> createState() => _HelpDetailsPageState();
 }
 
-class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
+class _HelpDetailsPageState extends State<HelpDetailsPage> {
   final List<String> imagePaths = [
     Assets.imagesAnimalPhoto1,
     Assets.imagesAnimalPhoto2,
     Assets.imagesAnimalPhoto5,
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +32,8 @@ class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
             //header section
             //
             TextAndBackArrowHeader(
-              texts: ["Adoption", " Details"],
-              colorsOfTexts: [ColorsApp.primaryColor, Colors.black],
+              texts: ["Help", " Details"],
+              colorsOfTexts: [ColorsApp.secondaryColor, Colors.black],
             ),
             SizedBox(
               height: 25,
@@ -52,7 +51,7 @@ class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
                     //
                     CustomImagesSlider(
                       imagePaths: imagePaths,
-                      colorsOfDots: ColorsApp.primaryColor,
+                      colorsOfDots: ColorsApp.secondaryColor,
                     ),
                     SizedBox(
                       height: 10,
@@ -61,7 +60,7 @@ class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
                     //title text Section
                     //
                     Text(
-                      "I have a pet and I want to offer him for adoption",
+                      "Pet injured",
                       style: AppStyles.urbanistSemiBold16(context),
                       maxLines: 3,
                     ),
@@ -71,12 +70,10 @@ class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
                     //
                     //request information Sction
                     //
-                    RequestInformationInAdoptionDetailsPage(
-                      gender: 'Male',
-                      type: 'Dog',
-                      size: 'Medium',
-                      age: '2',
+                    RequestInformationInHelpDetailsPage(
                       location: 'https://maps.app.goo.gl/1ddFxqPYZboorctQ7',
+                      dateAndTime: 'Thu,1-2025',
+                      socialMediaLink: 'https://www.facebook.com',
                     ),
                     SizedBox(
                       height: 10,
@@ -94,7 +91,7 @@ class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
                     //
                     //about Pet Section
                     //
-                    AboutPetInAdoptionDetailsPage(
+                    AboutPetInHelpDetailsPage(
                         aboutPet:
                             'Figma ipsum component variant main layer. Style boolean italic star pixel mask underline. Union object main slice team align. Ellipse blur pixel fill rotate text. Duplicate inspect figma scale content move edit distribute asset. Inspect union create opacity strikethrough. Rectangle layout ipsum selection line connection export italic ipsum. Asset polygon rectangle component vertical invite pen ipsum. Duplicate hand comment editor star community strikethrough rotate share polygon. Content asset duplicate team strikethrough link fill.'),
                     SizedBox(
