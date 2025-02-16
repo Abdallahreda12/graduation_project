@@ -27,10 +27,11 @@ class _SelectTypeOfRequestState extends State<SelectTypeOfRequest> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
+        margin: EdgeInsets.only(left: 2, right: 2, top: 2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
           border: widget.isSelected
-              ? Border.all(color: widget.borderColor, width: 3, strokeAlign: 1)
+              ? Border.all(color: widget.borderColor, width: 2, strokeAlign: 1)
               : null,
         ),
         child: Container(
