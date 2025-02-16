@@ -9,13 +9,19 @@ class CustomTextField extends StatelessWidget {
       required this.text,
       required this.hintText,
       this.borderradius = 0,
-      required this.validator});
+      required this.validator,
+      this.hintMaxLines = 1,
+      this.maxLine = 1,
+      this.borderColor = ColorsApp.primaryColor});
 
   final Function(String) onDataChanged;
   final FormFieldValidator<String>? validator;
   final String text;
   final String hintText;
   final double borderradius;
+  final int hintMaxLines;
+  final int maxLine;
+  final Color borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +36,7 @@ class CustomTextField extends StatelessWidget {
           height: 5,
         ),
         TextFormField(
+          maxLines: maxLine,
           validator: validator,
           onChanged: (value) {
             onDataChanged(value);
@@ -37,13 +44,14 @@ class CustomTextField extends StatelessWidget {
           decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(borderradius),
-              borderSide: BorderSide(color: ColorsApp.primaryColor),
+              borderSide: BorderSide(color: borderColor),
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(borderradius),
               borderSide: BorderSide(width: 2),
             ),
             hintText: hintText,
+            hintMaxLines: hintMaxLines,
           ),
         ),
       ],
