@@ -5,6 +5,7 @@ import 'package:graduation_project/view/adoption%20And%20Help%20Page/adoptionAnd
 import 'package:graduation_project/view/adoption%20Details%20Page/adoptionDetailsPage.dart';
 import 'package:graduation_project/view/help%20Details%20page/helpDetailsPage.dart';
 import 'package:graduation_project/view/home%20page/homePage.dart';
+import 'package:graduation_project/view/notifaction%20page/notifactionPage.dart';
 import 'package:graduation_project/view/onboarding%20page/onboardingPage.dart';
 import 'package:graduation_project/view/select%20lang%20page/selectLangPage.dart';
 import 'package:graduation_project/view/signin%20page/signinPage.dart';
@@ -90,6 +91,9 @@ class MainApp extends StatelessWidget {
         GetPage(
             name: "/adoptionandhelprequestpage",
             page: () => AdoptionAndHelpRequestPage()),
+        GetPage(
+            name: "/notifactionpage",
+            page: () => NotifactionPage()),
       ],
     );
   }
