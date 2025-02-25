@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
 import 'package:graduation_project/core/util/colors.dart';
+import 'package:graduation_project/core/util/customFunctions.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:intl/intl.dart';
 
@@ -12,10 +13,12 @@ class TextFiedsInHelpRequest extends StatefulWidget {
 }
 
 class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
+  TextEditingController locationController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final TextEditingController dateController = TextEditingController();
     DateTime? selectedDate;
+
     return Column(
       children: [
         CustomTextField(
@@ -87,7 +90,23 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
         SizedBox(
           height: 15,
         ),
+        //
+        //two buttons to get location link (will remove but after get suitable design)
+        //
+        ElevatedButton(
+            onPressed: () async {
+              locationController.text =
+                  await CustomFunctions.getCurrentLocation();
+            },
+            child: Text("get Current location")),
+        ElevatedButton(
+            onPressed: () => CustomFunctions.openGoogleMaps(context),
+            child: Text("open google map")),
+        //
+        //pass controller to it to show new valuein textfield
+        //
         CustomTextField(
+          controller: locationController,
           onDataChanged: (p0) {},
           text: "Location Link*",
           hintText: "Location of the case",
