@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 
-class CustomCheckListTile extends StatefulWidget {
-  const CustomCheckListTile(
+class CustomCheckBoxMultiAnswer extends StatefulWidget {
+  const CustomCheckBoxMultiAnswer(
       {super.key,
       required this.options,
       required this.question,
@@ -11,15 +11,16 @@ class CustomCheckListTile extends StatefulWidget {
       this.activeColor = ColorsApp.primaryColor});
   final List<String> options;
   final String question;
-  final Function(String) onDataChanged;
+  final Function(List<String> answersList) onDataChanged;
   final Color activeColor;
 
   @override
-  State<CustomCheckListTile> createState() => _CustomCheckListTileState();
+  State<CustomCheckBoxMultiAnswer> createState() =>
+      _CustomCheckBoxMultiAnswerState();
 }
 
-class _CustomCheckListTileState extends State<CustomCheckListTile> {
-  String answer = "";
+class _CustomCheckBoxMultiAnswerState extends State<CustomCheckBoxMultiAnswer> {
+  List<String> answer = [];
 
   @override
   Widget build(BuildContext context) {
@@ -32,47 +33,31 @@ class _CustomCheckListTileState extends State<CustomCheckListTile> {
         ),
         SizedBox(height: 5),
         Column(
-          children: widget.options.map(
+          children: widget.options.asMap().entries.map(
             (e) {
+              var item = e.value;
               return Row(
                 children: [
                   Checkbox(
                     activeColor: widget.activeColor,
-                    value: answer == e,
+                    value: answer.contains(item),
                     onChanged: (value) {
                       setState(
                         () {
-                          answer == e ? answer = "" : answer = e;
+                          answer.contains(item)
+                              ? answer.remove(item)
+                              : answer.add(item);
                           widget.onDataChanged(answer);
                         },
                       );
                     },
                   ),
                   Text(
-                    e,
+                    item,
                     style: AppStyles.urbanistMedium14(context),
                   )
                 ],
               );
-              //another version from checklist 
-              // return CheckboxListTile(
-              //   activeColor: ColorsApp.primaryColor,
-              //   dense: true,
-              //   visualDensity: VisualDensity(vertical: -2),
-              //   title: Text(
-              //     e,
-              //     style: AppStyles.urbanistMedium14(context),
-              //   ),
-              //   value: answer == e,
-              //   onChanged: (value) {
-              //     setState(
-              //       () {
-              //         answer == e ? answer = "" : answer = e;
-              //         widget.onDataChanged(answer);
-              //       },
-              //     );
-              //   },
-              // );
             },
           ).toList(),
         ),

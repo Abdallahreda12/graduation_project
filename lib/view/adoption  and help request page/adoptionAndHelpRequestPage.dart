@@ -72,7 +72,7 @@ class _AdoptionAndHelpRequestPageState
                             },
                             isSelected: selectedType == "adoption",
                             borderColor: ColorsApp.primaryColor,
-                            image: Assets.imagesAnimalPhoto5,
+                            image: Assets.imagesAnimalPhoto1,
                             textColor: ColorsApp.primaryColor)
                       ],
                     ),
