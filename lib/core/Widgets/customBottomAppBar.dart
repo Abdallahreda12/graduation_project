@@ -106,7 +106,9 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () { if (widget.currentPageIndex != 5) {
+                      Get.toNamed("/profilePage");
+                    }},
                   icon: SvgPicture.asset(
                     Assets.imagesPersonAppBarIcon,
                     width: 24,
