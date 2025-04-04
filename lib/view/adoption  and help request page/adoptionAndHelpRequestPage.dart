@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
@@ -24,103 +25,112 @@ class _AdoptionAndHelpRequestPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(left: 27, right: 27, top: 35),
-        child: Column(
-          children: [
-            TextAndBackArrowHeader(
-              texts: ["Adoption", " & ", "help", " request"],
-              colorsOfTexts: [
-                ColorsApp.primaryColor,
-                Colors.black,
-                ColorsApp.secondaryColor,
-                Colors.black
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SelectTypeOfRequest(
-                          isSelected: selectedType == "help",
-                          onTap: () {
-                            setState(
-                              () {
-                                selectedType = "help";
-                              },
-                            );
-                          },
-                          type: "help",
-                          borderColor: ColorsApp.secondaryColor,
-                          image: Assets.imagesAnimalPhoto2,
-                          textColor: ColorsApp.secondaryColor,
-                        ),
-                        SelectTypeOfRequest(
-                            type: "adoption",
+      backgroundColor: ColorsApp.backGroundColor,
+      body: Stack(children: [
+        Positioned.fill(
+          child: SvgPicture.asset(
+            Assets.imagesLogoInverse,
+            fit: BoxFit.none,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 27, right: 27, top: 35),
+          child: Column(
+            children: [
+              TextAndBackArrowHeader(
+                texts: ["Adoption", " & ", "help", " request"],
+                colorsOfTexts: [
+                  ColorsApp.primaryColor,
+                  Colors.black,
+                  ColorsApp.secondaryColor,
+                  Colors.black
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SelectTypeOfRequest(
+                            isSelected: selectedType == "help",
                             onTap: () {
                               setState(
                                 () {
-                                  selectedType = "adoption";
+                                  selectedType = "help";
                                 },
                               );
                             },
-                            isSelected: selectedType == "adoption",
-                            borderColor: ColorsApp.primaryColor,
-                            image: Assets.imagesAnimalPhoto1,
-                            textColor: ColorsApp.primaryColor)
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    //
-                    //request TextFeild
-                    //
-                    selectedType == "help"
-                        //
-                        //request for help
-                        //
-                        ? Form(
-                            key: formKey,
-                            child: TextFiedsInHelpRequest(),
-                          )
-                        //
-                        //request for adoption
-                        //
-                        : Form(
-                            key: formKey,
-                            child: TextFieldsInAdoptionRequest(),
-                          )
-                  ],
+                            type: "help",
+                            borderColor: ColorsApp.secondaryColor,
+                            image: Assets.imagesAnimalPhoto2,
+                            textColor: ColorsApp.secondaryColor,
+                          ),
+                          SelectTypeOfRequest(
+                              type: "adoption",
+                              onTap: () {
+                                setState(
+                                  () {
+                                    selectedType = "adoption";
+                                  },
+                                );
+                              },
+                              isSelected: selectedType == "adoption",
+                              borderColor: ColorsApp.primaryColor,
+                              image: Assets.imagesAnimalPhoto1,
+                              textColor: ColorsApp.primaryColor)
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      //
+                      //request TextFeild
+                      //
+                      selectedType == "help"
+                          //
+                          //request for help
+                          //
+                          ? Form(
+                              key: formKey,
+                              child: TextFiedsInHelpRequest(),
+                            )
+                          //
+                          //request for adoption
+                          //
+                          : Form(
+                              key: formKey,
+                              child: TextFieldsInAdoptionRequest(),
+                            )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Custombutton(
-              text: "Submet",
-              width: MediaQuery.sizeOf(context).width,
-              onTap: () {
-                if (formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("your request was done"),
-                    ),
-                  );
-                  Get.back();
-                }
-              },
-            ),
-            SizedBox(
-              height: 15,
-            )
-          ],
+              Custombutton(
+                text: "Submet",
+                width: MediaQuery.sizeOf(context).width,
+                onTap: () {
+                  if (formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("your request was done"),
+                      ),
+                    );
+                    Get.back();
+                  }
+                },
+              ),
+              SizedBox(
+                height: 15,
+              )
+            ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }

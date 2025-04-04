@@ -16,7 +16,7 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ColorsApp.backGroundColor,
+      color: ColorsApp.primaryColorOpicaty,
       height: 60,
       width: MediaQuery.sizeOf(context).width,
       child: Row(
@@ -106,9 +106,11 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () { if (widget.currentPageIndex != 5) {
+                  onPressed: () {
+                    if (widget.currentPageIndex != 5) {
                       Get.toNamed("/profilePage");
-                    }},
+                    }
+                  },
                   icon: SvgPicture.asset(
                     Assets.imagesPersonAppBarIcon,
                     width: 24,

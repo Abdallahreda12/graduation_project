@@ -24,7 +24,8 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                   //28 -> 25 padding + 3 space between two item
                   width: (MediaQuery.of(context).size.width / 2) - 28,
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  decoration: BoxDecoration(color: ColorsApp.backGroundColor),
+                  decoration:
+                      BoxDecoration(color: ColorsApp.primaryColorOpicaty),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +70,8 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                   //28 -> 25 padding + 3 space between two item
                   width: (MediaQuery.of(context).size.width / 2) - 28,
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  decoration: BoxDecoration(color: ColorsApp.backGroundColor),
+                  decoration:
+                      BoxDecoration(color: ColorsApp.primaryColorOpicaty),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -122,7 +124,7 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
             //28 -> 25 padding + 3 space between two item
             width: MediaQuery.of(context).size.width - 50,
             padding: EdgeInsets.only(top: 15, bottom: 15, right: 20, left: 10),
-            decoration: BoxDecoration(color: ColorsApp.backGroundColor),
+            decoration: BoxDecoration(color: ColorsApp.primaryColorOpicaty),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
