@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 
 class BuildDropdownRow extends StatelessWidget {
@@ -26,6 +27,7 @@ class BuildDropdownRow extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 50),
           child: DropdownButton<String>(
+            dropdownColor: ColorsApp.backGroundColor,
             icon: Icon(Icons.keyboard_arrow_down_rounded),
             iconSize: 28,
             value: selectedValue,

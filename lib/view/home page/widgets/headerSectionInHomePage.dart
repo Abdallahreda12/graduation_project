@@ -36,7 +36,7 @@ class HeaderSectionInHomePage extends StatelessWidget {
                 height: 35,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
-                    color: ColorsApp.backGroundColor),
+                    color: ColorsApp.primaryColorOpicaty),
                 child: FittedBox(
                     fit: BoxFit.none,
                     child: SvgPicture.asset(
@@ -56,7 +56,7 @@ class HeaderSectionInHomePage extends StatelessWidget {
                 height: 35,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
-                    color: ColorsApp.backGroundColor),
+                    color: ColorsApp.primaryColorOpicaty),
                 child: FittedBox(
                     fit: BoxFit.none,
                     child: SvgPicture.asset(
