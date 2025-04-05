@@ -8,18 +8,25 @@ class CustomCheckListTile extends StatefulWidget {
       required this.options,
       required this.question,
       required this.onDataChanged,
-      this.activeColor = ColorsApp.primaryColor});
+      this.activeColor = ColorsApp.primaryColor,
+      this.defualtAnswer = ""});
   final List<String> options;
   final String question;
   final Function(String) onDataChanged;
   final Color activeColor;
+  final String defualtAnswer;
 
   @override
   State<CustomCheckListTile> createState() => _CustomCheckListTileState();
 }
 
 class _CustomCheckListTileState extends State<CustomCheckListTile> {
-  String answer = "";
+  late String answer;
+  @override
+  void initState() {
+    super.initState();
+    answer = widget.defualtAnswer;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +61,7 @@ class _CustomCheckListTileState extends State<CustomCheckListTile> {
                   )
                 ],
               );
-              //another version from checklist 
+              //another version from checklist
               // return CheckboxListTile(
               //   activeColor: ColorsApp.primaryColor,
               //   dense: true,
