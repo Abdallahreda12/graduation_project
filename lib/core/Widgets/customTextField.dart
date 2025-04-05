@@ -35,6 +35,23 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        widget.controller ?? TextEditingController(text: widget.initValue);
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose(); // Only dispose if we created it
+    }
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,17 +61,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
           widget.text,
           style: AppStyles.urbanistMedium14(context),
         ),
-        SizedBox(
-          height: 5,
-        ),
+        SizedBox(height: 5),
         TextFormField(
-          controller: widget.controller,
+          controller: _controller,
           readOnly: widget.readOnly,
           maxLines: widget.maxLine,
           validator: widget.validator,
-          onChanged: (value) {
-            widget.onDataChanged(value);
-          },
+          onChanged: widget.onDataChanged,
           decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderradius),
@@ -62,7 +75,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderradius),
-              borderSide: BorderSide(width: 2),
+              borderSide: const BorderSide(width: 2),
             ),
             hintText: widget.hintText,
             hintMaxLines: widget.hintMaxLines,
