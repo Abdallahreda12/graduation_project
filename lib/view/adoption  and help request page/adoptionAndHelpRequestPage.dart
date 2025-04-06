@@ -111,6 +111,9 @@ class _AdoptionAndHelpRequestPageState
                 ),
               ),
               Custombutton(
+                backGroundColor: selectedType == "help"
+                    ? ColorsApp.secondaryColor
+                    : ColorsApp.primaryColor,
                 text: "Submet",
                 width: MediaQuery.sizeOf(context).width,
                 onTap: () {

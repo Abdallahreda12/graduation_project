@@ -31,7 +31,8 @@ class CustomSignUp3FormDoctorPage extends StatefulWidget {
       _CustomSignUp3FormDoctorPageState();
 }
 
-class _CustomSignUp3FormDoctorPageState extends State<CustomSignUp3FormDoctorPage> {
+class _CustomSignUp3FormDoctorPageState
+    extends State<CustomSignUp3FormDoctorPage> {
   DateTime? selectedDate;
 
   @override
@@ -71,6 +72,18 @@ class _CustomSignUp3FormDoctorPageState extends State<CustomSignUp3FormDoctorPag
                 ),
                 onTap: () async {
                   DateTime? pickedDate = await showDatePicker(
+                    builder: (context, child) {
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                            colorScheme: ColorScheme.light(
+                          primary:
+                              ColorsApp.primaryColor, // Header background color
+                          onPrimary: Colors.white,
+                          onSurface: Colors.black,
+                        )),
+                        child: child!,
+                      ); // Body text color, child: child)
+                    },
                     context: context,
                     initialDate: DateTime.now(),
                     firstDate: DateTime(1950),
@@ -81,7 +94,7 @@ class _CustomSignUp3FormDoctorPageState extends State<CustomSignUp3FormDoctorPag
                       selectedDate = pickedDate;
                       widget.dateController.text =
                           DateFormat('yyyy-MM-dd').format(selectedDate!);
-                      widget.onDatePicked(selectedDate!);
+                      //widget.onDatePicked(selectedDate!);
                     });
                   }
                 },
