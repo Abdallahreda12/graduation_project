@@ -61,7 +61,7 @@ class _Signup2PageState extends State<Signup2Page> {
                 runAlignment: WrapAlignment.center,
                 alignment: WrapAlignment.center,
                 crossAxisAlignment: WrapCrossAlignment.center,
-                spacing: 32,
+                spacing: 50,
                 runSpacing: 32,
                 direction: Axis.horizontal,
                 children: [
@@ -77,12 +77,12 @@ class _Signup2PageState extends State<Signup2Page> {
                     text: "Doctor",
                     icon: Assets.imagesDoctor,
                   ),
-                  TypeUserBox(
-                    isSelected: typeUser == "Institution",
-                    onDataChanged: updateData,
-                    text: "Institution",
-                    icon: Assets.imagesInstitutionLogo,
-                  ),
+                  // TypeUserBox(
+                  //   isSelected: typeUser == "Institution",
+                  //   onDataChanged: updateData,
+                  //   text: "Institution",
+                  //   icon: Assets.imagesInstitutionLogo,
+                  // ),
                 ],
               ),
             ),

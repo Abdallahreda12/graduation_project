@@ -44,20 +44,8 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                           BlendMode.srcIn),
                     )),
                 IconButton(
-                    onPressed: () {},
-                    icon: SvgPicture.asset(
-                      Assets.imagesInstitutionLogo,
-                      width: 24,
-                      height: 24,
-                      colorFilter: ColorFilter.mode(
-                          widget.currentPageIndex == 1
-                              ? ColorsApp.primaryColor
-                              : Colors.black,
-                          BlendMode.srcIn),
-                    )),
-                IconButton(
                   onPressed: () {
-                    if (widget.currentPageIndex != 2) {
+                    if (widget.currentPageIndex != 1) {
                       Get.toNamed("/adoptionandhelp");
                     }
                   },
@@ -66,12 +54,37 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                     width: 24,
                     height: 24,
                     colorFilter: ColorFilter.mode(
+                        widget.currentPageIndex == 1
+                            ? ColorsApp.primaryColor
+                            : Colors.black,
+                        BlendMode.srcIn),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: SvgPicture.asset(
+                    Assets.imagesFluentDoctorAppBarIcon,
+                    width: 24,
+                    height: 24,
+                    colorFilter: ColorFilter.mode(
                         widget.currentPageIndex == 2
                             ? ColorsApp.primaryColor
                             : Colors.black,
                         BlendMode.srcIn),
                   ),
-                )
+                ),
+                // IconButton(
+                //     onPressed: () {},
+                //     icon: SvgPicture.asset(
+                //       Assets.imagesInstitutionLogo,
+                //       width: 24,
+                //       height: 24,
+                //       colorFilter: ColorFilter.mode(
+                //           widget.currentPageIndex == 1
+                //               ? ColorsApp.primaryColor
+                //               : Colors.black,
+                //           BlendMode.srcIn),
+                //     )),
               ],
             ),
           ),
@@ -82,7 +95,7 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                 IconButton(
                   onPressed: () {},
                   icon: SvgPicture.asset(
-                    Assets.imagesShoppingcartAppBarIcon,
+                    Assets.imagesAIIcon,
                     width: 24,
                     height: 24,
                     colorFilter: ColorFilter.mode(
@@ -95,9 +108,9 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                 IconButton(
                   onPressed: () {},
                   icon: SvgPicture.asset(
-                    Assets.imagesFluentDoctorAppBarIcon,
-                    width: 24,
-                    height: 24,
+                    Assets.imagesChatIcon,
+                    width: 20,
+                    height: 20,
                     colorFilter: ColorFilter.mode(
                         widget.currentPageIndex == 4
                             ? ColorsApp.primaryColor

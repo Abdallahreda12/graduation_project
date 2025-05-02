@@ -18,8 +18,8 @@ class HelpDetailsPage extends StatefulWidget {
 
 class _HelpDetailsPageState extends State<HelpDetailsPage> {
   final List<String> imagePaths = [
-    Assets.imagesAnimalPhoto1,
     Assets.imagesAnimalPhoto2,
+    Assets.imagesAnimalPhoto1,
     Assets.imagesAnimalPhoto5,
   ];
   @override
