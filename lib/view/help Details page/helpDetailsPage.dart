@@ -41,7 +41,7 @@ class _HelpDetailsPageState extends State<HelpDetailsPage> {
               //header section
               //
               TextAndBackArrowHeader(
-                texts: ["help", " details"],
+                texts: ["Help", " Details"],
                 colorsOfTexts: [ColorsApp.secondaryColor, Colors.black],
               ),
               SizedBox(
