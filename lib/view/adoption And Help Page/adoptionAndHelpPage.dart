@@ -68,7 +68,7 @@ class _AdoptionAndHelpPageState extends State<AdoptionAndHelpPage> {
           FloatingActionButtonLocation.miniCenterDocked,
       //CustomBottomAppBar
       bottomNavigationBar: CustomBottomAppBar(
-        currentPageIndex: 2,
+        currentPageIndex: 1,
       ),
       body: Stack(children: [
         Positioned.fill(
@@ -109,18 +109,31 @@ class _AdoptionAndHelpPageState extends State<AdoptionAndHelpPage> {
                 child: ListView.builder(
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return AdoptionAndHelpCard(
-                      image: Assets.imagesAnimalPhoto1,
-                      title: 'Cat',
-                      subtitle:
-                          'Found hiding under a car in the parking lot of Smiths Grocery Store',
-                      typeOfCard: 'adoption',
-                      contact: 'contact:555-987-6543 to claim',
-                      onTap: () {
-                        //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
-                        Get.toNamed("/adoptiondetailspage");
-                      },
-                    );
+                    return index % 2 == 0
+                        ? AdoptionAndHelpCard(
+                            image: Assets.imagesAnimalPhoto2,
+                            title: 'Cat',
+                            subtitle:
+                                'Found hiding under a car in the parking lot of Smiths Grocery Store',
+                            typeOfCard: 'help',
+                            contact: 'contact:555-987-6543 to claim',
+                            onTap: () {
+                              //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
+                              Get.toNamed("/helpdetailspage");
+                            },
+                          )
+                        : AdoptionAndHelpCard(
+                            image: Assets.imagesAnimalPhoto1,
+                            title: 'Dog',
+                            subtitle:
+                                'Medium-sized golden retriever with a red collar, responds to the name "Buddy',
+                            typeOfCard: 'adoption',
+                            contact: 'contact:555-987-6543 to claim',
+                            onTap: () {
+                              //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
+                              Get.toNamed("/adoptiondetailspage");
+                            },
+                          );
                   },
                 ),
               ),

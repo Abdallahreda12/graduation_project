@@ -45,7 +45,11 @@ class SecondListViewInHomePage extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 10),
                 decoration: BoxDecoration(
                   //color will change depending on if help or adoption
-                  border: Border.all(color: ColorsApp.primaryColor),
+                  border: index % 2 == 0
+                      ? Border.all(color: ColorsApp.primaryColor)
+                      : Border.all(
+                          color: ColorsApp
+                              .secondaryColor), //customize it when get API  " Border.all(color: ColorsApp.primaryColor)",
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
