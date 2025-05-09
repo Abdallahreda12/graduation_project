@@ -27,7 +27,11 @@ class _SelectTypeOfRequestState extends State<SelectTypeOfRequest> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        margin: EdgeInsets.only(left: 2, right: 2, top: 2),
+        margin: EdgeInsets.only(
+          left: 2,
+          right: 2,
+          top: 2,
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
           border: widget.isSelected
@@ -38,6 +42,7 @@ class _SelectTypeOfRequestState extends State<SelectTypeOfRequest> {
           width: (MediaQuery.sizeOf(context).width / 2) - 35,
           height: 100,
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6),
             image: DecorationImage(
               fit: BoxFit.fill,
               scale: 2,

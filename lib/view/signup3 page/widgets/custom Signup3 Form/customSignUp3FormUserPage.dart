@@ -71,6 +71,18 @@ class _CustomSignUp3FormUserPageState extends State<CustomSignUp3FormUserPage> {
                 ),
                 onTap: () async {
                   DateTime? pickedDate = await showDatePicker(
+                    builder: (context, child) {
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                            colorScheme: ColorScheme.light(
+                          primary:
+                              ColorsApp.primaryColor, // Header background color
+                          onPrimary: Colors.white,
+                          onSurface: Colors.black,
+                        )),
+                        child: child!,
+                      ); // Body text color, child: child)
+                    },
                     context: context,
                     initialDate: DateTime.now(),
                     firstDate: DateTime(1950),
@@ -81,8 +93,8 @@ class _CustomSignUp3FormUserPageState extends State<CustomSignUp3FormUserPage> {
                       _selectedDate = pickedDate;
                       widget.dateOfBirthController.text =
                           DateFormat('yyyy-MM-dd').format(_selectedDate!);
+                      //widget.onDatePicked(selectedDate!);
                     });
-                    widget.onDateSelected(_selectedDate!);
                   }
                 },
                 validator: (value) {

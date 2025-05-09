@@ -24,7 +24,8 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                   //28 -> 25 padding + 3 space between two item
                   width: (MediaQuery.of(context).size.width / 2) - 28,
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  decoration: BoxDecoration(color: ColorsApp.backGroundColor),
+                  decoration:
+                      BoxDecoration(color: ColorsApp.primaryColorOpicaty),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +70,8 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                   //28 -> 25 padding + 3 space between two item
                   width: (MediaQuery.of(context).size.width / 2) - 28,
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  decoration: BoxDecoration(color: ColorsApp.backGroundColor),
+                  decoration:
+                      BoxDecoration(color: ColorsApp.primaryColorOpicaty),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -82,7 +84,11 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                         child: FittedBox(
                           fit: BoxFit.none,
                           child: SvgPicture.asset(
-                            Assets.imagesSolarHandHeartIcon,
+                            colorFilter:
+                                ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                            Assets.imagesChatIcon,
+                            width: 24,
+                            height: 24,
                           ),
                         ),
                       ),
@@ -93,14 +99,14 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Institutions",
+                            "Chats",
                             style: AppStyles.urbanistMedium16(context),
                           ),
                           Center(
                             widthFactor: 1,
                             child: Text(
                               softWrap: true,
-                              "Report a lost pet or a found animal.",
+                              "Direct chat between users and doctors for quick health advice.",
                               style: AppStyles.urbanistReqular14(context),
                             ),
                           ),
@@ -122,7 +128,7 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
             //28 -> 25 padding + 3 space between two item
             width: MediaQuery.of(context).size.width - 50,
             padding: EdgeInsets.only(top: 15, bottom: 15, right: 20, left: 10),
-            decoration: BoxDecoration(color: ColorsApp.backGroundColor),
+            decoration: BoxDecoration(color: ColorsApp.primaryColorOpicaty),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -135,7 +141,11 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                   child: FittedBox(
                     fit: BoxFit.none,
                     child: SvgPicture.asset(
-                      Assets.imagesShoppingCartIcon,
+                      colorFilter:
+                          ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                      Assets.imagesFluentDoctorAppBarIcon,
+                      width: 26,
+                      height: 26,
                     ),
                   ),
                 ),
@@ -147,14 +157,14 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Store",
+                        "Doctors",
                         style: AppStyles.urbanistMedium16(context),
                       ),
                       Center(
                         widthFactor: 1,
                         child: Text(
                           softWrap: true,
-                          "We offer a variety of healthy pets with a guarantee of quality and guidance for optimal care.",
+                          "Find and chat with trusted doctors anytime.",
                           style: AppStyles.urbanistReqular14(context),
                         ),
                       ),

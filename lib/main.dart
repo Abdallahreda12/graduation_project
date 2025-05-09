@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/view/additional%20info%20edit%20page/AdditionalInfoEdit.dart';
+import 'package:graduation_project/view/additional%20info%20page/AdditionalInfoPage.dart';
 import 'package:graduation_project/view/adoption%20%20and%20help%20request%20page/adoptionAndHelpRequestPage.dart';
 import 'package:graduation_project/view/adoption%20And%20Help%20Page/adoptionAndHelpPage.dart';
 import 'package:graduation_project/view/adoption%20Details%20Page/adoptionDetailsPage.dart';
@@ -7,6 +9,7 @@ import 'package:graduation_project/view/help%20Details%20page/helpDetailsPage.da
 import 'package:graduation_project/view/home%20page/homePage.dart';
 import 'package:graduation_project/view/notifaction%20page/notifactionPage.dart';
 import 'package:graduation_project/view/onboarding%20page/onboardingPage.dart';
+import 'package:graduation_project/view/profile%20page/profilePage.dart';
 import 'package:graduation_project/view/select%20lang%20page/selectLangPage.dart';
 import 'package:graduation_project/view/signin%20page/signinPage.dart';
 import 'package:graduation_project/view/signup%20completed%20page/signupCompletedPage.dart';
@@ -92,6 +95,9 @@ class MainApp extends StatelessWidget {
             name: "/adoptionandhelprequestpage",
             page: () => AdoptionAndHelpRequestPage()),
         GetPage(name: "/notifactionpage", page: () => NotifactionPage()),
+        GetPage(name: "/profilePage", page: () => ProfilePage()),
+        GetPage(name: "/additionalinfopage", page: () => AdditionalInfoPage()),
+        GetPage(name: "/additionalinfoeditpage", page: () => AdditionalInfoEditPage()),
       ],
     );
   }

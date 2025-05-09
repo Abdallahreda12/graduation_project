@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
 import 'package:graduation_project/core/util/colors.dart';
+import 'package:graduation_project/core/util/customFunctions.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:intl/intl.dart';
 
@@ -12,10 +14,12 @@ class TextFiedsInHelpRequest extends StatefulWidget {
 }
 
 class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
+  TextEditingController locationController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final TextEditingController dateController = TextEditingController();
     DateTime? selectedDate;
+
     return Column(
       children: [
         CustomTextField(
@@ -65,6 +69,18 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
               ),
               onTap: () async {
                 DateTime? pickedDate = await showDatePicker(
+                  builder: (context, child) {
+                    return Theme(
+                      data: Theme.of(context).copyWith(
+                          colorScheme: ColorScheme.light(
+                        primary:
+                            ColorsApp.secondaryColor, // Header background color
+                        onPrimary: Colors.white,
+                        onSurface: Colors.black,
+                      )),
+                      child: child!,
+                    ); // Body text color, child: child)
+                  },
                   context: context,
                   initialDate: DateTime.now(),
                   firstDate: DateTime(1950),
@@ -87,7 +103,11 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
         SizedBox(
           height: 15,
         ),
+        //
+        //pass controller to it to show new value in textfield
+        //
         CustomTextField(
+          controller: locationController,
           onDataChanged: (p0) {},
           text: "Location Link*",
           hintText: "Location of the case",
@@ -95,6 +115,44 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
               value!.isEmpty ? "Location link is required" : null,
           hintMaxLines: 1,
           borderColor: ColorsApp.secondaryColor,
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        //
+        //two buttons to get location link (will remove but after get suitable design)
+        //
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Custombutton(
+                backGroundColor: ColorsApp.secondaryColor,
+                height: 40,
+                borderradius: 25,
+                text: "get current location",
+                width: ((MediaQuery.sizeOf(context).width * 0.5) -
+                    10), //doesn't make any effect because there is expanded but it is required so..
+                onTap: () async {
+                  locationController.text =
+                      await CustomFunctions.getCurrentLocation();
+                },
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Custombutton(
+                  backGroundColor: ColorsApp.secondaryColor,
+                  height: 40,
+                  borderradius: 25,
+                  text: "open google map",
+                  width: ((MediaQuery.sizeOf(context).width * 0.5) -
+                      10), //doesn't make any effect because there is expanded but it is required so..
+                  onTap: () => CustomFunctions.openGoogleMaps(context)),
+            ),
+          ],
         ),
         SizedBox(
           height: 15,

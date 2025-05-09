@@ -11,12 +11,14 @@ class Custombutton extends StatelessWidget {
       required this.width,
       this.thereIsBorder = false,
       required this.onTap,
-      this.borderradius = 3});
+      this.borderradius = 3,
+      this.height = 45});
 
   final String text;
   final Color backGroundColor;
   final Color textColor;
   final double width;
+  final double height;
   final VoidCallback onTap;
   final bool thereIsBorder;
   final double borderradius;
@@ -26,7 +28,7 @@ class Custombutton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width,
-        height: 45,
+        height: height,
         decoration: BoxDecoration(
             border: thereIsBorder
                 ? Border.all(color: Colors.black, width: 1)

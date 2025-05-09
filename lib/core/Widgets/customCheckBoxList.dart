@@ -7,17 +7,26 @@ class CustomCheckListTile extends StatefulWidget {
       {super.key,
       required this.options,
       required this.question,
-      required this.onDataChanged});
+      required this.onDataChanged,
+      this.activeColor = ColorsApp.primaryColor,
+      this.defualtAnswer = ""});
   final List<String> options;
   final String question;
   final Function(String) onDataChanged;
+  final Color activeColor;
+  final String defualtAnswer;
 
   @override
   State<CustomCheckListTile> createState() => _CustomCheckListTileState();
 }
 
 class _CustomCheckListTileState extends State<CustomCheckListTile> {
-  String answer = "";
+  late String answer;
+  @override
+  void initState() {
+    super.initState();
+    answer = widget.defualtAnswer;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,24 +41,45 @@ class _CustomCheckListTileState extends State<CustomCheckListTile> {
         Column(
           children: widget.options.map(
             (e) {
-              return CheckboxListTile(
-                activeColor: ColorsApp.primaryColor,
-                dense: true,
-                visualDensity: VisualDensity(vertical: -2),
-                title: Text(
-                  e,
-                  style: AppStyles.urbanistMedium14(context),
-                ),
-                value: answer == e,
-                onChanged: (value) {
-                  setState(
-                    () {
-                      answer == e ? answer = "" : answer = e;
-                      widget.onDataChanged(answer);
+              return Row(
+                children: [
+                  Checkbox(
+                    activeColor: widget.activeColor,
+                    value: answer == e,
+                    onChanged: (value) {
+                      setState(
+                        () {
+                          answer == e ? answer = "" : answer = e;
+                          widget.onDataChanged(answer);
+                        },
+                      );
                     },
-                  );
-                },
+                  ),
+                  Text(
+                    e,
+                    style: AppStyles.urbanistMedium14(context),
+                  )
+                ],
               );
+              //another version from checklist
+              // return CheckboxListTile(
+              //   activeColor: ColorsApp.primaryColor,
+              //   dense: true,
+              //   visualDensity: VisualDensity(vertical: -2),
+              //   title: Text(
+              //     e,
+              //     style: AppStyles.urbanistMedium14(context),
+              //   ),
+              //   value: answer == e,
+              //   onChanged: (value) {
+              //     setState(
+              //       () {
+              //         answer == e ? answer = "" : answer = e;
+              //         widget.onDataChanged(answer);
+              //       },
+              //     );
+              //   },
+              // );
             },
           ).toList(),
         ),

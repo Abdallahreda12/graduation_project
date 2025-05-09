@@ -9,11 +9,13 @@ class ButtonsRow extends StatelessWidget {
       this.firstButton = 'Back',
       this.secondButton = 'Next',
       this.activeNextButton = true,
-      required this.secondButtonAction});
+      required this.secondButtonAction,
+      this.firstButtonColor = ColorsApp.backGroundColor});
   final String firstButton;
   final String secondButton;
   final bool activeNextButton;
   final VoidCallback secondButtonAction;
+  final Color firstButtonColor;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class ButtonsRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Custombutton(
-          backGroundColor: ColorsApp.backGroundColor,
+          backGroundColor: firstButtonColor,
           textColor: ColorsApp.primaryColor,
           text: firstButton,
           width: (MediaQuery.sizeOf(context).width - 70) / 2,
