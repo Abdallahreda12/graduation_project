@@ -97,7 +97,9 @@ class MainApp extends StatelessWidget {
         GetPage(name: "/notifactionpage", page: () => NotifactionPage()),
         GetPage(name: "/profilePage", page: () => ProfilePage()),
         GetPage(name: "/additionalinfopage", page: () => AdditionalInfoPage()),
-        GetPage(name: "/additionalinfoeditpage", page: () => AdditionalInfoEditPage()),
+        GetPage(
+            name: "/additionalinfoeditpage",
+            page: () => AdditionalInfoEditPage()),
       ],
     );
   }
