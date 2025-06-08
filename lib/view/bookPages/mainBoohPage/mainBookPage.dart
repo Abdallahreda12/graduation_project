@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:graduation_project/core/Widgets/customBottomAppBar.dart';
 import 'package:graduation_project/core/Widgets/customPlusBottunInAppBar.dart';
 import 'package:graduation_project/core/util/appImages.dart';
@@ -70,7 +72,9 @@ class MainBookPage extends StatelessWidget {
                 runSpacing: 12,
                 children: List.generate(5, (index) {
                   return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed("/DoctorDetailsPage");
+                    },
                     child: SizedBox(
                         width: MediaQuery.of(context).size.width / 2 - 20,
                         child: DoctorCard()),

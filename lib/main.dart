@@ -5,6 +5,7 @@ import 'package:graduation_project/view/additional%20info%20page/AdditionalInfoP
 import 'package:graduation_project/view/adoption%20%20and%20help%20request%20page/adoptionAndHelpRequestPage.dart';
 import 'package:graduation_project/view/adoption%20And%20Help%20Page/adoptionAndHelpPage.dart';
 import 'package:graduation_project/view/adoption%20Details%20Page/adoptionDetailsPage.dart';
+import 'package:graduation_project/view/bookPages/DoctorDetailsPage/DoctorDetailsPage.dart';
 import 'package:graduation_project/view/bookPages/mainBoohPage/mainBookPage.dart';
 import 'package:graduation_project/view/help%20Details%20page/helpDetailsPage.dart';
 import 'package:graduation_project/view/home%20page/homePage.dart';
@@ -102,6 +103,7 @@ class MainApp extends StatelessWidget {
             name: "/additionalinfoeditpage",
             page: () => AdditionalInfoEditPage()),
         GetPage(name: "/mainbookpage", page: () => MainBookPage()),
+        GetPage(name: "/DoctorDetailsPage", page: () => DoctorDetailsPage()),
       ],
     );
   }
