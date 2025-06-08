@@ -68,6 +68,7 @@ class Assets {
   static const String imagesChatIcon = "assets/images/ChatIcon.svg";
   static const String imagesbannerMainBookPage =
       "assets/images/bannerMainBookPage.png";
+  static const String imagesDoctorImage = "assets/images/doctorImage.png";
 
   /// Assets for imagesNotificationIcon
   /// assets/images/notificationIcon.svg

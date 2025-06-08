@@ -11,8 +11,8 @@ class BannerOfMainBookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 25),
       width: MediaQuery.sizeOf(context).width,
-      height: 200,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
