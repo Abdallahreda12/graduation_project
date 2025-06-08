@@ -61,7 +61,11 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (widget.currentPageIndex != 2) {
+                      Get.toNamed("/mainbookpage");
+                    }
+                  },
                   icon: SvgPicture.asset(
                     Assets.imagesFluentDoctorAppBarIcon,
                     width: 24,

@@ -66,6 +66,9 @@ class Assets {
   /// assets/images/LogoInverse.svg
   static const String imagesLogoInverse = "assets/images/LogoInverse.svg";
   static const String imagesChatIcon = "assets/images/ChatIcon.svg";
+  static const String imagesbannerMainBookPage =
+      "assets/images/bannerMainBookPage.png";
+  static const String imagesDoctorImage = "assets/images/doctorImage.png";
 
   /// Assets for imagesNotificationIcon
   /// assets/images/notificationIcon.svg

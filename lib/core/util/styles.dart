@@ -121,6 +121,14 @@ abstract class AppStyles {
         fontWeight: FontWeight.w600);
   }
 
+  static TextStyle urbanistSemiBold20(BuildContext context) {
+    return TextStyle(
+        color: Colors.black,
+        fontSize: getResposiveFontSize(context, fontsize: 20),
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w600);
+  }
+
   static TextStyle urbanistItalic18(BuildContext context) {
     return TextStyle(
         fontStyle: FontStyle.italic,
