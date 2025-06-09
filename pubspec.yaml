@@ -7,6 +7,7 @@ environment:
   sdk: ^3.6.1
 
 dependencies:
+  booking_calendar: ^1.1.10
   carousel_slider: ^5.0.0
   flutter:
     sdk: flutter
@@ -16,7 +17,7 @@ dependencies:
   geolocator: ^13.0.2
   get: ^4.6.6
   google_maps_flutter: ^2.10.0
-  intl: ^0.20.2
+  intl: ^0.18.0
   salomon_bottom_bar: ^3.3.2
   smooth_page_indicator: ^1.2.0+3
   url_launcher: ^6.3.1

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:graduation_project/core/Widgets/customBottomAppBar.dart';
 import 'package:graduation_project/core/Widgets/customPlusBottunInAppBar.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
-import 'package:graduation_project/view/bookPages/mainBoohPage/widgets/BannerOfMainBookPage.dart';
-import 'package:graduation_project/view/bookPages/mainBoohPage/widgets/DoctorCard.dart';
-import 'package:graduation_project/view/bookPages/mainBoohPage/widgets/searchBarInMainBookPage.dart';
+import 'package:graduation_project/view/bookPages/mainBookPage/widgets/BannerOfMainBookPage.dart';
+import 'package:graduation_project/view/bookPages/mainBookPage/widgets/DoctorCard.dart';
+import 'package:graduation_project/view/bookPages/mainBookPage/widgets/searchBarInMainBookPage.dart';
 
 class MainBookPage extends StatelessWidget {
   const MainBookPage({super.key});
