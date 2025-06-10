@@ -183,7 +183,9 @@ class _SigninPageState extends State<SigninPage> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Get.toNamed("/resetpassword");
+                                },
                                 child: Text(
                                   "Forgot Password?",
                                   style: AppStyles.urbanistReqular14(context),
