@@ -12,11 +12,13 @@ class Custombutton extends StatelessWidget {
       this.thereIsBorder = false,
       required this.onTap,
       this.borderradius = 3,
-      this.height = 45});
+      this.height = 45,
+      this.isActive = true});
 
   final String text;
   final Color backGroundColor;
   final Color textColor;
+  final bool isActive;
   final double width;
   final double height;
   final VoidCallback onTap;
@@ -24,22 +26,25 @@ class Custombutton extends StatelessWidget {
   final double borderradius;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-            border: thereIsBorder
-                ? Border.all(color: Colors.black, width: 1)
-                : null,
-            color: backGroundColor,
-            borderRadius: BorderRadius.circular(borderradius)),
-        child: Center(
-          child: Text(
-            text,
-            style: AppStyles.urbanistSemiBold14(context)
-                .copyWith(color: textColor),
+    return AbsorbPointer(
+      absorbing: !isActive,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+              border: thereIsBorder
+                  ? Border.all(color: Colors.black, width: 1)
+                  : null,
+              color: isActive ? backGroundColor : backGroundColor.withAlpha(90),
+              borderRadius: BorderRadius.circular(borderradius)),
+          child: Center(
+            child: Text(
+              text,
+              style: AppStyles.urbanistSemiBold14(context)
+                  .copyWith(color: textColor),
+            ),
           ),
         ),
       ),

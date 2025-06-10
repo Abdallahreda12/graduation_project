@@ -75,7 +75,7 @@ class DoctorDetailsPage extends StatelessWidget {
               text: 'Book an appointment',
               width: MediaQuery.sizeOf(context).width,
               onTap: () {
-                Get.toNamed("/");
+                Get.toNamed("/bookpage");
               },
             ),
           ),

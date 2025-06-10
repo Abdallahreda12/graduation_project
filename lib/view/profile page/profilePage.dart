@@ -105,30 +105,37 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: ColorsApp.primaryColorOpicaty),
                         child: Column(
                           children: [
-                            BuildDropdownRow(
-                              context: context,
-                              label: 'Theme',
-                              selectedValue: _selectedTheme,
-                              options: ['Light', 'Dark'],
-                              onChanged: (String? value) {
-                                setState(() {
-                                  _selectedTheme = value!;
-                                });
-                              },
+                            Padding(
+                              padding: const EdgeInsets.only(right: 30),
+                              child: BuildDropdownRow(
+                                context: context,
+                                label: 'Theme',
+                                selectedValue: _selectedTheme,
+                                options: ['Light', 'Dark'],
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _selectedTheme = value!;
+                                  });
+                                },
+                              ),
                             ),
                             SizedBox(
                               height: 15,
                             ),
-                            BuildDropdownRow(
-                              context: context,
-                              label: 'Language',
-                              selectedValue: _selectedLanguage,
-                              options: ['Eng', 'Arb'],
-                              onChanged: (String? value) {
-                                setState(() {
-                                  _selectedLanguage = value!;
-                                });
-                              },
+                            Padding(
+                              padding: const EdgeInsets.only(right: 30),
+                              child: BuildDropdownRow(
+                                mainAxisAlign: MainAxisAlignment.spaceBetween,
+                                context: context,
+                                label: 'Language',
+                                selectedValue: _selectedLanguage,
+                                options: ['Eng', 'Arb'],
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _selectedLanguage = value!;
+                                  });
+                                },
+                              ),
                             ),
                           ],
                         ),
