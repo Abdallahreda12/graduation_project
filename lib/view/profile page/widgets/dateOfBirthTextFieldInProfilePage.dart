@@ -8,7 +8,7 @@ class DateOfBirthTextFieldInProfilePage extends StatefulWidget {
   final String initValue;
 
 
-  DateOfBirthTextFieldInProfilePage(
+  const DateOfBirthTextFieldInProfilePage(
       {required this.label,
       required this.initValue,
       });
@@ -38,12 +38,13 @@ class _DateOfBirthTextFieldInProfilePageState
       lastDate: DateTime(2101),
     );
 
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
         _controller = TextEditingController(
             text: DateFormat('dd/MM/yyyy').format(selectedDate!));
       });
+    }
   }
 
   @override

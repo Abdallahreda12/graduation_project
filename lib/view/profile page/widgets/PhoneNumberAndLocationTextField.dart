@@ -7,7 +7,7 @@ class PhoneNumberAndLocationTextField extends StatefulWidget {
   final String initValue;
   final TextInputType keyboardType;
 
-  PhoneNumberAndLocationTextField(
+  const PhoneNumberAndLocationTextField(
       {required this.label,
       required this.initValue,
       this.keyboardType = TextInputType.name});
