@@ -5,6 +5,7 @@ import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
+import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/bookPages/AnimalOwnerPage/widgets/formFieldInAnimalOwnerPage.dart';
 
 class AnimalOwnerPage extends StatefulWidget {
@@ -61,8 +62,7 @@ class _AnimalOwnerPageState extends State<AnimalOwnerPage> {
               width: MediaQuery.sizeOf(context).width,
               onTap: () {
                 if (_formKey.currentState!.validate()) {
-                  // If all fields are valid, proceed
-                  Get.toNamed("/successpage");
+                  showAppointmentDialog(context);
                 }
               },
             ),
@@ -71,4 +71,63 @@ class _AnimalOwnerPageState extends State<AnimalOwnerPage> {
       ]),
     );
   }
+}
+
+void showAppointmentDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: false, // Prevent dismiss on tap outside
+    builder: (BuildContext context) {
+      return Dialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Check Icon
+              CircleAvatar(
+                backgroundColor: ColorsApp.primaryColor,
+                radius: 40,
+                child: Icon(Icons.check, color: Colors.white, size: 40),
+              ),
+              SizedBox(height: 10),
+              // Title
+              Text("Congratulations",
+                  style: AppStyles.urbanistMedium24(context)
+                      .copyWith(color: Colors.black)),
+              SizedBox(height: 8),
+              // Subtitle
+              Text(
+                "Appointment successfully booked.",
+                style: AppStyles.urbanistReqular14(context),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              // View Appointment Button
+              ElevatedButton(
+                onPressed: () {
+                  Get.offAllNamed("/mainbookpage");
+                  // Navigate to the appointment page
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorsApp.primaryColor,
+                  minimumSize: Size(double.infinity, 45),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  "View Appointment",
+                  style: AppStyles.urbanistSemiBold14(context)
+                      .copyWith(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }

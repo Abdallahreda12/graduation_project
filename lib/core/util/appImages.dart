@@ -69,6 +69,7 @@ class Assets {
   static const String imagesbannerMainBookPage =
       "assets/images/bannerMainBookPage.png";
   static const String imagesDoctorImage = "assets/images/doctorImage.png";
+  static const String imagesDoneIcon = "assets/images/DoneIcon.svg";
 
   /// Assets for imagesNotificationIcon
   /// assets/images/notificationIcon.svg
