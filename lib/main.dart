@@ -23,6 +23,7 @@ import 'package:graduation_project/view/signup3%20page/signup3Page.dart';
 import 'package:graduation_project/view/signup4%20page/signup4Page.dart';
 import 'package:graduation_project/view/signup5%20page/signup5Page.dart';
 import 'package:graduation_project/view/splash%20page/splashPage.dart';
+import 'package:graduation_project/view/tips%20and%20tricks%20pages/TipsAndTricksPage/TipsAndTricksForYourPetsPage.dart';
 
 void main() {
   runApp(const MainApp());
@@ -108,6 +109,7 @@ class MainApp extends StatelessWidget {
         GetPage(name: "/DoctorDetailsPage", page: () => DoctorDetailsPage()),
         GetPage(name: "/bookpage", page: () => BookingPage()),
         GetPage(name: "/animalownerpage", page: () => AnimalOwnerPage()),
+        GetPage(name: "/tipsandtricksforyourpetspage", page: () => TipsAndTricksForYourPetsPage()),
       ],
     );
   }
