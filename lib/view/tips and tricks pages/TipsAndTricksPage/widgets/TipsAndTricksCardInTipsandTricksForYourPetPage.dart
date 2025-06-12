@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 
-class TipsAndTricksCardInTipsandTricksForYourPetPage extends StatelessWidget {
-  const TipsAndTricksCardInTipsandTricksForYourPetPage(
+class TipsAndTricksCardInTipsAndTricksForYourPetPage extends StatelessWidget {
+  const TipsAndTricksCardInTipsAndTricksForYourPetPage(
       {super.key, required this.title, required this.description});
 
   final String title;
@@ -12,7 +14,7 @@ class TipsAndTricksCardInTipsandTricksForYourPetPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //Get.toNamed("/tipsandtricksforyourpetspage");
+        Get.toNamed("/informationpage",arguments: title);
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 15),

@@ -11,27 +11,36 @@ class TextAndBackArrowHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Row(
       children: [
-        GestureDetector(
-          onTap: () {
-            Get.back();
-          },
-          child: Icon(Icons.arrow_back_ios),
+        Expanded(
+          flex: 1,
+          child: GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(Icons.arrow_back_ios),
+          ),
         ),
-        Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: texts.asMap().entries.map(
-              (e) {
-                int index = e.key;
-                var item = e.value;
-                return Text(
-                  item,
-                  style: AppStyles.urbanistSemiBold18(context)
-                      .copyWith(color: colorsOfTexts[index]),
-                );
-              },
-            ).toList()),
+        Expanded(
+          flex: 15,
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: texts.asMap().entries.map(
+                (e) {
+                  int index = e.key;
+                  var item = e.value;
+                  return Flexible(
+                    child: Text(
+                      item,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppStyles.urbanistSemiBold18(context)
+                          .copyWith(color: colorsOfTexts[index]),
+                    ),
+                  );
+                },
+              ).toList()),
+        ),
       ],
     );
   }

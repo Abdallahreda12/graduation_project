@@ -5,7 +5,7 @@ import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
-import 'package:graduation_project/view/tips%20and%20tricks%20pages/TipsAndTricksPage/Data/TipsAndTricksForYourPetsPageData.dart';
+import 'package:graduation_project/view/tips%20and%20tricks%20pages/Data/TipsAndTricksForYourPetsPageData.dart';
 class TipsAndTricksForYourPetsPage extends StatefulWidget {
   const TipsAndTricksForYourPetsPage({super.key});
 

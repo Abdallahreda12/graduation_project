@@ -14,7 +14,7 @@ class PageViewInTipsAndTricksForYourPetsPage extends StatelessWidget {
         final item = cardDetials[index];
         final key = item.keys.first;
         final value = item[key]!;
-        return TipsAndTricksCardInTipsandTricksForYourPetPage(
+        return TipsAndTricksCardInTipsAndTricksForYourPetPage(
             title: key, description: value);
       },
     );
