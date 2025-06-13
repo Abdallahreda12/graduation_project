@@ -14,6 +14,7 @@ import 'package:graduation_project/view/home%20page/homePage.dart';
 import 'package:graduation_project/view/notifaction%20page/notifactionPage.dart';
 import 'package:graduation_project/view/onboarding%20page/onboardingPage.dart';
 import 'package:graduation_project/view/profile%20page/profilePage.dart';
+import 'package:graduation_project/view/reset%20password%20page/resetPassword.dart';
 import 'package:graduation_project/view/select%20lang%20page/selectLangPage.dart';
 import 'package:graduation_project/view/signin%20page/signinPage.dart';
 import 'package:graduation_project/view/signup%20completed%20page/signupCompletedPage.dart';
@@ -106,14 +107,19 @@ class MainApp extends StatelessWidget {
         GetPage(
             name: "/additionalinfoeditpage",
             page: () => AdditionalInfoEditPage()),
+
+        GetPage(name: "/resetpassword", page: () => ResetPassword()),
+
         GetPage(name: "/mainbookpage", page: () => MainBookPage()),
         GetPage(name: "/DoctorDetailsPage", page: () => DoctorDetailsPage()),
         GetPage(name: "/bookpage", page: () => BookingPage()),
         GetPage(name: "/animalownerpage", page: () => AnimalOwnerPage()),
+
         GetPage(
             name: "/tipsandtricksforyourpetspage",
             page: () => TipsAndTricksForYourPetsPage()),
         GetPage(name: "/informationpage", page: () => InformationPage()),
+
       ],
     );
   }
