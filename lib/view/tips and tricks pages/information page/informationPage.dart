@@ -25,6 +25,7 @@ class _InformationPageState extends State<InformationPage> {
   String? details;
   late List<String> links;
 
+  //for get header and details
   @override
   void initState() {
     title = Get.arguments;

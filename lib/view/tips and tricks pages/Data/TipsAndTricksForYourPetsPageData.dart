@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/view/tips%20and%20tricks%20pages/TipsAndTricksPage/widgets/PageViewInTipsAndTricksForYourPetsPage.dart';
 
 abstract class TipsAndTricksForYourPetsPageData {
+  //
+  //used in TipsAndTricksForYourPetsPage
+  //
   static List<String> categories = [
     "Pet Types",
     "Feeding",
@@ -13,145 +16,71 @@ abstract class TipsAndTricksForYourPetsPageData {
     "Emergency"
   ];
 
+  //
+  //pageview in every category
+  //
   static List<Widget> pages = [
     PageViewInTipsAndTricksForYourPetsPage(cardDetials: [
+      {"Dog": "Popular Dog Breeds and Their Characteristics"},
+      {"Cat": "Popular Cat Breeds and Their Unique Traits"},
+      {"rabbits": "All About Rabbits: Gentle Pets with Big Personalities"},
+      {"hamsters": "Hamsters: Tiny Companions with Big Personalities"},
+      {"Birds": "Birds: Colorful, Intelligent, and Loyal Companions"},
+      {"fish": "Pet Fish: A Peaceful and Beautiful Addition to Any Home"},
       {
-        "Dog":
-            "Introduce users to some ofthe most popular dog breeds around the world"
-      },
-      {
-        "Cat":
-            "Introduce users to some of the most popular cat breeds around the world"
-      },
-      {
-        "rabbits":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
-      {
-        "hamsters":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
-      {
-        "Birds":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
-      {
-        "fish":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
-      {
-        "reptiles":
-            "Introduce users to some of the most popular dog breeds around the world"
+        "reptiles": "Reptiles: Unique and Fascinating Pets for Committed Owners"
       },
     ]),
     PageViewInTipsAndTricksForYourPetsPage(cardDetials: [
-      {
-        "Recommended food":
-            "Introduce users to some ofsssssssssssssssssssss the most popular dog breeds around the world"
-      },
-      {
-        "Human foods that are toxic":
-            "Introduce users to some of the most popular cat breeds around the world"
-      },
-      {
-        "Feeding schedule tips":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
+      {"Recommended food": "Recommended Food for Popular Pets"},
+      {"Human foods that are toxic": "Human foods that are toxic"},
+      {"Feeding schedule tips": "Feeding Schedule Tips for Pets"},
     ]),
     PageViewInTipsAndTricksForYourPetsPage(cardDetials: [
-      {
-        "Common diseases and symptoms":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
-      {
-        "Vaccination schedule":
-            "Introduce users to some of the most popular cat breeds around the world"
-      },
+      {"Common diseases and symptoms": "Common Diseases and Symptoms in Pets"},
+      {"Vaccination schedule": "Vaccination Schedule for Pets"},
       {
         "Parasite prevention (fleas, ticks, worms)":
-            "Introduce users to some of the most popular dog breeds around the world"
+            "Parasite Prevention (Fleas, Ticks, Worms)"
       },
     ]),
     PageViewInTipsAndTricksForYourPetsPage(cardDetials: [
-      {
-        "Bathing and brushing tips":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
-      {
-        "Nail trimming":
-            "Introduce users to some of the most popular cat breeds around the world"
-      },
-      {
-        "Ear and dental care":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
+      {"Bathing and brushing tips": "Bathing and Brushing Tips"},
+      {"Nail trimming": "Nail Trimming"},
+      {"Ear and dental care": "Ear and Dental Care"},
     ]),
     PageViewInTipsAndTricksForYourPetsPage(cardDetials: [
-      {
-        "Potty training tips":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
-      {
-        "Obedience training basics":
-            "Introduce users to some of the most popular cat breeds around the world"
-      },
-      {
-        "Socialization tips":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
+      {"Potty training tips": "Potty Training Tips"},
+      {"Obedience training basics": "Obedience Training Basics"},
+      {"Socialization tips": "Socialization Tips"},
       {
         "Dealing with aggressive or anxious behavior":
-            "Introduce users to some of the most popular dog breeds around the world"
+            "Dealing with Aggressive or Anxious Behavior"
       },
     ]),
     PageViewInTipsAndTricksForYourPetsPage(cardDetials: [
-      {
-        "Daily activity needs":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
-      {
-        "Mental stimulation ideas":
-            "Introduce users to some of the most popular cat breeds around the world"
-      },
-      {
-        "DIY toys and games":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
+      {"Daily activity needs": "Daily Activity Needs"},
+      {"Mental stimulation ideas": " Mental Stimulation Ideas for Pets"},
+      {"DIY toys and games": "DIY Toys and Games for Pets"},
     ]),
     PageViewInTipsAndTricksForYourPetsPage(cardDetials: [
-      {
-        "How to adopt responsibly":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
-      {
-        "Preparing your home":
-            "Introduce users to some of the most popular cat breeds around the world"
-      },
-      {
-        "First vet visit checklist":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
-      {
-        "Pet insurance info":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
+      {"How to adopt responsibly": " How to Adopt Responsibly"},
+      {"Preparing your home": "Preparing Your Home for a New Pet"},
+      {"First vet visit checklist": "First vet visit checklist"},
+      {"Pet insurance info": "Pet Insurance: What You Need to Know"},
     ]),
     PageViewInTipsAndTricksForYourPetsPage(cardDetials: [
-      {
-        "First aid tips":
-            "Introduce users to some of the most popular dog breeds around the world"
-      },
-      {
-        "Toxic substances and plants":
-            "Introduce users to some of the most popular cat breeds around the world"
-      },
+      {"First aid tips": "Basic Pet First Aid Tips"},
+      {"Toxic substances and plants": "Toxic Substances and Plants for Pets"},
       {
         "What to do if your pet goes missing":
-            "Introduce users to some of the most popular dog breeds around the world"
+            "What to Do If Your Pet Goes Missing"
       },
     ]),
   ];
-
+//
+//used it in informationPage to get header and details for every topic
+//
   static List<Map<String, Map<String, String>>> informationTopics = [
     {
       "Dog": {
@@ -170,6 +99,8 @@ Another favorite is the Golden Retriever, known for their kindness, patience, an
 
 Each dog breed has its own needs, so it's important for potential owners to research and consider factors like size, grooming needs, exercise requirements, and temperament before making a decision. The right match can lead to a lifelong friendship filled with loyalty, fun, and unconditional love.'''
       },
+//
+//
       "Cat": {
         '''🐱 Popular Cat Breeds and Their Unique Traits''': '''
 Cats come in a wide variety of breeds, each with its own personality, appearance, and care needs. Whether you're looking for a playful kitten, a calm lap cat, or a hypoallergenic companion, there’s a perfect breed for every cat lover.
@@ -186,6 +117,8 @@ For people with allergies, the Sphynx cat can be a good option. This breed is kn
 
 Each cat breed has its own charm, and choosing the right one depends on your lifestyle, home, and how much time you can dedicate to grooming and play. Whether you want a quiet cuddle buddy or a curious explorer, there’s a cat breed that will fit perfectly into your life.'''
       },
+//
+//
       "rabbits": {
         '''🐰 All About Rabbits: Gentle Pets with Big Personalities''': '''
 Rabbits are adorable, quiet, and intelligent animals that make wonderful pets for individuals and families alike. With proper care, they can live 8–12 years or more and form strong bonds with their owners.
@@ -208,6 +141,8 @@ Socially, rabbits are very interactive. Some do well alone with lots of human in
 
 Rabbits are a great option for people looking for a quiet, clean, and lovable companion. With the right care, they’ll bring happiness, joy, and calm to your home.'''
       },
+//
+//
       "hamsters": {
         '''🐹 Hamsters: Tiny Companions with Big Personalities''': '''
 Hamsters are one of the most popular small pets, especially for first-time pet owners and children. They are low-maintenance, adorable, and can develop strong bonds with their owners when treated gently and with care.
@@ -236,6 +171,8 @@ All pet birds need a spacious cage, a balanced diet (pellets, seeds, fruits, and
 
 Birds are sensitive to environmental changes, stress, and poor diets, so keeping their environment stable and engaging is essential. With the right care, pet birds can become loving, loyal companions and brighten your life with their songs, colors, and personalities.'''
       },
+//
+//
       "fish": {
         '''🐠 Pet Fish: A Peaceful and Beautiful Addition to Any Home''': '''
 Fish are among the most relaxing and visually stunning pets to keep. Their graceful movements, vibrant colors, and calming presence make them a favorite for both beginners and experienced pet lovers. While fish may seem low-maintenance, providing a healthy and stable environment is key to keeping them happy and thriving.
@@ -262,6 +199,8 @@ Feeding your fish once or twice a day with quality flakes or pellets is usually 
 
 Fish are quiet and low-allergy pets, making them ideal for apartments or shared living spaces. While they may not show affection like cats or dogs, watching them swim peacefully can reduce stress and bring a sense of tranquility to your home.
 '''
+//
+//
       },
       "reptiles": {
         '''🐢 Reptiles: Unique and Fascinating Pets for Committed Owners''': '''
@@ -293,6 +232,8 @@ Reptiles are not low-maintenance—they require routine care, regular feeding, a
 
 With patience and knowledge, reptiles can become captivating and loyal pets that bring a touch of the wild into your home.'''
       },
+//
+//
       "Recommended food": {
         '''🥕 Recommended Food for Popular Pets''': '''
 🐶 Dogs
@@ -369,6 +310,8 @@ Avoid human snacks and sweets
 
 Research your pet's specific species needs
 '''
+//
+//
       },
       "Human foods that are toxic": {
         '''⚠️ Human Foods That Are Toxic to Pets''': '''
@@ -448,6 +391,8 @@ While sharing your snack might seem like a kind gesture, many human foods are ac
 ✅ General Rule:
 If you’re unsure whether a food is safe, don’t feed it to your pet. Always stick to a diet recommended for their species.
 '''
+//
+//
       },
       "Feeding schedule tips": {
         '''🕒 Feeding Schedule Tips for Pets''': '''
@@ -513,6 +458,8 @@ A consistent feeding schedule is key to keeping your pet healthy, energetic, and
 
 🚫 No table scraps – Stick to species-appropriate food
 '''
+//
+//
       },
       "Common diseases and symptoms": {
         '''🩺 Common Diseases and Symptoms in Pets''': '''
@@ -616,6 +563,8 @@ Common Diseases:
 
   -Unusual lumps or swelling
 '''
+//
+//
       },
       "Vaccination schedule": {
         '''💉 Vaccination Schedule for Pets''': '''
@@ -662,6 +611,8 @@ Keep track of local vaccination laws
 
 Consider setting reminders in your app for pet owners
 '''
+//
+//
       },
       "Parasite prevention (fleas, ticks, worms)": {
         '''🛡️ Parasite Prevention (Fleas, Ticks, Worms)''': '''
@@ -729,6 +680,8 @@ Many modern parasite treatments offer combined protection against fleas, ticks, 
 
   -Indoor pets still need parasite prevention — fleas and worms can enter homes easily.
 '''
+//
+//
       },
       "Bathing and brushing tips": {
         '''🧼 Bathing and Brushing Tips''': '''
@@ -791,6 +744,8 @@ Tips for cats:
 
   -Check nails, ears, eyes, and teeth regularly during grooming sessions.
 '''
+//
+//
       },
       "Nail trimming": {
         '''✂️ Nail Trimming''': '''
@@ -844,6 +799,8 @@ Tips for trimming cat nails:
 
   -Always check paws for cuts, swelling, or signs of infection while trimming.
 '''
+//
+//
       },
       "Ear and dental care": {
         '''🦷👂 Ear and Dental Care''': '''
@@ -889,6 +846,8 @@ Tips for dental care:
 
   -If you notice anything unusual—odor, bleeding, swelling—contact your veterinarian.
 '''
+//
+//
       },
       "Potty training tips": {
         '''🚽 Potty Training Tips''': '''
@@ -944,6 +903,8 @@ Use enzymatic cleaners to remove odor completely and prevent re-marking.
 
 Watch your pet’s routine and learn their timing for better success.
 '''
+//
+//
       },
       "Obedience training basics": {
         '''🐾 Obedience Training Basics''': '''
@@ -1006,6 +967,8 @@ Training also satisfies your pet’s mental needs. You can make it fun with game
 Start obedience training as early as possible. Even older pets can learn with patience and consistency. 
 If you're unsure where to begin, consider a certified pet trainer or basic obedience class for guidance.
 '''
+//
+//
       },
       "Socialization tips": {
         '''🐾 Socialization Tips''': '''
@@ -1063,6 +1026,8 @@ Watch their body language: Don’t force it if they seem scared or overwhelmed
 🐾 Final Tip
 Socialization is an ongoing journey—not a one-time task. Keep introducing your pet to new situations throughout their life to keep their confidence strong and their behavior balanced.
 '''
+//
+//
       },
       "Dealing with aggressive or anxious behavior": {
         '''😾 Dealing with Aggressive or Anxious Behavior''': '''
@@ -1120,6 +1085,8 @@ Seek a certified pet behaviorist or trainer if:
 
   -You’ve tried basic techniques without success
 '''
+//
+//
       },
       "Daily activity needs": {
         '''🐕 Daily Activity Needs''': '''
@@ -1186,6 +1153,8 @@ Reptiles are less active but still benefit from light interaction.
 📝 Final Advice
 Match your pet’s daily routine to its species, breed, and personality. Even short sessions of activity improve your pet’s mood, health, and behavior. Remember, a tired pet is a happy pet!
 '''
+//
+//
       },
       "Mental stimulation ideas": {
         '''🧠 Mental Stimulation Ideas for Pets''': '''
@@ -1255,9 +1224,9 @@ Avoid overstimulation—watch your pet's body language.
 Mix physical with mental tasks for the best results.
 
 Enrichment isn’t just fun—it’s essential for a pet’s health and happiness!
-
-
 '''
+//
+//
       },
       "DIY toys and games": {
         '''🧸 DIY Toys and Games for Pets''': '''
@@ -1331,6 +1300,8 @@ Remove broken or chewed-up toys immediately.
 
 DIY games aren’t just fun—they boost your pet’s brainpower and give you bonding time together!
 '''
+//
+//
       },
       "How to adopt responsibly": {
         '''🐾 How to Adopt Responsibly''': '''
@@ -1404,9 +1375,9 @@ Remember: Adoption is forever.
 
 ❤️ Final Thought
 When you adopt responsibly, you're not just getting a pet—you’re giving an animal a second chance at life. It's one of the most rewarding things you can do.
-
-
 '''
+//
+//
       },
       "Preparing your home": {
         '''🏠 Preparing Your Home for a New Pet''': '''
@@ -1495,6 +1466,8 @@ If you have children or other pets:
 ❤️ Final Tip
 The first few days in a new home are overwhelming for most pets. Keep things calm, quiet, and predictable. With patience, love, and a well-prepared home, your new pet will feel like family in no time.
 '''
+//
+//
       },
       "First vet visit checklist": {
         '''🩺 First Vet Visit Checklist''': '''
@@ -1577,6 +1550,8 @@ Write down any unusual behavior, symptoms, or concerns you've noticed—even if 
 ❤️ Final Reminder
 Don’t wait until your pet is sick to visit the vet. Early care sets the stage for a healthy, happy life!
 '''
+//
+//
       },
       "Pet insurance info": {
         '''🐾 Pet Insurance: What You Need to Know''': '''
@@ -1653,6 +1628,8 @@ Some plans may also cover:
 🧠 Tip
 Enroll your pet while they’re young and healthy to avoid exclusions for pre-existing conditions.
 '''
+//
+//
       },
       "First aid tips": {
         '''🆘 Basic Pet First Aid Tips''': '''
@@ -1738,6 +1715,8 @@ Include:
 🧠 Tip:
 Always stay calm. Your pet will pick up on your stress. In any emergency, contact your veterinarian or a 24/7 animal hospital right away.
 '''
+//
+//
       },
       "Toxic substances and plants": {
         '''⚠️ Toxic Substances and Plants for Pets''': '''
@@ -1833,6 +1812,8 @@ If your pet has ingested a toxic item, watch for:
 
   -Research before bringing new plants or products into the home
 '''
+//
+//
       },
       "What to do if your pet goes missing": {
         '''🚨 What to Do If Your Pet Goes Missing''': '''
@@ -1875,7 +1856,9 @@ Losing a pet is every owner's nightmare, but staying calm and acting quickly can
       },
     }
   ];
-
+//
+//used in informationPage to get linksfor each topc
+//
   static List<Map<String, List<String>>> informationTopicsLinks = [
     {
       "Dog": [
