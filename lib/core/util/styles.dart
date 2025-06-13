@@ -145,6 +145,46 @@ abstract class AppStyles {
         fontFamily: 'Urbanist',
         fontWeight: FontWeight.w400);
   }
+
+  static TextStyle urbanistBold12(BuildContext context) {
+    return TextStyle(
+        color: Colors.black,
+        fontSize: getResposiveFontSize(context, fontsize: 12),
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.bold);
+  }
+
+  static TextStyle urbanistBold14(BuildContext context) {
+    return TextStyle(
+        color: Colors.black,
+        fontSize: getResposiveFontSize(context, fontsize: 14),
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.bold);
+  }
+
+  static TextStyle urbanistBold16(BuildContext context) {
+    return TextStyle(
+        color: Colors.black,
+        fontSize: getResposiveFontSize(context, fontsize: 16),
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.bold);
+  }
+
+  static TextStyle urbanistBold18(BuildContext context) {
+    return TextStyle(
+        color: Colors.black,
+        fontSize: getResposiveFontSize(context, fontsize: 18),
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.bold);
+  }
+
+  static TextStyle urbanistBold20(BuildContext context) {
+    return TextStyle(
+        color: Colors.black,
+        fontSize: getResposiveFontSize(context, fontsize: 20),
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.bold);
+  }
 }
 
 double getResposiveFontSize(BuildContext context, {required double fontsize}) {
