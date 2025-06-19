@@ -137,4 +137,6 @@ class Assets {
       "assets/images/tipsAndTricksPhotos/Recommended_food.jpg";
   static const String imagesWhattToDoIfYourPetGoesMissing =
       "assets/images/tipsAndTricksPhotos/What_to_do_if_your_pet_goes_missing.jpg";
+  static const String adoptionPhoto = "assets/images/adoptionPhoto.jpg";
+  static const String helpPhoto = "assets/images/helpPhoto.jpg";
 }

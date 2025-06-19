@@ -123,7 +123,9 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
           height: 10,
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed("/mainbookpage");
+          },
           child: Container(
             //28 -> 25 padding + 3 space between two item
             width: MediaQuery.of(context).size.width - 50,

@@ -67,7 +67,7 @@ class _AdoptionAndHelpRequestPageState
                             },
                             type: "help",
                             borderColor: ColorsApp.secondaryColor,
-                            image: Assets.imagesAnimalPhoto2,
+                            image: Assets.helpPhoto,
                             textColor: ColorsApp.secondaryColor,
                           ),
                           SelectTypeOfRequest(
@@ -81,7 +81,7 @@ class _AdoptionAndHelpRequestPageState
                               },
                               isSelected: selectedType == "adoption",
                               borderColor: ColorsApp.primaryColor,
-                              image: Assets.imagesAnimalPhoto1,
+                              image: Assets.adoptionPhoto,
                               textColor: ColorsApp.primaryColor)
                         ],
                       ),

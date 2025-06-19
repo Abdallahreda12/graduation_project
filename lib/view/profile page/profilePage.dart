@@ -5,6 +5,7 @@ import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
+import 'package:graduation_project/locale/locale_controller.dart';
 import 'package:graduation_project/view/profile%20page/widgets/GenderTextFieldInProfilePage.dart';
 import 'package:graduation_project/view/profile%20page/widgets/buildDropDownRow.dart';
 import 'package:graduation_project/view/profile%20page/widgets/dateOfBirthTextFieldInProfilePage.dart';
@@ -19,6 +20,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final localeController = Get.find<MylocaleController>();
   String _selectedTheme = 'Light';
   String _selectedLanguage = 'Eng';
   String notificationStatus = "Allow";
@@ -133,6 +135,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 onChanged: (String? value) {
                                   setState(() {
                                     _selectedLanguage = value!;
+                                    localeController.changLang(
+                                        value == "Eng" ? 'en' : 'ar');
                                   });
                                 },
                               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
@@ -20,7 +21,7 @@ class SecondListViewInHomePage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                //go to Adoption and Help tap
+                Get.toNamed("adoptionandhelp");
               },
               child: Padding(
                 padding: const EdgeInsets.only(right: 25),

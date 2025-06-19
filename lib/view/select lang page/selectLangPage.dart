@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
@@ -36,7 +37,7 @@ class SelectLangPage extends StatelessWidget {
               height: 50,
             ),
             Text(
-              "Select language",
+              "Select language".tr,
               style: AppStyles.urbanistReqular32(context),
             ),
             SizedBox(
