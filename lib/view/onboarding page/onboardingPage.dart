@@ -81,7 +81,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Custombutton(
-                text: 'Get Started',
+                text: 'get Started',
                 width: MediaQuery.sizeOf(context).width,
                 onTap: () {
                   Get.toNamed("/signinpage");
