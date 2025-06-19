@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/locale/locale_controller.dart';
+import 'package:graduation_project/locale/translation_service.dart';
 import 'package:graduation_project/view/additional%20info%20edit%20page/AdditionalInfoEdit.dart';
 import 'package:graduation_project/view/additional%20info%20page/AdditionalInfoPage.dart';
 import 'package:graduation_project/view/adoption%20%20and%20help%20request%20page/adoptionAndHelpRequestPage.dart';
@@ -27,18 +29,32 @@ import 'package:graduation_project/view/splash%20page/splashPage.dart';
 import 'package:graduation_project/view/tips%20and%20tricks%20pages/TipsAndTricksPage/TipsAndTricksForYourPetsPage.dart';
 import 'package:graduation_project/view/tips%20and%20tricks%20pages/information%20page/informationPage.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize controller
+  final translations = await TranslationService.loadTranslations();
+  final localeController = Get.put(MylocaleController());
+  await localeController.initLang();
+  runApp(MainApp(
+    translations: translations,
+    initialLocale: localeController.currentLocale.value,
+  ));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+  const MainApp(
+      {super.key, required this.translations, required this.initialLocale});
+  final Map<String, Map<String, String>> translations;
+  final Locale initialLocale;
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashPage(),
+      translations: TranslationService(translations),
+      locale: initialLocale,
+      fallbackLocale: TranslationService.fallbackLocale,
       getPages: [
         GetPage(name: "/splashpage", page: () => SplashPage()),
         GetPage(name: "/selectlangpage", page: () => SelectLangPage()),

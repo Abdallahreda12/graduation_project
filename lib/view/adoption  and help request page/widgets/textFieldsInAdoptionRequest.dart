@@ -25,7 +25,7 @@ class _TextFieldsInAdoptionRequestState
           CustomTextField(
             onDataChanged: (p0) {},
             text: "Type*",
-            hintText: "Type of pet",
+            hintText: "Type of your pet",
             validator: (value) =>
                 value!.isEmpty ? "determine type of pet is required" : null,
             hintMaxLines: 1,

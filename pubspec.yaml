@@ -18,6 +18,7 @@ dependencies:
   google_maps_flutter: ^2.10.0
   intl: ^0.18.0
   salomon_bottom_bar: ^3.3.2
+  shared_preferences: ^2.5.3
   smooth_page_indicator: ^1.2.0+3
   url_launcher: ^6.3.1
 
@@ -31,6 +32,8 @@ flutter:
   assets:
     - assets/images/
     - assets/images/tipsAndTricksPhotos/
+    - assets/lang/en.json
+    - assets/lang/ar.json
   fonts:
     - family: Urbanist
       fonts:

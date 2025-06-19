@@ -83,7 +83,7 @@ class _FirstListViewInHomePageState extends State<FirstListViewInHomePage> {
                     width: 160,
                     height: 160,
                     padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.symmetric(horizontal: 5),
+                    margin: EdgeInsets.only(right: 10),
                     decoration: BoxDecoration(
                         color: ColorsApp.primaryColorOpicaty,
                         borderRadius: BorderRadius.circular(12)),
