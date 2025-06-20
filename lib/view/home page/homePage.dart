@@ -36,42 +36,48 @@ class HomePage extends StatelessWidget {
               fit: BoxFit.none,
             ),
           ),
-          SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                //
-                // Header Section
-                //
-                Padding(
-                  padding: const EdgeInsets.only(right: 25),
-                  child: HeaderSectionInHomePage(),
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              //
+              // Header Section
+              //
+              Padding(
+                padding: const EdgeInsets.only(right: 25),
+                child: HeaderSectionInHomePage(),
+              ),
+              const SizedBox(height: 15),
+              //
+              // Navigator Tabs
+              //
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 25),
+                        child: NavigatorsTapsInHomePage(),
+                      ),
+                      const SizedBox(height: 10),
+                      //
+                      //First ListView
+                      //
+                      FirstListViewInHomePage(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      //
+                      //Second ListView
+                      //
+                      SecondListViewInHomePage(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 15),
-                //
-                // Navigator Tabs
-                //
-                Padding(
-                  padding: const EdgeInsets.only(right: 25),
-                  child: NavigatorsTapsInHomePage(),
-                ),
-                const SizedBox(height: 10),
-                //
-                //First ListView
-                //
-                FirstListViewInHomePage(),
-                SizedBox(
-                  height: 20,
-                ),
-                //
-                //Second ListView
-                //
-                SecondListViewInHomePage(),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ]),
       ),

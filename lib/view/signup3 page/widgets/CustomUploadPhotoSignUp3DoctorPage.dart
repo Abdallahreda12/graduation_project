@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
-import 'package:graduation_project/core/util/styles.dart';
 
 class CustomUploadPhotoSignUp3DoctorPage extends StatelessWidget {
   const CustomUploadPhotoSignUp3DoctorPage(
@@ -33,15 +32,7 @@ class CustomUploadPhotoSignUp3DoctorPage extends StatelessWidget {
               child: Image.asset(Assets.imagesAnonymousAvatar),
             ),
           ),
-          const SizedBox(height: 10),
-          Text(
-            "Profile Photo",
-            style: AppStyles.urbanistMedium22(context).copyWith(
-              color: Color(0xff004A5A),
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+
           const SizedBox(height: 15),
           Custombutton(
             text: "Upload Picture",
