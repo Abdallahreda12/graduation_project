@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 
@@ -8,19 +8,27 @@ class HeaderOnboardingpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final double screenHeight = size.height;
+    final double screenWidth = size.width;
+
+    final double circleHeight = screenHeight * 0.6;
+    final double circleOffsetTop = -circleHeight * 0.5;
+    final double circleOffsetSide = -screenWidth * 0.15;
+
     return Positioned(
-      top: -250,
-      right: -60,
-      left: -60,
+      top: circleOffsetTop,
+      left: circleOffsetSide,
+      right: circleOffsetSide,
       child: ClipOval(
         child: Container(
+          width: screenWidth * 1.3,
+          height: circleHeight,
           color: ColorsApp.primaryColor,
-          width: MediaQuery.of(context).size.width,
-          height: 500,
-          child: Transform.translate(
-            offset: Offset(0, 120),
-            child: FittedBox(
-              fit: BoxFit.none,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: screenHeight * 0.06),
               child: SvgPicture.asset(
                 Assets.imagesLogoInverse,
                 width: 100,
