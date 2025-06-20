@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/util/appImages.dart';
@@ -5,7 +7,9 @@ import 'package:graduation_project/core/util/colors.dart';
 
 class CustomUploadPhotoSignUp3UserPage extends StatelessWidget {
   const CustomUploadPhotoSignUp3UserPage(
-      {super.key, required this.onUploadPhoto});
+      {super.key, required this.onUploadPhoto, required this.selectedImages});
+
+  final File? selectedImages;
   final VoidCallback onUploadPhoto;
   @override
   Widget build(BuildContext context) {
@@ -17,6 +21,7 @@ class CustomUploadPhotoSignUp3UserPage extends StatelessWidget {
             width: 150,
             height: 150,
             decoration: BoxDecoration(
+              border: Border.all(color: ColorsApp.primaryColor, width: 3),
               borderRadius: BorderRadius.circular(100),
               boxShadow: [
                 BoxShadow(
@@ -28,8 +33,9 @@ class CustomUploadPhotoSignUp3UserPage extends StatelessWidget {
               ],
             ),
             child: CircleAvatar(
-              backgroundColor: ColorsApp.primaryColor,
-              child: Image.asset(Assets.imagesAnonymousAvatar),
+              backgroundImage: selectedImages != null
+                  ? FileImage(selectedImages!)
+                  : AssetImage(Assets.imagesAnonymousAvatar) as ImageProvider,
             ),
           ),
 
