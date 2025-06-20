@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
@@ -15,6 +18,28 @@ class TextFiedsInHelpRequest extends StatefulWidget {
 
 class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
   TextEditingController locationController = TextEditingController();
+
+  //to put on it images
+  List<File> selectedImages = [];
+  Set<String> selectedImagePaths = {};
+  //
+  //function to pick images
+  //
+  Future<void> pickImages() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: true,
+    );
+
+    if (result != null && result.files.isNotEmpty) {
+      setState(() {
+        selectedImages.addAll(
+          result.paths.map((path) => File(path!)).toList(),
+        );
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController dateController = TextEditingController();
@@ -195,20 +220,105 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
               SizedBox(
                 height: 5,
               ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  decoration:
-                      BoxDecoration(color: ColorsApp.secondaryColorOpicaty),
-                  child: Icon(
-                    Icons.add,
-                    size: 30,
-                    color: ColorsApp.secondaryColor,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: pickImages,
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration:
+                          BoxDecoration(color: ColorsApp.secondaryColorOpicaty),
+                      child: Icon(
+                        Icons.add,
+                        size: 30,
+                        color: ColorsApp.secondaryColor,
+                      ),
+                    ),
+                  ),
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: selectedImages.map((img) {
+                      final isSelected = selectedImagePaths.contains(img.path);
+
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (isSelected) {
+                              selectedImagePaths.remove(img.path);
+                            } else {
+                              selectedImagePaths.add(img.path);
+                            }
+                          });
+                        },
+                        child: Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: isSelected
+                                      ? Colors.red
+                                      : Colors.transparent,
+                                  width: 3,
+                                ),
+                              ),
+                              child: Image.file(
+                                img,
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            if (isSelected)
+                              Positioned(
+                                top: 4,
+                                right: 4,
+                                child: Icon(
+                                  Icons.check_circle,
+                                  color: Colors.red,
+                                  size: 20,
+                                ),
+                              ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  )
+                ],
+              ), //
+              // Delete button appears only if any photo is selected
+              //
+              if (selectedImagePaths.isNotEmpty) ...[
+                const SizedBox(height: 15),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
+                    label: const Text(
+                      "Delete Selected",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        selectedImages.removeWhere(
+                            (img) => selectedImagePaths.contains(img.path));
+                        selectedImagePaths.clear();
+                      });
+                    },
                   ),
                 ),
-              )
+              ]
             ],
           ),
         ),
