@@ -39,6 +39,7 @@ class Assets {
   /// Assets for imagesDoctor
   /// assets/images/doctor.svg
   static const String imagesDoctor = "assets/images/doctor.svg";
+  static const String requestsIcon = "assets/images/requestsIcon.svg";
 
   /// Assets for imagesFluentDoctorAppBarIcon
   /// assets/images/fluent_doctorAppBarIcon.svg
