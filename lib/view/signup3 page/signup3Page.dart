@@ -103,7 +103,7 @@ class _Signup3PageState extends State<Signup3Page> {
                       //
                       CustomUploadPhotoSignUp3UserPage(
                         onUploadPhoto: pickImages,
-                        selectedImages:selectedImage,
+                        selectedImages: selectedImage,
                       ),
                       const SizedBox(height: 25),
                       //

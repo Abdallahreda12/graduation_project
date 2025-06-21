@@ -40,9 +40,22 @@ class AdoptionAndHelpCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
                     image,
-                    width: MediaQuery.sizeOf(context).width,
+                    width: double.infinity,
                     height: 125,
                     fit: BoxFit.fill,
+                    filterQuality: FilterQuality.high,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        width: double.infinity,
+                        height: 125,
+                        color: Colors.grey.shade300,
+                        child: Icon(
+                          Icons.broken_image,
+                          color: Colors.grey.shade700,
+                          size: 40,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
