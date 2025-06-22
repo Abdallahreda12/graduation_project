@@ -13,6 +13,7 @@ import 'package:graduation_project/view/bookPages/DoctorDetailsPage/DoctorDetail
 import 'package:graduation_project/view/bookPages/mainBookPage/mainBookPage.dart';
 import 'package:graduation_project/view/help%20Details%20page/helpDetailsPage.dart';
 import 'package:graduation_project/view/home%20page/homePage.dart';
+import 'package:graduation_project/view/myRequestsPage/myRequestsPage.dart';
 import 'package:graduation_project/view/notifaction%20page/notifactionPage.dart';
 import 'package:graduation_project/view/onboarding%20page/onboardingPage.dart';
 import 'package:graduation_project/view/profile%20page/profilePage.dart';
@@ -113,6 +114,14 @@ class MainApp extends StatelessWidget {
         GetPage(name: "/adoptionandhelp", page: () => AdoptionAndHelpPage()),
         GetPage(
             name: "/adoptiondetailspage", page: () => AdoptionDetailsPage()),
+        GetPage(
+            name: "/adoptiondetailspageWithDeleteButton",
+            page: () => AdoptionDetailsPage(
+                  enableDeleteButton: true,
+                )),
+        GetPage(
+            name: "/helpdetailspageWithDeleteButton",
+            page: () => HelpDetailsPage(  enableDeleteButton: true,)),
         GetPage(name: "/helpdetailspage", page: () => HelpDetailsPage()),
         GetPage(
             name: "/adoptionandhelprequestpage",
@@ -123,19 +132,16 @@ class MainApp extends StatelessWidget {
         GetPage(
             name: "/additionalinfoeditpage",
             page: () => AdditionalInfoEditPage()),
-
         GetPage(name: "/resetpassword", page: () => ResetPassword()),
-
         GetPage(name: "/mainbookpage", page: () => MainBookPage()),
         GetPage(name: "/DoctorDetailsPage", page: () => DoctorDetailsPage()),
         GetPage(name: "/bookpage", page: () => BookingPage()),
         GetPage(name: "/animalownerpage", page: () => AnimalOwnerPage()),
-
         GetPage(
             name: "/tipsandtricksforyourpetspage",
             page: () => TipsAndTricksForYourPetsPage()),
         GetPage(name: "/informationpage", page: () => InformationPage()),
-
+        GetPage(name: "/myrequestspage", page: () => MyRequestsPage()),
       ],
     );
   }
