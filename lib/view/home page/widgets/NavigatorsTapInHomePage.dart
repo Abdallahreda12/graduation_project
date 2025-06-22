@@ -191,7 +191,7 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
         //
         GestureDetector(
           onTap: () {
-            //Get.toNamed("/mainbookpage");
+            Get.toNamed("/myrequestspage");
           },
           child: Container(
             //28 -> 25 padding + 3 space between two item
