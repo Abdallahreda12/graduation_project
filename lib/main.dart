@@ -11,13 +11,17 @@ import 'package:graduation_project/view/bookPages/AnimalOwnerPage/AnimalOwnerPag
 import 'package:graduation_project/view/bookPages/BookingPage/bookPage.dart';
 import 'package:graduation_project/view/bookPages/DoctorDetailsPage/DoctorDetailsPage.dart';
 import 'package:graduation_project/view/bookPages/mainBookPage/mainBookPage.dart';
+import 'package:graduation_project/view/reset%20password%20page/create%20new%20password/createNewPasswordPage.dart';
+import 'package:graduation_project/view/reset%20password%20page/email%20entry%20page/emailEntryPage.dart';
 import 'package:graduation_project/view/help%20Details%20page/helpDetailsPage.dart';
 import 'package:graduation_project/view/home%20page/homePage.dart';
 import 'package:graduation_project/view/myRequestsPage/myRequestsPage.dart';
 import 'package:graduation_project/view/notifaction%20page/notifactionPage.dart';
 import 'package:graduation_project/view/onboarding%20page/onboardingPage.dart';
+import 'package:graduation_project/view/reset%20password%20page/phone%20entry%20page/phoneEntryPage.dart';
 import 'package:graduation_project/view/profile%20page/profilePage.dart';
 import 'package:graduation_project/view/reset%20password%20page/resetPassword.dart';
+import 'package:graduation_project/view/reset%20password%20page/verificationPage.dart';
 import 'package:graduation_project/view/select%20lang%20page/selectLangPage.dart';
 import 'package:graduation_project/view/signin%20page/signinPage.dart';
 import 'package:graduation_project/view/signup%20completed%20page/signupCompletedPage.dart';
@@ -137,11 +141,20 @@ class MainApp extends StatelessWidget {
         GetPage(name: "/DoctorDetailsPage", page: () => DoctorDetailsPage()),
         GetPage(name: "/bookpage", page: () => BookingPage()),
         GetPage(name: "/animalownerpage", page: () => AnimalOwnerPage()),
+
+        GetPage(name: "/emailentrypage", page: () => EmailEntryPage()),
+        GetPage(name: "/phoneentrypage", page: () => PhoneEntryPage()),
+        GetPage(name: "/verificationpage", page: () => VerificationPage()),
+        GetPage(
+            name: "/createnewpasswordpage",
+            page: () => CreateNewPasswordPage()),
+
         GetPage(
             name: "/tipsandtricksforyourpetspage",
             page: () => TipsAndTricksForYourPetsPage()),
         GetPage(name: "/informationpage", page: () => InformationPage()),
         GetPage(name: "/myrequestspage", page: () => MyRequestsPage()),
+
       ],
     );
   }

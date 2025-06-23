@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
-import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/reset%20password%20page/widgets/resetOptionTile.dart';
 
@@ -22,8 +22,10 @@ class _ResetPasswordState extends State<ResetPassword> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: GestureDetector(
-          onTap: () {},
-          child: Icon(Icons.arrow_back_ios),
+          onTap: () {
+            Get.back();
+          },
+          child: const Icon(Icons.arrow_back_ios, color: Colors.black),
         ),
       ),
       backgroundColor: Colors.white,
@@ -44,10 +46,7 @@ class _ResetPasswordState extends State<ResetPassword> {
               style: AppStyles.urbanistReqular14(context),
             ),
             SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 25,
+              height: 45,
             ),
             ResetOptionTile(
               title: 'via Email',
@@ -76,9 +75,22 @@ class _ResetPasswordState extends State<ResetPassword> {
             ),
             Spacer(),
             Custombutton(
-              text: 'Reset Password',
+              text: 'Next',
               width: double.infinity,
-              onTap: () {},
+              onTap: () {
+                if (selectedMethod == ResetMethod.email) {
+                  Get.toNamed("/emailentrypage");
+                } else if (selectedMethod == ResetMethod.phone) {
+                  Get.toNamed("/phoneentrypage");
+                } else {
+                  Get.snackbar(
+                    'Error',
+                    'Please select a method to reset your password.',
+                    backgroundColor: Colors.redAccent,
+                    colorText: Colors.white,
+                  );
+                }
+              },
             ),
           ],
         ),
