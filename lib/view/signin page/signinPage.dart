@@ -130,9 +130,7 @@ class _SigninPageState extends State<SigninPage> {
                                 "Password",
                                 style: AppStyles.urbanistMedium14(context),
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
+                              SizedBox(height: 10),
                               TextFormField(
                                 validator: (value) {
                                   if (value!.isEmpty || value.length < 6) {
