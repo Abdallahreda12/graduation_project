@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/core/util/styles.dart';
@@ -51,6 +54,24 @@ class _Signup3PageState extends State<Signup3Page> {
     });
   }
 
+  //to put on it images
+  File? selectedImage;
+  //
+  //function to pick images
+  //
+  Future<void> pickImages() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+
+    if (result != null && result.files.single.path != null) {
+      setState(() {
+        selectedImage = File(result.files.single.path!);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return widget.typeOfUser == "User"
@@ -81,9 +102,8 @@ class _Signup3PageState extends State<Signup3Page> {
                       //Upload photo
                       //
                       CustomUploadPhotoSignUp3UserPage(
-                        onUploadPhoto: () {
-                          //Handle Upload photo
-                        },
+                        onUploadPhoto: pickImages,
+                        selectedImages: selectedImage,
                       ),
                       const SizedBox(height: 25),
                       //

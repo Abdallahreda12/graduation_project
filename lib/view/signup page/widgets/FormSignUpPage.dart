@@ -7,13 +7,12 @@ class FormSignUpPage extends StatefulWidget {
     super.key,
     required this.globalKey,
     required this.emailController,
-    required this.onNameChanged,
     required this.onEmailChanged,
     required this.onPasswordChanged,
   });
   final GlobalKey<FormState> globalKey;
   final TextEditingController emailController;
-  final Function(String) onNameChanged;
+
   final Function(String) onEmailChanged;
   final Function(String) onPasswordChanged;
   @override
@@ -35,37 +34,7 @@ class _FormSignUpPageState extends State<FormSignUpPage> {
       child: Column(
         children: [
           //
-          //first textfield
-          //
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Name",
-                style: AppStyles.urbanistMedium14(context),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                onChanged: widget.onNameChanged,
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: ColorsApp.primaryColor),
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2),
-                  ),
-                  hintText: "What’s your full name",
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          //
-          //Second Textfield
+          //first Textfield
           //
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +92,7 @@ class _FormSignUpPageState extends State<FormSignUpPage> {
             height: 15,
           ),
           //
-          //third textfield
+          //second textfield
           //
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -16,79 +16,75 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   late PageController pageController;
   int currentCardIndex = 0;
+
   @override
   void initState() {
-    pageController = PageController();
-
-    pageController.addListener(
-      () {
-        currentCardIndex = pageController.page!.round();
-        setState(() {});
-      },
-    );
     super.initState();
+    pageController = PageController();
+    pageController.addListener(() {
+      currentCardIndex = pageController.page!.round();
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final double screenHeight = size.height;
+    final double screenWidth = size.width;
+
     return Scaffold(
       body: Stack(
         clipBehavior: Clip.none,
         children: [
           //
-          //Header of the page
+          // Header
           //
           HeaderOnboardingpage(),
           //
-          //body
+          // PageView & dots
           //
           Positioned(
-            top: 280,
+            top: screenHeight * 0.33,
             left: 0,
             right: 0,
-            bottom: 105,
-            child: SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 400,
-                      child: Pageviewcontent(
-                        pageController: pageController,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    DotsIndicator(
-                      numOfDots: 3,
-                      currentCardIndex: currentCardIndex,
-                      colorOfDots: ColorsApp.primaryColor,
-                    ),
-                  ],
-                ),
+            bottom: screenHeight * 0.14,
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: screenHeight * 0.4,
+                    child: Pageviewcontent(pageController: pageController),
+                  ),
+                  const SizedBox(height: 20),
+                  DotsIndicator(
+                    numOfDots: 3,
+                    currentCardIndex: currentCardIndex,
+                    colorOfDots: ColorsApp.primaryColor,
+                  ),
+                ],
               ),
             ),
           ),
           //
-          //button
+          // Button
           //
           Positioned(
-            bottom: 33,
+            bottom: screenHeight * 0.04,
             right: 0,
             left: 0,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
               child: Custombutton(
-                text: 'get Started',
-                width: MediaQuery.sizeOf(context).width,
+                text: 'Get Started',
+                width: screenWidth,
                 onTap: () {
                   Get.toNamed("/signinpage");
                 },
               ),
             ),
-          )
+          ),
         ],
       ),
     );

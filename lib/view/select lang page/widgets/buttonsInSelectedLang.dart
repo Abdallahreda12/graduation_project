@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
+import 'package:graduation_project/locale/locale_controller.dart';
 
 class ButtonsInSelectedLang extends StatelessWidget {
-  const ButtonsInSelectedLang({super.key});
-
+  ButtonsInSelectedLang({super.key});
+  final localeController = Get.find<MylocaleController>();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,6 +16,8 @@ class ButtonsInSelectedLang extends StatelessWidget {
           width: MediaQuery.sizeOf(context).width,
           onTap: () {
             Get.toNamed("/onboarding");
+
+            localeController.changLang('ar');
           },
         ),
         SizedBox(
@@ -29,6 +32,8 @@ class ButtonsInSelectedLang extends StatelessWidget {
           width: MediaQuery.sizeOf(context).width,
           onTap: () {
             Get.toNamed("/onboarding");
+
+            localeController.changLang('en');
           },
         )
       ],

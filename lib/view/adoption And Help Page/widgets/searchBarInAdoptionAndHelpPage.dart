@@ -13,10 +13,32 @@ class SearchbarInAdoptionAndHelpPage extends StatelessWidget {
           onTap: () {},
           child: Icon(Icons.search),
         ),
-        suffixIcon: GestureDetector(
-          onTap: () {},
-          child: Icon(Icons.filter_list),
+
+        // shows a menu when clicking filter icon
+        suffixIcon: PopupMenuButton<String>(
+          icon: Icon(Icons.filter_list),
+          onSelected: (value) {
+            // Handle selection logic here
+            if (value == 'adoption') {
+              // filter for adoption
+              print('Adoption selected');
+            } else if (value == 'help') {
+              // filter for help
+              print('Help selected');
+            }
+          },
+          itemBuilder: (context) => [
+            PopupMenuItem(
+              value: 'adoption',
+              child: Text('Adoption'),
+            ),
+            PopupMenuItem(
+              value: 'help',
+              child: Text('Help'),
+            ),
+          ],
         ),
+
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: ColorsApp.primaryColor),

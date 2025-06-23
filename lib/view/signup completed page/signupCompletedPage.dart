@@ -54,7 +54,7 @@ class SignupCompletedPage extends StatelessWidget {
                 text: 'Get Started',
                 width: MediaQuery.sizeOf(context).width,
                 onTap: () {
-                  Get.toNamed("/homepage");
+                  Get.toNamed("/signinpage");
                 },
               ),
             ),

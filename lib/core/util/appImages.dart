@@ -39,6 +39,7 @@ class Assets {
   /// Assets for imagesDoctor
   /// assets/images/doctor.svg
   static const String imagesDoctor = "assets/images/doctor.svg";
+  static const String requestsIcon = "assets/images/requestsIcon.svg";
 
   /// Assets for imagesFluentDoctorAppBarIcon
   /// assets/images/fluent_doctorAppBarIcon.svg
@@ -120,4 +121,23 @@ class Assets {
   /// Assets for imagesUser
   /// assets/images/User.svg
   static const String imagesUser = "assets/images/User.svg";
+
+  static const String imagesCommonDiseasesAndSymptoms =
+      "assets/images/tipsAndTricksPhotos/Common_diseases_and_symptoms.jpg";
+  static const String imagesDailyActivityNeeds =
+      "assets/images/tipsAndTricksPhotos/Daily_activity_needs.jpg";
+  static const String imagesFirstAidTips =
+      "assets/images/tipsAndTricksPhotos/First_aid_tips.jpg";
+  static const String imagesHumanFoodsThatAreToxic =
+      "assets/images/tipsAndTricksPhotos/Human_foods_that_are_toxic.jpg";
+  static const String imagesObedienceTrainingBasics =
+      "assets/images/tipsAndTricksPhotos/Obedience_training_basics.jpg";
+  static const String imagesPetInsuranceInfo =
+      "assets/images/tipsAndTricksPhotos/Pet_insurance_info.jpg";
+  static const String imagesRecommendedFood =
+      "assets/images/tipsAndTricksPhotos/Recommended_food.jpg";
+  static const String imagesWhattToDoIfYourPetGoesMissing =
+      "assets/images/tipsAndTricksPhotos/What_to_do_if_your_pet_goes_missing.jpg";
+  static const String adoptionPhoto = "assets/images/adoptionPhoto.jpg";
+  static const String helpPhoto = "assets/images/helpPhoto.jpg";
 }

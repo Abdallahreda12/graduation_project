@@ -13,6 +13,9 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
     return Column(
       children: [
         IntrinsicHeight(
+          //
+          //first row in the navigatorPage
+          //
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -122,8 +125,13 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
+        //
+        //Doctor Navigator
+        //
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed("/mainbookpage");
+          },
           child: Container(
             //28 -> 25 padding + 3 space between two item
             width: MediaQuery.of(context).size.width - 50,
@@ -165,6 +173,67 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                         child: Text(
                           softWrap: true,
                           "Find and chat with trusted doctors anytime.",
+                          style: AppStyles.urbanistReqular14(context),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        //
+        //requests Navigator
+        //
+        GestureDetector(
+          onTap: () {
+            Get.toNamed("/myrequestspage");
+          },
+          child: Container(
+            //28 -> 25 padding + 3 space between two item
+            width: MediaQuery.of(context).size.width - 50,
+            padding: EdgeInsets.only(top: 15, bottom: 15, right: 20, left: 10),
+            decoration: BoxDecoration(color: ColorsApp.primaryColorOpicaty),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3),
+                      color: ColorsApp.primaryColor),
+                  child: FittedBox(
+                    fit: BoxFit.none,
+                    child: SvgPicture.asset(
+                      colorFilter:
+                          ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                      Assets.requestsIcon,
+                      width: 24,
+                      height: 24,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Requests",
+                        style: AppStyles.urbanistMedium16(context),
+                      ),
+                      Center(
+                        widthFactor: 1,
+                        child: Text(
+                          softWrap: true,
+                          "see all your requests",
                           style: AppStyles.urbanistReqular14(context),
                         ),
                       ),

@@ -18,7 +18,7 @@ class _SignupPageState extends State<SignupPage> {
   late String pass;
   final GlobalKey<FormState> globalKey = GlobalKey();
   final TextEditingController emailController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,11 +53,6 @@ class _SignupPageState extends State<SignupPage> {
             FormSignUpPage(
               globalKey: globalKey,
               emailController: emailController,
-              onNameChanged: (p0) {
-                setState(() {
-                  name = p0;
-                });
-              },
               onEmailChanged: (p0) {
                 setState(() {
                   gmail = p0;

@@ -53,11 +53,15 @@ class _SelectTypeOfRequestState extends State<SelectTypeOfRequest> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5, left: 10),
+              Container(
+                margin: EdgeInsets.only(bottom: 5, left: 5),
+                decoration: BoxDecoration(
+                    color: Colors.white.withAlpha(130),
+                    borderRadius: BorderRadius.circular(15)),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
                   widget.type,
-                  style: AppStyles.urbanistMedium16(context)
+                  style: AppStyles.urbanistSemiBold16(context)
                       .copyWith(color: widget.textColor),
                 ),
               )

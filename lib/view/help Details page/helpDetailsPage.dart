@@ -10,8 +10,8 @@ import 'package:graduation_project/view/help%20Details%20page/widgets/aboutPetIn
 import 'package:graduation_project/view/help%20Details%20page/widgets/requestInformationInAdoptionDetailsPage.dart';
 
 class HelpDetailsPage extends StatefulWidget {
-  const HelpDetailsPage({super.key});
-
+  const HelpDetailsPage({super.key, this.enableDeleteButton = false});
+  final bool enableDeleteButton;
   @override
   State<HelpDetailsPage> createState() => _HelpDetailsPageState();
 }
@@ -104,8 +104,33 @@ class _HelpDetailsPageState extends State<HelpDetailsPage> {
                           aboutPet:
                               'Figma ipsum component variant main layer. Style boolean italic star pixel mask underline. Union object main slice team align. Ellipse blur pixel fill rotate text. Duplicate inspect figma scale content move edit distribute asset. Inspect union create opacity strikethrough. Rectangle layout ipsum selection line connection export italic ipsum. Asset polygon rectangle component vertical invite pen ipsum. Duplicate hand comment editor star community strikethrough rotate share polygon. Content asset duplicate team strikethrough link fill.'),
                       SizedBox(
-                        height: 50,
-                      )
+                        height: 10,
+                      ),
+                      widget.enableDeleteButton
+                          ? GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 20),
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                decoration: BoxDecoration(
+                                  color: ColorsApp.secondaryColor,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Delete",
+                                        softWrap: false,
+                                        overflow: TextOverflow.ellipsis,
+                                        style:
+                                            AppStyles.urbanistReqular16(context)
+                                                .copyWith(color: Colors.white)),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Text(""),
                     ],
                   ),
                 ),
