@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/view/signup%20page/widgets/buttonsRow.dart';
 import 'package:graduation_project/view/signup4%20page/widgets/custom%20signup4%20textField%20column/customSignUp4TextFieldDoctorColumn.dart';
-import 'package:graduation_project/view/signup4%20page/widgets/custom%20signup4%20textField%20column/customSignUp4TextFieldInstitutionColumn.dart';
 import 'package:graduation_project/view/signup4%20page/widgets/custom%20signup4%20textField%20column/customSignUp4TextFieldUserColumn.dart';
 
 class Signup4Page extends StatefulWidget {
@@ -29,13 +28,7 @@ class _Signup4PageState extends State<Signup4Page> {
   late String clinicName;
   late String clinicAddress;
   ////////////////////////////////////////
-  /////variables used in signup4 page for institution
-  late String institutionOperatingHours;
-  late String institutionTypesAnimals;
-  late String institutionServiceAreas;
-  late String institutionMissionStatment;
-  late String institutionAdoptonPolicies;
-  /////////////////////////////////////////
+
   void updateData(String data) {
     setState(() {
       // userName = data;
@@ -57,9 +50,6 @@ class _Signup4PageState extends State<Signup4Page> {
                   child: CustomSignUp4TextFieldUserColumn(
                     onAgeRangeChanged: (value) => setState(() {
                       ageRangeOfAnimal = value;
-                    }),
-                    onHelperStatusChanged: (value) => setState(() {
-                      areYouHelper = value;
                     }),
                     onAdoptionStatusChanged: (value) => setState(() {
                       lookingForAdoption = value;
@@ -94,113 +84,64 @@ class _Signup4PageState extends State<Signup4Page> {
         //
         //signup4 page for doctor
         //
-        : widget.typeOfUser == "Doctor"
-            ? Scaffold(
-                resizeToAvoidBottomInset: true,
-                body: Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      SingleChildScrollView(
-                        child: CustomSignUp4TextFieldDoctorColumn(
-                          onSpecializationChanged: (value) {
-                            setState(() {
-                              doctorSpecialization = value;
-                            });
-                          },
-                          onDegreesChanged: (value) {
-                            setState(() {
-                              doctorDegrees = value;
-                            });
-                          },
-                          onLicensingChanged: (value) {
-                            setState(() {
-                              doctorLicensing = value;
-                            });
-                          },
-                          onExperienceChanged: (value) {
-                            setState(() {
-                              doctorYearsExperience = value;
-                            });
-                          },
-                          onClinicNameChanged: (value) {
-                            setState(() {
-                              clinicName = value;
-                            });
-                          },
-                          onClinicAddressChanged: (value) {
-                            setState(() {
-                              clinicAddress = value;
-                            });
-                          },
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: ButtonsRow(
-                          secondButtonAction: () {
-                            // if (doctorGlobalKey.currentState!.validate()) {}
-                            Get.toNamed("/signup5doctorpage");
-                          },
-                        ),
-                      ),
-                    ],
+        : Scaffold(
+            resizeToAvoidBottomInset: true,
+            body: Padding(
+              padding: const EdgeInsets.all(25),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  SingleChildScrollView(
+                    child: CustomSignUp4TextFieldDoctorColumn(
+                      onSpecializationChanged: (value) {
+                        setState(() {
+                          doctorSpecialization = value;
+                        });
+                      },
+                      onDegreesChanged: (value) {
+                        setState(() {
+                          doctorDegrees = value;
+                        });
+                      },
+                      onLicensingChanged: (value) {
+                        setState(() {
+                          doctorLicensing = value;
+                        });
+                      },
+                      onExperienceChanged: (value) {
+                        setState(() {
+                          doctorYearsExperience = value;
+                        });
+                      },
+                      onClinicNameChanged: (value) {
+                        setState(() {
+                          clinicName = value;
+                        });
+                      },
+                      onClinicAddressChanged: (value) {
+                        setState(() {
+                          clinicAddress = value;
+                        });
+                      },
+                    ),
                   ),
-                ),
-              )
-            //
-            //signup4 page for institution
-            //
-            : Scaffold(
-                resizeToAvoidBottomInset: true,
-                body: Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: Stack(fit: StackFit.expand, children: [
-                    SingleChildScrollView(
-                      child: CustomSignUp4TextFieldInstitutionColumn(
-                        onOperatingHoursChanged: (value) {
-                          setState(() {
-                            // Update the value as needed
-                          });
-                        },
-                        onTypesAnimalsChanged: (value) {
-                          setState(() {
-                            // Update the value as needed
-                          });
-                        },
-                        onServiceAreasChanged: (value) {
-                          setState(() {
-                            // Update the value as needed
-                          });
-                        },
-                        onMissionStatementChanged: (value) {
-                          setState(() {
-                            // Update the value as needed
-                          });
-                        },
-                        onAdoptionPoliciesChanged: (value) {
-                          setState(() {
-                            // Update the value as needed
-                          });
-                        },
-                      ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: ButtonsRow(
+                      secondButtonAction: () {
+                        // if (doctorGlobalKey.currentState!.validate()) {}
+                        Get.toNamed("/signup5doctorpage");
+                      },
                     ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: ButtonsRow(
-                        secondButtonAction: () {
-                          // if (doctorGlobalKey.currentState!.validate()) {}
-                          Get.toNamed("/signup5institutionpage");
-                        },
-                      ),
-                    ),
-                  ]),
-                ),
-              );
+                  ),
+                ],
+              ),
+            ),
+          );
+    //
+    //signup4 page for institution
+    //
   }
 }
