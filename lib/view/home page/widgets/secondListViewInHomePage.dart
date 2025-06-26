@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/HomePageController.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
@@ -9,6 +10,7 @@ class SecondListViewInHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<HomePageControllerImp>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,7 +23,7 @@ class SecondListViewInHomePage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.toNamed("adoptionandhelp");
+                controller.goToAdoptAndHelp();
               },
               child: Padding(
                 padding: const EdgeInsets.only(right: 25),

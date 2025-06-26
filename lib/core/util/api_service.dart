@@ -1,59 +1,42 @@
-//وريها لعمر
-import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class ApiService {
-  final _baseUrl = "";
-  final Dio _dio;
+class Api {
 
-  ApiService(this._dio);
+  // // GET
+  // Future<Map<String, dynamic>> get({required String uri}) async {
+  //   Uri url = Uri.parse(uri);
 
-  // GET
-  Future<Map<String, dynamic>> get({required String endPoints}) async {
-    Uri url = Uri.parse("$_baseUrl$endPoints");
-
-    try {
-      final response = await _dio.get("$url");
-      return response.data;
-    } catch (e) {
-      if (e is DioException) {
-        print("DioError: ${e.response?.statusCode} - ${e.message}");
-        throw Exception("Failed to GET data: ${e.message}");
-      } else {
-        print("Unexpected error: $e");
-        throw Exception("Unexpected error: $e");
-      }
-    }
-  }
+  //   try {
+  //     final response = await http.get(url);
+  //     if (response.statusCode == 200) {
+  //       return jsonDecode(response.body);
+  //     } else {
+  //       print("GET Error: ${response.statusCode}");
+  //       throw Exception("Failed to GET data");
+  //     }
+  //   } catch (e) {
+  //     print("Unexpected error: $e");
+  //     throw Exception("Unexpected error: $e");
+  //   }
+  // }
 
   //POST
-  Future<Map<String, dynamic>> post({
-    required String endPoints,
-    required Map<String, dynamic> data,
-    Map<String, dynamic>? headers,
+  Future<dynamic> post({
+    required String uri,
+    required Map data,
+    // Map<String, dynamic>? headers,
   }) async {
-    Uri url = Uri.parse("$_baseUrl$endPoints");
-
+    Uri url = Uri.parse(uri);
     try {
-      final response = await _dio.post(
-        "$url",
-        data: data,
-        // options: Options(
-        //   headers: headers ?? {
-        //     'Content-Type': 'application/json',
-        //   },
-        // ),
+      print(data);
+      final response = await http.post(
+        url,
+        body: data,
       );
-
-      // Map data = jsonDecode(response.body);
-      //   return data;
-
-      return response.data;
+      return response.body;
     } catch (e) {
       throw Exception('Failed to post: $e');
     }
   }
 }
-
-
-//make object from it when use it 
-///  final ApiService apiService;
