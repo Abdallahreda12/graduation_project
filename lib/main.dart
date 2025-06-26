@@ -125,7 +125,9 @@ class MainApp extends StatelessWidget {
                 )),
         GetPage(
             name: "/helpdetailspageWithDeleteButton",
-            page: () => HelpDetailsPage(  enableDeleteButton: true,)),
+            page: () => HelpDetailsPage(
+                  enableDeleteButton: true,
+                )),
         GetPage(name: "/helpdetailspage", page: () => HelpDetailsPage()),
         GetPage(
             name: "/adoptionandhelprequestpage",
@@ -141,20 +143,17 @@ class MainApp extends StatelessWidget {
         GetPage(name: "/DoctorDetailsPage", page: () => DoctorDetailsPage()),
         GetPage(name: "/bookpage", page: () => BookingPage()),
         GetPage(name: "/animalownerpage", page: () => AnimalOwnerPage()),
-
         GetPage(name: "/emailentrypage", page: () => EmailEntryPage()),
         GetPage(name: "/phoneentrypage", page: () => PhoneEntryPage()),
         GetPage(name: "/verificationpage", page: () => VerificationPage()),
         GetPage(
             name: "/createnewpasswordpage",
             page: () => CreateNewPasswordPage()),
-
         GetPage(
             name: "/tipsandtricksforyourpetspage",
             page: () => TipsAndTricksForYourPetsPage()),
         GetPage(name: "/informationpage", page: () => InformationPage()),
         GetPage(name: "/myrequestspage", page: () => MyRequestsPage()),
-
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/HomePageController.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/core/util/appImages.dart';
@@ -10,6 +11,7 @@ class HeaderSectionInHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<HomePageControllerImp>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -17,7 +19,7 @@ class HeaderSectionInHomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hello \"name\"!",
+              "Hello ${controller.user.usersFirstName}!",
               style: AppStyles.urbanistReqular18(context),
             ),
             Text(
@@ -30,7 +32,9 @@ class HeaderSectionInHomePage extends StatelessWidget {
         Row(
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                controller.goToChatBoot();
+              },
               child: Container(
                 width: 35,
                 height: 35,
@@ -49,7 +53,7 @@ class HeaderSectionInHomePage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.toNamed("/notifactionpage");
+                controller.goToNotifacation();
               },
               child: Container(
                 width: 35,
