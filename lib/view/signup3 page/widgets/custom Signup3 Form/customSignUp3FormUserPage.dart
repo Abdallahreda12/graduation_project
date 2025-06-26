@@ -6,10 +6,10 @@ import 'package:intl/intl.dart';
 
 class CustomSignUp3FormUserPage extends StatefulWidget {
   final GlobalKey<FormState> formKey;
-  final Function(String) onNameChanged;
+  final Function(String) onFirstNameChanged;
+  final Function(String) onLastNameChanged;
   final TextEditingController dateOfBirthController;
   final Function(DateTime) onDateSelected;
-  final Function(String) onEmailChanged;
   final Function(String) onPhoneChanged;
   final String? selectedGender;
   final Function(String?) onGenderChanged;
@@ -17,13 +17,14 @@ class CustomSignUp3FormUserPage extends StatefulWidget {
   const CustomSignUp3FormUserPage({
     super.key,
     required this.formKey,
-    required this.onNameChanged,
+    required this.onFirstNameChanged,
     required this.dateOfBirthController,
     required this.onDateSelected,
-    required this.onEmailChanged,
+ 
     required this.onPhoneChanged,
     required this.selectedGender,
     required this.onGenderChanged,
+    required this.onLastNameChanged,
   });
 
   @override
@@ -41,11 +42,21 @@ class _CustomSignUp3FormUserPageState extends State<CustomSignUp3FormUserPage> {
       child: Column(
         children: [
           CustomTextField(
-            onDataChanged: widget.onNameChanged,
-            text: "Full Name",
-            hintText: "What is your full name",
+            onDataChanged: widget.onFirstNameChanged,
+            text: "First Name",
+            hintText: "What is your first name",
             borderradius: 20,
-            validator: (value) => value!.isEmpty ? "Name is required" : null,
+            validator: (value) =>
+                value!.isEmpty ? "First name is required" : null,
+          ),
+          const SizedBox(height: 10),
+          CustomTextField(
+            onDataChanged: widget.onLastNameChanged,
+            text: "Last Name",
+            hintText: "What is your last name",
+            borderradius: 20,
+            validator: (value) =>
+                value!.isEmpty ? "Last name is required" : null,
           ),
           const SizedBox(height: 10),
           Column(
@@ -136,15 +147,6 @@ class _CustomSignUp3FormUserPageState extends State<CustomSignUp3FormUserPage> {
                     value == null ? "Please select your gender" : null,
               ),
             ],
-          ),
-          const SizedBox(height: 10),
-          CustomTextField(
-            onDataChanged: widget.onEmailChanged,
-            text: "Email Address",
-            hintText: "What’s your email address",
-            borderradius: 20,
-            validator: (value) =>
-                value!.contains('@') ? null : "Please enter a valid email",
           ),
           const SizedBox(height: 10),
           CustomTextField(
