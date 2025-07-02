@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:graduation_project/api_links.dart';
+import 'package:graduation_project/controller/HomePageController.dart';
+import 'package:graduation_project/controller/ViewMyRequestsController.dart';
 import 'package:graduation_project/core/Widgets/customImageSlider.dart';
 import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
+import 'package:graduation_project/data/models/helpModel.dart';
 import 'package:graduation_project/view/adoption%20Details%20Page/widgets/personalCard.dart';
 import 'package:graduation_project/view/help%20Details%20page/widgets/aboutPetInAdoptionDetailsPage.dart';
 import 'package:graduation_project/view/help%20Details%20page/widgets/requestInformationInAdoptionDetailsPage.dart';
@@ -17,13 +22,12 @@ class HelpDetailsPage extends StatefulWidget {
 }
 
 class _HelpDetailsPageState extends State<HelpDetailsPage> {
-  final List<String> imagePaths = [
-    Assets.imagesAnimalPhoto2,
-    Assets.imagesAnimalPhoto1,
-    Assets.imagesAnimalPhoto5,
-  ];
   @override
   Widget build(BuildContext context) {
+    final UnifiedItem item = Get.arguments;
+    final HelpRequestModel helpRequest = item.data as HelpRequestModel;
+    final List<String> imagePaths = ['$linkServerImage${helpRequest.photoUrl}'];
+
     return Scaffold(
       backgroundColor: ColorsApp.backGroundColor,
       body: Stack(children: [
@@ -69,7 +73,7 @@ class _HelpDetailsPageState extends State<HelpDetailsPage> {
                       //title text Section
                       //
                       Text(
-                        "Pet injured",
+                        helpRequest.title,
                         style: AppStyles.urbanistSemiBold16(context),
                         maxLines: 3,
                       ),
@@ -80,65 +84,71 @@ class _HelpDetailsPageState extends State<HelpDetailsPage> {
                       //request information Sction
                       //
                       RequestInformationInHelpDetailsPage(
-                        location: 'https://maps.app.goo.gl/1ddFxqPYZboorctQ7',
-                        dateAndTime: 'Thu,1-2025',
-                        socialMediaLink: 'https://www.facebook.com',
+                        location: helpRequest.location,
+                        dateAndTime: helpRequest.date,
+                        socialMediaLink: helpRequest.socialMediaLink,
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      widget.enableDeleteButton
+                          ? SizedBox(
+                              height: 0,
+                            )
+                          : SizedBox(
+                              height: 10,
+                            ),
                       //
                       //Personal Card Section
                       //
-                      PersonalCard(
-                          image: Assets.imagesProfilePhoto,
-                          name: "James Parlor",
-                          des: "Pet Owner"),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      widget.enableDeleteButton
+                          ? Text("")
+                          : PersonalCard(
+                              image: Assets.imagesProfilePhoto,
+                              name: "James Parlor",
+                              des: "Pet Owner"),
+                      widget.enableDeleteButton
+                          ? SizedBox(
+                              height: 0,
+                            )
+                          : SizedBox(
+                              height: 10,
+                            ),
                       //
                       //about Pet Section
                       //
                       AboutPetInHelpDetailsPage(
-                          aboutPet:
-                              'Figma ipsum component variant main layer. Style boolean italic star pixel mask underline. Union object main slice team align. Ellipse blur pixel fill rotate text. Duplicate inspect figma scale content move edit distribute asset. Inspect union create opacity strikethrough. Rectangle layout ipsum selection line connection export italic ipsum. Asset polygon rectangle component vertical invite pen ipsum. Duplicate hand comment editor star community strikethrough rotate share polygon. Content asset duplicate team strikethrough link fill.'),
+                          aboutPet: helpRequest.description),
                       SizedBox(
                         height: 10,
                       ),
-                      widget.enableDeleteButton
-                          ? GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 15, horizontal: 20),
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                decoration: BoxDecoration(
-                                  color: ColorsApp.secondaryColor,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text("Delete",
-                                        softWrap: false,
-                                        overflow: TextOverflow.ellipsis,
-                                        style:
-                                            AppStyles.urbanistReqular16(context)
-                                                .copyWith(color: Colors.white)),
-                                  ],
-                                ),
-                              ),
-                            )
-                          : Text(""),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
       ]),
+      bottomNavigationBar: widget.enableDeleteButton
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle deletion
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorsApp.secondaryColor,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                child: Text(
+                  "Delete",
+                  style: AppStyles.urbanistReqular16(context)
+                      .copyWith(color: Colors.white),
+                ),
+              ),
+            )
+          : null,
     );
   }
 }

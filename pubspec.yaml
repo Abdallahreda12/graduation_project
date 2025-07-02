@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   booking_calendar: ^1.1.10
+  cached_network_image: ^3.4.1
   carousel_slider: ^5.0.0
   dio: ^5.8.0+1
   file_picker: ^10.2.0

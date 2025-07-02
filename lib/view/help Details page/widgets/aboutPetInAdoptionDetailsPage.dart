@@ -14,7 +14,7 @@ class AboutPetInHelpDetailsPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "About Pet",
+          "Description",
           style: AppStyles.urbanistSemiBold16(context),
         ),
         SizedBox(

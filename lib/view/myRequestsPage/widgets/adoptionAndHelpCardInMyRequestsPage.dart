@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
@@ -44,24 +45,30 @@ class AdoptionAndHelpCardInMyRequestsPage extends StatelessWidget {
                     margin: EdgeInsets.all(8),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        image,
-                        width: double.infinity,
+                      child: CachedNetworkImage(
+                        imageUrl: image,
+                        width: MediaQuery.sizeOf(context).width * 0.4,
                         height: 125,
                         fit: BoxFit.fill,
                         filterQuality: FilterQuality.high,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            width: double.infinity,
-                            height: 125,
-                            color: Colors.grey.shade300,
-                            child: Icon(
-                              Icons.broken_image,
-                              color: Colors.grey.shade700,
-                              size: 40,
-                            ),
-                          );
-                        },
+                        placeholder: (context, url) => Container(
+                          width: double.infinity,
+                          height: 125,
+                          color: Colors.grey.shade300,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => Container(
+                          width: double.infinity,
+                          height: 125,
+                          color: Colors.grey.shade300,
+                          child: Icon(
+                            Icons.broken_image,
+                            color: Colors.grey.shade700,
+                            size: 40,
+                          ),
+                        ),
                       ),
                     ),
                   ),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:graduation_project/controller/profilrController.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 
 class GenderTextFieldInProfilePage extends StatefulWidget {
   final String label;
-  final String initValue;
+  final String? initValue;
 
   const GenderTextFieldInProfilePage({
     required this.label,
@@ -18,49 +20,13 @@ class GenderTextFieldInProfilePage extends StatefulWidget {
 
 class _GenderTextFieldInProfilePageState
     extends State<GenderTextFieldInProfilePage> {
-  IconData icon = Icons.edit_sharp;
-  late TextEditingController _controller;
-  DateTime? selectedDate;
-  String selectedGender = 'None';
-
-  void _showPopupMenu(BuildContext context) async {
-    final RenderBox button = context.findRenderObject() as RenderBox;
-    final buttonPosition =
-        button.localToGlobal(Offset.zero); 
-    final buttonSize = button.size;
-
-    final selected = await showMenu<String>(
-      context: context,
-      position: RelativeRect.fromLTRB(
-        buttonPosition.dx + buttonSize.width, // Left position 
-        buttonPosition.dy + buttonSize.height, // Top position 
-        buttonPosition.dx, // Right position 
-        buttonPosition.dy + buttonSize.height, // Bottom 
-      ),
-      items: [
-        PopupMenuItem<String>(
-          value: 'Male',
-          child: Text('Male'),
-        ),
-        PopupMenuItem<String>(
-          value: 'Female',
-          child: Text('Female'),
-        ),
-      ],
-    );
-
-    if (selected != null) {
-      setState(() {
-        selectedGender = selected;
-        _controller = TextEditingController(text: selectedGender);
-      });
-    }
-  }
+  final controller = Get.find<ProfileControllerImp>();
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: widget.initValue);
+    controller.textEditingController =
+        TextEditingController(text: widget.initValue);
   }
 
   @override
@@ -80,15 +46,15 @@ class _GenderTextFieldInProfilePageState
             borderRadius: BorderRadius.circular(5)),
         child: TextFormField(
           textAlignVertical: TextAlignVertical.center,
-          controller: _controller,
+          controller: controller.textEditingController,
           readOnly: true,
           cursorColor: ColorsApp.primaryColor,
           decoration: InputDecoration(
             suffixIcon: GestureDetector(
               onTap: () {
-                _showPopupMenu(context);
+                controller.showPopupMenu(context);
               },
-              child: Icon(icon),
+              child: Icon(controller.icon),
             ),
             contentPadding: EdgeInsets.only(left: 10),
             border: InputBorder.none,

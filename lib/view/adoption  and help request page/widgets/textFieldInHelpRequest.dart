@@ -1,11 +1,9 @@
-import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:graduation_project/controller/AddRequestController.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
 import 'package:graduation_project/core/util/colors.dart';
-import 'package:graduation_project/core/util/customFunctions.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:intl/intl.dart';
 
@@ -17,38 +15,16 @@ class TextFiedsInHelpRequest extends StatefulWidget {
 }
 
 class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
-  TextEditingController locationController = TextEditingController();
-
-  //to put on it images
-  List<File> selectedImages = [];
-  Set<String> selectedImagePaths = {};
-  //
-  //function to pick images
-  //
-  Future<void> pickImages() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-      allowMultiple: true,
-    );
-
-    if (result != null && result.files.isNotEmpty) {
-      setState(() {
-        selectedImages.addAll(
-          result.paths.map((path) => File(path!)).toList(),
-        );
-      });
-    }
-  }
+  final controller = Get.find<AddRequestControllerImp>();
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController dateController = TextEditingController();
-    DateTime? selectedDate;
-
     return Column(
       children: [
         CustomTextField(
-          onDataChanged: (p0) {},
+          onDataChanged: (p0) {
+            controller.title = p0;
+          },
           text: "Title*",
           hintText: "Please specify the case type clearly.",
           validator: (value) => value!.isEmpty ? "title is required" : null,
@@ -60,7 +36,9 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
           height: 15,
         ),
         CustomTextField(
-          onDataChanged: (p0) {},
+          onDataChanged: (p0) {
+            controller.description = p0;
+          },
           text: "Description*",
           hintText: "Descripe the case",
           validator: (value) =>
@@ -80,7 +58,7 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
               style: AppStyles.urbanistMedium14(context),
             ),
             TextFormField(
-              controller: dateController,
+              controller: controller.dateController,
               readOnly: true,
               decoration: InputDecoration(
                 hintText: "What’s the date when you found",
@@ -113,9 +91,9 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
                 );
                 if (pickedDate != null) {
                   setState(() {
-                    selectedDate = pickedDate;
-                    dateController.text =
-                        DateFormat('yyyy-MM-dd').format(selectedDate!);
+                    controller.selectedDate = pickedDate;
+                    controller.dateController.text = DateFormat('yyyy-MM-dd')
+                        .format(controller.selectedDate!);
                     //widget.onDatePicked(selectedDate!);
                   });
                 }
@@ -132,8 +110,10 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
         //pass controller to it to show new value in textfield
         //
         CustomTextField(
-          controller: locationController,
-          onDataChanged: (p0) {},
+          controller: controller.locationController,
+          onDataChanged: (p0) {
+            controller.locatonLink = p0;
+          },
           text: "Location Link*",
           hintText: "Location of the case",
           validator: (value) =>
@@ -158,9 +138,8 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
                 text: "get current location",
                 width: ((MediaQuery.sizeOf(context).width * 0.5) -
                     10), //doesn't make any effect because there is expanded but it is required so..
-                onTap: () async {
-                  locationController.text =
-                      await CustomFunctions.getCurrentLocation();
+                onTap: () {
+                  controller.getLinkInCurrentLocation();
                 },
               ),
             ),
@@ -175,7 +154,7 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
                   text: "open google map",
                   width: ((MediaQuery.sizeOf(context).width * 0.5) -
                       10), //doesn't make any effect because there is expanded but it is required so..
-                  onTap: () => CustomFunctions.openGoogleMaps(context)),
+                  onTap: () => controller.openMap(context)),
             ),
           ],
         ),
@@ -183,7 +162,9 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
           height: 15,
         ),
         CustomTextField(
-          onDataChanged: (p0) {},
+          onDataChanged: (p0) {
+            controller.contactInfo = p0;
+          },
           text: "Contact Info",
           hintText: "Your phone Number",
           validator: (value) {
@@ -196,7 +177,9 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
           height: 15,
         ),
         CustomTextField(
-          onDataChanged: (p0) {},
+          onDataChanged: (p0) {
+            controller.socialmediaLink = p0;
+          },
           text: "Socail Media Link*",
           hintText: "Your social media link",
           validator: (value) {
@@ -224,7 +207,7 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
-                    onTap: pickImages,
+                    onTap: controller.pickImages,
                     child: Container(
                       width: 100,
                       height: 100,
@@ -240,16 +223,17 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
                   Wrap(
                     spacing: 10,
                     runSpacing: 10,
-                    children: selectedImages.map((img) {
-                      final isSelected = selectedImagePaths.contains(img.path);
+                    children: controller.selectedImages.map((img) {
+                      final isSelected =
+                          controller.selectedImagePaths.contains(img.path);
 
                       return GestureDetector(
                         onTap: () {
                           setState(() {
                             if (isSelected) {
-                              selectedImagePaths.remove(img.path);
+                              controller.selectedImagePaths.remove(img.path);
                             } else {
-                              selectedImagePaths.add(img.path);
+                              controller.selectedImagePaths.add(img.path);
                             }
                           });
                         },
@@ -290,7 +274,7 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
               ), //
               // Delete button appears only if any photo is selected
               //
-              if (selectedImagePaths.isNotEmpty) ...[
+              if (controller.selectedImagePaths.isNotEmpty) ...[
                 const SizedBox(height: 15),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -311,9 +295,9 @@ class _TextFiedsInHelpRequestState extends State<TextFiedsInHelpRequest> {
                     ),
                     onPressed: () {
                       setState(() {
-                        selectedImages.removeWhere(
-                            (img) => selectedImagePaths.contains(img.path));
-                        selectedImagePaths.clear();
+                        controller.selectedImages.removeWhere((img) =>
+                            controller.selectedImagePaths.contains(img.path));
+                        controller.selectedImagePaths.clear();
                       });
                     },
                   ),

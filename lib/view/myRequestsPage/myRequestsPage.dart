@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/api_links.dart';
+import 'package:graduation_project/controller/ViewMyRequestsController.dart';
+import 'package:graduation_project/core/class/handleWidgets.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
+import 'package:graduation_project/data/models/adoptionModel.dart';
+import 'package:graduation_project/data/models/helpModel.dart';
 import 'package:graduation_project/view/adoption%20And%20Help%20Page/widgets/searchBarInAdoptionAndHelpPage.dart';
 import 'package:graduation_project/view/myRequestsPage/widgets/adoptionAndHelpCardInMyRequestsPage.dart';
 
@@ -57,79 +62,91 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ViewMyRequestsControllerImp());
     return Scaffold(
-      backgroundColor: ColorsApp.backGroundColor,
-      resizeToAvoidBottomInset: false,
-      body: Stack(children: [
-        Positioned.fill(
-          child: SvgPicture.asset(
-            Assets.imagesLogoInverse,
-            fit: BoxFit.none,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15, top: 35),
-          child: Column(
-            children: [
-              //
-              //Header of page
-              //
-              TextAndBackArrowHeader(
-                texts: ["My Requests"],
-                colorsOfTexts: [
-                  ColorsApp.primaryColor,
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              //
-              //SaerchBar
-              //
-              SearchbarInAdoptionAndHelpPage(),
-              SizedBox(
-                height: 10,
-              ),
-              //
-              //cards
-              //
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return index % 2 == 0
-                        ? AdoptionAndHelpCardInMyRequestsPage(
-                            image: Assets.imagesAnimalPhoto2,
-                            title: 'Cat',
-                            subtitle:
-                                'Found hiding under a car in the parking lot of Smiths Grocery Store',
-                            typeOfCard: 'help',
-                            contact: 'contact:555-987-6543 to claim',
-                            onTap: () {
-                              //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
-                              Get.toNamed("/helpdetailspageWithDeleteButton");
-                            },
-                          )
-                        : AdoptionAndHelpCardInMyRequestsPage(
-                            image: Assets.imagesAnimalPhoto1,
-                            title: 'Dog',
-                            subtitle:
-                                'Medium-sized golden retriever with a red collar, responds to the name "Buddy',
-                            typeOfCard: 'adoption',
-                            contact: 'contact:555-987-6543 to claim',
-                            onTap: () {
-                              //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
-                              Get.toNamed(
-                                  "/adoptiondetailspageWithDeleteButton");
-                            },
-                          );
-                  },
+        backgroundColor: ColorsApp.backGroundColor,
+        resizeToAvoidBottomInset: false,
+        body: GetBuilder<ViewMyRequestsControllerImp>(
+          builder: (controller) => HandleLoadingIndicator(
+            isLoading: controller.isLoading,
+            widget: Stack(children: [
+              Positioned.fill(
+                child: SvgPicture.asset(
+                  Assets.imagesLogoInverse,
+                  fit: BoxFit.none,
                 ),
               ),
-            ],
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 35),
+                child: Column(
+                  children: [
+                    //
+                    //Header of page
+                    //
+                    TextAndBackArrowHeader(
+                      texts: ["My Requests"],
+                      colorsOfTexts: [
+                        ColorsApp.primaryColor,
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    //
+                    //SaerchBar
+                    //
+                    SearchbarInAdoptionAndHelpPage(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    //
+                    //cards
+                    //(item.data as AdoptionModel).photoUrl
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: controller.mergedItems.length,
+                        itemBuilder: (context, index) {
+                          final item = controller.mergedItems[index];
+
+                          return item.type == "adoption"
+                              ? AdoptionAndHelpCardInMyRequestsPage(
+                                  image:
+                                      'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/upload/${(item.data as AdoptionModel).photoUrl}',
+                                  title: (item.data as AdoptionModel).title,
+                                  subtitle:
+                                      (item.data as AdoptionModel).description,
+                                  typeOfCard: 'adoption',
+                                  contact: (item.data as AdoptionModel).phone,
+                                  onTap: () {
+                                    //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
+                                    Get.toNamed(
+                                        "/adoptiondetailspageWithDeleteButton",arguments: item);
+                                  },
+                                )
+                              : AdoptionAndHelpCardInMyRequestsPage(
+                                  image:
+                                      '$linkServerImage${(item.data as HelpRequestModel).photoUrl}',
+                                  title: (item.data as HelpRequestModel).title,
+                                  subtitle: (item.data as HelpRequestModel)
+                                      .description,
+                                  typeOfCard: 'help',
+                                  contact:
+                                      (item.data as HelpRequestModel).phone,
+                                  onTap: () {
+                                    //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
+                                    Get.toNamed(
+                                        "/helpdetailspageWithDeleteButton",
+                                        arguments: item);
+                                  },
+                                );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ]),
           ),
-        ),
-      ]),
-    );
+        ));
   }
 }
