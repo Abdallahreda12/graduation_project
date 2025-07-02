@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:graduation_project/controller/AddRequestController.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/Widgets/customCheckBoxList.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
 import 'package:graduation_project/core/util/colors.dart';
-import 'package:graduation_project/core/util/customFunctions.dart';
 import 'package:graduation_project/core/util/styles.dart';
-import 'package:file_picker/file_picker.dart';
-import 'dart:io';
 
 class TextFieldsInAdoptionRequest extends StatefulWidget {
   const TextFieldsInAdoptionRequest({super.key});
@@ -18,28 +17,7 @@ class TextFieldsInAdoptionRequest extends StatefulWidget {
 
 class _TextFieldsInAdoptionRequestState
     extends State<TextFieldsInAdoptionRequest> {
-  TextEditingController locationController = TextEditingController();
-
-  //to put on it images
-  List<File> selectedImages = [];
-  Set<String> selectedImagePaths = {};
-  //
-  //function to pick images
-  //
-  Future<void> pickImages() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-      allowMultiple: true,
-    );
-
-    if (result != null && result.files.isNotEmpty) {
-      setState(() {
-        selectedImages.addAll(
-          result.paths.map((path) => File(path!)).toList(),
-        );
-      });
-    }
-  }
+  final controller = Get.find<AddRequestControllerImp>();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +25,9 @@ class _TextFieldsInAdoptionRequestState
       Column(
         children: [
           CustomTextField(
-            onDataChanged: (p0) {},
+            onDataChanged: (p0) {
+              controller.type = p0;
+            },
             text: "Type*",
             hintText: "Type of your pet",
             validator: (value) =>
@@ -60,7 +40,9 @@ class _TextFieldsInAdoptionRequestState
             height: 15,
           ),
           CustomTextField(
-            onDataChanged: (p0) {},
+            onDataChanged: (p0) {
+              controller.title = p0;
+            },
             text: "Title*",
             hintText: "Please be clearly",
             validator: (value) => value!.isEmpty ? "title is required" : null,
@@ -72,7 +54,9 @@ class _TextFieldsInAdoptionRequestState
             height: 15,
           ),
           CustomTextField(
-            onDataChanged: (p0) {},
+            onDataChanged: (p0) {
+              controller.description = p0;
+            },
             text: "Description*",
             hintText:
                 "Please describe your pet (e.g., Color, Size, Gender,Distinctive markings)",
@@ -88,15 +72,21 @@ class _TextFieldsInAdoptionRequestState
           CustomCheckListTile(
             options: ["Male", "Female"],
             question: "Gender",
-            onDataChanged: (p0) {},
+            onDataChanged: (p0) {
+              controller.gender = p0;
+            },
           ),
           CustomCheckListTile(
             options: ["Small", "Medium", "Big", "Don't know"],
             question: "Size",
-            onDataChanged: (p0) {},
+            onDataChanged: (p0) {
+              controller.size = p0;
+            },
           ),
           CustomTextField(
-            onDataChanged: (p0) {},
+            onDataChanged: (p0) {
+              controller.age = p0;
+            },
             text: "Age",
             hintText: "Pet's age",
             validator: (value) {
@@ -109,8 +99,10 @@ class _TextFieldsInAdoptionRequestState
             height: 15,
           ),
           CustomTextField(
-            controller: locationController,
-            onDataChanged: (p0) {},
+            controller: controller.locationController,
+            onDataChanged: (p0) {
+              controller.locatonLink = p0;
+            },
             text: "Location*",
             hintText: "Your location",
             validator: (value) =>
@@ -134,9 +126,8 @@ class _TextFieldsInAdoptionRequestState
                   text: "get current location",
                   width: ((MediaQuery.sizeOf(context).width * 0.5) -
                       10), //doesn't make any effect because there is expanded but it is required so..
-                  onTap: () async {
-                    locationController.text =
-                        await CustomFunctions.getCurrentLocation();
+                  onTap: () {
+                    controller.getLinkInCurrentLocation();
                   },
                 ),
               ),
@@ -150,7 +141,9 @@ class _TextFieldsInAdoptionRequestState
                     text: "open google map",
                     width: ((MediaQuery.sizeOf(context).width * 0.5) -
                         10), //doesn't make any effect because there is expanded but it is required so..
-                    onTap: () => CustomFunctions.openGoogleMaps(context)),
+                    onTap: () {
+                      controller.openMap(context);
+                    }),
               ),
             ],
           ),
@@ -158,7 +151,9 @@ class _TextFieldsInAdoptionRequestState
             height: 15,
           ),
           CustomTextField(
-            onDataChanged: (p0) {},
+            onDataChanged: (p0) {
+              controller.contactInfo = p0;
+            },
             text: "Contact Info",
             hintText: "Your phone Number",
             validator: (value) {
@@ -186,7 +181,7 @@ class _TextFieldsInAdoptionRequestState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
-                      onTap: pickImages,
+                      onTap: controller.pickImages,
                       child: Container(
                         width: 100,
                         height: 100,
@@ -202,17 +197,16 @@ class _TextFieldsInAdoptionRequestState
                     Wrap(
                       spacing: 10,
                       runSpacing: 10,
-                      children: selectedImages.map((img) {
+                      children: controller.selectedImages.map((img) {
                         final isSelected =
-                            selectedImagePaths.contains(img.path);
-
+                            controller.selectedImagePaths.contains(img.path);
                         return GestureDetector(
                           onTap: () {
                             setState(() {
                               if (isSelected) {
-                                selectedImagePaths.remove(img.path);
+                                controller.selectedImagePaths.remove(img.path);
                               } else {
-                                selectedImagePaths.add(img.path);
+                                controller.selectedImagePaths.add(img.path);
                               }
                             });
                           },
@@ -254,7 +248,7 @@ class _TextFieldsInAdoptionRequestState
                 //
                 // Delete button appears only if any photo is selected
                 //
-                if (selectedImagePaths.isNotEmpty) ...[
+                if (controller.selectedImagePaths.isNotEmpty) ...[
                   const SizedBox(height: 15),
                   Align(
                     alignment: Alignment.centerLeft,
@@ -275,9 +269,9 @@ class _TextFieldsInAdoptionRequestState
                       ),
                       onPressed: () {
                         setState(() {
-                          selectedImages.removeWhere(
-                              (img) => selectedImagePaths.contains(img.path));
-                          selectedImagePaths.clear();
+                          controller.selectedImages.removeWhere((img) =>
+                              controller.selectedImagePaths.contains(img.path));
+                          controller.selectedImagePaths.clear();
                         });
                       },
                     ),

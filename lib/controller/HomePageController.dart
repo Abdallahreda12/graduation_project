@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
 import 'package:graduation_project/controller/loginController.dart';
 import 'package:graduation_project/core/util/appImages.dart';
+import 'package:graduation_project/data/models/adoptionModel.dart';
+import 'package:graduation_project/data/models/helpModel.dart';
 import 'package:graduation_project/data/models/userInfo.dart';
+import 'package:graduation_project/data/services/homeData.dart';
 import 'package:graduation_project/view/tips%20and%20tricks%20pages/Data/TipsAndTricksForYourPetsPageData.dart';
 
 abstract class HomePageController extends GetxController {
@@ -14,9 +17,17 @@ abstract class HomePageController extends GetxController {
   goToSpecificReques();
   goTospecificTopiInTipsAndTricks(int index);
   getHeaderInTipsAndTricks();
+  getRequest();
 }
 
 class HomePageControllerImp extends HomePageController {
+  late int userId;
+
+  bool isLoading = false;
+  final List<AdoptionModel> adoptions = [];
+  final List<HelpRequestModel> helpRequests = [];
+
+  List<UnifiedItem> mergedItems = [];
   late UserModel user;
   //this list that will shown it in the home page (Take care the names must be the same in the TipsAndTricksForYOurPetsData)
   final List<String> tipsAndTricksList = [
@@ -45,11 +56,14 @@ class HomePageControllerImp extends HomePageController {
 //titles for tipsAndTricksCard
   List<String> headers = [];
 
+
   @override
-  void onInit() {
+  void onInit() async {
     final LoginControllerImp loginController = Get.find();
     user = loginController.user;
-    Get.delete<LoginControllerImp>();
+    userId = user.userId;
+    await getRequest();
+    //Get.delete<LoginControllerImp>();
     super.onInit();
   }
 
@@ -101,4 +115,45 @@ class HomePageControllerImp extends HomePageController {
       }
     }
   }
+
+//get requests for 'Need You' section
+  @override
+  getRequest() async {
+    isLoading = true;
+    update();
+    var res = await HomeData().postData(userid: userId);
+
+    if (res.containsKey('adoption') && res['adoption'] is List) {
+      adoptions.addAll(
+        (res['adoption'] as List).map((e) => AdoptionModel.fromJson(e)),
+      );
+    }
+
+    if (res.containsKey('help') && res['help'] is List) {
+      helpRequests.addAll(
+        (res['help'] as List).map((e) => HelpRequestModel.fromJson(e)),
+      );
+    }
+    print(adoptions[0].description);
+    print(helpRequests[0].description);
+
+    // Merge into one list
+    mergedItems = [
+      ...adoptions.map((a) => UnifiedItem(data: a, type: 'adoption')),
+      ...helpRequests.map((h) => UnifiedItem(data: h, type: 'help')),
+    ];
+
+    // Shuffle randomly
+    mergedItems.shuffle();
+    isLoading = false;
+    update();
+  }
+}
+
+//this class for migrate two list with each other in adoptionModels and helpModels
+class UnifiedItem {
+  final dynamic data;
+  final String type; // 'adoption' or 'help'
+
+  UnifiedItem({required this.data, required this.type});
 }

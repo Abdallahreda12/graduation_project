@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/Widgets/dotsIndicator.dart';
@@ -25,7 +26,7 @@ class _CustomImagesSliderState extends State<CustomImagesSlider> {
             height: 218,
             viewportFraction: 1,
             pageSnapping: true,
-            enableInfiniteScroll: true,
+            enableInfiniteScroll: false,
             onPageChanged: (index, reason) {
               setState(() {
                 activeIndex = index;
@@ -34,13 +35,14 @@ class _CustomImagesSliderState extends State<CustomImagesSlider> {
           ),
           items: widget.imagePaths.map((imagePath) {
             return ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.fill,
-                width: MediaQuery.of(context).size.width,
-              ),
-            );
+                borderRadius: BorderRadius.circular(10.0),
+                child: CachedNetworkImage(
+                  imageUrl: imagePath,
+                  fit: BoxFit.fill,
+                  width: MediaQuery.of(context).size.width,
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ));
           }).toList(),
         ),
         Positioned(

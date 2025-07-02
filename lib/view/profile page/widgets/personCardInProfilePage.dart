@@ -9,7 +9,7 @@ class PersonCardInProfilePage extends StatelessWidget {
       required this.gmail});
   final String image;
   final String name;
-  final String gmail;
+  final String? gmail;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class PersonCardInProfilePage extends StatelessWidget {
                 style: AppStyles.urbanistMedium16(context),
               ),
               Text(
-                gmail,
+                gmail!,
                 style: AppStyles.urbanistReqular16(context)
                     .copyWith(color: Color(0xff999999)),
               ),

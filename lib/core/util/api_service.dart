@@ -1,8 +1,6 @@
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class Api {
-
   // // GET
   // Future<Map<String, dynamic>> get({required String uri}) async {
   //   Uri url = Uri.parse(uri);
@@ -29,7 +27,9 @@ class Api {
   }) async {
     Uri url = Uri.parse(uri);
     try {
+      print("ApiService");
       print(data);
+      print(uri);
       final response = await http.post(
         url,
         body: data,

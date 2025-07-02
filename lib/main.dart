@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/core/util/appPreference.dart';
 import 'package:graduation_project/locale/locale_controller.dart';
 import 'package:graduation_project/locale/translation_service.dart';
 import 'package:graduation_project/view/additional%20info%20edit%20page/AdditionalInfoEdit.dart';
@@ -36,11 +37,11 @@ import 'package:graduation_project/view/tips%20and%20tricks%20pages/information%
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize controller
+  await AppPreferences.init();
   final translations = await TranslationService.loadTranslations();
   final localeController = Get.put(MylocaleController());
   await localeController.initLang();
+  //final themeController = Get.put(ThemeController());
   runApp(MainApp(
     translations: translations,
     initialLocale: localeController.currentLocale.value,
@@ -54,11 +55,16 @@ class MainApp extends StatelessWidget {
   final Locale initialLocale;
   @override
   Widget build(BuildContext context) {
+    //final isDark = Get.find<ThemeController>().isDarkMode.value;
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashPage(),
       translations: TranslationService(translations),
       locale: initialLocale,
+      //must make custom theme
+      //theme: ThemeData.light(),
+      //darkTheme: ThemeData.dark(),
+      //themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
       fallbackLocale: TranslationService.fallbackLocale,
       getPages: [
         GetPage(name: "/splashpage", page: () => SplashPage()),

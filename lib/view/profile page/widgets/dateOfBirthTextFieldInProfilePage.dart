@@ -5,13 +5,12 @@ import 'package:intl/intl.dart';
 
 class DateOfBirthTextFieldInProfilePage extends StatefulWidget {
   final String label;
-  final String initValue;
+  final String? initValue;
 
-
-  const DateOfBirthTextFieldInProfilePage(
-      {required this.label,
-      required this.initValue,
-      });
+  const DateOfBirthTextFieldInProfilePage({
+    required this.label,
+    required this.initValue,
+  });
 
   @override
   _DateOfBirthTextFieldInProfilePageState createState() =>

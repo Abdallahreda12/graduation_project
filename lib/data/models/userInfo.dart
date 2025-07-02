@@ -14,6 +14,7 @@ class UserModel {
   final int? usersApprove;
   final String? createdAt;
   final String? updatedAt;
+  final String? usersPhone;
 
   UserModel({
     required this.userId,
@@ -25,6 +26,7 @@ class UserModel {
     this.usersFullAddress,
     this.usersLocation,
     this.usersRadius,
+    this.usersPhone,
     required this.usersEmail,
     required this.usersPassword,
     required this.usersVerifyCode,
@@ -50,6 +52,7 @@ class UserModel {
       usersApprove: json['users_approve'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
+      usersPhone: json['users_phone'],
     );
   }
 
@@ -70,6 +73,7 @@ class UserModel {
       'users_approve': usersApprove,
       'created_at': createdAt,
       'updated_at': updatedAt,
+      'users_phone': usersPhone
     };
   }
 }

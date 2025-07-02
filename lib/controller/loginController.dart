@@ -22,7 +22,7 @@ class LoginControllerImp extends LoginController {
   late String email;
   late String pass;
   late UserModel user;
-  Color iconPassColor = Colors.grey;
+  Color iconPassColor = Colors.red;
   Color iconGmailColor = Colors.grey;
   final TextEditingController emailController = TextEditingController();
 
@@ -112,10 +112,7 @@ class LoginControllerImp extends LoginController {
   goToResetPass() {
     Get.toNamed("/resetpassword");
   }
-  
+
   @override
-  adduser() {
-    
-    
-  }
+  adduser() {}
 }

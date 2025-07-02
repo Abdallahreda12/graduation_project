@@ -4,7 +4,7 @@ import 'package:graduation_project/core/util/styles.dart';
 
 class PhoneNumberAndLocationTextField extends StatefulWidget {
   final String label;
-  final String initValue;
+  final String? initValue;
   final TextInputType keyboardType;
 
   const PhoneNumberAndLocationTextField(
