@@ -4,11 +4,14 @@ import 'package:graduation_project/core/util/styles.dart';
 
 class TextAndBackArrowHeader extends StatelessWidget {
   const TextAndBackArrowHeader(
-      {super.key, required this.texts, required this.colorsOfTexts});
+      {super.key,
+      required this.texts,
+      this.onTap,
+      required this.colorsOfTexts});
 
   final List<String> texts;
   final List<Color> colorsOfTexts;
-
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -16,9 +19,7 @@ class TextAndBackArrowHeader extends StatelessWidget {
         Expanded(
           flex: 1,
           child: GestureDetector(
-            onTap: () {
-              Get.back();
-            },
+            onTap: onTap ?? () => Get.back(),
             child: Icon(Icons.arrow_back_ios),
           ),
         ),

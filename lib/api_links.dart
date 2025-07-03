@@ -13,3 +13,6 @@ const String linkAddAdoptionRequest =
     "$linkServerName/adopt&help/add_adopt.php";
 const String linkViewMyRequest =
     "$linkServerName/adopt&help/view_user_requsts.php";
+const String linkDeleteAdoptionReq =
+    "$linkServerName/adopt&help/delete_adoption.php";
+const String linkDeleteHelpReq = "$linkServerName/adopt&help/delete_help.php";

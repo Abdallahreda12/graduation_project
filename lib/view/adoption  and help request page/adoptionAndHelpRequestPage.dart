@@ -7,6 +7,7 @@ import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/core/class/handleWidgets.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
+import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/adoption%20%20and%20help%20request%20page/widgets/selectTypeOfRequest.dart';
 import 'package:graduation_project/view/adoption%20%20and%20help%20request%20page/widgets/textFieldInHelpRequest.dart';
 import 'package:graduation_project/view/adoption%20%20and%20help%20request%20page/widgets/textFieldsInAdoptionRequest.dart';
@@ -137,21 +138,64 @@ class _AdoptionAndHelpRequestPageState
                             );
                           } else {
                             controller.addAdoptionRequest();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("your request was done"),
-                              ),
-                            );
                             Get.back();
+                            showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              builder: (context) {
+                                return AlertDialog(
+                                  backgroundColor: ColorsApp.primaryColor,
+                                  alignment: Alignment.center,
+                                  content: Text(
+                                    "Your request was done",
+                                    style: AppStyles.urbanistReqular16(context)
+                                        .copyWith(color: Colors.white),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text(
+                                        "OK",
+                                        style:
+                                            AppStyles.urbanistReqular14(context)
+                                                .copyWith(color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           }
                         } else if (controller.selectedType == 'help') {
                           controller.addHelpRequest();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("your request was done"),
-                            ),
-                          );
+
                           Get.back();
+                          showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (context) {
+                              return AlertDialog(
+                                backgroundColor: ColorsApp.secondaryColor,
+                                alignment: Alignment.center,
+                                content: Text(
+                                  "Your request was done",
+                                  style: AppStyles.urbanistReqular16(context)
+                                      .copyWith(color: Colors.white),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: Text(
+                                      "OK",
+                                      style:
+                                          AppStyles.urbanistReqular14(context)
+                                              .copyWith(color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         }
                       }
                     },

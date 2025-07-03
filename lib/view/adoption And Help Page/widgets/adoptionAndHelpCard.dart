@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
@@ -28,7 +29,7 @@ class AdoptionAndHelpCard extends StatelessWidget {
           margin: EdgeInsets.symmetric(vertical: 7),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: typeOfCard == "help"
+              color: typeOfCard == "Help"
                   ? ColorsApp.secondaryColor.withAlpha(51)
                   : ColorsApp.primaryColor.withAlpha(51)),
           child: Column(
@@ -37,15 +38,22 @@ class AdoptionAndHelpCard extends StatelessWidget {
               Container(
                 margin: EdgeInsets.all(8),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    image,
-                    width: double.infinity,
-                    height: 125,
-                    fit: BoxFit.fill,
-                    filterQuality: FilterQuality.high,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                      imageUrl: image, // make sure this is a full URL
+                      width: double.infinity,
+                      height: 125,
+                      fit: BoxFit.fill,
+                      filterQuality: FilterQuality.high,
+                      placeholder: (context, url) => Container(
+                        width: double.infinity,
+                        height: 125,
+                        color: Colors.grey.shade200,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Container(
                         width: double.infinity,
                         height: 125,
                         color: Colors.grey.shade300,
@@ -54,10 +62,8 @@ class AdoptionAndHelpCard extends StatelessWidget {
                           color: Colors.grey.shade700,
                           size: 40,
                         ),
-                      );
-                    },
-                  ),
-                ),
+                      ),
+                    )),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -75,7 +81,7 @@ class AdoptionAndHelpCard extends StatelessWidget {
                     Text(
                       typeOfCard,
                       style: AppStyles.urbanistReqular12(context).copyWith(
-                          color: typeOfCard == "help"
+                          color: typeOfCard == "Help"
                               ? ColorsApp.secondaryColor
                               : ColorsApp.primaryColor),
                     ),
