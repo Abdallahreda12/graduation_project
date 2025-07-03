@@ -6,6 +6,7 @@ import 'package:graduation_project/controller/HomePageController.dart';
 import 'package:graduation_project/controller/ViewMyRequestsController.dart';
 import 'package:graduation_project/core/Widgets/customImageSlider.dart';
 import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
+import 'package:graduation_project/core/class/handleWidgets.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
@@ -22,6 +23,7 @@ class HelpDetailsPage extends StatefulWidget {
 }
 
 class _HelpDetailsPageState extends State<HelpDetailsPage> {
+  final controller = Get.find<ViewMyRequestsControllerImp>();
   @override
   Widget build(BuildContext context) {
     final UnifiedItem item = Get.arguments;
@@ -30,109 +32,118 @@ class _HelpDetailsPageState extends State<HelpDetailsPage> {
 
     return Scaffold(
       backgroundColor: ColorsApp.backGroundColor,
-      body: Stack(children: [
-        Positioned.fill(
-          child: SvgPicture.asset(
-            Assets.imagesLogoInverse,
-            fit: BoxFit.none,
+      body: HandleLoadingIndicator(
+        isLoading: controller.isLoading,
+        widget: Stack(children: [
+          Positioned.fill(
+            child: SvgPicture.asset(
+              Assets.imagesLogoInverse,
+              fit: BoxFit.none,
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 27, right: 27, top: 35),
-          child: Column(
-            children: [
-              //
-              //header section
-              //
-              TextAndBackArrowHeader(
-                texts: ["help", " details"],
-                colorsOfTexts: [ColorsApp.secondaryColor, Colors.black],
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              //
-              //content section
-              //
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //
-                      //images slider section
-                      //
-                      CustomImagesSlider(
-                        imagePaths: imagePaths,
-                        colorsOfDots: ColorsApp.secondaryColor,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      //
-                      //title text Section
-                      //
-                      Text(
-                        helpRequest.title,
-                        style: AppStyles.urbanistSemiBold16(context),
-                        maxLines: 3,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      //
-                      //request information Sction
-                      //
-                      RequestInformationInHelpDetailsPage(
-                        location: helpRequest.location,
-                        dateAndTime: helpRequest.date,
-                        socialMediaLink: helpRequest.socialMediaLink,
-                      ),
-                      widget.enableDeleteButton
-                          ? SizedBox(
-                              height: 0,
-                            )
-                          : SizedBox(
-                              height: 10,
-                            ),
-                      //
-                      //Personal Card Section
-                      //
-                      widget.enableDeleteButton
-                          ? Text("")
-                          : PersonalCard(
-                              image: Assets.imagesProfilePhoto,
-                              name: "James Parlor",
-                              des: "Pet Owner"),
-                      widget.enableDeleteButton
-                          ? SizedBox(
-                              height: 0,
-                            )
-                          : SizedBox(
-                              height: 10,
-                            ),
-                      //
-                      //about Pet Section
-                      //
-                      AboutPetInHelpDetailsPage(
-                          aboutPet: helpRequest.description),
-                      SizedBox(
-                        height: 10,
-                      ),
-                    ],
+          Padding(
+            padding: const EdgeInsets.only(left: 27, right: 27, top: 35),
+            child: Column(
+              children: [
+                //
+                //header section
+                //
+                TextAndBackArrowHeader(
+                  onTap: () {
+                    Get.toNamed("/myrequestspage");
+                  },
+                  texts: ["help", " details"],
+                  colorsOfTexts: [ColorsApp.secondaryColor, Colors.black],
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                //
+                //content section
+                //
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //
+                        //images slider section
+                        //
+                        CustomImagesSlider(
+                          imagePaths: imagePaths,
+                          colorsOfDots: ColorsApp.secondaryColor,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        //
+                        //title text Section
+                        //
+                        Text(
+                          helpRequest.title,
+                          style: AppStyles.urbanistSemiBold16(context),
+                          maxLines: 3,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        //
+                        //request information Sction
+                        //
+                        RequestInformationInHelpDetailsPage(
+                          location: helpRequest.location,
+                          dateAndTime: helpRequest.date,
+                          socialMediaLink: helpRequest.socialMediaLink,
+                        ),
+                        widget.enableDeleteButton
+                            ? SizedBox(
+                                height: 0,
+                              )
+                            : SizedBox(
+                                height: 10,
+                              ),
+                        //
+                        //Personal Card Section
+                        //
+                        widget.enableDeleteButton
+                            ? Text("")
+                            : PersonalCard(
+                                image: Assets.imagesProfilePhoto,
+                                name: "James Parlor",
+                                des: "Pet Owner"),
+                        widget.enableDeleteButton
+                            ? SizedBox(
+                                height: 0,
+                              )
+                            : SizedBox(
+                                height: 10,
+                              ),
+                        //
+                        //about Pet Section
+                        //
+                        AboutPetInHelpDetailsPage(
+                            aboutPet: helpRequest.description),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ]),
+        ]),
+      ),
       bottomNavigationBar: widget.enableDeleteButton
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: ElevatedButton(
-                onPressed: () {
-                  // Handle deletion
+                onPressed: () async {
+                  await controller.deleteHelpRequest(
+                      helpRequest.helpId, helpRequest.photoUrl);
+                  await controller.getRequest();
+                  Get.offNamed("/myrequestspage");
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ColorsApp.secondaryColor,

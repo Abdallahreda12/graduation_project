@@ -63,6 +63,7 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
   @override
   Widget build(BuildContext context) {
     Get.put(ViewMyRequestsControllerImp());
+
     return Scaffold(
         backgroundColor: ColorsApp.backGroundColor,
         resizeToAvoidBottomInset: false,
@@ -84,6 +85,9 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
                     //Header of page
                     //
                     TextAndBackArrowHeader(
+                      onTap: () {
+                        Get.toNamed("/homepage");
+                      },
                       texts: ["My Requests"],
                       colorsOfTexts: [
                         ColorsApp.primaryColor,
@@ -111,7 +115,7 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
                           return item.type == "adoption"
                               ? AdoptionAndHelpCardInMyRequestsPage(
                                   image:
-                                      'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/upload/${(item.data as AdoptionModel).photoUrl}',
+                                      '$linkServerImage${(item.data as AdoptionModel).photoUrl}',
                                   title: (item.data as AdoptionModel).title,
                                   subtitle:
                                       (item.data as AdoptionModel).description,
@@ -119,8 +123,9 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
                                   contact: (item.data as AdoptionModel).phone,
                                   onTap: () {
                                     //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
-                                    Get.toNamed(
-                                        "/adoptiondetailspageWithDeleteButton",arguments: item);
+                                    Get.offNamed(
+                                        "/adoptiondetailspageWithDeleteButton",
+                                        arguments: item);
                                   },
                                 )
                               : AdoptionAndHelpCardInMyRequestsPage(
@@ -134,7 +139,7 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
                                       (item.data as HelpRequestModel).phone,
                                   onTap: () {
                                     //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
-                                    Get.toNamed(
+                                    Get.offNamed(
                                         "/helpdetailspageWithDeleteButton",
                                         arguments: item);
                                   },

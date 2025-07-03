@@ -33,14 +33,14 @@ class ProfileControllerImp extends ProfileController {
     user = loginController.user;
     userId = user.userId;
 
-    themeController = Get.find<ThemeController>();
+    //themeController = Get.find<ThemeController>();
     langController = Get.find<MylocaleController>();
 
     String? savedLang = await langController.getSavedLanguage();
     selectedLanguage = (savedLang == 'ar') ? 'Arb' : 'Eng';
 
-    final isDark = themeController.isDarkMode.value;
-    selectedTheme = isDark ? 'Dark' : 'Light';
+    //final isDark = themeController.isDarkMode.value;
+    //selectedTheme = isDark ? 'Dark' : 'Light';
 
     update(); // Refresh UI
 

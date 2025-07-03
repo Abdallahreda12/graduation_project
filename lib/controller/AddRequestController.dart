@@ -124,6 +124,9 @@ class AddRequestControllerImp extends AddRequestController {
         result.paths.map((path) => File(path!)).toList(),
       );
     }
+
+    isLoading = false;
+    update();
   }
 
   @override

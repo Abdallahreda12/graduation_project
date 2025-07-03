@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/api_links.dart';
 import 'package:graduation_project/controller/HomePageController.dart';
 import 'package:graduation_project/core/class/handleWidgets.dart';
 import 'package:graduation_project/core/util/appImages.dart';
@@ -46,80 +47,98 @@ class SecondListViewInHomePage extends StatelessWidget {
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: controller.mergedItems.length,
+                //to view only 8 items not all, adoptionAndHelpRequestPage will show all requestes
+                itemCount: controller.mergedItems.length > 8
+                    ? 8
+                    : controller.mergedItems.length,
                 itemBuilder: (context, index) {
                   final item = controller.mergedItems[index];
                   final screenWidth = MediaQuery.of(context).size.width;
-                  return GestureDetector(
-                    onTap: () {
-                      if (item.type == 'adoption') {
-                        Get.toNamed("/adoptiondetailspage", arguments: item);
-                      } else {
-                        Get.toNamed("/helpdetailspage", arguments: item);
-                      }
-                    },
-                    child: Container(
-                      width: 180,
-                      margin: EdgeInsets.only(right: screenWidth * 0.025),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: item.type == 'adoption'
-                              ? ColorsApp.primaryColor
-                              : ColorsApp.secondaryColor,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10, horizontal: screenWidth * 0.025),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: 120, // or whatever height you want
-                                child: Image.network(
-                                  item.type == 'adoption'
-                                      ? 'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/upload/${(item.data as AdoptionModel).photoUrl}'
-                                      : 'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/upload/${(item.data as HelpRequestModel).photoUrl}',
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Image.asset(
-                                      Assets.imagesAnimalPhoto1,
+                  return controller.hasRequests
+                      ? GestureDetector(
+                          onTap: () {
+                            if (item.type == 'adoption') {
+                              Get.toNamed("/adoptiondetailspage",
+                                  arguments: item);
+                            } else {
+                              Get.toNamed("/helpdetailspage", arguments: item);
+                            }
+                          },
+                          child: Container(
+                            width: 180,
+                            margin: EdgeInsets.only(right: screenWidth * 0.025),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: item.type == 'adoption'
+                                    ? ColorsApp.primaryColor
+                                    : ColorsApp.secondaryColor,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: screenWidth * 0.025),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: SizedBox(
                                       width: double.infinity,
-                                      height: 120,
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
-                                ),
+                                      height:
+                                          120, // or whatever height you want
+                                      child: Image.network(
+                                        item.type == 'adoption'
+                                            ? '$linkServerImage${(item.data as AdoptionModel).photoUrl}'
+                                            : '$linkServerImage${(item.data as HelpRequestModel).photoUrl}',
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Image.asset(
+                                            Assets.imagesAnimalPhoto1,
+                                            width: double.infinity,
+                                            height: 120,
+                                            fit: BoxFit.cover,
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.01),
+                                  Text(
+                                      item.type == 'adoption'
+                                          ? (item.data as AdoptionModel).title
+                                          : (item.data as HelpRequestModel)
+                                              .title,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: AppStyles.urbanistSemiBold14(
+                                          context)),
+                                  Text(
+                                      item.type == 'adoption'
+                                          ? (item.data as AdoptionModel)
+                                              .description
+                                          : (item.data as HelpRequestModel)
+                                              .description,
+                                      overflow: TextOverflow.ellipsis,
+                                      style:
+                                          AppStyles.urbanistReqular12(context)
+                                              .copyWith(
+                                                  color: const Color.fromARGB(
+                                                      163, 0, 0, 0))),
+                                ],
                               ),
                             ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.01),
-                            Text(
-                                item.type == 'adoption'
-                                    ? (item.data as AdoptionModel).title
-                                    : (item.data as HelpRequestModel).title,
-                                overflow: TextOverflow.ellipsis,
-                                style: AppStyles.urbanistSemiBold14(context)),
-                            Text(
-                                item.type == 'adoption'
-                                    ? (item.data as AdoptionModel).description
-                                    : (item.data as HelpRequestModel)
-                                        .description,
-                                overflow: TextOverflow.ellipsis,
-                                style: AppStyles.urbanistReqular12(context)
-                                    .copyWith(
-                                        color: const Color.fromARGB(
-                                            163, 0, 0, 0))),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
+                          ))
+                      : Center(
+                          child: Text(
+                            "No requests found",
+                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                          ),
+                        );
                 },
               ),
             )

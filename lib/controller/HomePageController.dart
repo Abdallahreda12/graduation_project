@@ -22,7 +22,7 @@ abstract class HomePageController extends GetxController {
 
 class HomePageControllerImp extends HomePageController {
   late int userId;
-
+  bool hasRequests = true;
   bool isLoading = false;
   final List<AdoptionModel> adoptions = [];
   final List<HelpRequestModel> helpRequests = [];
@@ -55,7 +55,6 @@ class HomePageControllerImp extends HomePageController {
 
 //titles for tipsAndTricksCard
   List<String> headers = [];
-
 
   @override
   void onInit() async {
@@ -116,35 +115,40 @@ class HomePageControllerImp extends HomePageController {
     }
   }
 
-//get requests for 'Need You' section
   @override
   getRequest() async {
     isLoading = true;
     update();
+
+    adoptions.clear();
+    helpRequests.clear();
+    mergedItems.clear();
+
     var res = await HomeData().postData(userid: userId);
 
     if (res.containsKey('adoption') && res['adoption'] is List) {
-      adoptions.addAll(
-        (res['adoption'] as List).map((e) => AdoptionModel.fromJson(e)),
-      );
+      List adoptionList = res['adoption'];
+      if (adoptionList.isNotEmpty) {
+        adoptions.addAll(adoptionList.map((e) => AdoptionModel.fromJson(e)));
+      }
     }
 
     if (res.containsKey('help') && res['help'] is List) {
-      helpRequests.addAll(
-        (res['help'] as List).map((e) => HelpRequestModel.fromJson(e)),
-      );
+      List helpList = res['help'];
+      if (helpList.isNotEmpty) {
+        helpRequests.addAll(helpList.map((e) => HelpRequestModel.fromJson(e)));
+      }
     }
-    print(adoptions[0].description);
-    print(helpRequests[0].description);
 
-    // Merge into one list
+    hasRequests = adoptions.isNotEmpty || helpRequests.isNotEmpty;
+
     mergedItems = [
       ...adoptions.map((a) => UnifiedItem(data: a, type: 'adoption')),
       ...helpRequests.map((h) => UnifiedItem(data: h, type: 'help')),
     ];
 
-    // Shuffle randomly
     mergedItems.shuffle();
+
     isLoading = false;
     update();
   }
