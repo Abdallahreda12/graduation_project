@@ -1,5 +1,4 @@
-import 'dart:convert';
-import 'package:get/get_connect/http/src/multipart/multipart_file.dart';
+import 'dart:io';
 import 'package:graduation_project/api_links.dart';
 import 'package:graduation_project/core/util/api_service.dart';
 
@@ -14,31 +13,28 @@ class AddAdoptionRequestData {
     required String gender,
     required String age,
     required String size,
-    required List<MultipartFile> selectedImages,
+    required List<File> selectedImages,
   }) async {
     final api = Api();
-    var res = await api.post(
+
+    var data = {
+      "userid": userid.toString(),
+      "title": title,
+      "phone": phone,
+      "type": type,
+      "location": location,
+      "description": description,
+      "gender": gender,
+      "size": size,
+      "age": age,
+    };
+
+    var response = await api.postImagesWithData(
       uri: linkAddAdoptionRequest,
-      data: {
-        "userid": userid.toString(),
-        "title": title,
-        "phone": phone,
-        "type": type,
-        "location": location,
-        "description": description,
-        "gender": gender,
-        "files": selectedImages.toString(),
-        "size": size,
-        "age": age,
-      },
+      data: data,
+      imageFiles: selectedImages,
     );
-    try {
-      Map<String, dynamic> data = jsonDecode(res);
-      print(data);
-      return data;
-    } catch (e) {
-      print("❌ JSON Parse Failed: $e");
-      print("🔁 Raw response body: $res");
-    }
+
+    return response;
   }
 }
