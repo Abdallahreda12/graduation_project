@@ -53,26 +53,21 @@ class AddRequestControllerImp extends AddRequestController {
   addHelpRequest() async {
     isLoading = true;
     update();
-    List<MultipartFile> multipartImages = [];
-    for (var image in selectedImages) {
-      multipartImages.add(
-        MultipartFile(
-          image.path,
-          filename: image.path.split('/').last,
-        ),
-      );
-    }
+
     var res = await AddHelpRequestData().postData(
-        userid: userid,
-        title: title,
-        phone: contactInfo,
-        description: description,
-        date: selectedDate.toString(),
-        location: locationController.text,
-        socailMediaLink: socialmediaLink,
-        selectedImages: multipartImages);
+      userid: userid,
+      title: title,
+      phone: contactInfo,
+      description: description,
+      date: selectedDate.toString(),
+      location: locationController.text,
+      socailMediaLink: socialmediaLink,
+      selectedImages: selectedImages, // List<File>
+    );
+
     isLoading = false;
     update();
+
     print(
         "AddReqHelp//////////////////////////////////////////////////////////////////");
     print(res);
@@ -80,19 +75,6 @@ class AddRequestControllerImp extends AddRequestController {
 
   @override
   addAdoptionRequest() async {
-    isLoading = true;
-    update();
-    List<MultipartFile> multipartImages = [];
-
-    for (var image in selectedImages) {
-      multipartImages.add(
-        MultipartFile(
-          image.path,
-          filename: image.path.split('/').last,
-        ),
-      );
-    }
-    //there is problem on this add req
     var res = await AddAdoptionRequestData().postData(
       userid: userid,
       title: title,
@@ -101,12 +83,11 @@ class AddRequestControllerImp extends AddRequestController {
       location: locationController.text,
       description: description,
       gender: gender,
-      selectedImages: multipartImages,
-      size: size,
       age: age,
+      size: size,
+      selectedImages: selectedImages,
     );
-    isLoading = false;
-    update();
+
     print(
         "AddReqAdoption//////////////////////////////////////////////////////////////////");
     print(res);

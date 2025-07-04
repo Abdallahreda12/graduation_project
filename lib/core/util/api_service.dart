@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
 
 class Api {
   // // GET
@@ -34,9 +38,49 @@ class Api {
         url,
         body: data,
       );
+      print(response.body);
       return response.body;
     } catch (e) {
       throw Exception('Failed to post: $e');
+    }
+  }
+
+  Future<dynamic> postImagesWithData({
+    required String uri,
+    required Map<String, String> data,
+    required List<File> imageFiles,
+    String fieldName = 'files',
+  }) async {
+    try {
+      var request = http.MultipartRequest("POST", Uri.parse(uri));
+      request.fields.addAll(data);
+
+      for (var file in imageFiles) {
+        var stream = http.ByteStream(file.openRead());
+        var length = await file.length();
+        var multipartFile = http.MultipartFile(
+          fieldName,
+          stream,
+          length,
+          filename: basename(file.path),
+        );
+        request.files.add(multipartFile);
+      }
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      print("📦 Raw server response: ${response.body}");
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception(
+            "Upload failed: ${response.statusCode} - ${response.body}");
+      }
+    } catch (e) {
+      print("❌ Upload failed: $e");
+      return null;
     }
   }
 }

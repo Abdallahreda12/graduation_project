@@ -1,5 +1,4 @@
-import 'dart:convert';
-import 'package:get/get_connect/http/src/multipart/multipart_file.dart';
+import 'dart:io';
 import 'package:graduation_project/api_links.dart';
 import 'package:graduation_project/core/util/api_service.dart';
 
@@ -12,24 +11,25 @@ class AddHelpRequestData {
     required String location,
     required String description,
     required String socailMediaLink,
-    required List<MultipartFile> selectedImages,
+    required List<File> selectedImages,
   }) async {
     final api = Api();
-    var res = await api.post(
+    var data = {
+      "userid": userid.toString(),
+      "title": title,
+      "phone": phone,
+      "date": date,
+      "location": location,
+      "description": description,
+      "social_media_link": socailMediaLink,
+    };
+
+    var response = await api.postImagesWithData(
       uri: linkAddHelpRequest,
-      data: {
-        "userid": userid.toString(),
-        "title": title,
-        "phone": phone,
-        "date": date,
-        "location": location,
-        "description": description,
-        "social_media_link": socailMediaLink,
-        "files": selectedImages.toString(),
-      },
+      data: data,
+      imageFiles: selectedImages,
     );
-    Map<String, dynamic> data = jsonDecode(res);
-    print(data);
-    return data;
+
+    return response;
   }
 }
