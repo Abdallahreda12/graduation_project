@@ -106,13 +106,12 @@ class _FormSignUpPageState extends State<FormSignUpPage> {
               ),
               TextFormField(
                 validator: (value) {
-                  if (value!.isEmpty || value.length < 6) {
-                    return "invaild Password";
-                  } else {
-                    widget.onPasswordChanged;
+                  if (value!.isEmpty || value.length < 3) {
+                    return "Invalid Password";
                   }
                   return null;
                 },
+                onChanged: widget.onPasswordChanged,
                 obscureText: iconPassColor == Colors.grey ? false : true,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(

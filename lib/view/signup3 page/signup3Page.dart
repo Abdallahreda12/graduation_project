@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/signUpController.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/buttonsRow.dart';
 import 'package:graduation_project/view/signup%20page/widgets/stepsRow.dart';
@@ -18,49 +19,12 @@ class Signup3Page extends StatefulWidget {
 }
 
 class _Signup3PageState extends State<Signup3Page> {
-  //variables used in signup3 page for user
-  final GlobalKey<FormState> userGlobalKey = GlobalKey();
-  TextEditingController userDateofBirthController = TextEditingController();
-  DateTime? userSelectedDate;
-  late String firstName;
-  late String lastName;
-  String? userSelectedGender;
-  late String userEmailAddress;
-  late String userPhoneNumber;
-  ////////////////////////////////////////
-  //variables used in signup3 page for doctor
-  final GlobalKey<FormState> doctorGlobalKey = GlobalKey();
-  TextEditingController doctorDateofBirthController = TextEditingController();
-  DateTime? doctorSelectedDate;
-  late String doctorFirstName;
-  late String doctorLastName;
-  String? doctorSelectedGender;
-  late String doctorEmailAddress;
-  late String doctorPhoneNumber;
-  ////////////////////////////////////////
+  final controller = Get.find<SignUpControllerImp>();
 
   void updateData(String data) {
     setState(() {
-      firstName = data;
+      controller.userfirstName = data;
     });
-  }
-
-  //to put on it images
-  File? selectedImage;
-  //
-  //function to pick images
-  //
-  Future<void> pickImages() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-      allowMultiple: false,
-    );
-
-    if (result != null && result.files.single.path != null) {
-      setState(() {
-        selectedImage = File(result.files.single.path!);
-      });
-    }
   }
 
   @override
@@ -93,27 +57,28 @@ class _Signup3PageState extends State<Signup3Page> {
                       //Upload photo
                       //
                       CustomUploadPhotoSignUp3UserPage(
-                        onUploadPhoto: pickImages,
-                        selectedImages: selectedImage,
+                        onUploadPhoto: controller.pickImages,
+                        selectedImages: controller.selectedImage,
                       ),
                       const SizedBox(height: 25),
                       //
                       // Form Fields
                       //
                       CustomSignUp3FormUserPage(
-                        formKey: userGlobalKey,
+                        formKey: controller.userGlobalKey,
                         onFirstNameChanged: (value) =>
-                            setState(() => firstName = value),
-                        dateOfBirthController: userDateofBirthController,
+                            setState(() => controller.userfirstName = value),
+                        dateOfBirthController:
+                            controller.userDateofBirthController,
                         onDateSelected: (date) =>
-                            setState(() => userSelectedDate = date),
+                            setState(() => controller.userSelectedDate = date),
                         onPhoneChanged: (value) =>
-                            setState(() => userPhoneNumber = value),
-                        selectedGender: userSelectedGender,
-                        onGenderChanged: (value) =>
-                            setState(() => userSelectedGender = value),
+                            setState(() => controller.userPhoneNumber = value),
+                        selectedGender: controller.userSelectedGender,
+                        onGenderChanged: (value) => setState(
+                            () => controller.userSelectedGender = value),
                         onLastNameChanged: (value) =>
-                            setState(() => lastName = value),
+                            setState(() => controller.userlastName = value),
                       ),
                       const SizedBox(height: 70),
                     ],
@@ -128,10 +93,9 @@ class _Signup3PageState extends State<Signup3Page> {
                   left: 0,
                   child: ButtonsRow(
                     secondButtonAction: () {
-                      //if (userGlobalKey.currentState!.validate()) {
-                      // Get.toNamed("/signup4userpage");
-                      //}
+                      // if (controller.userGlobalKey.currentState!.validate()) {
                       Get.toNamed("/signup4userpage");
+                      //}
                     },
                   ),
                 ),
@@ -165,29 +129,29 @@ class _Signup3PageState extends State<Signup3Page> {
                       //Upload photo
                       //
                       CustomUploadPhotoSignUp3DoctorPage(
-                        onUploadPhoto: pickImages,
-                        selectedImages: selectedImage,
+                        onUploadPhoto: controller.pickImages,
+                        selectedImages: controller.selectedImage,
                       ),
                       const SizedBox(height: 25),
                       //
                       // Form Fields
                       //
                       CustomSignUp3FormDoctorPage(
-                        formKey: doctorGlobalKey,
+                        formKey: controller.doctorGlobalKey,
                         onFirstNameChanged: (value) =>
-                            setState(() => doctorFirstName = value),
+                            setState(() => controller.doctorFirstName = value),
                         onLastNameChanged: (value) =>
-                            setState(() => doctorLastName = value),
-                        onEmailChanged: (value) =>
-                            setState(() => doctorEmailAddress = value),
-                        onPhoneChanged: (value) =>
-                            setState(() => doctorPhoneNumber = value),
-                        dateController: doctorDateofBirthController,
-                        onDatePicked: (value) =>
-                            setState(() => doctorSelectedDate = value),
-                        onGenderSelected: (value) =>
-                            setState(() => doctorSelectedGender = value),
-                        selectedGender: doctorSelectedGender,
+                            setState(() => controller.doctorLastName = value),
+                        onEmailChanged: (value) => setState(
+                            () => controller.doctorEmailAddress = value),
+                        onPhoneChanged: (value) => setState(
+                            () => controller.doctorPhoneNumber = value),
+                        dateController: controller.doctorDateofBirthController,
+                        onDatePicked: (value) => setState(
+                            () => controller.doctorSelectedDate = value),
+                        onGenderSelected: (value) => setState(
+                            () => controller.doctorSelectedGender = value),
+                        selectedGender: controller.doctorSelectedGender,
                       ),
                       const SizedBox(height: 70),
                     ],
@@ -202,10 +166,9 @@ class _Signup3PageState extends State<Signup3Page> {
                   left: 0,
                   child: ButtonsRow(
                     secondButtonAction: () {
-                      // if (doctorGlobalKey.currentState!.validate()) {
-                      // Get.toNamed("/signup4doctorpage");
-                      //}
+                      //if (controller.doctorGlobalKey.currentState!.validate()) {
                       Get.toNamed("/signup4doctorpage");
+                      //}
                     },
                   ),
                 ),

@@ -114,6 +114,7 @@ class AddRequestControllerImp extends AddRequestController {
   getLinkInCurrentLocation() async {
     isLoading = true;
     update();
+
     locationController.text = await CustomFunctions.getCurrentLocation();
     isLoading = false;
     update();

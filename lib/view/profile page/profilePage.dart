@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/api_links.dart';
 import 'package:graduation_project/controller/profilrController.dart';
 import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/core/util/appImages.dart';
@@ -20,7 +21,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   @override
   Widget build(BuildContext context) {
     Get.put(ProfileControllerImp());
@@ -56,7 +56,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         PersonCardInProfilePage(
                           name:
                               '${controller.user.usersFirstName} ${controller.user.usersLastName}',
-                          image: Assets.imagesProfilePhoto,
+                          image:
+                              '$linkServerImage$controller.user.usersPhotoUrl',
                           gmail: controller.user.usersEmail,
                         ),
                         SizedBox(

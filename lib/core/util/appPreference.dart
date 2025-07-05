@@ -30,5 +30,16 @@ class AppPreferences {
     return _prefs?.getString(_keyTheme);
   }
 
+  // Notification
+  static const _keyUserNotification = 'user_notification';
+
+  static Future<void> setUserNotification(String value) async {
+    await _prefs?.setString(_keyUserNotification, value);
+  }
+
+  static String? getUserNotification() {
+    return _prefs?.getString(_keyUserNotification);
+  }
+
   // Add more preference getters/setters here...
 }

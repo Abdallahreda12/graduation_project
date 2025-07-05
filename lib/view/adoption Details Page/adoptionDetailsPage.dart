@@ -52,7 +52,7 @@ class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
                 //
                 TextAndBackArrowHeader(
                   onTap: () {
-                    Get.toNamed("/myrequestspage");
+                    Get.toNamed("/homepage");
                   },
                   texts: ["Adoption", " Details"],
                   colorsOfTexts: [ColorsApp.primaryColor, Colors.black],

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:graduation_project/controller/signUpController.dart';
+import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/Widgets/customCheckBoxList.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
 import 'package:graduation_project/core/util/colors.dart';
@@ -6,8 +10,6 @@ import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/stepsRow.dart';
 
 class CustomSignUp5TextFieldUserColumn extends StatelessWidget {
-  final double usersliderValue;
-  final Function(double) onSliderChanged;
   final String userLocation;
   final Function(String) onLocationChanged;
   final String userturnOnNotification;
@@ -15,8 +17,6 @@ class CustomSignUp5TextFieldUserColumn extends StatelessWidget {
 
   const CustomSignUp5TextFieldUserColumn({
     super.key,
-    required this.usersliderValue,
-    required this.onSliderChanged,
     required this.userLocation,
     required this.onLocationChanged,
     required this.userturnOnNotification,
@@ -25,6 +25,7 @@ class CustomSignUp5TextFieldUserColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<SignUpControllerImp>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -38,46 +39,55 @@ class CustomSignUp5TextFieldUserColumn extends StatelessWidget {
         ),
         const SizedBox(height: 25),
         CustomTextField(
+          controller: controller.locationController,
           onDataChanged: onLocationChanged,
-          text: "Location",
-          hintText: "Where are you located? (City/ZIP Code)",
-          borderradius: 20,
-          validator: (value) {
-            return null;
-          },
+          text: "Location Link*",
+          hintText: "Location of the case",
+          validator: (value) =>
+              value!.isEmpty ? "Location link is required" : null,
+          hintMaxLines: 1,
+          borderColor: ColorsApp.primaryColor,
         ),
-        const SizedBox(height: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        SizedBox(
+          height: 5,
+        ),
+        //
+        //two buttons to get location link (will remove but after get suitable design)
+        //
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Radius",
-              style: AppStyles.urbanistMedium14(context),
-            ),
-            Text(
-              "How far are you willing to travel to adopt a pet or volunteer?",
-              style: AppStyles.urbanistReqular14(context)
-                  .copyWith(color: Colors.grey),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Slider(
-                activeColor: ColorsApp.primaryColor,
-                value: usersliderValue,
-                min: 0,
-                max: 200,
-                divisions: 100,
-                onChanged: onSliderChanged,
+            Expanded(
+              child: Custombutton(
+                backGroundColor: ColorsApp.primaryColor,
+                height: 40,
+                borderradius: 25,
+                text: "get current location",
+                width: ((MediaQuery.sizeOf(context).width * 0.5) -
+                    10), //doesn't make any effect because there is expanded but it is required so..
+                onTap: () {
+                  controller.getLinkInCurrentLocation();
+                  print(controller.locationController.text);
+                },
               ),
             ),
-            Text(
-              "${usersliderValue.toInt().toString()} KM",
-              style: AppStyles.urbanistReqular16(context)
-                  .copyWith(color: ColorsApp.primaryColor),
+            SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Custombutton(
+                  backGroundColor: ColorsApp.primaryColor,
+                  height: 40,
+                  borderradius: 25,
+                  text: "open google map",
+                  width: ((MediaQuery.sizeOf(context).width * 0.5) -
+                      10), //doesn't make any effect because there is expanded but it is required so..
+                  onTap: () => controller.openMap(context)),
             ),
           ],
         ),
         const SizedBox(height: 10),
+
         CustomCheckListTile(
           options: ["Yes", "No"],
           question: "Turn on notification ",
