@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/ViewMyRequestsController.dart';
 import 'package:graduation_project/controller/loginController.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/data/models/adoptionModel.dart';
@@ -59,9 +60,11 @@ class HomePageControllerImp extends HomePageController {
   @override
   void onInit() async {
     final LoginControllerImp loginController = Get.find();
+
     user = loginController.user;
     userId = user.userId;
     await getRequest();
+    Get.put(ViewMyRequestsControllerImp());
     //Get.delete<LoginControllerImp>();
     super.onInit();
   }

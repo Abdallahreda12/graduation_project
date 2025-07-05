@@ -1,11 +1,22 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:graduation_project/api_links.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({super.key});
+  const DoctorCard(
+      {super.key,
+      required this.photo,
+      required this.name,
+      required this.desciption,
+      required this.stars});
+  final String photo;
+  final String name;
+  final String desciption;
+  final String stars;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +28,14 @@ class DoctorCard extends StatelessWidget {
       child: Column(
         children: [
           ClipOval(
-            child: Image.asset(Assets.imagesDoctorImage),
+            child: CachedNetworkImage(
+              imageUrl: "$linkServerImage$photo",
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+              fit: BoxFit.cover,
+              width: 100, // adjust as needed
+              height: 100,
+            ),
           ),
           SizedBox(
             height: 10,
@@ -26,7 +44,7 @@ class DoctorCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Dr.Kalini Jithma",
+                name,
                 style: AppStyles.urbanistSemiBold14(context)
                     .copyWith(color: Colors.white),
               ),
@@ -34,7 +52,7 @@ class DoctorCard extends StatelessWidget {
                 height: 2,
               ),
               Text(
-                "Veterinary Behavioral",
+                desciption,
                 style: AppStyles.urbanistReqular12(context)
                     .copyWith(color: Color(0xffD9D9D9)),
               ),
@@ -50,7 +68,7 @@ class DoctorCard extends StatelessWidget {
                     colorFilter:
                         ColorFilter.mode(Colors.white, BlendMode.srcIn),
                   ),
-                  Text("4.5",
+                  Text(stars,
                       style: AppStyles.urbanistReqular12(context).copyWith(
                         color: Color(0xffD9D9D9),
                       ))

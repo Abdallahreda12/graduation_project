@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/signUpController.dart';
 import 'package:graduation_project/view/signup%20page/widgets/buttonsRow.dart';
 import 'package:graduation_project/view/signup4%20page/widgets/custom%20signup4%20textField%20column/customSignUp4TextFieldDoctorColumn.dart';
 import 'package:graduation_project/view/signup4%20page/widgets/custom%20signup4%20textField%20column/customSignUp4TextFieldUserColumn.dart';
@@ -12,29 +13,7 @@ class Signup4Page extends StatefulWidget {
 }
 
 class _Signup4PageState extends State<Signup4Page> {
-  //variables used in signup4 page for user
-  late String ageRangeOfAnimal;
-  late String areYouHelper;
-  late String lookingForAdoption;
-  late String animalsAdoptionPreferred;
-  late String haveYouAdoptBefore;
-  late String haveExperienceWithAnimalCare;
-  ////////////////////////////////////////
-  //variables used in signup4 page for doctor
-  late String doctorSpecialization;
-  late String doctorDegrees;
-  late String doctorLicensing;
-  late String doctorYearsExperience;
-  late String clinicName;
-  late String clinicAddress;
-  ////////////////////////////////////////
-
-  void updateData(String data) {
-    setState(() {
-      // userName = data;
-    });
-  }
-
+  final controller = Get.find<SignUpControllerImp>();
   @override
   Widget build(BuildContext context) {
     return widget.typeOfUser == "User"
@@ -48,21 +27,16 @@ class _Signup4PageState extends State<Signup4Page> {
               child: Stack(fit: StackFit.expand, children: [
                 SingleChildScrollView(
                   child: CustomSignUp4TextFieldUserColumn(
-                    onAgeRangeChanged: (value) => setState(() {
-                      ageRangeOfAnimal = value;
-                    }),
-                    onAdoptionStatusChanged: (value) => setState(() {
-                      lookingForAdoption = value;
-                    }),
-                    onAdoptionPreferenceChanged: (value) => setState(() {
-                      animalsAdoptionPreferred = value;
-                    }),
-                    onPreviousAdoptionChanged: (value) => setState(() {
-                      haveYouAdoptBefore = value;
-                    }),
-                    onExperienceChanged: (value) => setState(() {
-                      haveExperienceWithAnimalCare = value;
-                    }),
+                    onAgeRangeChanged: (value) =>
+                        controller.ageRangeOfAnimal = value,
+                    onAdoptionStatusChanged: (value) =>
+                        controller.lookingForAdoption = value,
+                    onAdoptionPreferenceChanged: (value) =>
+                        controller.animalsAdoptionPreferred = value,
+                    onPreviousAdoptionChanged: (value) =>
+                        controller.haveYouAdoptBefore = value,
+                    onExperienceChanged: (value) =>
+                        controller.haveExperienceWithAnimalCare = value,
                   ),
                 ), //
                 // Buttons Row
@@ -94,34 +68,22 @@ class _Signup4PageState extends State<Signup4Page> {
                   SingleChildScrollView(
                     child: CustomSignUp4TextFieldDoctorColumn(
                       onSpecializationChanged: (value) {
-                        setState(() {
-                          doctorSpecialization = value;
-                        });
+                        controller.doctorSpecialization = value;
                       },
                       onDegreesChanged: (value) {
-                        setState(() {
-                          doctorDegrees = value;
-                        });
+                        controller.doctorDegrees = value;
                       },
                       onLicensingChanged: (value) {
-                        setState(() {
-                          doctorLicensing = value;
-                        });
+                        controller.doctorLicensing = value;
                       },
                       onExperienceChanged: (value) {
-                        setState(() {
-                          doctorYearsExperience = value;
-                        });
+                        controller.doctorYearsExperience = value;
                       },
                       onClinicNameChanged: (value) {
-                        setState(() {
-                          clinicName = value;
-                        });
+                        controller.clinicName = value;
                       },
                       onClinicAddressChanged: (value) {
-                        setState(() {
-                          clinicAddress = value;
-                        });
+                        controller.clinicAddress = value;
                       },
                     ),
                   ),
@@ -131,7 +93,9 @@ class _Signup4PageState extends State<Signup4Page> {
                     right: 0,
                     child: ButtonsRow(
                       secondButtonAction: () {
-                        // if (doctorGlobalKey.currentState!.validate()) {}
+                        // if (controller.doctorGlobalKey.currentState!.validate()) {
+                        //   Get.toNamed("/signup5doctorpage");
+                        // }
                         Get.toNamed("/signup5doctorpage");
                       },
                     ),
