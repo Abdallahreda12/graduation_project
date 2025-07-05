@@ -41,7 +41,7 @@ class _Signup2PageState extends State<Signup2Page> {
             //Count Steps
             //
             StepsRow(
-              currentIndex: 2,
+              currentIndex: 3,
             ),
             SizedBox(
               height: 25,

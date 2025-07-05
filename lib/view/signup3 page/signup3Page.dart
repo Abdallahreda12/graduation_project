@@ -82,7 +82,7 @@ class _Signup3PageState extends State<Signup3Page> {
                       //
                       //Steps Row
                       //
-                      StepsRow(currentIndex: 3),
+                      StepsRow(currentIndex: 4),
                       const SizedBox(height: 25),
                       Text(
                         "Personal Information",
@@ -154,7 +154,7 @@ class _Signup3PageState extends State<Signup3Page> {
                       //
                       //Steps Row
                       //
-                      StepsRow(currentIndex: 3),
+                      StepsRow(currentIndex: 4),
                       const SizedBox(height: 25),
                       Text(
                         "Personal Information",
@@ -165,9 +165,8 @@ class _Signup3PageState extends State<Signup3Page> {
                       //Upload photo
                       //
                       CustomUploadPhotoSignUp3DoctorPage(
-                        onUploadPhoto: () {
-                          //Handle Upload photo
-                        },
+                        onUploadPhoto: pickImages,
+                        selectedImages: selectedImage,
                       ),
                       const SizedBox(height: 25),
                       //
@@ -177,7 +176,7 @@ class _Signup3PageState extends State<Signup3Page> {
                         formKey: doctorGlobalKey,
                         onFirstNameChanged: (value) =>
                             setState(() => doctorFirstName = value),
-                             onLastNameChanged: (value) =>
+                        onLastNameChanged: (value) =>
                             setState(() => doctorLastName = value),
                         onEmailChanged: (value) =>
                             setState(() => doctorEmailAddress = value),
