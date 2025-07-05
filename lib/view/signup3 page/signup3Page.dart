@@ -82,7 +82,7 @@ class _Signup3PageState extends State<Signup3Page> {
                       //
                       //Steps Row
                       //
-                      StepsRow(currentIndex: 3),
+                      StepsRow(currentIndex: 4),
                       const SizedBox(height: 25),
                       Text(
                         "Personal Information",
@@ -154,7 +154,7 @@ class _Signup3PageState extends State<Signup3Page> {
                       //
                       //Steps Row
                       //
-                      StepsRow(currentIndex: 3),
+                      StepsRow(currentIndex: 4),
                       const SizedBox(height: 25),
                       Text(
                         "Personal Information",

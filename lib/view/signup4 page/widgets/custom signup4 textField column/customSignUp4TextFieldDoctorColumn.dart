@@ -27,7 +27,7 @@ class CustomSignUp4TextFieldDoctorColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 25),
-        StepsRow(currentIndex: 4),
+        StepsRow(currentIndex: 5),
         const SizedBox(height: 25),
         Text(
           "Clinic Details",

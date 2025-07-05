@@ -29,7 +29,7 @@ class CustomSignUp4TextFieldUserColumn extends StatelessWidget {
         //
         // Steps Row
         //
-        StepsRow(currentIndex: 4),
+        StepsRow(currentIndex: 5),
         const SizedBox(height: 25),
         Text(
           "Personal Information",

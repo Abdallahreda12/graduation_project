@@ -12,7 +12,7 @@ class StepChart extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5),
       //70 -> 60 padding of all screen and 10 for padding of each side for shart
-      width: (MediaQuery.sizeOf(context).width - 70) / (count),
+      width: (MediaQuery.sizeOf(context).width - 130) / (count),
       height: 6,
       decoration: BoxDecoration(
         color: colorIs ? ColorsApp.primaryColor : ColorsApp.backGroundGreyColor,

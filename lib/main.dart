@@ -34,6 +34,7 @@ import 'package:graduation_project/view/signup5%20page/signup5Page.dart';
 import 'package:graduation_project/view/splash%20page/splashPage.dart';
 import 'package:graduation_project/view/tips%20and%20tricks%20pages/TipsAndTricksPage/TipsAndTricksForYourPetsPage.dart';
 import 'package:graduation_project/view/tips%20and%20tricks%20pages/information%20page/informationPage.dart';
+import 'package:graduation_project/view/verify%20page/verifyPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -160,6 +161,7 @@ class MainApp extends StatelessWidget {
             page: () => TipsAndTricksForYourPetsPage()),
         GetPage(name: "/informationpage", page: () => InformationPage()),
         GetPage(name: "/myrequestspage", page: () => MyRequestsPage()),
+        GetPage(name: "/verifypage", page: () => VerifyPage()),
       ],
     );
   }

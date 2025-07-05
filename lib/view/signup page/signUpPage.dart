@@ -71,7 +71,7 @@ class _SignupPageState extends State<SignupPage> {
             ButtonsRow(
               firstButton: "Back to Sign in",
               secondButtonAction: () {
-                Get.toNamed('/signup2page');
+                Get.toNamed('/verifypage');
               },
             )
           ],
