@@ -31,7 +31,7 @@ class CustomSignUp5TextFieldUserColumn extends StatelessWidget {
       children: [
         const SizedBox(height: 25),
         // Steps Row
-        StepsRow(currentIndex: 5),
+        StepsRow(currentIndex: 6),
         const SizedBox(height: 25),
         Text(
           "Additional Information",

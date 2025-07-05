@@ -75,7 +75,18 @@ class _SignupPageState extends State<SignupPage> {
                 )
               ],
             ),
-          ),
+
+            Expanded(child: SizedBox()),
+            //
+            //Buttons
+            //
+            ButtonsRow(
+              firstButton: "Back to Sign in",
+              secondButtonAction: () {
+                Get.toNamed('/verifypage');
+              },
+            )
+          ],
         ),
       ),
     );
