@@ -18,3 +18,5 @@ const String linkDeleteAdoptionReq =
 const String linkDeleteHelpReq = "$linkServerName/adopt&help/delete_help.php";
 const String linkViewDoctors = "$linkServerName/book/view_doctors.php";
 const String linkUserInfo = "$linkServerName/auth/user_info.php";
+//correct this link
+const String linkDoctorInfo = "$linkServerName/auth/user_info.php";

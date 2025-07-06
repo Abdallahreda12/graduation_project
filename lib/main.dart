@@ -99,11 +99,7 @@ class MainApp extends StatelessWidget {
             page: () => Signup4Page(
                   typeOfUser: 'Doctor',
                 )),
-        GetPage(
-            name: "/signup4institutionpage",
-            page: () => Signup4Page(
-                  typeOfUser: 'Institution',
-                )),
+     
         GetPage(
             name: "/signup5userpage",
             page: () => Signup5Page(
@@ -115,11 +111,7 @@ class MainApp extends StatelessWidget {
                   typeOfUser: 'Doctor',
                 )),
         GetPage(
-            name: "/signup5institutionpage",
-            page: () => Signup5Page(
-                  typeOfUser: 'Institution',
-                )),
-        GetPage(
+          
             name: "/signupcompletedpage", page: () => SignupCompletedPage()),
         GetPage(name: "/homepage", page: () => HomePage()),
         GetPage(name: "/adoptionandhelp", page: () => AdoptionAndHelpPage()),

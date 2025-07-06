@@ -10,16 +10,13 @@ import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/stepsRow.dart';
 
 class CustomSignUp5TextFieldUserColumn extends StatelessWidget {
-  final String userLocation;
   final Function(String) onLocationChanged;
-  final String userturnOnNotification;
+
   final Function(String) onNotificationChanged;
 
   const CustomSignUp5TextFieldUserColumn({
     super.key,
-    required this.userLocation,
     required this.onLocationChanged,
-    required this.userturnOnNotification,
     required this.onNotificationChanged,
   });
 

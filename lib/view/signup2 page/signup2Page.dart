@@ -77,12 +77,7 @@ class _Signup2PageState extends State<Signup2Page> {
                     text: "Doctor",
                     icon: Assets.imagesDoctor,
                   ),
-                  // TypeUserBox(
-                  //   isSelected: typeUser == "Institution",
-                  //   onDataChanged: updateData,
-                  //   text: "Institution",
-                  //   icon: Assets.imagesInstitutionLogo,
-                  // ),
+                 
                 ],
               ),
             ),
@@ -95,10 +90,8 @@ class _Signup2PageState extends State<Signup2Page> {
               secondButtonAction: () {
                 if (typeUser == "User") {
                   Get.toNamed("/signup3userpage");
-                } else if (typeUser == "Doctor") {
+                } else {
                   Get.toNamed("/signup3doctorpage");
-                } else if (typeUser == "Institution") {
-                  Get.toNamed("/signup3institutionpage");
                 }
               },
             )
