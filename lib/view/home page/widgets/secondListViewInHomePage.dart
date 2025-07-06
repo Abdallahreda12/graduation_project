@@ -1,9 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/api_links.dart';
 import 'package:graduation_project/controller/HomePageController.dart';
 import 'package:graduation_project/core/class/handleWidgets.dart';
-import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/data/models/adoptionModel.dart';
@@ -85,25 +85,32 @@ class SecondListViewInHomePage extends StatelessWidget {
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: SizedBox(
-                                      width: double.infinity,
-                                      height:
-                                          120, // or whatever height you want
-                                      child: Image.network(
-                                        item.type == 'adoption'
-                                            ? '$linkServerImage${(item.data as AdoptionModel).photoUrl}'
-                                            : '$linkServerImage${(item.data as HelpRequestModel).photoUrl}',
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return Image.asset(
-                                            Assets.imagesAnimalPhoto1,
+                                        width: double.infinity,
+                                        height:
+                                            120, // or whatever height you want
+                                        child: CachedNetworkImage(
+                                          imageUrl: item.type == 'adoption'
+                                              ? '$linkServerImage${(item.data as AdoptionModel).photoUrl}'
+                                              : '$linkServerImage${(item.data as HelpRequestModel).photoUrl}',
+                                          fit: BoxFit.cover,
+                                          width: double.infinity,
+                                          height: 120,
+                                          placeholder: (context, url) =>
+                                              const Center(
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Container(
                                             width: double.infinity,
-                                            height: 120,
-                                            fit: BoxFit.cover,
-                                          );
-                                        },
-                                      ),
-                                    ),
+                                            height: 125,
+                                            color: Colors.grey.shade300,
+                                            child: Icon(
+                                              Icons.broken_image,
+                                              color: Colors.grey.shade700,
+                                              size: 40,
+                                            ),
+                                          ),
+                                        )),
                                   ),
                                   SizedBox(
                                       height:

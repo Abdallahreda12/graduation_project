@@ -64,29 +64,20 @@ class _SignupPageState extends State<SignupPage> {
                 //
                 //Buttons
                 //
+                Expanded(child: SizedBox()),
+                //
+                //Buttons
+                //
                 ButtonsRow(
                   firstButton: "Back to Sign in",
                   secondButtonAction: () {
-                    // if (controller.globalKey.currentState!.validate()) {
-                    //   controller.signupEmailAndPass();
-                    // }
-                    Get.toNamed('/signup2page');
+                    //controller.signupEmailAndPass();
+                    Get.toNamed('/verifypage');
                   },
                 )
               ],
             ),
-
-            Expanded(child: SizedBox()),
-            //
-            //Buttons
-            //
-            ButtonsRow(
-              firstButton: "Back to Sign in",
-              secondButtonAction: () {
-                Get.toNamed('/verifypage');
-              },
-            )
-          ],
+          ),
         ),
       ),
     );

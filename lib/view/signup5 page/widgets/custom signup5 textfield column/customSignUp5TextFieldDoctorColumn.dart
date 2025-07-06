@@ -10,16 +10,12 @@ import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/stepsRow.dart';
 
 class CustomSignUp5TextFieldDoctorColumn extends StatelessWidget {
-  final double doctorSliderValue;
-  final Function(double) onSliderChanged;
   final Function(String) onLocationChanged;
   final Function(String) onHomeVisitsChanged;
   final Function(String) onTurnOnNotificationChanged;
 
   const CustomSignUp5TextFieldDoctorColumn({
     super.key,
-    required this.doctorSliderValue,
-    required this.onSliderChanged,
     required this.onLocationChanged,
     required this.onHomeVisitsChanged,
     required this.onTurnOnNotificationChanged,
@@ -47,7 +43,7 @@ class CustomSignUp5TextFieldDoctorColumn extends StatelessWidget {
           validator: (value) =>
               value!.isEmpty ? "Location link is required" : null,
           hintMaxLines: 1,
-          borderColor: ColorsApp.secondaryColor,
+          borderColor: ColorsApp.primaryColor,
         ),
         SizedBox(
           height: 5,
@@ -60,7 +56,7 @@ class CustomSignUp5TextFieldDoctorColumn extends StatelessWidget {
           children: [
             Expanded(
               child: Custombutton(
-                backGroundColor: ColorsApp.secondaryColor,
+                backGroundColor: ColorsApp.primaryColor,
                 height: 40,
                 borderradius: 25,
                 text: "get current location",
@@ -68,6 +64,7 @@ class CustomSignUp5TextFieldDoctorColumn extends StatelessWidget {
                     10), //doesn't make any effect because there is expanded but it is required so..
                 onTap: () {
                   controller.getLinkInCurrentLocation();
+                  print(controller.locationController.text);
                 },
               ),
             ),
@@ -76,7 +73,7 @@ class CustomSignUp5TextFieldDoctorColumn extends StatelessWidget {
             ),
             Expanded(
               child: Custombutton(
-                  backGroundColor: ColorsApp.secondaryColor,
+                  backGroundColor: ColorsApp.primaryColor,
                   height: 40,
                   borderradius: 25,
                   text: "open google map",
@@ -86,37 +83,7 @@ class CustomSignUp5TextFieldDoctorColumn extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Radius",
-              style: AppStyles.urbanistMedium14(context),
-            ),
-            Text(
-              "How far are you willing to travel to adopt a pet or volunteer?",
-              style: AppStyles.urbanistReqular14(context)
-                  .copyWith(color: Colors.grey),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Slider(
-                activeColor: ColorsApp.primaryColor,
-                value: doctorSliderValue,
-                min: 0,
-                max: 200,
-                divisions: 100,
-                onChanged: onSliderChanged,
-              ),
-            ),
-            Text(
-              "${doctorSliderValue.toInt().toString()} KM",
-              style: AppStyles.urbanistReqular16(context)
-                  .copyWith(color: ColorsApp.primaryColor),
-            ),
-          ],
-        ),
+
         const SizedBox(height: 10),
         CustomCheckListTile(
           options: ["Yes", "No"],

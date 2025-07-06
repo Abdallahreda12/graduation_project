@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:graduation_project/controller/signUpController.dart';
 import 'package:graduation_project/core/util/colors.dart';
 
 class OtpField extends StatelessWidget {
@@ -13,13 +16,17 @@ class OtpField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<SignUpControllerImp>();
     return SizedBox(
-      height: 85,
+      height: 80,
       child: AspectRatio(
-        aspectRatio: 0.9,
+        aspectRatio: 0.8,
         child: TextField(
           autofocus: true,
           onChanged: (value) {
+            if (value.isNotEmpty) {
+              controller.verfyCode += value;
+            }
             if (value.length == 1 && !last) {
               FocusScope.of(context).nextFocus();
             }
