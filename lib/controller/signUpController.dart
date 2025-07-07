@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:graduation_project/controller/loginController.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/customFunctions.dart';
+import 'package:graduation_project/data/models/doctorInfoModel.dart';
+import 'package:graduation_project/data/models/userInfoModel.dart';
 import 'package:graduation_project/data/services/signupData.dart';
 
 abstract class SignUpController extends GetxController {
@@ -18,6 +20,7 @@ abstract class SignUpController extends GetxController {
 }
 
 class SignUpControllerImp extends SignUpController {
+  late String typrUser;
   bool isLoading = false;
 
   late String gmail;
@@ -25,69 +28,145 @@ class SignUpControllerImp extends SignUpController {
   final GlobalKey<FormState> globalKey = GlobalKey();
   final TextEditingController emailController = TextEditingController();
 
-  //variables used in signup3 page for user
+  // Model instances
+  UserInfoModel? userInfo;
+  DoctorInfoModel? doctorInfo;
+
+  // Form keys and controllers
   final GlobalKey<FormState> userGlobalKey = GlobalKey();
-  TextEditingController userDateofBirthController = TextEditingController();
-  DateTime? userSelectedDate;
-  late String userfirstName;
-  late String userlastName;
-  String? userSelectedGender;
-  late String userEmailAddress;
-  late String userPhoneNumber;
-  ////////////////////////////////////////
-  //variables used in signup3 page for doctor
   final GlobalKey<FormState> doctorGlobalKey = GlobalKey();
+  TextEditingController userDateofBirthController = TextEditingController();
   TextEditingController doctorDateofBirthController = TextEditingController();
+  DateTime? userSelectedDate;
   DateTime? doctorSelectedDate;
-  late String doctorFirstName;
-  late String doctorLastName;
-  String? doctorSelectedGender;
-  late String doctorEmailAddress;
-  late String doctorPhoneNumber;
-  ////////////////////////////////////////
 
-  //variables used in signup4 page for user
-  late String ageRangeOfAnimal;
-  late String areYouHelper;
-  late String lookingForAdoption;
-  late String animalsAdoptionPreferred;
-  late String haveYouAdoptBefore;
-  late String haveExperienceWithAnimalCare;
-  ////////////////////////////////////////
-  //variables used in signup4 page for doctor
-  late String doctorSpecialization;
-  late String doctorDegrees;
-  late String doctorLicensing;
-  late String doctorYearsExperience;
-  late String clinicName;
-  late String clinicAddress;
-  ////////////////////////////////////////
-  ///
-  /// //variables used in signup5 page for user
-  late double usersliderValue = 23;
-  late String userturnOnNotification = "";
-  late String userLocation = "";
-  ////////////////////////////////////////
-  //variables used in signup5 page for doctor
-  late double doctorSliderValue = 23;
-  late String doctorturnOnNotification = "";
-  late String doctorLocation = "";
-  late String doctorHomeVisits = "";
-  ////////////////////////////////////////
   File? selectedImage;
-
   late String verfyCode = "";
   late int userId;
-
   TextEditingController locationController = TextEditingController();
+
   @override
   void onInit() {
     super.onInit();
     Get.delete<LoginControllerImp>();
+    // Initialize models with default values
+    _initializeModels();
   }
 
-  //
-  //
+  void _initializeModels() {
+    userInfo = UserInfoModel(
+      firstName: '',
+      lastName: '',
+      gender: null,
+      emailAddress: '',
+      phoneNumber: '',
+      birthday: '',
+      ageRangeOfAnimal: '',
+      areYouHelper: '',
+      lookingForAdoption: '',
+      animalsAdoptionPreferred: '',
+      haveYouAdoptBefore: '',
+      haveExperienceWithAnimalCare: '',
+      turnOnNotification: '',
+      location: '',
+    );
+
+    doctorInfo = DoctorInfoModel(
+      firstName: '',
+      lastName: '',
+      gender: null,
+      emailAddress: '',
+      phoneNumber: '',
+      birthday: '',
+      specialization: '',
+      degrees: '',
+      licensing: '',
+      yearsExperience: '',
+      clinicName: '',
+      clinicAddress: '',
+      turnOnNotification: '',
+      location: '',
+      homeVisits: '',
+    );
+  }
+
+  // Helper methods to update model data
+  void updateUserInfo({
+    String? firstName,
+    String? lastName,
+    String? gender,
+    String? emailAddress,
+    String? phoneNumber,
+    String? birthday,
+    String? ageRangeOfAnimal,
+    String? areYouHelper,
+    String? lookingForAdoption,
+    String? animalsAdoptionPreferred,
+    String? haveYouAdoptBefore,
+    String? haveExperienceWithAnimalCare,
+    double? sliderValue,
+    String? turnOnNotification,
+    String? location,
+  }) {
+    userInfo = UserInfoModel(
+      firstName: firstName ?? userInfo!.firstName,
+      lastName: lastName ?? userInfo!.lastName,
+      gender: gender ?? userInfo!.gender,
+      emailAddress: emailAddress ?? userInfo!.emailAddress,
+      phoneNumber: phoneNumber ?? userInfo!.phoneNumber,
+      birthday: birthday ?? userInfo!.birthday,
+      ageRangeOfAnimal: ageRangeOfAnimal ?? userInfo!.ageRangeOfAnimal,
+      areYouHelper: areYouHelper ?? userInfo!.areYouHelper,
+      lookingForAdoption: lookingForAdoption ?? userInfo!.lookingForAdoption,
+      animalsAdoptionPreferred:
+          animalsAdoptionPreferred ?? userInfo!.animalsAdoptionPreferred,
+      haveYouAdoptBefore: haveYouAdoptBefore ?? userInfo!.haveYouAdoptBefore,
+      haveExperienceWithAnimalCare: haveExperienceWithAnimalCare ??
+          userInfo!.haveExperienceWithAnimalCare,
+      turnOnNotification: turnOnNotification ?? userInfo!.turnOnNotification,
+      location: location ?? userInfo!.location,
+    );
+    update();
+  }
+
+  void updateDoctorInfo({
+    String? firstName,
+    String? lastName,
+    String? gender,
+    String? emailAddress,
+    String? phoneNumber,
+    String? birthday,
+    String? specialization,
+    String? degrees,
+    String? licensing,
+    String? yearsExperience,
+    String? clinicName,
+    String? clinicAddress,
+    double? sliderValue,
+    String? turnOnNotification,
+    String? location,
+    String? homeVisits,
+  }) {
+    doctorInfo = DoctorInfoModel(
+      firstName: firstName ?? doctorInfo!.firstName,
+      lastName: lastName ?? doctorInfo!.lastName,
+      gender: gender ?? doctorInfo!.gender,
+      emailAddress: emailAddress ?? doctorInfo!.emailAddress,
+      phoneNumber: phoneNumber ?? doctorInfo!.phoneNumber,
+      birthday: birthday ?? doctorInfo!.birthday,
+      specialization: specialization ?? doctorInfo!.specialization,
+      degrees: degrees ?? doctorInfo!.degrees,
+      licensing: licensing ?? doctorInfo!.licensing,
+      yearsExperience: yearsExperience ?? doctorInfo!.yearsExperience,
+      clinicName: clinicName ?? doctorInfo!.clinicName,
+      clinicAddress: clinicAddress ?? doctorInfo!.clinicAddress,
+      turnOnNotification: turnOnNotification ?? doctorInfo!.turnOnNotification,
+      location: location ?? doctorInfo!.location,
+      homeVisits: homeVisits ?? doctorInfo!.homeVisits,
+    );
+    update();
+  }
+
   @override
   signupDoctorInfo() async {
     isLoading = true;
@@ -95,21 +174,21 @@ class SignUpControllerImp extends SignUpController {
     try {
       var res = await SignupData().postSignUpDoctorInfoData(
         userid: userId,
-        usersFirstName: userfirstName,
-        usersLastName: userlastName,
-        phone: userPhoneNumber,
-        gender: userSelectedGender!,
-        birthday: userDateofBirthController.text,
+        usersFirstName: doctorInfo!.firstName!,
+        usersLastName: doctorInfo!.lastName!,
+        phone: doctorInfo!.phoneNumber!,
+        gender: doctorInfo!.gender!,
+        birthday: doctorDateofBirthController.text,
         location: locationController.text,
         radius: "0",
-        specialization: doctorSpecialization,
-        degree: doctorDegrees,
-        licensing_info: doctorLicensing,
-        years_experience: doctorYearsExperience,
-        hom_visit: doctorHomeVisits == "Yes" ? "1" : "0",
+        specialization: doctorInfo!.specialization!,
+        degree: doctorInfo!.degrees!,
+        licensing_info: doctorInfo!.licensing!,
+        years_experience: doctorInfo!.yearsExperience!,
+        hom_visit: doctorInfo!.homeVisits == "Yes" ? "1" : "0",
         selectedFiles: selectedImage != null ? [selectedImage!] : [],
       );
-      print("Signup user info response: $res");
+      print("Signup doctor info response: $res");
 
       if (res['status'] == 'success') {
         Get.snackbar(
@@ -130,7 +209,7 @@ class SignUpControllerImp extends SignUpController {
         );
       }
     } catch (e) {
-      print("Signup user info error: $e");
+      print("Signup doctor info error: $e");
       Get.snackbar(
         'Error',
         'Something went wrong while submitting your info.',
@@ -144,8 +223,6 @@ class SignUpControllerImp extends SignUpController {
     update();
   }
 
-  //
-  //
   @override
   signupEmailAndPass() async {
     isLoading = true;
@@ -189,8 +266,6 @@ class SignUpControllerImp extends SignUpController {
     }
   }
 
-  //
-  //
   @override
   signupUserInfo() async {
     isLoading = true;
@@ -198,23 +273,24 @@ class SignUpControllerImp extends SignUpController {
     try {
       var res = await SignupData().postSignUpUserInfoData(
         userid: userId,
-        usersFirstName: userfirstName,
-        usersLastName: userlastName,
-        phone: userPhoneNumber,
-        gender: userSelectedGender!,
+        usersFirstName: userInfo!.firstName,
+        usersLastName: userInfo!.lastName,
+        phone: userInfo!.phoneNumber,
+        gender: userInfo!.gender!,
         birthday: userDateofBirthController.text,
         location: locationController.text,
         radius: "0",
-        adoptionPreference: animalsAdoptionPreferred,
-        lookingForAdoption: lookingForAdoption == "Yes" ? "1" : "0", // from UI
-        adoptedBefore: haveYouAdoptBefore == "Yes" ? "1" : "0", // from UI
-        preferredAgeRange: animalsAdoptionPreferred, // from UI
+        adoptionPreference: userInfo!.animalsAdoptionPreferred,
+        lookingForAdoption: userInfo!.lookingForAdoption == "Yes" ? "1" : "0",
+        adoptedBefore: userInfo!.haveYouAdoptBefore == "Yes" ? "1" : "0",
+        preferredAgeRange: userInfo!.ageRangeOfAnimal,
         hasExperienceCaring:
-            haveExperienceWithAnimalCare == "Yes" ? "1" : "0", // from UI
+            userInfo!.haveExperienceWithAnimalCare == "Yes" ? "1" : "0",
         selectedFiles: selectedImage != null ? [selectedImage!] : [],
       );
+      print("////////////////////////////////");
       print("Signup user info response: $res");
-
+      print("////////////////////////////////");
       if (res['status'] == 'success') {
         Get.snackbar(
           'Success',
@@ -248,8 +324,6 @@ class SignUpControllerImp extends SignUpController {
     update();
   }
 
-  //
-  //
   Future<void> pickImages() async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.image,
@@ -262,20 +336,20 @@ class SignUpControllerImp extends SignUpController {
     }
   }
 
-  //
-  //
   @override
   getLinkInCurrentLocation() async {
     isLoading = true;
     update();
 
     locationController.text = await CustomFunctions.getCurrentLocation();
+    // Update both models with the current location
+    updateUserInfo(location: locationController.text);
+    updateDoctorInfo(location: locationController.text);
+
     isLoading = false;
     update();
   }
 
-  //
-  //
   @override
   openMap(context) async {
     isLoading = true;
@@ -285,8 +359,6 @@ class SignUpControllerImp extends SignUpController {
     isLoading = false;
   }
 
-  //
-  //
   @override
   sendVerificationCode() async {
     print("📨 Verifying code: $verfyCode");
@@ -295,12 +367,16 @@ class SignUpControllerImp extends SignUpController {
     try {
       var res = await SignupData()
           .postVerificationCodeData(email: gmail, verfyCode: verfyCode);
-
+      print("///////////////////////////////////////////////////////////////");
       print("✅ Server Response: $res");
-
+      print("///////////////////////////////////////////////////////////////");
       if (res != null && res['status'] == 'success') {
         userId = res["user_id"];
+        print(
+            "///////////////////////////////////////////////////////////////");
         print(userId);
+        print(
+            "///////////////////////////////////////////////////////////////");
         isLoading = false;
         update();
         Get.snackbar(

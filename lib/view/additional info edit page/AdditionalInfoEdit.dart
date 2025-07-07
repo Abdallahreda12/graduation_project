@@ -15,8 +15,8 @@ class AdditionalInfoEditPage extends StatefulWidget {
 }
 
 class _AdditionalInfoEditPageState extends State<AdditionalInfoEditPage> {
-  late String userName = "Abdallah Reda";
-  late String userEmailAddress = "Abdallah@gmail.com";
+  late String firstName = "Abdallah";
+  late String lastName = "reda";
   late String ageRangeOfAnimal;
   late String areYouHelper;
   late String lookingForAdoption;
@@ -43,14 +43,24 @@ class _AdditionalInfoEditPageState extends State<AdditionalInfoEditPage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      //
+                      //upload photo
+                      //
+                      // EditePhoto(
+                      //   onUploadPhoto: controller.pickImages,
+                      //   selectedImages: controller.selectedImage,
+                      // ),
+                      SizedBox(
+                        height: 15,
+                      ),
                       CustomTextField(
-                        initValue: userName,
+                        initValue: firstName,
                         onDataChanged: (p0) {
                           setState(() {
-                            userName = p0;
+                            firstName = p0;
                           });
                         },
-                        text: "Full Name",
+                        text: "First Name",
                         hintText: "What is your full name",
                         borderradius: 20,
                         validator: (value) =>
@@ -60,18 +70,20 @@ class _AdditionalInfoEditPageState extends State<AdditionalInfoEditPage> {
                         height: 15,
                       ),
                       CustomTextField(
-                        initValue: userEmailAddress,
+                        initValue: lastName,
                         onDataChanged: (p0) {
                           setState(() {
-                            userEmailAddress = p0;
+                            lastName = p0;
                           });
                         },
-                        text: "Email Address",
-                        hintText: "What’s your email address",
+                        text: "last Name",
+                        hintText: "What is your full name",
                         borderradius: 20,
-                        validator: (value) => value!.contains('@')
-                            ? null
-                            : "Please enter a valid email",
+                        validator: (value) =>
+                            value!.isEmpty ? "Name is required" : null,
+                      ),
+                      SizedBox(
+                        height: 15,
                       ),
                       SizedBox(
                         height: 10,

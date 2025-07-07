@@ -86,8 +86,8 @@ class VerifyPage extends StatelessWidget {
                 ButtonsRow(
                   firstButton: "Back",
                   secondButtonAction: () {
-                    //controller.sendVerificationCode();
-                    Get.toNamed('/signup2page');
+                    controller.sendVerificationCode();
+                   
                   },
                 )
               ],

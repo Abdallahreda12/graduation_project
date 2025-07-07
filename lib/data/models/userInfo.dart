@@ -1,20 +1,20 @@
 class UserModel {
-  final int userId;
-  final String? usersFirstName;
-  final String? usersLastName;
-  final String? usersPhotoUrl;
-  final String? usersGender;
-  final String? usersDateOfBirth;
-  final String? usersFullAddress;
-  final String? usersLocation;
-  final dynamic usersRadius;
-  final String? usersEmail;
-  final String? usersPassword;
-  final int? usersVerifyCode;
-  final int? usersApprove;
-  final String? createdAt;
-  final String? updatedAt;
-  final String? usersPhone;
+  int userId;
+  String? usersFirstName;
+  String? usersLastName;
+  String? usersPhotoUrl;
+  String? usersGender;
+  String? usersDateOfBirth;
+  String? usersFullAddress;
+  String? usersLocation;
+  dynamic usersRadius;
+  String? usersEmail;
+  String? usersPassword;
+  int? usersVerifyCode;
+  int? usersApprove;
+  String? createdAt;
+  String? updatedAt;
+  String? usersPhone;
 
   UserModel({
     required this.userId,

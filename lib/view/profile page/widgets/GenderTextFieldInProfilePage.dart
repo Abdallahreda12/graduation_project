@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:graduation_project/controller/profilrController.dart';
+import 'package:graduation_project/controller/profileController.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 
@@ -31,6 +31,7 @@ class _GenderTextFieldInProfilePageState
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ProfileControllerImp>();
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Padding(
         padding: const EdgeInsets.only(left: 5),
