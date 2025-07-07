@@ -45,7 +45,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   //header of page
                   //
                   TextAndBackArrowHeader(
-                      texts: ["Profile"], colorsOfTexts: [Colors.black]),
+                      onTap: () {
+                        Get.toNamed("/homepage");
+                      },
+                      texts: ["Profile"],
+                      colorsOfTexts: [Colors.black]),
                   SizedBox(
                     height: 25,
                   ),
@@ -58,9 +62,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           PersonCardInProfilePage(
                             name:
-                                '${controller.user.usersFirstName} ${controller.user.usersLastName}',
+                                '${controller.fullInfoForUser?.firstName} ${controller.fullInfoForUser?.lastName}',
                             image:
-                                '$linkServerImage$controller.user.usersPhotoUrl',
+                                '$linkServerImage${controller.user.usersPhotoUrl}',
                             gmail: controller.user.usersEmail,
                           ),
                           SizedBox(

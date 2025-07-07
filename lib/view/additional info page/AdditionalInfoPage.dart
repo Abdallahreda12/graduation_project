@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/profileController.dart';
 import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
@@ -15,14 +16,7 @@ class AdditionalInfoPage extends StatefulWidget {
 }
 
 class _AdditionalInfoPageState extends State<AdditionalInfoPage> {
-  late String userName;
-  late String userEmailAddress;
-  late String ageRangeOfAnimal;
-  late String areYouHelper;
-  late String lookingForAdoption;
-  late String animalsAdoptionPreferred;
-  late String haveYouAdoptBefore;
-  late String haveExperienceWithAnimalCare;
+  final controller = Get.find<ProfileControllerImp>();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +41,9 @@ class _AdditionalInfoPageState extends State<AdditionalInfoPage> {
                 children: [
                   Expanded(
                     child: TextAndBackArrowHeader(
+                        onTap: () {
+                          Get.toNamed("/profilePage");
+                        },
                         texts: ["Additional Info"],
                         colorsOfTexts: [Colors.black]),
                   ),
@@ -67,61 +64,128 @@ class _AdditionalInfoPageState extends State<AdditionalInfoPage> {
               //
               //profile card
               //
+              // controller.user.type == "user"
+              // ?
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       PersonCardInProfilePage(
-                        name: "Abdallah Reda",
-                        image: Assets.imagesProfilePhoto,
-                        gmail: "Abdallah@gmail.com",
+                        name:
+                            '${controller.fullInfoForUser?.firstName} ${controller.fullInfoForUser?.lastName}',
+                        image: controller.fullInfoForUser?.usersPhotoUrl ?? "",
+                        gmail: controller.fullInfoForUser?.emailAddress,
                       ),
                       SizedBox(
                         height: 20,
                       ),
                       AdditionalInfoCard(
                         question: "Age Range of animals that you preferred",
-                        answer: "Young",
+                        answer: controller.fullInfoForUser?.ageRangeOfAnimal,
                       ),
                       SizedBox(
                         height: 12,
-                      ),
-                      AdditionalInfoCard(
-                        question: "Are you helper?",
-                        answer: "Yes",
                       ),
                       SizedBox(
                         height: 12,
                       ),
                       AdditionalInfoCard(
                         question: "Are you looking for adoption?",
-                        answer: "No",
+                        answer:
+                            controller.fullInfoForUser?.lookingForAdoption ==
+                                    "1"
+                                ? "Yes"
+                                : "No",
                       ),
                       SizedBox(
                         height: 12,
                       ),
                       AdditionalInfoCard(
                         question: "Animals adoption preferred",
-                        answer: "Dog",
+                        answer: controller
+                            .fullInfoForUser?.animalsAdoptionPreferred,
                       ),
                       SizedBox(
                         height: 12,
                       ),
                       AdditionalInfoCard(
                         question: "Have you adopt before?",
-                        answer: "yes",
+                        answer:
+                            controller.fullInfoForUser?.haveYouAdoptBefore ==
+                                    '1'
+                                ? "Yes"
+                                : "No",
                       ),
                       SizedBox(
                         height: 12,
                       ),
                       AdditionalInfoCard(
                         question: "Do you have experience with animal care?",
-                        answer: "No",
+                        answer: controller.fullInfoForUser
+                                    ?.haveExperienceWithAnimalCare ==
+                                "1"
+                            ? "Yes"
+                            : "No",
                       ),
                     ],
                   ),
                 ),
-              ),
+              )
+              // : Expanded(
+              //     child: SingleChildScrollView(
+              //       child: Column(
+              //         children: [
+              //           PersonCardInProfilePage(
+              //             name:
+              //                 '${controller.additionalInfoForDoctor?.firstName}${controller.additionalInfoForDoctor?.lastName}',
+              //             image: controller.user.usersPhotoUrl,
+              //             gmail: controller
+              //                 .additionalInfoForDoctor?.emailAddress,
+              //           ),
+              //           SizedBox(
+              //             height: 20,
+              //           ),
+              //           AdditionalInfoCard(
+              //             question: "specialization",
+              //             answer: controller
+              //                 .additionalInfoForDoctor?.specialization,
+              //           ),
+              //           SizedBox(
+              //             height: 12,
+              //           ),
+              //           AdditionalInfoCard(
+              //             question: "degree?",
+              //             answer:
+              //                 controller.additionalInfoForDoctor?.degrees,
+              //           ),
+              //           SizedBox(
+              //             height: 12,
+              //           ),
+              //           AdditionalInfoCard(
+              //             question: "licensing information",
+              //             answer:
+              //                 controller.additionalInfoForDoctor?.licensing,
+              //           ),
+              //           SizedBox(
+              //             height: 12,
+              //           ),
+              //           AdditionalInfoCard(
+              //             question: "Years Experience",
+              //             answer: controller
+              //                 .additionalInfoForDoctor?.yearsExperience,
+              //           ),
+              //           SizedBox(
+              //             height: 12,
+              //           ),
+              //           AdditionalInfoCard(
+              //             question: "Do you visit home?",
+              //             answer: controller
+              //                 .additionalInfoForDoctor?.homeVisits,
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
             ],
           ),
         ),
@@ -135,7 +199,7 @@ class AdditionalInfoCard extends StatelessWidget {
       {super.key, required this.question, required this.answer});
 
   final String question;
-  final String answer;
+  final String? answer;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -166,7 +230,7 @@ class AdditionalInfoCard extends StatelessWidget {
                   bottomLeft: Radius.circular(10)),
               color: ColorsApp.primaryColorOpicaty),
           child: Text(
-            answer,
+            answer ?? "",
             style: AppStyles.urbanistReqular16(context),
           ),
         ),

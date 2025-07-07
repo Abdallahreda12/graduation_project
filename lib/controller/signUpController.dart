@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:graduation_project/controller/loginController.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/customFunctions.dart';
-import 'package:graduation_project/data/models/doctorInfoModel.dart';
+import 'package:graduation_project/data/models/doctorAdditionalInfoModel.dart';
 import 'package:graduation_project/data/models/userInfoModel.dart';
 import 'package:graduation_project/data/services/signupData.dart';
 
@@ -62,13 +62,13 @@ class SignUpControllerImp extends SignUpController {
       phoneNumber: '',
       birthday: '',
       ageRangeOfAnimal: '',
-      areYouHelper: '',
       lookingForAdoption: '',
       animalsAdoptionPreferred: '',
       haveYouAdoptBefore: '',
       haveExperienceWithAnimalCare: '',
       turnOnNotification: '',
       location: '',
+      usersPhotoUrl: '',
     );
 
     doctorInfo = DoctorInfoModel(
@@ -116,7 +116,6 @@ class SignUpControllerImp extends SignUpController {
       phoneNumber: phoneNumber ?? userInfo!.phoneNumber,
       birthday: birthday ?? userInfo!.birthday,
       ageRangeOfAnimal: ageRangeOfAnimal ?? userInfo!.ageRangeOfAnimal,
-      areYouHelper: areYouHelper ?? userInfo!.areYouHelper,
       lookingForAdoption: lookingForAdoption ?? userInfo!.lookingForAdoption,
       animalsAdoptionPreferred:
           animalsAdoptionPreferred ?? userInfo!.animalsAdoptionPreferred,
@@ -125,6 +124,7 @@ class SignUpControllerImp extends SignUpController {
           userInfo!.haveExperienceWithAnimalCare,
       turnOnNotification: turnOnNotification ?? userInfo!.turnOnNotification,
       location: location ?? userInfo!.location,
+      usersPhotoUrl: userInfo?.usersPhotoUrl,
     );
     update();
   }

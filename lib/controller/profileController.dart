@@ -1,12 +1,15 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/controller/loginController.dart';
-import 'package:graduation_project/controller/signUpController.dart';
+import 'package:graduation_project/data/models/doctorAdditionalInfoModel.dart';
 import 'package:graduation_project/data/models/userInfo.dart';
+import 'package:graduation_project/data/models/userInfoModel.dart';
 import 'package:graduation_project/data/services/editAddionalIInfoData.dart';
 import 'package:graduation_project/data/services/editProfileData.dart';
+import 'package:graduation_project/data/services/viewAdditionalInfoData.dart';
 import 'package:graduation_project/locale/locale_controller.dart';
 import 'package:graduation_project/theme/themeController.dart';
 
@@ -16,13 +19,16 @@ abstract class ProfileController extends GetxController {
   changeTheme(value);
   editProfile();
   showPopupMenu(context);
-  // editeAdditionalInfo();
+  viewAdditionalInfo();
+  editeAdditionalInfo();
 }
 
 class ProfileControllerImp extends ProfileController {
+  UserInfoModel? fullInfoForUser;
+  DoctorInfoModel? additionalInfoForDoctor;
+
   bool isLoading = false;
 
-  late int userId;
   late UserModel user;
 
   late ThemeController themeController;
@@ -34,6 +40,10 @@ class ProfileControllerImp extends ProfileController {
 
   IconData icon = Icons.edit_sharp;
   late TextEditingController textEditingController;
+  TextEditingController textEditingControllerForFirstName =
+      TextEditingController();
+  TextEditingController textEditingControllerforLastName =
+      TextEditingController();
   DateTime? selectedDate;
   String selectedGender = 'None';
 
@@ -43,7 +53,18 @@ class ProfileControllerImp extends ProfileController {
   void onInit() async {
     final LoginControllerImp loginController = Get.find();
     user = loginController.user;
-    userId = user.userId;
+    textEditingControllerForFirstName.text = user.usersFirstName!;
+    textEditingControllerforLastName.text = user.usersLastName!;
+
+    fullInfoForUser?.firstName = user.usersFirstName!;
+    fullInfoForUser?.lastName = user.usersLastName!;
+    fullInfoForUser?.birthday = user.usersDateOfBirth!;
+    fullInfoForUser?.emailAddress = user.usersEmail!;
+    fullInfoForUser?.gender = user.usersGender!;
+    fullInfoForUser?.location = user.usersFullAddress!;
+    fullInfoForUser?.phoneNumber = user.usersPhone!;
+
+    await viewAdditionalInfo();
 
     //themeController = Get.find<ThemeController>();
     langController = Get.find<MylocaleController>();
@@ -54,9 +75,19 @@ class ProfileControllerImp extends ProfileController {
     //final isDark = themeController.isDarkMode.value;
     //selectedTheme = isDark ? 'Dark' : 'Light';
 
-    update(); // Refresh UI
+    update();
 
     super.onInit();
+  }
+
+  //
+  //
+  Future<void> pickImages() async {
+    final result = await FilePicker.platform.pickFiles(type: FileType.image);
+    if (result != null && result.files.single.path != null) {
+      selectedImageFiles = [File(result.files.single.path!)];
+      update();
+    }
   }
 
 //
@@ -130,38 +161,38 @@ class ProfileControllerImp extends ProfileController {
     isLoading = true;
     update();
     try {
-      final response = await EditProfileData().postData(
+      var response = await EditProfileData().postData(
         userId: user.userId,
         phone: user.usersPhone ?? '',
         gender: user.usersGender ?? '',
         brithday: user.usersDateOfBirth ?? '',
         location: user.usersLocation ?? '',
-        oldimagename:
-            "2341photo_2025-03-11_09-25-27.jpg", // user.usersPhotoUrl!,
-        files: [], //selectedImageFiles,
       );
-      print("asdasdasdasdasdasdasdasd");
-      print(response['status']);
-      if (response['status'] == 'success') {
-        isLoading = false;
-        update();
-        Get.snackbar(
-          'Success',
-          'Profile updated successfully.',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-        );
-      } else {
-        Get.snackbar(
-          'Error',
-          'Failed to update profile.',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
-      }
+      //السطر العاق ده بيطلع ايرور
+      //response["status"];
+      isLoading = false;
+      update();
+      // if (response['status'] == 'success') {
+      //   isLoading = false;
+      //   update();
+      //   Get.snackbar(
+      //     'Success',
+      //     'Profile updated successfully.',
+      //     snackPosition: SnackPosition.BOTTOM,
+      //     backgroundColor: Colors.green,
+      //     colorText: Colors.white,
+      //   );
+      // } else {
+      //   Get.snackbar(
+      //     'Error',
+      //     'Failed to update profile.',
+      //     snackPosition: SnackPosition.BOTTOM,
+      //     backgroundColor: Colors.red,
+      //     colorText: Colors.white,
+      //   );
+      // }
     } catch (e) {
+      print(e);
       Get.snackbar(
         'Error',
         'Something went wrong: $e',
@@ -172,47 +203,125 @@ class ProfileControllerImp extends ProfileController {
     }
   }
 
-  // @override
-  // editeAdditionalInfo() async {
-  //   //make userInfoModel and DoctorInfoModel to get information and pass to EditAddionalInfoData().postData
-  //   try {
-  //     final response = await EditAddionalInfoData().postData(userId: userId, users_first_name: user.usersFirstName, users_last_name: user.usersLastName, interest_id: "1", adoption_preference: , looking_for_adoption: looking_for_adoption, adopted_before: adopted_before, preferred_age_range: preferred_age_range, has_experience_caring: has_experience_caring, oldimagename: oldimagename, files: files)
-  //       // userId: user.userId,
-  //       // phone: user.usersPhone ?? '',
-  //       // gender: user.usersGender ?? '',
-  //       // brithday: user.usersDateOfBirth ?? '',
-  //       // location: user.usersLocation ?? '',
-  //       // oldimagename:
-  //       //     "7616photo_2025-03-11_09-25-27.jpg", // user.usersPhotoUrl!,
-  //       // files: [], //selectedImageFiles,
+//
+//
+  @override
+  viewAdditionalInfo() async {
+    try {
+      var response =
+          await ViewAddionalInfoData().postDataForUser(userId: user.userId);
+      update();
+      print("✅sssssssss Response: $response");
+      if (response['status'] == 'success') {
+        final userInfoMap = response['data'][0];
+        print(
+            "aaaaaaaassss${userInfoMap["user_interests_looking_for_adoption"].toString()}");
+        fullInfoForUser = UserInfoModel.fromJson({
+          "first_name": user.usersFirstName ?? '',
+          "last_name": user.usersLastName ?? '',
+          "gender": user.usersGender,
+          "email_address": user.usersEmail ?? '',
+          "phone_number": user.usersPhone ?? '',
+          "birthday": user.usersDateOfBirth ?? '',
+          "age_range_of_animal":
+              userInfoMap["user_interests_preferred_age_range"] ?? '',
+          "are_you_helper": "",
+          "looking_for_adoption":
+              userInfoMap["user_interests_looking_for_adoption"].toString(),
+          "animals_adoption_preferred":
+              userInfoMap["user_interests_adoption_preference"] ?? '',
+          "have_you_adopt_before":
+              userInfoMap["user_interests_adopted_before"].toString(),
+          "have_experience_with_animal_care":
+              userInfoMap["user_interests_has_experience_caring"].toString(),
+          "turn_on_notification": "",
+          "location": user.usersFullAddress ?? '',
+          "users_photo_url": user.usersPhotoUrl ?? '',
+        });
+      }
+      update();
+    } catch (e) {
+      print("❌ Exception in viewAdditionalInfo: $e");
+      Get.snackbar(
+        'Error',
+        'Something went wrong: $e',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
 
-  //     print("asdasdasdasdasdasdasdasd");
-  //     print(response['status']);
-  //     if (response['status'] == 'success') {
-  //       Get.snackbar(
-  //         'Success',
-  //         'Profile updated successfully.',
-  //         snackPosition: SnackPosition.BOTTOM,
-  //         backgroundColor: Colors.green,
-  //         colorText: Colors.white,
-  //       );
-  //     } else {
-  //       Get.snackbar(
-  //         'Error',
-  //         'Failed to update profile.',
-  //         snackPosition: SnackPosition.BOTTOM,
-  //         backgroundColor: Colors.red,
-  //         colorText: Colors.white,
-  //       );
-  //     }
-  //   } catch (e) {
-  //     Get.snackbar(
-  //       'Error',
-  //       'Something went wrong: $e',
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       backgroundColor: Colors.red,
-  //       colorText: Colors.white,
-  //     );
-  //   }
-  // }
+//
+//view based on user.type, if user show user's data if doctor show doctor's data
+  @override
+  editeAdditionalInfo() async {
+    print("1");
+    if (true) {
+      print("2");
+      //user.type == "user") {
+      try {
+        print("3");
+        print(fullInfoForUser!.firstName);
+        print(fullInfoForUser!.lastName);
+        print(fullInfoForUser!.animalsAdoptionPreferred);
+        print(fullInfoForUser!.lookingForAdoption);
+        print(fullInfoForUser!.haveYouAdoptBefore);
+        print(fullInfoForUser!.ageRangeOfAnimal);
+        print(fullInfoForUser!.haveExperienceWithAnimalCare);
+        print(fullInfoForUser!.usersPhotoUrl.toString());
+        print(selectedImageFiles);
+        update();
+        var response = await EditAddionalInfoData().postDataForUser(
+            userId: user.userId,
+            users_first_name: textEditingControllerForFirstName.text,
+            users_last_name: textEditingControllerforLastName.text,
+            adoption_preference:
+                fullInfoForUser?.animalsAdoptionPreferred ?? "",
+            looking_for_adoption: fullInfoForUser?.lookingForAdoption ?? "",
+            adopted_before: fullInfoForUser?.haveYouAdoptBefore ?? "",
+            preferred_age_range: fullInfoForUser?.ageRangeOfAnimal ?? "",
+            has_experience_caring:
+                fullInfoForUser?.haveExperienceWithAnimalCare ?? "",
+            oldimagename: fullInfoForUser?.usersPhotoUrl.toString() ?? "",
+            files: selectedImageFiles);
+        update();
+        viewAdditionalInfo();
+        update();
+        if (response['status'] == 'success') {
+          user.usersFirstName = textEditingControllerForFirstName.text;
+          user.usersLastName = textEditingControllerforLastName.text;
+          print("5");
+          Get.snackbar(
+            'Success',
+            'Profile updated successfully.',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+          );
+          update();
+        } else {
+          Get.snackbar(
+            'Error',
+            'Failed to update profile.',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+          );
+        }
+        update();
+      } catch (e) {
+        print(user.userId);
+        print(e);
+        Get.snackbar(
+          'Error',
+          'Something wenssssssssssssst wrong: $e',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+        update();
+      }
+    }
+  }
 }

@@ -15,6 +15,7 @@ class UserModel {
   String? createdAt;
   String? updatedAt;
   String? usersPhone;
+  //String? type = "user";
 
   UserModel({
     required this.userId,
@@ -27,6 +28,7 @@ class UserModel {
     this.usersLocation,
     this.usersRadius,
     this.usersPhone,
+    //this.type = "user",
     required this.usersEmail,
     required this.usersPassword,
     required this.usersVerifyCode,
@@ -37,23 +39,23 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      userId: json['user_id'],
-      usersFirstName: json['users_first_name'],
-      usersLastName: json['users_last_name'],
-      usersPhotoUrl: json['users_photo_url'],
-      usersGender: json['users_gender'],
-      usersDateOfBirth: json['users_date_of_birth'],
-      usersFullAddress: json['users_full_address'],
-      usersLocation: json['users_location'],
-      usersRadius: json['users_radius'],
-      usersEmail: json['users_email'],
-      usersPassword: json['users_password'],
-      usersVerifyCode: json['users_verifycode'],
-      usersApprove: json['users_approve'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
-      usersPhone: json['users_phone'],
-    );
+        userId: json['user_id'],
+        usersFirstName: json['users_first_name'],
+        usersLastName: json['users_last_name'],
+        usersPhotoUrl: json['users_photo_url'],
+        usersGender: json['users_gender'],
+        usersDateOfBirth: json['users_date_of_birth'],
+        usersFullAddress: json['users_full_address'],
+        usersLocation: json['users_location'],
+        usersRadius: json['users_radius'],
+        usersEmail: json['users_email'],
+        usersPassword: json['users_password'],
+        usersVerifyCode: json['users_verifycode'],
+        usersApprove: json['users_approve'],
+        createdAt: json['created_at'],
+        updatedAt: json['updated_at'],
+        usersPhone: json['users_phone']);
+    // type: json['type']);
   }
 
   Map<String, dynamic> toJson() {
@@ -73,7 +75,9 @@ class UserModel {
       'users_approve': usersApprove,
       'created_at': createdAt,
       'updated_at': updatedAt,
-      'users_phone': usersPhone
+      'users_phone': usersPhone,
+      //edit this when omar add it
+      //'type': type
     };
   }
 }
