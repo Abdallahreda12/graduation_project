@@ -25,3 +25,4 @@ const String linkEditAdditionalInfo =
     "$linkServerName/profile/edit_additional_info.php";
 const String linkViewAdditionalInfo =
     "$linkServerName/profile/view_additional_info.php";
+const String linkViewUser = "$linkServerName/adopt&help/view_user.php";

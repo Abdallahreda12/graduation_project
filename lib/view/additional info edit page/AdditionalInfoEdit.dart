@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/profileController.dart';
 import 'package:graduation_project/core/Widgets/customCheckBoxList.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
+import 'package:graduation_project/view/additional%20info%20edit%20page/widgets/uploadPhoto.dart';
 import 'package:graduation_project/view/signup%20page/widgets/buttonsRow.dart';
 
 class AdditionalInfoEditPage extends StatefulWidget {
@@ -15,14 +17,7 @@ class AdditionalInfoEditPage extends StatefulWidget {
 }
 
 class _AdditionalInfoEditPageState extends State<AdditionalInfoEditPage> {
-  late String firstName = "Abdallah";
-  late String lastName = "reda";
-  late String ageRangeOfAnimal;
-  late String areYouHelper;
-  late String lookingForAdoption;
-  late String animalsAdoptionPreferred;
-  late String haveYouAdoptBefore;
-  late String haveExperienceWithAnimalCare;
+  final controller = Get.find<ProfileControllerImp>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,15 +44,22 @@ class _AdditionalInfoEditPageState extends State<AdditionalInfoEditPage> {
                       // EditePhoto(
                       //   onUploadPhoto: controller.pickImages,
                       //   selectedImages: controller.selectedImage,
-                      // ),
+                      // ),s
+                      UploadphotoInAdditionalInfoEdit(
+                        onUploadPhoto: controller.pickImages,
+                        selectedImages: controller.selectedImageFiles,
+                      ),
                       SizedBox(
                         height: 15,
                       ),
                       CustomTextField(
-                        initValue: firstName,
+                        controller:
+                            controller.textEditingControllerForFirstName,
+                        initValue:
+                            controller.textEditingControllerForFirstName.text,
                         onDataChanged: (p0) {
                           setState(() {
-                            firstName = p0;
+                            controller.fullInfoForUser!.firstName = p0;
                           });
                         },
                         text: "First Name",
@@ -70,11 +72,11 @@ class _AdditionalInfoEditPageState extends State<AdditionalInfoEditPage> {
                         height: 15,
                       ),
                       CustomTextField(
-                        initValue: lastName,
+                        controller: controller.textEditingControllerforLastName,
+                        initValue:
+                            controller.textEditingControllerforLastName.text,
                         onDataChanged: (p0) {
-                          setState(() {
-                            lastName = p0;
-                          });
+                          controller.fullInfoForUser!.lastName = p0;
                         },
                         text: "last Name",
                         hintText: "What is your full name",
@@ -89,65 +91,72 @@ class _AdditionalInfoEditPageState extends State<AdditionalInfoEditPage> {
                         height: 10,
                       ),
                       CustomCheckListTile(
-                        defualtAnswer: "Young",
+                        defualtAnswer:
+                            controller.fullInfoForUser!.ageRangeOfAnimal,
                         options: ["Puppy/Kitten", "Young", "Adult"],
                         question: "Age Range of animals that you preferred",
                         onDataChanged: (p0) {
                           setState(() {
-                            ageRangeOfAnimal = p0;
+                            controller.fullInfoForUser!.ageRangeOfAnimal = p0;
                           });
                         },
                       ),
+
                       CustomCheckListTile(
-                        defualtAnswer: "No",
-                        options: ["Yes", "No"],
-                        question: "Are you a helper?",
-                        onDataChanged: (p0) {
-                          setState(() {
-                            areYouHelper = p0;
-                          });
-                        },
-                      ),
+                          defualtAnswer:
+                              controller.fullInfoForUser!.lookingForAdoption ==
+                                      "1"
+                                  ? "Yes"
+                                  : "No",
+                          options: ["Yes", "No"],
+                          question: "Are you looking for adoption?",
+                          onDataChanged: (p0) {
+                            setState(() {
+                              controller.fullInfoForUser!.lookingForAdoption =
+                                  p0 == "Yes" ? "1" : "0";
+                            });
+                          }),
                       CustomCheckListTile(
-                        defualtAnswer: "No",
-                        options: ["Yes", "No"],
-                        question: "Are you looking for adoption?",
-                        onDataChanged: (p0) {
-                          setState(() {
-                            lookingForAdoption = p0;
-                          });
-                        },
-                      ),
-                      CustomCheckListTile(
-                        defualtAnswer: "Cat",
+                        defualtAnswer: controller
+                            .fullInfoForUser!.animalsAdoptionPreferred,
                         options: ["Cat", "Dog", "Other (e.g., rabbit, bird)"],
                         question: "Animals adoption preferred",
                         onDataChanged: (p0) {
                           setState(() {
-                            animalsAdoptionPreferred = p0;
+                            controller
+                                .fullInfoForUser!.animalsAdoptionPreferred = p0;
                           });
                         },
                       ),
                       CustomCheckListTile(
-                        defualtAnswer: "Yes",
-                        options: ["Yes", "No"],
-                        question: "Have you adopted before?",
-                        onDataChanged: (p0) {
-                          setState(() {
-                            haveYouAdoptBefore = p0;
-                          });
-                        },
-                      ),
+                          defualtAnswer:
+                              controller.fullInfoForUser!.haveYouAdoptBefore ==
+                                      "1"
+                                  ? "Yes"
+                                  : "No",
+                          options: ["Yes", "No"],
+                          question: "Have you adopted before?",
+                          onDataChanged: (p0) {
+                            setState(() {
+                              controller.fullInfoForUser!.haveYouAdoptBefore =
+                                  p0 == "Yes" ? "1" : "0";
+                            });
+                          }),
                       CustomCheckListTile(
-                        defualtAnswer: "No",
-                        options: ["Yes", "No", "Little knowledge"],
-                        question: "Do you have experience with animal care?",
-                        onDataChanged: (p0) {
-                          setState(() {
-                            haveExperienceWithAnimalCare = p0;
-                          });
-                        },
-                      ),
+                          defualtAnswer: controller.fullInfoForUser!
+                                      .haveExperienceWithAnimalCare ==
+                                  "1"
+                              ? "Yes"
+                              : "No",
+                          options: ["Yes", "No"],
+                          question: "Do you have experience with animal care?",
+                          onDataChanged: (p0) {
+                            setState(() {
+                              controller.fullInfoForUser!
+                                      .haveExperienceWithAnimalCare =
+                                  p0 == "Yes" ? "1" : "0";
+                            });
+                          }),
                       const SizedBox(height: 70),
                     ],
                   ),
@@ -163,11 +172,14 @@ class _AdditionalInfoEditPageState extends State<AdditionalInfoEditPage> {
           child: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 35),
             child: ButtonsRow(
+              firstButtonAction: () {
+                Get.toNamed("/additionalinfopage");
+              },
               secondButton: "Save",
               firstButtonColor: ColorsApp.primaryColorOpicaty,
-              secondButtonAction: () {
-                //if (userGlobalKey.currentState!.validate()) {}
-                Get.back();
+              secondButtonAction: () async {
+                await controller.editeAdditionalInfo();
+                Get.toNamed("/additionalinfopage");
               },
             ),
           ),

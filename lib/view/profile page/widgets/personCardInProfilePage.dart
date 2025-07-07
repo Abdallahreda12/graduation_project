@@ -18,7 +18,7 @@ class PersonCardInProfilePage extends StatelessWidget {
       children: [
         ClipOval(
           child: CachedNetworkImage(
-            imageUrl: image,
+            imageUrl: image ?? "",
             width: 65,
             height: 65,
             fit: BoxFit.cover,
@@ -39,7 +39,7 @@ class PersonCardInProfilePage extends StatelessWidget {
                 style: AppStyles.urbanistMedium16(context),
               ),
               Text(
-                gmail!,
+                gmail ?? "",
                 style: AppStyles.urbanistReqular16(context)
                     .copyWith(color: Color(0xff999999)),
               ),

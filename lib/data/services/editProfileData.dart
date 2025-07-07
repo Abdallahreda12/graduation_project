@@ -9,8 +9,6 @@ class EditProfileData {
     required String gender,
     required String brithday,
     required String location,
-    required String oldimagename,
-    required List<File> files,
   }) async {
     final api = Api();
     var data = {
@@ -19,15 +17,13 @@ class EditProfileData {
       "gender": gender,
       "brithday": brithday,
       "location": location,
-      "oldimagename": oldimagename,
     };
 
-    var response = await api.postImagesWithData(
+    var response = await api.post(
       uri: linkEditProfile,
       data: data,
-      imageFiles: files,
     );
-    
+    print('uuu${response}');
     return response;
   }
 }

@@ -10,11 +10,13 @@ class ButtonsRow extends StatelessWidget {
       this.secondButton = 'Next',
       this.activeNextButton = true,
       required this.secondButtonAction,
+      this.firstButtonAction,
       this.firstButtonColor = ColorsApp.backGroundColor});
   final String firstButton;
   final String secondButton;
   final bool activeNextButton;
   final VoidCallback secondButtonAction;
+  final VoidCallback? firstButtonAction;
   final Color firstButtonColor;
 
   @override
@@ -27,9 +29,7 @@ class ButtonsRow extends StatelessWidget {
           textColor: ColorsApp.primaryColor,
           text: firstButton,
           width: (MediaQuery.sizeOf(context).width - 70) / 2,
-          onTap: () {
-            Get.back();
-          },
+          onTap: firstButtonAction ?? () => Get.back(),
         ),
         AbsorbPointer(
           absorbing: !activeNextButton,

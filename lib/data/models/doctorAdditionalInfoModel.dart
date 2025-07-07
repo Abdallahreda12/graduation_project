@@ -1,4 +1,3 @@
-// doctor_info_model.dart
 class DoctorInfoModel {
   String? firstName;
   String? lastName;
@@ -33,4 +32,24 @@ class DoctorInfoModel {
     required this.location,
     required this.homeVisits,
   });
+
+  factory DoctorInfoModel.fromJson(Map<String, dynamic> json) {
+    return DoctorInfoModel(
+      firstName: json['first_name'],
+      lastName: json['last_name'],
+      gender: json['gender'],
+      emailAddress: json['email_address'],
+      phoneNumber: json['phone_number'],
+      birthday: json['birthday'],
+      specialization: json['specialization'],
+      degrees: json['degrees'],
+      licensing: json['licensing'],
+      yearsExperience: json['years_experience'],
+      clinicName: json['clinic_name'],
+      clinicAddress: json['clinic_address'],
+      turnOnNotification: json['turn_on_notification'],
+      location: json['location'],
+      homeVisits: json['home_visits'],
+    );
+  }
 }
