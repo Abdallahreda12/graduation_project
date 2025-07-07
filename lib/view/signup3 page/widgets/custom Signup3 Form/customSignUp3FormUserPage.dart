@@ -20,7 +20,6 @@ class CustomSignUp3FormUserPage extends StatefulWidget {
     required this.onFirstNameChanged,
     required this.dateOfBirthController,
     required this.onDateSelected,
- 
     required this.onPhoneChanged,
     required this.selectedGender,
     required this.onGenderChanged,
@@ -154,9 +153,8 @@ class _CustomSignUp3FormUserPageState extends State<CustomSignUp3FormUserPage> {
             text: "Phone Number",
             hintText: "What’s your phone number",
             borderradius: 20,
-            validator: (value) => value!.length <= 11
-                ? "Please enter a valid phone number"
-                : null,
+            validator: (value) =>
+                value!.length < 11 ? "Please enter a valid phone number" : null,
           ),
         ],
       ),

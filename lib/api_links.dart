@@ -20,3 +20,8 @@ const String linkViewDoctors = "$linkServerName/book/view_doctors.php";
 const String linkUserInfo = "$linkServerName/auth/user_info.php";
 //correct this link
 const String linkDoctorInfo = "$linkServerName/auth/user_info.php";
+const String linkEditProfile = "$linkServerName/profile/edit_profile.php?";
+const String linkEditAdditionalInfo =
+    "$linkServerName/profile/edit_additional_info.php";
+const String linkViewAdditionalInfo =
+    "$linkServerName/profile/view_additional_info.php";

@@ -36,11 +36,12 @@ class _Signup5PageState extends State<Signup5Page> {
                       child: CustomSignUp5TextFieldUserColumn(
                         onLocationChanged: (value) {
                           controller.locationController.text = value;
+                          // Update the user model with the new location
+                          controller.updateUserInfo(location: value);
                         },
                         onNotificationChanged: (value) {
-                          setState(() {
-                            controller.userturnOnNotification = value;
-                          });
+                          // Update the user model with notification preference
+                          controller.updateUserInfo(turnOnNotification: value);
                           AppPreferences.setUserNotification(value);
                         },
                       ),
@@ -55,7 +56,7 @@ class _Signup5PageState extends State<Signup5Page> {
                       child: ButtonsRow(
                         secondButtonAction: () async {
                           await controller.signupUserInfo();
-                          Get.toNamed("/signupcompletedpage");
+                          //Get.toNamed("/signupcompletedpage");
                         },
                       ),
                     ),
@@ -65,7 +66,7 @@ class _Signup5PageState extends State<Signup5Page> {
             ),
           )
         //
-        //signup4 page for doctor
+        //signup5 page for doctor
         //
         : Scaffold(
             resizeToAvoidBottomInset: true,
@@ -80,16 +81,17 @@ class _Signup5PageState extends State<Signup5Page> {
                       child: CustomSignUp5TextFieldDoctorColumn(
                         onLocationChanged: (value) {
                           controller.locationController.text = value;
+                          // Update the doctor model with the new location
+                          controller.updateDoctorInfo(location: value);
                         },
                         onHomeVisitsChanged: (value) {
-                          setState(() {
-                            controller.doctorHomeVisits = value;
-                          });
+                          // Update the doctor model with home visits preference
+                          controller.updateDoctorInfo(homeVisits: value);
                         },
                         onTurnOnNotificationChanged: (value) {
-                          setState(() {
-                            controller.doctorturnOnNotification = value;
-                          });
+                          // Update the doctor model with notification preference
+                          controller.updateDoctorInfo(
+                              turnOnNotification: value);
                           AppPreferences.setUserNotification(value);
                         },
                       ),
@@ -102,11 +104,10 @@ class _Signup5PageState extends State<Signup5Page> {
                       left: 0,
                       child: ButtonsRow(
                         secondButtonAction: () async {
-                          //if (userGlobalKey.currentState!.validate()) {
-                          //Get.toNamed("\")
-                          //}
+                          // Optional: Add validation here if needed
+                          // if (controller.doctorGlobalKey.currentState!.validate()) {
                           await controller.signupDoctorInfo();
-                          Get.toNamed("/signupcompletedpage");
+                          // }
                         },
                       ),
                     ),

@@ -30,16 +30,21 @@ class _Signup4PageState extends State<Signup4Page> {
                 child: Stack(fit: StackFit.expand, children: [
                   SingleChildScrollView(
                     child: CustomSignUp4TextFieldUserColumn(
-                      onAgeRangeChanged: (value) =>
-                          controller.ageRangeOfAnimal = value,
-                      onAdoptionStatusChanged: (value) =>
-                          controller.lookingForAdoption = value,
-                      onAdoptionPreferenceChanged: (value) =>
-                          controller.animalsAdoptionPreferred = value,
-                      onPreviousAdoptionChanged: (value) =>
-                          controller.haveYouAdoptBefore = value,
-                      onExperienceChanged: (value) =>
-                          controller.haveExperienceWithAnimalCare = value,
+                      onAgeRangeChanged: (value) {
+                        controller.updateUserInfo(ageRangeOfAnimal: value);
+                      },
+                      onAdoptionStatusChanged: (value) {
+                        controller.updateUserInfo(lookingForAdoption: value);
+                      },
+                      onAdoptionPreferenceChanged: (value) {
+                        controller.updateUserInfo(animalsAdoptionPreferred: value);
+                      },
+                      onPreviousAdoptionChanged: (value) {
+                        controller.updateUserInfo(haveYouAdoptBefore: value);
+                      },
+                      onExperienceChanged: (value) {
+                        controller.updateUserInfo(haveExperienceWithAnimalCare: value);
+                      },
                     ),
                   ), //
                   // Buttons Row
@@ -50,8 +55,10 @@ class _Signup4PageState extends State<Signup4Page> {
                     left: 0,
                     child: ButtonsRow(
                       secondButtonAction: () {
-                        //if (userGlobalKey.currentState!.validate()) {}
+                        // Optional: Add validation here if needed
+                        // if (controller.userGlobalKey.currentState!.validate()) {
                         Get.toNamed("/signup5userpage");
+                        // }
                       },
                     ),
                   ),
@@ -74,22 +81,22 @@ class _Signup4PageState extends State<Signup4Page> {
                     SingleChildScrollView(
                       child: CustomSignUp4TextFieldDoctorColumn(
                         onSpecializationChanged: (value) {
-                          controller.doctorSpecialization = value;
+                          controller.updateDoctorInfo(specialization: value);
                         },
                         onDegreesChanged: (value) {
-                          controller.doctorDegrees = value;
+                          controller.updateDoctorInfo(degrees: value);
                         },
                         onLicensingChanged: (value) {
-                          controller.doctorLicensing = value;
+                          controller.updateDoctorInfo(licensing: value);
                         },
                         onExperienceChanged: (value) {
-                          controller.doctorYearsExperience = value;
+                          controller.updateDoctorInfo(yearsExperience: value);
                         },
                         onClinicNameChanged: (value) {
-                          controller.clinicName = value;
+                          controller.updateDoctorInfo(clinicName: value);
                         },
                         onClinicAddressChanged: (value) {
-                          controller.clinicAddress = value;
+                          controller.updateDoctorInfo(clinicAddress: value);
                         },
                       ),
                     ),
@@ -99,10 +106,9 @@ class _Signup4PageState extends State<Signup4Page> {
                       right: 0,
                       child: ButtonsRow(
                         secondButtonAction: () {
-                          // if (controller.doctorGlobalKey.currentState!.validate()) {
-                          //   Get.toNamed("/signup5doctorpage");
-                          // }
-                          Get.toNamed("/signup5doctorpage");
+                          if (controller.doctorGlobalKey.currentState!.validate()) {
+                            Get.toNamed("/signup5doctorpage");
+                          }
                         },
                       ),
                     ),
@@ -111,8 +117,5 @@ class _Signup4PageState extends State<Signup4Page> {
               ),
             ),
           );
-    //
-    //signup4 page for institution
-    //
   }
 }

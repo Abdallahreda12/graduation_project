@@ -37,7 +37,9 @@ class SignupCompletedPage extends StatelessWidget {
                   style: AppStyles.urbanistMedium22(context),
                 ),
                 Text(
-                  "You're All Set, ${controller.userfirstName} ${controller.userlastName}!",
+                  controller.typrUser == "User"
+                      ? "You're All Set, ${controller.userInfo?.firstName} ${controller.userInfo?.lastName}!"
+                      : "You're All Set, ${controller.doctorInfo?.firstName} ${controller.doctorInfo?.lastName}!",
                   style: AppStyles.urbanistMedium16(context),
                 )
               ],
