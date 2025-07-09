@@ -11,6 +11,7 @@ import 'package:graduation_project/view/bookPages/AnimalOwnerPage/AnimalOwnerPag
 import 'package:graduation_project/view/bookPages/BookingPage/bookPage.dart';
 import 'package:graduation_project/view/bookPages/DoctorDetailsPage/DoctorDetailsPage.dart';
 import 'package:graduation_project/view/bookPages/mainBookPage/mainBookPage.dart';
+import 'package:graduation_project/view/chat/chat_view.dart';
 import 'package:graduation_project/view/help%20Details%20page/helpDetailsPage.dart';
 import 'package:graduation_project/view/home%20page/homePage.dart';
 import 'package:graduation_project/view/myRequestsPage/myRequestsPage.dart';
@@ -52,7 +53,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
+      home: ChatView(),
       translations: TranslationService(translations),
       locale: initialLocale,
       fallbackLocale: TranslationService.fallbackLocale,
