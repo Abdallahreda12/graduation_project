@@ -12,6 +12,7 @@ import 'package:graduation_project/view/bookPages/AnimalOwnerPage/AnimalOwnerPag
 import 'package:graduation_project/view/bookPages/BookingPage/bookPage.dart';
 import 'package:graduation_project/view/bookPages/DoctorDetailsPage/DoctorDetailsPage.dart';
 import 'package:graduation_project/view/bookPages/mainBookPage/mainBookPage.dart';
+import 'package:graduation_project/view/chat/chat_view.dart';
 import 'package:graduation_project/view/reset%20password%20page/create%20new%20password/createNewPasswordPage.dart';
 import 'package:graduation_project/view/reset%20password%20page/email%20entry%20page/emailEntryPage.dart';
 import 'package:graduation_project/view/help%20Details%20page/helpDetailsPage.dart';
@@ -59,7 +60,7 @@ class MainApp extends StatelessWidget {
     //final isDark = Get.find<ThemeController>().isDarkMode.value;
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
+      home: ChatView(),
       translations: TranslationService(translations),
       locale: initialLocale,
       //must make custom theme
