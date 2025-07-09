@@ -14,7 +14,8 @@ class StepsRow extends StatelessWidget {
         StepChart(colorIs: currentIndex >= 2),
         StepChart(colorIs: currentIndex >= 3),
         StepChart(colorIs: currentIndex >= 4),
-        StepChart(colorIs: currentIndex >= 5)
+        StepChart(colorIs: currentIndex >= 5),
+        StepChart(colorIs: currentIndex >= 6)
       ],
     );
   }

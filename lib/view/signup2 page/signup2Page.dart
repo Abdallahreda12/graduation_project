@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/signUpController.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/ButtonsRow.dart';
@@ -14,6 +15,7 @@ class Signup2Page extends StatefulWidget {
 }
 
 class _Signup2PageState extends State<Signup2Page> {
+  final controller = Get.find<SignUpControllerImp>();
   late String typeUser = "";
   bool isSelected = false;
 
@@ -41,7 +43,7 @@ class _Signup2PageState extends State<Signup2Page> {
             //Count Steps
             //
             StepsRow(
-              currentIndex: 2,
+              currentIndex: 3,
             ),
             SizedBox(
               height: 25,
@@ -77,12 +79,6 @@ class _Signup2PageState extends State<Signup2Page> {
                     text: "Doctor",
                     icon: Assets.imagesDoctor,
                   ),
-                  // TypeUserBox(
-                  //   isSelected: typeUser == "Institution",
-                  //   onDataChanged: updateData,
-                  //   text: "Institution",
-                  //   icon: Assets.imagesInstitutionLogo,
-                  // ),
                 ],
               ),
             ),
@@ -94,11 +90,11 @@ class _Signup2PageState extends State<Signup2Page> {
               activeNextButton: isSelected,
               secondButtonAction: () {
                 if (typeUser == "User") {
+                  controller.typrUser = "User";
                   Get.toNamed("/signup3userpage");
-                } else if (typeUser == "Doctor") {
+                } else {
+                  controller.typrUser = "Doctor";
                   Get.toNamed("/signup3doctorpage");
-                } else if (typeUser == "Institution") {
-                  Get.toNamed("/signup3institutionpage");
                 }
               },
             )

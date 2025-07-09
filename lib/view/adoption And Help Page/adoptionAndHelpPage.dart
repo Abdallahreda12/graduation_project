@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/api_links.dart';
+import 'package:graduation_project/controller/HomePageController.dart';
 import 'package:graduation_project/core/Widgets/customBottomAppBar.dart';
 import 'package:graduation_project/core/Widgets/customPlusBottunInAppBar.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
+import 'package:graduation_project/data/models/adoptionModel.dart';
+import 'package:graduation_project/data/models/helpModel.dart';
 import 'package:graduation_project/view/adoption%20And%20Help%20Page/widgets/adoptionAndHelpCard.dart';
 import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/view/adoption%20And%20Help%20Page/widgets/searchBarInAdoptionAndHelpPage.dart';
@@ -59,6 +63,8 @@ class _AdoptionAndHelpPageState extends State<AdoptionAndHelpPage> {
 
   @override
   Widget build(BuildContext context) {
+    //when api for this page do , instead this controller by the controller of the adoptionAndHelpRequest
+    final HomePageControllerImp controller = Get.find<HomePageControllerImp>();
     return Scaffold(
       backgroundColor: ColorsApp.backGroundColor,
       resizeToAvoidBottomInset: false,
@@ -70,7 +76,9 @@ class _AdoptionAndHelpPageState extends State<AdoptionAndHelpPage> {
       bottomNavigationBar: CustomBottomAppBar(
         currentPageIndex: 1,
       ),
-      body: Stack(children: [
+      body: //GetBuilder<HomePageControllerImp>(
+          //builder: (controller) =>
+          Stack(children: [
         Positioned.fill(
           child: SvgPicture.asset(
             Assets.imagesLogoInverse,
@@ -107,31 +115,33 @@ class _AdoptionAndHelpPageState extends State<AdoptionAndHelpPage> {
               //
               Expanded(
                 child: ListView.builder(
-                  itemCount: 10,
+                  itemCount: controller.mergedItems.length,
                   itemBuilder: (context, index) {
-                    return index % 2 == 0
+                    final item = controller.mergedItems[index];
+
+                    return item.type == 'adoption'
                         ? AdoptionAndHelpCard(
-                            image: Assets.imagesAnimalPhoto2,
-                            title: 'Cat',
-                            subtitle:
-                                'Found hiding under a car in the parking lot of Smiths Grocery Store',
-                            typeOfCard: 'help',
-                            contact: 'contact:555-987-6543 to claim',
+                            image:
+                                '$linkServerImage${(item.data as AdoptionModel).photoUrl}',
+                            title: (item.data as AdoptionModel).title,
+                            subtitle: (item.data as AdoptionModel).description,
+                            typeOfCard: 'Adoption',
+                            contact: (item.data as AdoptionModel).phone,
                             onTap: () {
-                              //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
-                              Get.toNamed("/helpdetailspage");
+                              Get.toNamed("/adoptiondetailspage",
+                                  arguments: item);
                             },
                           )
                         : AdoptionAndHelpCard(
-                            image: Assets.imagesAnimalPhoto1,
-                            title: 'Dog',
+                            image:
+                                '$linkServerImage${(item.data as HelpRequestModel).photoUrl}',
+                            title: (item.data as HelpRequestModel).title,
                             subtitle:
-                                'Medium-sized golden retriever with a red collar, responds to the name "Buddy',
-                            typeOfCard: 'adoption',
-                            contact: 'contact:555-987-6543 to claim',
+                                (item.data as HelpRequestModel).description,
+                            typeOfCard: 'Help',
+                            contact: (item.data as HelpRequestModel).phone,
                             onTap: () {
-                              //handle this to navigate you to specific page for AdoptionDetailsPage or helpDetailsPage
-                              Get.toNamed("/adoptiondetailspage");
+                              Get.toNamed("/helpdetailspage", arguments: item);
                             },
                           );
                   },
@@ -142,5 +152,6 @@ class _AdoptionAndHelpPageState extends State<AdoptionAndHelpPage> {
         ),
       ]),
     );
+    //);
   }
 }

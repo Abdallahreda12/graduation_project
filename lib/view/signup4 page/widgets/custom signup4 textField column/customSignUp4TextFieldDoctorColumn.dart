@@ -27,7 +27,7 @@ class CustomSignUp4TextFieldDoctorColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 25),
-        StepsRow(currentIndex: 4),
+        StepsRow(currentIndex: 5),
         const SizedBox(height: 25),
         Text(
           "Clinic Details",
@@ -88,26 +88,26 @@ class CustomSignUp4TextFieldDoctorColumn extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 20),
-        CustomTextField(
-          onDataChanged: onClinicNameChanged,
-          text: "Clinic Name",
-          hintText: "What’s your clinic name?",
-          borderradius: 20,
-          validator: (value) {
-            return null;
-          },
-        ),
-        const SizedBox(height: 10),
-        CustomTextField(
-          onDataChanged: onClinicAddressChanged,
-          text: "Clinic Address",
-          hintText: "City/Pincode",
-          borderradius: 20,
-          validator: (value) {
-            return null;
-          },
-        ),
+        // const SizedBox(height: 20),
+        // CustomTextField(
+        //   onDataChanged: onClinicNameChanged,
+        //   text: "Clinic Name",
+        //   hintText: "What’s your clinic name?",
+        //   borderradius: 20,
+        //   validator: (value) {
+        //     return null;
+        //   },
+        // ),
+        // const SizedBox(height: 10),
+        // CustomTextField(
+        //   onDataChanged: onClinicAddressChanged,
+        //   text: "Clinic Address",
+        //   hintText: "City/Pincode",
+        //   borderradius: 20,
+        //   validator: (value) {
+        //     return null;
+        //   },
+        // ),
         const SizedBox(height: 70),
       ],
     );

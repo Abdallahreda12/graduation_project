@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:graduation_project/controller/profileController.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:intl/intl.dart';
 
 class DateOfBirthTextFieldInProfilePage extends StatefulWidget {
   final String label;
-  final String initValue;
+  final String? initValue;
 
-
-  const DateOfBirthTextFieldInProfilePage(
-      {required this.label,
-      required this.initValue,
-      });
+  const DateOfBirthTextFieldInProfilePage({
+    required this.label,
+    required this.initValue,
+  });
 
   @override
   _DateOfBirthTextFieldInProfilePageState createState() =>
@@ -27,10 +29,11 @@ class _DateOfBirthTextFieldInProfilePageState
   @override
   void initState() {
     super.initState();
+
     _controller = TextEditingController(text: widget.initValue);
   }
 
-  void toggleEdit() async {
+  void toggleEdit(ProfileControllerImp controller) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate ?? DateTime.now(),
@@ -39,16 +42,19 @@ class _DateOfBirthTextFieldInProfilePageState
     );
 
     if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-        _controller = TextEditingController(
-            text: DateFormat('dd/MM/yyyy').format(selectedDate!));
-      });
+      selectedDate = picked;
+      String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate!);
+      _controller.text = formattedDate;
+      controller.user.usersDateOfBirth = formattedDate;
+
+      controller.editProfile();
+      print("done");
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ProfileControllerImp>();
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Padding(
         padding: const EdgeInsets.only(left: 5),
@@ -68,7 +74,8 @@ class _DateOfBirthTextFieldInProfilePageState
           readOnly: true,
           cursorColor: ColorsApp.primaryColor,
           decoration: InputDecoration(
-            suffixIcon: GestureDetector(onTap: toggleEdit, child: Icon(icon)),
+            suffixIcon: GestureDetector(
+                onTap: () => toggleEdit(controller), child: Icon(icon)),
             contentPadding: EdgeInsets.only(left: 10),
             border: InputBorder.none,
           ),

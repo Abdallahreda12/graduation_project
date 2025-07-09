@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/signUpController.dart';
+import 'package:graduation_project/core/class/handleWidgets.dart';
+import 'package:graduation_project/core/util/appPreference.dart';
 import 'package:graduation_project/view/signup%20page/widgets/buttonsRow.dart';
 import 'package:graduation_project/view/signup5%20page/widgets/custom%20signup5%20textfield%20column/customSignUp5TextFieldDoctorColumn.dart';
-import 'package:graduation_project/view/signup5%20page/widgets/custom%20signup5%20textfield%20column/customSignUp5TextFieldInstitutionColumn.dart';
 import 'package:graduation_project/view/signup5%20page/widgets/custom%20signup5%20textfield%20column/customSignup5TextFieldUserColumn.dart';
 
 class Signup5Page extends StatefulWidget {
@@ -13,28 +15,7 @@ class Signup5Page extends StatefulWidget {
 }
 
 class _Signup5PageState extends State<Signup5Page> {
-  //variables used in signup5 page for user
-  late double usersliderValue = 23;
-  late String userturnOnNotification = "";
-  late String userLocation = "";
-  ////////////////////////////////////////
-  //variables used in signup5 page for doctor
-  late double doctorSliderValue = 23;
-  late String doctorturnOnNotification = "";
-  late String doctorLocation = "";
-  late String doctorHomeVisits = "";
-  ////////////////////////////////////////
-  /////variables used in signup5 page for institution
-  late double institutionliderValue = 23;
-  late String institutionLocation = "";
-  /////////////////////////////////////////
-  void updateData(String data) {
-    setState(
-      () {
-        // userName = data;
-      },
-    );
-  }
+  final controller = Get.find<SignUpControllerImp>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,150 +25,96 @@ class _Signup5PageState extends State<Signup5Page> {
         //
         ? Scaffold(
             resizeToAvoidBottomInset: true,
-            body: Padding(
-              padding: const EdgeInsets.all(25),
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  SingleChildScrollView(
-                    child: CustomSignUp5TextFieldUserColumn(
-                      usersliderValue: usersliderValue,
-                      onSliderChanged: (value) {
-                        setState(() {
-                          usersliderValue = value;
-                        });
-                      },
-                      userLocation: userLocation,
-                      onLocationChanged: (value) {
-                        setState(() {
-                          userLocation = value;
-                        });
-                      },
-                      userturnOnNotification: userturnOnNotification,
-                      onNotificationChanged: (value) {
-                        setState(() {
-                          userturnOnNotification = value;
-                        });
-                      },
+            body: HandleLoadingIndicator(
+              isLoading: controller.isLoading,
+              widget: Padding(
+                padding: const EdgeInsets.all(25),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    SingleChildScrollView(
+                      child: CustomSignUp5TextFieldUserColumn(
+                        onLocationChanged: (value) {
+                          controller.locationController.text = value;
+                          // Update the user model with the new location
+                          controller.updateUserInfo(location: value);
+                        },
+                        onNotificationChanged: (value) {
+                          // Update the user model with notification preference
+                          controller.updateUserInfo(turnOnNotification: value);
+                          AppPreferences.setUserNotification(value);
+                        },
+                      ),
                     ),
-                  ),
-                  //
-                  // Buttons Row
-                  //
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                    child: ButtonsRow(
-                      secondButtonAction: () {
-                        //if (userGlobalKey.currentState!.validate()) {
-                        //}
-                        Get.toNamed("/signupcompletedpage");
-                      },
+                    //
+                    // Buttons Row
+                    //
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      left: 0,
+                      child: ButtonsRow(
+                        secondButtonAction: () async {
+                          await controller.signupUserInfo();
+                          //Get.toNamed("/signupcompletedpage");
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           )
         //
-        //signup4 page for doctor
+        //signup5 page for doctor
         //
-        : widget.typeOfUser == "Doctor"
-            ? Scaffold(
-                resizeToAvoidBottomInset: true,
-                body: Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      SingleChildScrollView(
-                        child: CustomSignUp5TextFieldDoctorColumn(
-                          doctorSliderValue: doctorSliderValue,
-                          onSliderChanged: (value) {
-                            setState(() {
-                              doctorSliderValue = value;
-                            });
-                          },
-                          onLocationChanged: (value) {
-                            setState(() {
-                              doctorLocation = value;
-                            });
-                          },
-                          onHomeVisitsChanged: (value) {
-                            setState(() {
-                              doctorHomeVisits = value;
-                            });
-                          },
-                          onTurnOnNotificationChanged: (value) {
-                            setState(() {
-                              doctorturnOnNotification = value;
-                            });
-                          },
-                        ),
-                      ), //
-                      // Buttons Row
-                      //
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: ButtonsRow(
-                          secondButtonAction: () {
-                            //if (userGlobalKey.currentState!.validate()) {
-                            //Get.toNamed("\")
-                            //}
-                            Get.toNamed("/signupcompletedpage");
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            //
-            //signup4 page for institution
-            //
-            : Scaffold(
-                resizeToAvoidBottomInset: true,
-                body: Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      SingleChildScrollView(
-                          child: CustomSignUp5TextFieldInstitutionColumn(
-                        institutionSliderValue: institutionliderValue,
-                        onSliderChanged: (value) {
-                          setState(() {
-                            institutionliderValue = value;
-                          });
-                        },
+        : Scaffold(
+            resizeToAvoidBottomInset: true,
+            body: HandleLoadingIndicator(
+              isLoading: controller.isLoading,
+              widget: Padding(
+                padding: const EdgeInsets.all(25),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    SingleChildScrollView(
+                      child: CustomSignUp5TextFieldDoctorColumn(
                         onLocationChanged: (value) {
-                          setState(() {
-                            institutionLocation = value;
-                          });
+                          controller.locationController.text = value;
+                          // Update the doctor model with the new location
+                          controller.updateDoctorInfo(location: value);
                         },
-                      )),
-                      //
-                      // Buttons Row
-                      //
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: ButtonsRow(
-                          secondButtonAction: () {
-                            //if (userGlobalKey.currentState!.validate()) {
-                            //Get.toNamed("\")
-                            //}
-                            Get.toNamed("/signupcompletedpage");
-                          },
-                        ),
+                        onHomeVisitsChanged: (value) {
+                          // Update the doctor model with home visits preference
+                          controller.updateDoctorInfo(homeVisits: value);
+                        },
+                        onTurnOnNotificationChanged: (value) {
+                          // Update the doctor model with notification preference
+                          controller.updateDoctorInfo(
+                              turnOnNotification: value);
+                          AppPreferences.setUserNotification(value);
+                        },
                       ),
-                    ],
-                  ),
+                    ), //
+                    // Buttons Row
+                    //
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      left: 0,
+                      child: ButtonsRow(
+                        secondButtonAction: () async {
+                          // Optional: Add validation here if needed
+                          // if (controller.doctorGlobalKey.currentState!.validate()) {
+                          await controller.signupDoctorInfo();
+                          // }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              );
+              ),
+            ),
+          );
   }
 }

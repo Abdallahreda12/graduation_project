@@ -5,20 +5,19 @@ import 'package:graduation_project/view/signup%20page/widgets/stepsRow.dart';
 
 class CustomSignUp4TextFieldUserColumn extends StatelessWidget {
   final Function(String) onAgeRangeChanged;
-  final Function(String) onHelperStatusChanged;
   final Function(String) onAdoptionStatusChanged;
   final Function(String) onAdoptionPreferenceChanged;
   final Function(String) onPreviousAdoptionChanged;
   final Function(String) onExperienceChanged;
-
+  final String? selectedGender;
   const CustomSignUp4TextFieldUserColumn({
     super.key,
     required this.onAgeRangeChanged,
-    required this.onHelperStatusChanged,
     required this.onAdoptionStatusChanged,
     required this.onAdoptionPreferenceChanged,
     required this.onPreviousAdoptionChanged,
     required this.onExperienceChanged,
+    this.selectedGender,
   });
 
   @override
@@ -30,7 +29,7 @@ class CustomSignUp4TextFieldUserColumn extends StatelessWidget {
         //
         // Steps Row
         //
-        StepsRow(currentIndex: 4),
+        StepsRow(currentIndex: 5),
         const SizedBox(height: 25),
         Text(
           "Personal Information",
@@ -41,11 +40,6 @@ class CustomSignUp4TextFieldUserColumn extends StatelessWidget {
           options: ["Puppy/Kitten", "Young", "Adult"],
           question: "Age Range of animals that you preferred",
           onDataChanged: onAgeRangeChanged,
-        ),
-        CustomCheckListTile(
-          options: ["Yes", "No"],
-          question: "Are you a helper?",
-          onDataChanged: onHelperStatusChanged,
         ),
         CustomCheckListTile(
           options: ["Yes", "No"],

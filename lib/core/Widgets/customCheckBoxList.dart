@@ -3,13 +3,15 @@ import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 
 class CustomCheckListTile extends StatefulWidget {
-  const CustomCheckListTile(
-      {super.key,
-      required this.options,
-      required this.question,
-      required this.onDataChanged,
-      this.activeColor = ColorsApp.primaryColor,
-      this.defualtAnswer = ""});
+  const CustomCheckListTile({
+    super.key,
+    required this.options,
+    required this.question,
+    required this.onDataChanged,
+    this.activeColor = ColorsApp.primaryColor,
+    this.defualtAnswer = "",
+  });
+
   final List<String> options;
   final String question;
   final Function(String) onDataChanged;
@@ -22,10 +24,20 @@ class CustomCheckListTile extends StatefulWidget {
 
 class _CustomCheckListTileState extends State<CustomCheckListTile> {
   late String answer;
+  bool showError = false;
+
   @override
   void initState() {
     super.initState();
     answer = widget.defualtAnswer;
+  }
+
+  bool isValid() {
+    final valid = answer.isNotEmpty;
+    setState(() {
+      showError = !valid;
+    });
+    return valid;
   }
 
   @override
@@ -39,64 +51,52 @@ class _CustomCheckListTileState extends State<CustomCheckListTile> {
             widget.question,
             style: AppStyles.urbanistMedium16(context),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Wrap(
             spacing: 10,
             runSpacing: 10,
-            children: widget.options.map(
-              (e) {
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Theme(
-                        data: Theme.of(context).copyWith(
-                          unselectedWidgetColor:
-                              Colors.grey, // color when not selected
-                          checkboxTheme: CheckboxThemeData(
-                            shape: CircleBorder(), // 🔵 makes it circular
-                          ),
-                        ),
-                        child: Radio<String>(
-                          value: e,
-                          groupValue: answer,
-                          activeColor: widget.activeColor,
-                          fillColor: WidgetStatePropertyAll(widget.activeColor),
-                          onChanged: (value) {
-                            setState(() {
-                              answer = value!;
-                              widget.onDataChanged(answer);
-                            });
-                          },
-                        )),
-                    Text(
-                      e,
-                      style: AppStyles.urbanistMedium14(context),
-                    )
-                  ],
-                );
-                //another version from checklist
-                // return CheckboxListTile(
-                //   activeColor: ColorsApp.primaryColor,
-                //   dense: true,
-                //   visualDensity: VisualDensity(vertical: -2),
-                //   title: Text(
-                //     e,
-                //     style: AppStyles.urbanistMedium14(context),
-                //   ),
-                //   value: answer == e,
-                //   onChanged: (value) {
-                //     setState(
-                //       () {
-                //         answer == e ? answer = "" : answer = e;
-                //         widget.onDataChanged(answer);
-                //       },
-                //     );
-                //   },
-                // );
-              },
-            ).toList(),
+            children: widget.options.map((e) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Theme(
+                    data: Theme.of(context).copyWith(
+                      unselectedWidgetColor: Colors.grey,
+                      checkboxTheme: const CheckboxThemeData(
+                        shape: CircleBorder(),
+                      ),
+                    ),
+                    child: Radio<String>(
+                      value: e,
+                      groupValue: answer,
+                      activeColor: widget.activeColor,
+                      fillColor: WidgetStatePropertyAll(widget.activeColor),
+                      onChanged: (value) {
+                        setState(() {
+                          answer = value!;
+                          showError = false;
+                          widget.onDataChanged(answer);
+                        });
+                      },
+                    ),
+                  ),
+                  Text(
+                    e,
+                    style: AppStyles.urbanistMedium14(context),
+                  )
+                ],
+              );
+            }).toList(),
           ),
-          SizedBox(height: 15),
+          if (showError)
+            const Padding(
+              padding: EdgeInsets.only(top: 5, left: 4),
+              child: Text(
+                "This field is required",
+                style: TextStyle(color: Colors.red, fontSize: 12),
+              ),
+            ),
+          const SizedBox(height: 15),
         ],
       ),
     );

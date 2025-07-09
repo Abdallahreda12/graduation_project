@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/signUpController.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/styles.dart';
@@ -11,6 +12,7 @@ class SignupCompletedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<SignUpControllerImp>();
     return Scaffold(
       body: Stack(
         clipBehavior: Clip.none,
@@ -35,7 +37,9 @@ class SignupCompletedPage extends StatelessWidget {
                   style: AppStyles.urbanistMedium22(context),
                 ),
                 Text(
-                  "You're All Set, {userName}!",
+                  controller.typrUser == "User"
+                      ? "You're All Set, ${controller.userInfo?.firstName} ${controller.userInfo?.lastName}!"
+                      : "You're All Set, ${controller.doctorInfo?.firstName} ${controller.doctorInfo?.lastName}!",
                   style: AppStyles.urbanistMedium16(context),
                 )
               ],
