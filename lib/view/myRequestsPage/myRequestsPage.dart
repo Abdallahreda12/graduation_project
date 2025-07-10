@@ -37,11 +37,14 @@ class _MyRequestsPageState extends State<MyRequestsPage>
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ViewMyRequestsControllerImp());
+
     return Scaffold(
       backgroundColor: ColorsApp.backGroundColor,
       resizeToAvoidBottomInset: false,
-      body: GetBuilder<ViewMyRequestsControllerImp>(
-        builder: (controller) => HandleLoadingIndicator(
+      body: GetBuilder<ViewMyRequestsControllerImp>(builder: (controller) {
+        // controller.getRequest();
+        return HandleLoadingIndicator(
           isLoading: controller.isLoading,
           widget: Stack(
             children: [
@@ -155,8 +158,8 @@ class _MyRequestsPageState extends State<MyRequestsPage>
               ),
             ],
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

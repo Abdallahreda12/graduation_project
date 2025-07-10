@@ -88,9 +88,9 @@ class _Signup3PageState extends State<Signup3Page> {
                 left: 0,
                 child: ButtonsRow(
                   secondButtonAction: () {
-                    if (controller.userGlobalKey.currentState!.validate()) {
-                      Get.toNamed("/signup4userpage");
-                    }
+                    //if (controller.userGlobalKey.currentState!.validate()) {
+                    Get.toNamed("/signup4userpage");
+                    //}
                   },
                 ),
               ),
@@ -163,9 +163,12 @@ class _Signup3PageState extends State<Signup3Page> {
                 left: 0,
                 child: ButtonsRow(
                   secondButtonAction: () {
-                    if (controller.doctorGlobalKey.currentState!.validate()) {
-                      Get.toNamed("/signup4doctorpage");
-                    }
+                    print(controller.doctorInfo?.location);
+                    print(controller.doctorInfo?.gender);
+                    print(controller.doctorInfo?.clinicName);
+                    // if (controller.doctorGlobalKey.currentState!.validate()) {
+                    Get.toNamed("/signup4doctorpage");
+                    // }
                   },
                 ),
               ),

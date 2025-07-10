@@ -23,7 +23,15 @@ class AddHelpRequestData {
       "description": description,
       "social_media_link": socailMediaLink,
     };
+    print(userid);
+    print(title);
+    print(phone);
 
+    print(date);
+    print(location);
+    print(description);
+    print(socailMediaLink);
+    print(selectedImages);
     var response = await api.postImagesWithData(
       uri: linkAddHelpRequest,
       data: data,

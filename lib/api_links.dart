@@ -26,3 +26,6 @@ const String linkEditAdditionalInfo =
 const String linkViewAdditionalInfo =
     "$linkServerName/profile/view_additional_info.php";
 const String linkViewUser = "$linkServerName/adopt&help/view_user.php";
+const String linkAddClinic = "$linkServerName/clinic/add.php";
+
+
