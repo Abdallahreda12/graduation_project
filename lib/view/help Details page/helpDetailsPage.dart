@@ -50,7 +50,7 @@ class _HelpDetailsPageState extends State<HelpDetailsPage> {
                 //
                 TextAndBackArrowHeader(
                   onTap: () {
-                    Get.toNamed("/myrequestspage");
+                    Get.toNamed("/homepage");
                   },
                   texts: ["help", " details"],
                   colorsOfTexts: [ColorsApp.secondaryColor, Colors.black],
@@ -109,7 +109,7 @@ class _HelpDetailsPageState extends State<HelpDetailsPage> {
                             ? Text("")
                             : PersonalCard(
                                 image: Assets.imagesProfilePhoto,
-                                name: "James Parlor",
+                                name: "asd",
                                 des: "Pet Owner"),
                         widget.enableDeleteButton
                             ? SizedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/api_links.dart';
 import 'package:graduation_project/controller/profileController.dart';
 import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/core/util/appImages.dart';
@@ -73,7 +74,8 @@ class _AdditionalInfoPageState extends State<AdditionalInfoPage> {
                       PersonCardInProfilePage(
                         name:
                             '${controller.fullInfoForUser?.firstName} ${controller.fullInfoForUser?.lastName}',
-                        image: controller.fullInfoForUser?.usersPhotoUrl ?? "",
+                        image:
+                            '$linkServerImage${controller.user.usersPhotoUrl}',
                         gmail: controller.fullInfoForUser?.emailAddress,
                       ),
                       SizedBox(

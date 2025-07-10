@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/api_links.dart';
 import 'package:graduation_project/controller/profileController.dart';
 import 'package:graduation_project/core/Widgets/customCheckBoxList.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
@@ -48,6 +49,8 @@ class _AdditionalInfoEditPageState extends State<AdditionalInfoEditPage> {
                       UploadphotoInAdditionalInfoEdit(
                         onUploadPhoto: controller.pickImages,
                         selectedImages: controller.selectedImageFiles,
+                        initialImageUrl:
+                            '$linkServerImage${controller.user.usersPhotoUrl}',
                       ),
                       SizedBox(
                         height: 15,

@@ -42,7 +42,7 @@ class SignUpControllerImp extends SignUpController {
 
   File? selectedImage;
   late String verfyCode = "";
-  late int userId;
+  late int userId = 8;
   TextEditingController locationController = TextEditingController();
 
   @override
@@ -142,7 +142,6 @@ class SignUpControllerImp extends SignUpController {
     String? yearsExperience,
     String? clinicName,
     String? clinicAddress,
-    double? sliderValue,
     String? turnOnNotification,
     String? location,
     String? homeVisits,
