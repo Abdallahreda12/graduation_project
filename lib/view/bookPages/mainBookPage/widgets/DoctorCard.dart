@@ -1,81 +1,157 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:graduation_project/api_links.dart';
-import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
+import 'package:graduation_project/data/models/doctor_model.dart';
+// Import your doctor model here
+// import 'package:graduation_project/models/doctor_model.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard(
-      {super.key,
-      required this.photo,
-      required this.name,
-      required this.desciption,
-      required this.stars});
+  const DoctorCard({
+    super.key,
+    required this.photo,
+    required this.name,
+    required this.description,
+    required this.stars,
+    required this.doctorModel,
+  });
+
   final String photo;
   final String name;
-  final String desciption;
+  final String description;
   final String stars;
+  final DoctorModel doctorModel;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       decoration: BoxDecoration(
-          color: ColorsApp.primaryColor,
-          borderRadius: BorderRadius.circular(16)),
+        color: ColorsApp.primaryColor,
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Column(
         children: [
+          // Doctor Photo
           ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: "$linkServerImage$photo",
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-              fit: BoxFit.cover,
-              width: 100, // adjust as needed
-              height: 100,
-            ),
+            child: photo.isEmpty || photo == "empty" || photo == "failure"
+                ? Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.person,
+                      size: 50,
+                      color: Colors.grey.shade600,
+                    ),
+                  )
+                : CachedNetworkImage(
+                    imageUrl: "$linkServerImage$photo",
+                    placeholder: (context, url) => Container(
+                      width: 100,
+                      height: 100,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        size: 50,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                    fit: BoxFit.cover,
+                    width: 100,
+                    height: 100,
+                  ),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          
+          SizedBox(height: 10),
+          
+          // Doctor Info
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Doctor Name
               Text(
                 name,
                 style: AppStyles.urbanistSemiBold14(context)
                     .copyWith(color: Colors.white),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(
-                height: 2,
-              ),
+              
+              SizedBox(height: 2),
+              
+              // Specialization
               Text(
-                desciption,
+                description,
                 style: AppStyles.urbanistReqular12(context)
                     .copyWith(color: Color(0xffD9D9D9)),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(
-                height: 4,
-              ),
+              
+              SizedBox(height: 4),
+              
+              // Rating and Experience
               Row(
                 children: [
-                  SvgPicture.asset(
-                    Assets.imagesPetsAppBarIcon,
-                    width: 18,
-                    height: 18,
-                    colorFilter:
-                        ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  // Star Rating
+                  Icon(
+                    Icons.star,
+                    color: Colors.yellow,
+                    size: 16,
                   ),
-                  Text(stars,
-                      style: AppStyles.urbanistReqular12(context).copyWith(
-                        color: Color(0xffD9D9D9),
-                      ))
+                  SizedBox(width: 2),
+                  Text(
+                    stars,
+                    style: AppStyles.urbanistReqular12(context).copyWith(
+                      color: Color(0xffD9D9D9),
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  // Experience
+                  Text(
+                    "${doctorModel.doctorsYearsExperience}y exp",
+                    style: AppStyles.urbanistReqular12(context).copyWith(
+                      color: Color(0xffD9D9D9),
+                    ),
+                  ),
                 ],
               ),
+              
+              // Home Visit Badge (if available)
+              if (doctorModel.isHomeVisitAvailable) ...[
+                SizedBox(height: 4),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    "Home Visit",
+                    style: AppStyles.urbanistReqular12(context).copyWith(
+                      color: Colors.white,
+                      fontSize: 10,
+                    ),
+                  ),
+                ),
+              ],
             ],
-          )
+          ),
         ],
       ),
     );

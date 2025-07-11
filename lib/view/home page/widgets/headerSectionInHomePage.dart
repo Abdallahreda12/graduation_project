@@ -19,7 +19,7 @@ class HeaderSectionInHomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hello ${controller.user.usersFirstName}!",
+              "Hello ${controller.firstName}!",
               style: AppStyles.urbanistReqular18(context),
             ),
             Text(

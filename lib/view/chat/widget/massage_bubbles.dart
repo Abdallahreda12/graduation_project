@@ -1,15 +1,28 @@
+
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/util/colors.dart';
+import 'package:graduation_project/data/models/massage_model.dart';
 
 class MessageBubble extends StatelessWidget {
-  // final Message message;
+  final MessageModel message;
   final bool isMe;
 
   const MessageBubble({
     Key? key,
-    // required this.message,
+    required this.message,
     required this.isMe,
   }) : super(key: key);
+
+  String _formatMessageTime() {
+    DateTime now = DateTime.now();
+    DateTime messageTime = message.createdAt;
+    
+    if (now.difference(messageTime).inDays == 0) {
+      return "${messageTime.hour}:${messageTime.minute.toString().padLeft(2, '0')}";
+    } else {
+      return "${messageTime.day}/${messageTime.month} ${messageTime.hour}:${messageTime.minute.toString().padLeft(2, '0')}";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +48,17 @@ class MessageBubble extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "hello omar",
+                  message.messageContent,
                   style: TextStyle(
                     color: isMe ? Colors.white : Colors.black87,
                   ),
                 ),
-                SizedBox(height: 2),
+                SizedBox(height: 4),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "1.45 ص" ,
-                      //" _formatMessageTime()",
+                      _formatMessageTime(),
                       style: TextStyle(
                         fontSize: 10,
                         color: isMe ? Colors.white70 : Colors.black54,
@@ -55,35 +67,10 @@ class MessageBubble extends StatelessWidget {
                     if (isMe) SizedBox(width: 4),
                     if (isMe)
                       Icon(
-                        true // message.isRead
-                            ? Icons.done_all
-                            : Icons.done,
+                        message.isRead ? Icons.done_all : Icons.done,
                         size: 14,
-                        color:
-                            //message.isRead
-                            true ? Colors.white : Colors.white70,
+                        color: message.isRead ? Colors.white : Colors.white70,
                       ),
-                    // if (message.isPending)
-                    //   Padding(
-                    //     padding: const EdgeInsets.only(left: 4),
-                    //     child: SizedBox(
-                    //       width: 10,
-                    //       height: 10,
-                    //       child: CircularProgressIndicator(
-                    //         strokeWidth: 2,
-                    //         color: isMe ? Colors.white : Colors.blue,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // if (message.isFailed)
-                    //   Padding(
-                    //     padding: const EdgeInsets.only(left: 4),
-                    //     child: Icon(
-                    //       Icons.error_outline,
-                    //       size: 14,
-                    //       color: Colors.red,
-                    //     ),
-                    //   ),
                   ],
                 ),
               ],

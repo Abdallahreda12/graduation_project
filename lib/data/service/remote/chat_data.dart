@@ -9,27 +9,53 @@ const String linkGetMassage ="$linkServerName/chat/get_msg.php";
 const String linkMarkRead ="$linkServerName/chat/mark_read.php";
 const String linkSendMsg ="$linkServerName/chat/send_msg.php";
 
+
+
 class ChatData {
-  ChatData();
-
-    addConv(Map data)async{
-    var res =await Api().post(uri: linkAddConverstions, body: data);
-    return res;
+  Api api = Api() ;
+  Future<Map<String, dynamic>> getMessages(Map<String, String> data) async {
+    var response = await api.post(uri:  "AppLink.getMessages" , body :  data);
+    return response.fold((l) => {"status": "failure"}, (r) => r);
   }
 
-   getMoreMsg(Map data)async{
-    var res =await Api().post(uri: linkGetMassage, body: data
-    );
-    return res;
+  Future<Map<String, dynamic>> getConversations(Map<String, String> data) async {
+    var response = await api.post(uri:  "AppLink.getMessages" , body :  data);
+    return response.fold((l) => {"status": "failure"}, (r) => r);
   }
-   markAsRead(Map data )async{
-     var res =await Api().post(uri: linkMarkRead, body: data);
-    return res;
-    
+
+  Future<Map<String, dynamic>> createConversation(Map<String, String> data) async {
+    var response = await api.post(uri:  "AppLink.getMessages" , body :  data);
+    return response.fold((l) => {"status": "failure"}, (r) => r);
   }
-   sendMsg(Map data)async{
-    var res =await Api().post(uri: linkSendMsg, body: data);
-    return res;
+
+  Future<Map<String, dynamic>> markMessagesRead(Map<String, String> data) async {
+    var response = await api.post(uri:  "AppLink.getMessages" , body :  data);
+    return response.fold((l) => {"status": "failure"}, (r) => r);
   }
-  
+
+  Future<Map<String, dynamic>> sendMessage(Map<String, String> data) async {
+    var response = await api.post(uri:  "AppLink.getMessages" , body :  data);
+    return response.fold((l) => {"status": "failure"}, (r) => r);
+  }
+
+  Future<Map<String, dynamic>> getUserStatus(Map<String, String> data) async {
+    var response = await api.post(uri:  "AppLink.getMessages" , body :  data);
+    return response.fold((l) => {"status": "failure"}, (r) => r);
+  }
+
+  Future<Map<String, dynamic>> updateUserStatus(Map<String, String> data) async {
+    var response = await api.post(uri:  "AppLink.getMessages" , body :  data);
+    return response.fold((l) => {"status": "failure"}, (r) => r);
+  }
+
+
+
+
+
+
+
+
+
+
+
 }

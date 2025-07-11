@@ -90,7 +90,6 @@ class AddRequestControllerImp extends AddRequestController {
 
     print(
         "AddReqAdoption//////////////////////////////////////////////////////////////////");
-    print(res);
   }
 
   @override

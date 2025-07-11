@@ -10,6 +10,7 @@ class UserModel {
   dynamic usersRadius;
   String? usersEmail;
   String? usersPassword;
+  int? type ;
   int? usersVerifyCode;
   int? usersApprove;
   String? createdAt;
@@ -28,7 +29,7 @@ class UserModel {
     this.usersLocation,
     this.usersRadius,
     this.usersPhone,
-    //this.type = "user",
+    this.type ,
     required this.usersEmail,
     required this.usersPassword,
     required this.usersVerifyCode,
@@ -54,8 +55,8 @@ class UserModel {
         usersApprove: json['users_approve'],
         createdAt: json['created_at'],
         updatedAt: json['updated_at'],
+        type: json['users_type'], 
         usersPhone: json['users_phone']);
-    // type: json['type']);
   }
 
   Map<String, dynamic> toJson() {

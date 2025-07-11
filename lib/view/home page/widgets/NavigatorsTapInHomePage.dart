@@ -134,7 +134,12 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
         //
         GestureDetector(
           onTap: () {
-            controller.goToDoctors();
+            try{
+                 controller.goToDoctors();
+            }catch(e){
+              print(e) ;
+            }
+          
           },
           child: Container(
             //28 -> 25 padding + 3 space between two item

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/util/styles.dart';
+import 'package:graduation_project/data/models/doctor_model.dart';
 
 class Section4InDoctorDetailsPage extends StatelessWidget {
-  const Section4InDoctorDetailsPage({super.key});
+  final DoctorModel doctor;
+  
+  const Section4InDoctorDetailsPage({
+    super.key,
+    required this.doctor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +31,7 @@ class Section4InDoctorDetailsPage extends StatelessWidget {
               height: 5,
             ),
             Text(
-              "M.Sc. - Veterinary Surgery -Emergency and Critical Care.",
+              doctor.doctorsDegree,
               style: AppStyles.urbanistReqular12(context),
             )
           ],

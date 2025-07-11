@@ -1,9 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/core/util/appImages.dart';
+import 'package:graduation_project/api_links.dart';
 import 'package:graduation_project/core/util/styles.dart';
+import 'package:graduation_project/data/models/doctor_model.dart';
 
 class DoctorCardOnDoctorDetailsPage extends StatelessWidget {
-  const DoctorCardOnDoctorDetailsPage({super.key});
+  final DoctorModel doctor;
+  final VoidCallback? onMessageTap;
+  final VoidCallback? onCallTap;
+
+  const DoctorCardOnDoctorDetailsPage({
+    super.key,
+    required this.doctor,
+    this.onMessageTap,
+    this.onCallTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +33,48 @@ class DoctorCardOnDoctorDetailsPage extends StatelessWidget {
             child: Row(
               children: [
                 // Profile Image
-                const CircleAvatar(
-                  radius: 35,
-                  backgroundImage: AssetImage(
-                      Assets.imagesDoctorImage), // Replace with your image path
-                ),
+               ClipOval(
+            child: doctor.usersPhotoUrl.isEmpty || doctor.usersPhotoUrl == "empty" || doctor.usersPhotoUrl == "failure"
+                ? Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.person,
+                      size: 50,
+                      color: Colors.grey.shade600,
+                    ),
+                  )
+                : CachedNetworkImage(
+                    imageUrl: "$linkServerImage${doctor.usersPhotoUrl}",
+                    placeholder: (context, url) => SizedBox(
+                      width: 35,
+                      height: 35,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        size: 50,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                    fit: BoxFit.cover,
+                    width: 100,
+                    height: 100,
+                  ),
+          ),
                 const SizedBox(width: 12),
                 // Name, Degree, Rating
                 Expanded(
@@ -34,23 +82,35 @@ class DoctorCardOnDoctorDetailsPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Dr. Alexandera Poppins",
+                       "Dr.  ${doctor.fullName}",
                         style: AppStyles.urbanistSemiBold18(context),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
-                      Text("M.Sc. - Veterinary Surgery",
-                          style: AppStyles.urbanistReqular12(context)),
+                      Text(
+                        doctor.doctorsSpecialization,
+                        style: AppStyles.urbanistReqular12(context),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
                       SizedBox(height: 4),
                       Row(
                         children: [
-                          Icon(Icons.star, color: Colors.amber, size: 20),
-                          Icon(Icons.star, color: Colors.amber, size: 20),
-                          Icon(Icons.star, color: Colors.amber, size: 20),
-                          Icon(Icons.star, color: Colors.amber, size: 20),
-                          Icon(Icons.star_half, color: Colors.amber, size: 20),
+                          ...List.generate(5, (index) {
+                            if (index < doctor.averageRating.floor()) {
+                              return Icon(Icons.star, color: Colors.amber, size: 20);
+                            } else if (index < doctor.averageRating.ceil() && doctor.averageRating % 1 != 0) {
+                              return Icon(Icons.star_half, color: Colors.amber, size: 20);
+                            } else {
+                              return Icon(Icons.star_border, color: Colors.amber, size: 20);
+                            }
+                          }),
                           SizedBox(width: 5),
-                          Text("4.5 Star",
-                              style: AppStyles.urbanistReqular14(context)
-                                  .copyWith(color: Color(0xff909090))),
+                          Text(
+                            "${doctor.averageRating.toStringAsFixed(1)} Star",
+                            style: AppStyles.urbanistReqular14(context)
+                                .copyWith(color: Color(0xff909090)),
+                          ),
                         ],
                       ),
                     ],
@@ -68,7 +128,7 @@ class DoctorCardOnDoctorDetailsPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: onMessageTap,
                 child: Container(
                   height: 40,
                   width: MediaQuery.sizeOf(context).width / 2 - 50,
@@ -95,7 +155,7 @@ class DoctorCardOnDoctorDetailsPage extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: onCallTap,
                 child: Container(
                   height: 40,
                   width: MediaQuery.sizeOf(context).width / 2 - 50,

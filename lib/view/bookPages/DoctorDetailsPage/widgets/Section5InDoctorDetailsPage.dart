@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/util/styles.dart';
+import 'package:graduation_project/data/models/doctor_model.dart';
 
 class Section5InDoctorDetailsPage extends StatelessWidget {
-  const Section5InDoctorDetailsPage({super.key});
+  final DoctorModel doctor;
+  
+  const Section5InDoctorDetailsPage({
+    super.key,
+    required this.doctor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +31,7 @@ class Section5InDoctorDetailsPage extends StatelessWidget {
               height: 5,
             ),
             Text(
-              "Egypt Minya AlQamh-560016",
+              doctor.loaction,
               style: AppStyles.urbanistReqular12(context),
             )
           ],

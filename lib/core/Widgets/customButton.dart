@@ -10,7 +10,7 @@ class Custombutton extends StatelessWidget {
       this.textColor = Colors.white,
       required this.width,
       this.thereIsBorder = false,
-      required this.onTap,
+       this.onTap,
       this.borderradius = 3,
       this.height = 45,
       this.isActive = true});
@@ -21,7 +21,7 @@ class Custombutton extends StatelessWidget {
   final bool isActive;
   final double width;
   final double height;
-  final VoidCallback onTap;
+  final Function()? onTap;
   final bool thereIsBorder;
   final double borderradius;
   @override
