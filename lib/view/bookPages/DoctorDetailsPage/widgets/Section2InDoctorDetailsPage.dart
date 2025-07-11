@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
+import 'package:graduation_project/data/models/doctor_model.dart';
 
 class Section2InDoctorDetailsPage extends StatelessWidget {
-  const Section2InDoctorDetailsPage({super.key});
+  final DoctorModel doctor;
+  
+  const Section2InDoctorDetailsPage({
+    super.key,
+    required this.doctor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +33,7 @@ class Section2InDoctorDetailsPage extends StatelessWidget {
                     .copyWith(color: Color(0xff7C7D89)),
               ),
               Text(
-                "456k",
+                "454K",
                 style: AppStyles.urbanistSemiBold20(context)
                     .copyWith(color: ColorsApp.primaryColor),
               )
@@ -42,7 +48,7 @@ class Section2InDoctorDetailsPage extends StatelessWidget {
                     .copyWith(color: Color(0xff7C7D89)),
               ),
               Text(
-                "8 Years",
+                doctor.doctorsYearsExperience.toString(),
                 style: AppStyles.urbanistSemiBold20(context)
                     .copyWith(color: ColorsApp.primaryColor),
               )
@@ -57,7 +63,7 @@ class Section2InDoctorDetailsPage extends StatelessWidget {
                     .copyWith(color: Color(0xff7C7D89)),
               ),
               Text(
-                "6.8k",
+                doctor.ratingCount.toString(),
                 style: AppStyles.urbanistSemiBold20(context)
                     .copyWith(color: ColorsApp.primaryColor),
               )

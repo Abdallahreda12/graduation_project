@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/core/services/services.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/data/models/userInfo.dart';
@@ -26,6 +27,8 @@ class LoginControllerImp extends LoginController {
   Color iconGmailColor = Colors.grey;
   final TextEditingController emailController = TextEditingController();
 
+   MyServices myServices = Get.find(); 
+
   @override
   login(context) async {
     if (globalKey.currentState!.validate()) {
@@ -36,7 +39,19 @@ class LoginControllerImp extends LoginController {
         user = UserModel.fromJson(res['data'][0]);
         isLoading = false;
         update();
-        Get.toNamed("/homepage");
+
+        myServices.sharedPreferences.setString("step" ,"3");
+        myServices.sharedPreferences.setString("name" ,user.usersFirstName!);
+        myServices.sharedPreferences.setInt("id" ,user.userId);
+        myServices.sharedPreferences.setString("email" ,user.usersEmail!);
+        myServices.sharedPreferences.setString("location" ,user.usersLocation!);
+        print(res['data'][0]) ;
+        if(user.type == 0 ){ ///////////user  //////////////////
+            Get.toNamed("/homepage");
+        }else{
+            Get.toNamed("/homepage");
+        }
+      
       } else {
         isLoading = false;
         Get.snackbar(

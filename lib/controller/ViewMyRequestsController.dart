@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/controller/HomePageController.dart';
-import 'package:graduation_project/controller/loginController.dart';
+import 'package:graduation_project/core/services/services.dart';
 import 'package:graduation_project/data/models/adoptionModel.dart';
 import 'package:graduation_project/data/models/helpModel.dart';
-import 'package:graduation_project/data/models/userInfo.dart';
 import 'package:graduation_project/data/services/deleteAdoptionRequestData.dart';
 import 'package:graduation_project/data/services/deleteHelpRequestData.dart';
 import 'package:graduation_project/data/services/viewMyRequestsData.dart';
@@ -19,16 +18,15 @@ class ViewMyRequestsControllerImp extends ViewMyRequestsController {
   late int userId;
 
   bool isLoading = false;
-  late UserModel user;
   final List<AdoptionModel> adoptions = [];
   final List<HelpRequestModel> helpRequests = [];
   List<UnifiedItem> mergedItems = [];
+  MyServices myServices = Get.find(); 
 
   @override
   void onInit() async {
-    final LoginControllerImp loginController = Get.find();
-    user = loginController.user;
-    userId = user.userId;
+   
+    userId =    myServices.sharedPreferences.getInt("id")! ;
     await getRequest();
     // Get.delete<LoginControllerImp>();
     super.onInit();

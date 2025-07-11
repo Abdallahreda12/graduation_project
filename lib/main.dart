@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/core/middleware/mymiddleware.dart';
+import 'package:graduation_project/core/services/services.dart';
 import 'package:graduation_project/core/util/appPreference.dart';
 import 'package:graduation_project/locale/locale_controller.dart';
 import 'package:graduation_project/locale/translation_service.dart';
@@ -12,7 +14,8 @@ import 'package:graduation_project/view/bookPages/AnimalOwnerPage/AnimalOwnerPag
 import 'package:graduation_project/view/bookPages/BookingPage/bookPage.dart';
 import 'package:graduation_project/view/bookPages/DoctorDetailsPage/DoctorDetailsPage.dart';
 import 'package:graduation_project/view/bookPages/mainBookPage/mainBookPage.dart';
-import 'package:graduation_project/view/chat/chat_view.dart';
+import 'package:graduation_project/view/bookPages/select_packgae/select_package.dart';
+import 'package:graduation_project/view/chat/chat.dart';
 import 'package:graduation_project/view/reset%20password%20page/create%20new%20password/createNewPasswordPage.dart';
 import 'package:graduation_project/view/reset%20password%20page/email%20entry%20page/emailEntryPage.dart';
 import 'package:graduation_project/view/help%20Details%20page/helpDetailsPage.dart';
@@ -43,6 +46,7 @@ void main() async {
   final translations = await TranslationService.loadTranslations();
   final localeController = Get.put(MylocaleController());
   await localeController.initLang();
+   await intialService();
   //final themeController = Get.put(ThemeController());
   runApp(MainApp(
     translations: translations,
@@ -60,7 +64,6 @@ class MainApp extends StatelessWidget {
     //final isDark = Get.find<ThemeController>().isDarkMode.value;
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ChatView(),
       translations: TranslationService(translations),
       locale: initialLocale,
       //must make custom theme
@@ -69,7 +72,9 @@ class MainApp extends StatelessWidget {
       //themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
       fallbackLocale: TranslationService.fallbackLocale,
       getPages: [
-        GetPage(name: "/splashpage", page: () => SplashPage()),
+        GetPage(name: "/", page: () => SplashPage(),
+       // middlewares: [MyMiddleWare()] 
+        ),
         GetPage(name: "/selectlangpage", page: () => SelectLangPage()),
         GetPage(name: "/onboarding", page: () => OnboardingPage()),
         GetPage(name: "/signinpage", page: () => SigninPage()),
@@ -142,6 +147,7 @@ class MainApp extends StatelessWidget {
         GetPage(name: "/mainbookpage", page: () => MainBookPage()),
         GetPage(name: "/DoctorDetailsPage", page: () => DoctorDetailsPage()),
         GetPage(name: "/bookpage", page: () => BookingPage()),
+        GetPage(name: "/PackageSelectionPage", page: () => PackageSelectionPage()),
         GetPage(name: "/animalownerpage", page: () => AnimalOwnerPage()),
         GetPage(name: "/emailentrypage", page: () => EmailEntryPage()),
         GetPage(name: "/phoneentrypage", page: () => PhoneEntryPage()),
@@ -153,6 +159,7 @@ class MainApp extends StatelessWidget {
             name: "/tipsandtricksforyourpetspage",
             page: () => TipsAndTricksForYourPetsPage()),
         GetPage(name: "/informationpage", page: () => InformationPage()),
+        GetPage(name: "/ChatView", page: () => ChatView()),
         GetPage(name: "/myrequestspage", page: () => MyRequestsPage()),
         GetPage(name: "/verifypage", page: () => VerifyPage()),
       ],

@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/controller/loginController.dart';
+import 'package:graduation_project/core/services/services.dart';
 import 'package:graduation_project/data/models/doctorAdditionalInfoModel.dart';
 import 'package:graduation_project/data/models/userInfo.dart';
 import 'package:graduation_project/data/models/userInfoModel.dart';
@@ -28,6 +29,7 @@ class ProfileControllerImp extends ProfileController {
   DoctorInfoModel? additionalInfoForDoctor;
 
   bool isLoading = false;
+  MyServices myServices = Get.find() ;
 
   late UserModel user;
 

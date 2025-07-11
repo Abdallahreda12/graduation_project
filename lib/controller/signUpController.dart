@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/controller/loginController.dart';
+import 'package:graduation_project/core/services/services.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/customFunctions.dart';
 import 'package:graduation_project/data/models/doctorAdditionalInfoModel.dart';
@@ -44,6 +45,9 @@ class SignUpControllerImp extends SignUpController {
   late String verfyCode = "";
   late int userId = 8;
   TextEditingController locationController = TextEditingController();
+
+
+   MyServices myServices = Get.find();
 
   @override
   void onInit() {
@@ -386,6 +390,7 @@ class SignUpControllerImp extends SignUpController {
           colorText: Colors.white,
         );
         verfyCode = '';
+        myServices.sharedPreferences.setString("step" ,"2");
         Get.toNamed('/signup2page');
       } else {
         isLoading = false;

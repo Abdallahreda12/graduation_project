@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/doctor_details_controller.dart';
 import 'package:graduation_project/core/Widgets/customButton.dart';
 import 'package:graduation_project/core/Widgets/headerOfAdotinAndHelpPage.dart';
 import 'package:graduation_project/core/util/appImages.dart';
@@ -10,12 +11,16 @@ import 'package:graduation_project/view/bookPages/DoctorDetailsPage/widgets/Sect
 import 'package:graduation_project/view/bookPages/DoctorDetailsPage/widgets/Section3InDoctorDetailsPage.dart';
 import 'package:graduation_project/view/bookPages/DoctorDetailsPage/widgets/Section4InDoctorDetailsPage.dart';
 import 'package:graduation_project/view/bookPages/DoctorDetailsPage/widgets/Section5InDoctorDetailsPage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DoctorDetailsPage extends StatelessWidget {
   const DoctorDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Initialize the controller
+     final DoctorDetailsController controller = Get.put(DoctorDetailsController());
+
     return Scaffold(
       backgroundColor: ColorsApp.backGroundColor,
       body: Stack(children: [
@@ -29,35 +34,46 @@ class DoctorDetailsPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20, right: 20, top: 35),
           child: Column(
             children: [
-              //
-              //header of page
-              //
+              // Header of page
               TextAndBackArrowHeader(
                   texts: ["Doctor Details"], colorsOfTexts: [Colors.black]),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      //
-                      //Section 1 "Doctor Card" (need to make it customization)
-                      //
-                      DoctorCardOnDoctorDetailsPage(),
-                      //
-                      //Section 2
-                      //
-                      Section2InDoctorDetailsPage(),
-                      //
-                      //section 3 'About'
-                      //
-                      Section3InDoctorDetailsPage(),
-                      //
-                      //section 4 'Education'
-                      //
-                      Section4InDoctorDetailsPage(),
-                      //
-                      //setcion 5 "Location"
-                      //
-                      Section5InDoctorDetailsPage(),
+                      // Section 1 "Doctor Card"
+                        DoctorCardOnDoctorDetailsPage(
+                          doctor: controller.doctor,
+                          onMessageTap: (){},
+                          onCallTap: ()async{
+                            
+                            await launchUrl(Uri(scheme: 'tel', path: controller.doctor.phone));
+                          },
+                        ),
+                        //
+                        //Section 2
+                        //
+                        Section2InDoctorDetailsPage(
+                          doctor: controller.doctor,
+                        ),
+                        //
+                        //section 3 'About'
+                        //
+                        Section3InDoctorDetailsPage(
+                         doctor: controller.doctor,
+                        ),
+                        //
+                        //section 4 'Education'
+                        //
+                        Section4InDoctorDetailsPage(
+                         doctor: controller.doctor,
+                        ),
+                        //
+                        //section 5 "Location"
+                        //
+                        Section5InDoctorDetailsPage(
+                          doctor: controller.doctor,
+                        ),
                     ],
                   ),
                 ),
@@ -75,7 +91,7 @@ class DoctorDetailsPage extends StatelessWidget {
               text: 'Book an appointment',
               width: MediaQuery.sizeOf(context).width,
               onTap: () {
-                Get.toNamed("/bookpage");
+                Get.toNamed("/bookpage" , arguments: controller.doctor);
               },
             ),
           ),
