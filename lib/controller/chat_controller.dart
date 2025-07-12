@@ -210,7 +210,7 @@ class ChatController extends GetxController {
       update();
 
       final response = await ApiService.getMessages(conversationId, limit, offset);
-
+       
       if (response['status'] == 'success') {
         final newMessages = (response['data'] as List)
             .map((item) => Message.fromJson(item))
@@ -238,9 +238,9 @@ class ChatController extends GetxController {
           _webSocketService.markMessagesRead(unreadMessages);
         }
       } else {
-        if (offset == 0) {
-          errorMessage = 'Failed to load messages';
-        }
+        // if (offset == 0) {
+        //   errorMessage = 'Failed to load messages';
+        // }
       }
     } catch (e) {
       errorMessage = 'Error loading messages: $e';

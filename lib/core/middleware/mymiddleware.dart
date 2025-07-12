@@ -9,18 +9,12 @@ class MyMiddleWare extends GetMiddleware {
   MyServices myServices = Get.find(); //علشان عاملين  put
   @override
   RouteSettings? redirect(String? route) {
-    print("object") ;
-    if (myServices.sharedPreferences.getString("step") == "3") {
-      return const RouteSettings(name: "/homepage");
-    }
-     if (myServices.sharedPreferences.getString("step") == "2") {
-      return const RouteSettings(name: "/signup2page");
-    }
+    print(myServices.sharedPreferences.getString("step")) ;
     if (myServices.sharedPreferences.getString("step") == "1") {
-      return RouteSettings(name: "/signinpage");
-    } else
-      {
-        return null;
-      }
+        return RouteSettings(name: "/signinpage");
+    }
+    else {
+      return const RouteSettings(name: "/homepage");
+    } 
   }
 }

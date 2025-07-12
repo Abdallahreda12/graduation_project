@@ -3,8 +3,8 @@ import 'dart:convert';
 
 class ApiService {
   static const String baseUrl =  
-  "http://192.168.1.6/help_animals/chat" ;
- // 'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/chat';
+  //"http://192.168.1.6/help_animals/chat" ;
+  'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/chat';
 
   static Future<Map<String, dynamic>> createConversation(int userId1, int userId2) async {
     try {

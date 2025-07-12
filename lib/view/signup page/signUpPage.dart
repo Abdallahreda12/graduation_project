@@ -71,8 +71,8 @@ class _SignupPageState extends State<SignupPage> {
                 ButtonsRow(
                   firstButton: "Back to Sign in",
                   secondButtonAction: () {
-                    controller.signupEmailAndPass();
-                    //Get.toNamed('/verifypage');
+                   controller.signupEmailAndPass();
+                 //   Get.toNamed('/signup3userpage');
                   },
                 )
               ],

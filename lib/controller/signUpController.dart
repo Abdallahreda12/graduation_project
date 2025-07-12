@@ -46,8 +46,11 @@ class SignUpControllerImp extends SignUpController {
   late int userId;
   TextEditingController locationController = TextEditingController();
 
+  // Governorates and cities
+  String? selectedGovernorate;
+  String? selectedCity;
 
-   MyServices myServices = Get.find();
+  MyServices myServices = Get.find();
 
   @override
   void onInit() {
@@ -168,6 +171,28 @@ class SignUpControllerImp extends SignUpController {
       location: location ?? doctorInfo!.location,
       homeVisits: homeVisits ?? doctorInfo!.homeVisits,
     );
+    update();
+  }
+
+  // Update location based on governorate and city selection
+  void updateLocation() {
+    if (selectedGovernorate != null && selectedCity != null) {
+      locationController.text = selectedCity!;
+      updateUserInfo(location: locationController.text);
+      updateDoctorInfo(location: locationController.text);
+    }
+    update();
+  }
+
+
+  void onLocationSelected(String governorate, String city) {
+    selectedGovernorate = governorate;
+    selectedCity = city;
+    
+    // Update both models with the selected location
+    updateUserInfo(location: selectedCity);
+    updateDoctorInfo(location: selectedCity);
+    
     update();
   }
 
@@ -391,7 +416,7 @@ class SignUpControllerImp extends SignUpController {
           colorText: Colors.white,
         );
         verfyCode = '';
-        myServices.sharedPreferences.setString("step" ,"2");
+        myServices.sharedPreferences.setString("step", "2");
         Get.toNamed('/signup2page');
       } else {
         isLoading = false;
@@ -417,3 +442,7 @@ class SignUpControllerImp extends SignUpController {
     }
   }
 }
+
+
+
+

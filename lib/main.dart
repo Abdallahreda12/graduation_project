@@ -74,7 +74,7 @@ class MainApp extends StatelessWidget {
       //themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
       fallbackLocale: TranslationService.fallbackLocale,
       getPages: [
-        GetPage(name: "/", page: () => SplashPage(),
+       GetPage(name: "/", page: () => SplashPage(),
         middlewares: [MyMiddleWare()] 
         ),
         GetPage(name: "/selectlangpage", page: () => SelectLangPage()),
