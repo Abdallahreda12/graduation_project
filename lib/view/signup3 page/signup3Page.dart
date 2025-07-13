@@ -120,6 +120,7 @@ Widget _buildUserForm(BuildContext context) {
                   const SizedBox(height: 70),
                 ],
               ),
+
             ),
             Positioned(
               bottom: 0,
@@ -266,6 +267,21 @@ Widget _buildDoctorForm(BuildContext context) {
                     Get.toNamed("/signup4doctorpage");
                   }
                 },
+              Positioned(
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: ButtonsRow(
+                  secondButtonAction: () {
+                    print(controller.doctorInfo?.location);
+                    print(controller.doctorInfo?.gender);
+                    print(controller.doctorInfo?.clinicName);
+                    // if (controller.doctorGlobalKey.currentState!.validate()) {
+                    Get.toNamed("/signup4doctorpage");
+                    // }
+                  },
+                ),
+
               ),
             ),
           ],
