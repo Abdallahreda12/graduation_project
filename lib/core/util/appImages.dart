@@ -93,6 +93,8 @@ class Assets {
   /// Assets for imagesPlusAppBarIcon
   /// assets/images/plusAppBarIcon.svg
   static const String imagesPlusAppBarIcon = "assets/images/plusAppBarIcon.svg";
+  static const String imagesAdminIcon =
+      "assets/images/eos-icons_admin-outlined.svg";
 
   /// Assets for imagesShoppingCartIcon
   /// assets/images/Shopping-cart-icon.svg

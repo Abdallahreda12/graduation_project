@@ -24,6 +24,23 @@ class HelpDetailsPage extends StatefulWidget {
 
 class _HelpDetailsPageState extends State<HelpDetailsPage> {
   final controller = Get.find<ViewMyRequestsControllerImp>();
+  String? username;
+
+  @override
+  void initState() {
+    super.initState();
+    final UnifiedItem item = Get.arguments;
+    final HelpRequestModel helpRequest = item.data as HelpRequestModel;
+    loadUserName(helpRequest.userId);
+  }
+
+  void loadUserName(int userId) async {
+    var name = await controller.getUserName(userId);
+    setState(() {
+      username = name;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final UnifiedItem item = Get.arguments;
@@ -45,9 +62,6 @@ class _HelpDetailsPageState extends State<HelpDetailsPage> {
             padding: const EdgeInsets.only(left: 27, right: 27, top: 35),
             child: Column(
               children: [
-                //
-                //header section
-                //
                 TextAndBackArrowHeader(
                   onTap: () {
                     Get.toNamed("/homepage");
@@ -55,77 +69,41 @@ class _HelpDetailsPageState extends State<HelpDetailsPage> {
                   texts: ["help", " details"],
                   colorsOfTexts: [ColorsApp.secondaryColor, Colors.black],
                 ),
-                SizedBox(
-                  height: 25,
-                ),
-                //
-                //content section
-                //
+                const SizedBox(height: 25),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //
-                        //images slider section
-                        //
                         CustomImagesSlider(
                           imagePaths: imagePaths,
                           colorsOfDots: ColorsApp.secondaryColor,
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        //
-                        //title text Section
-                        //
+                        const SizedBox(height: 10),
                         Text(
                           helpRequest.title,
                           style: AppStyles.urbanistSemiBold16(context),
                           maxLines: 3,
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        //
-                        //request information Sction
-                        //
+                        const SizedBox(height: 10),
                         RequestInformationInHelpDetailsPage(
                           location: helpRequest.location,
                           dateAndTime: helpRequest.date,
                           socialMediaLink: helpRequest.socialMediaLink,
                         ),
-                        widget.enableDeleteButton
-                            ? SizedBox(
-                                height: 0,
-                              )
-                            : SizedBox(
-                                height: 10,
-                              ),
-                        //
-                        //Personal Card Section
-                        //
-                        widget.enableDeleteButton
-                            ? Text("")
-                            : PersonalCard(
-                                image: Assets.imagesProfilePhoto,
-                                name: "asd",
-                                des: "Pet Owner"),
-                        widget.enableDeleteButton
-                            ? SizedBox(
-                                height: 0,
-                              )
-                            : SizedBox(
-                                height: 10,
-                              ),
-                        //
-                        //about Pet Section
-                        //
+                        if (!widget.enableDeleteButton)
+                          const SizedBox(height: 10),
+                        if (!widget.enableDeleteButton)
+                          PersonalCard(
+                            image: Assets.imagesProfilePhoto,
+                            name: username ?? "Loading...",
+                            des: "Pet Owner",
+                          ),
+                        const SizedBox(height: 10),
                         AboutPetInHelpDetailsPage(
-                            aboutPet: helpRequest.description),
-                        SizedBox(
-                          height: 10,
+                          aboutPet: helpRequest.description,
                         ),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ),

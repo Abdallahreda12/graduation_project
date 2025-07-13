@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/controller/loginController.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/core/util/colors.dart';
 
@@ -13,6 +14,7 @@ class CustomBottomAppBar extends StatefulWidget {
 }
 
 class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
+  final controller = Get.find<LoginControllerImp>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,6 +32,7 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                 IconButton(
                     onPressed: () {
                       if (widget.currentPageIndex != 0) {
+                        
                         Get.toNamed("/homepage");
                       }
                     },

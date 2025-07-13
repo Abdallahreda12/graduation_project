@@ -65,129 +65,131 @@ class _AdditionalInfoPageState extends State<AdditionalInfoPage> {
               //
               //profile card
               //
-              // controller.user.type == "user"
-              // ?
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      PersonCardInProfilePage(
-                        name:
-                            '${controller.fullInfoForUser?.firstName} ${controller.fullInfoForUser?.lastName}',
-                        image:
-                            '$linkServerImage${controller.user.usersPhotoUrl}',
-                        gmail: controller.fullInfoForUser?.emailAddress,
+              controller.user.type == 0
+                  ? Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            PersonCardInProfilePage(
+                              name:
+                                  '${controller.fullInfoForUser?.firstName} ${controller.fullInfoForUser?.lastName}',
+                              image:
+                                  '$linkServerImage${controller.user.usersPhotoUrl}',
+                              gmail: controller.fullInfoForUser?.emailAddress,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            AdditionalInfoCard(
+                              question:
+                                  "Age Range of animals that you preferred",
+                              answer:
+                                  controller.fullInfoForUser?.ageRangeOfAnimal,
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            AdditionalInfoCard(
+                              question: "Are you looking for adoption?",
+                              answer: controller.fullInfoForUser
+                                          ?.lookingForAdoption ==
+                                      "1"
+                                  ? "Yes"
+                                  : "No",
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            AdditionalInfoCard(
+                              question: "Animals adoption preferred",
+                              answer: controller
+                                  .fullInfoForUser?.animalsAdoptionPreferred,
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            AdditionalInfoCard(
+                              question: "Have you adopt before?",
+                              answer: controller.fullInfoForUser
+                                          ?.haveYouAdoptBefore ==
+                                      '1'
+                                  ? "Yes"
+                                  : "No",
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            AdditionalInfoCard(
+                              question:
+                                  "Do you have experience with animal care?",
+                              answer: controller.fullInfoForUser
+                                          ?.haveExperienceWithAnimalCare ==
+                                      "1"
+                                  ? "Yes"
+                                  : "No",
+                            ),
+                          ],
+                        ),
                       ),
-                      SizedBox(
-                        height: 20,
+                    )
+                  : Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            PersonCardInProfilePage(
+                              name:
+                                  '${controller.fullInfoForUser?.firstName} ${controller.fullInfoForUser?.lastName}',
+                              image:
+                                  '$linkServerImage${controller.user.usersPhotoUrl}',
+                              gmail: controller.fullInfoForUser?.emailAddress,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            AdditionalInfoCard(
+                              question: "specialization",
+                              answer:
+                                  controller.additionalInfoForDoctor?.location,
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            AdditionalInfoCard(
+                              question: "degree?",
+                              answer:
+                                  controller.additionalInfoForDoctor?.degrees,
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            AdditionalInfoCard(
+                              question: "licensing information",
+                              answer:
+                                  controller.additionalInfoForDoctor?.licensing,
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            AdditionalInfoCard(
+                              question: "Years Experience",
+                              answer: controller
+                                  .additionalInfoForDoctor?.yearsExperience,
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            AdditionalInfoCard(
+                              question: "Do you visit home?",
+                              answer: controller
+                                  .additionalInfoForDoctor?.homeVisits,
+                            ),
+                          ],
+                        ),
                       ),
-                      AdditionalInfoCard(
-                        question: "Age Range of animals that you preferred",
-                        answer: controller.fullInfoForUser?.ageRangeOfAnimal,
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      AdditionalInfoCard(
-                        question: "Are you looking for adoption?",
-                        answer:
-                            controller.fullInfoForUser?.lookingForAdoption ==
-                                    "1"
-                                ? "Yes"
-                                : "No",
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      AdditionalInfoCard(
-                        question: "Animals adoption preferred",
-                        answer: controller
-                            .fullInfoForUser?.animalsAdoptionPreferred,
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      AdditionalInfoCard(
-                        question: "Have you adopt before?",
-                        answer:
-                            controller.fullInfoForUser?.haveYouAdoptBefore ==
-                                    '1'
-                                ? "Yes"
-                                : "No",
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      AdditionalInfoCard(
-                        question: "Do you have experience with animal care?",
-                        answer: controller.fullInfoForUser
-                                    ?.haveExperienceWithAnimalCare ==
-                                "1"
-                            ? "Yes"
-                            : "No",
-                      ),
-                    ],
-                  ),
-                ),
-              )
-              // : Expanded(
-              //     child: SingleChildScrollView(
-              //       child: Column(
-              //         children: [
-              //           PersonCardInProfilePage(
-              //             name:
-              //                 '${controller.additionalInfoForDoctor?.firstName}${controller.additionalInfoForDoctor?.lastName}',
-              //             image: controller.user.usersPhotoUrl,
-              //             gmail: controller
-              //                 .additionalInfoForDoctor?.emailAddress,
-              //           ),
-              //           SizedBox(
-              //             height: 20,
-              //           ),
-              //           AdditionalInfoCard(
-              //             question: "specialization",
-              //             answer: controller
-              //                 .additionalInfoForDoctor?.specialization,
-              //           ),
-              //           SizedBox(
-              //             height: 12,
-              //           ),
-              //           AdditionalInfoCard(
-              //             question: "degree?",
-              //             answer:
-              //                 controller.additionalInfoForDoctor?.degrees,
-              //           ),
-              //           SizedBox(
-              //             height: 12,
-              //           ),
-              //           AdditionalInfoCard(
-              //             question: "licensing information",
-              //             answer:
-              //                 controller.additionalInfoForDoctor?.licensing,
-              //           ),
-              //           SizedBox(
-              //             height: 12,
-              //           ),
-              //           AdditionalInfoCard(
-              //             question: "Years Experience",
-              //             answer: controller
-              //                 .additionalInfoForDoctor?.yearsExperience,
-              //           ),
-              //           SizedBox(
-              //             height: 12,
-              //           ),
-              //           AdditionalInfoCard(
-              //             question: "Do you visit home?",
-              //             answer: controller
-              //                 .additionalInfoForDoctor?.homeVisits,
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
+                    ),
             ],
           ),
         ),

@@ -26,8 +26,8 @@ class LoginControllerImp extends LoginController {
   Color iconPassColor = Colors.red;
   Color iconGmailColor = Colors.grey;
   final TextEditingController emailController = TextEditingController();
-
-   MyServices myServices = Get.find(); 
+  late bool isAdmin = false;
+  MyServices myServices = Get.find();
 
   @override
   login(context) async {
@@ -39,19 +39,30 @@ class LoginControllerImp extends LoginController {
         user = UserModel.fromJson(res['data'][0]);
         isLoading = false;
         update();
-
-        myServices.sharedPreferences.setString("step" ,"3");
-        myServices.sharedPreferences.setString("name" ,user.usersFirstName!);
-        myServices.sharedPreferences.setInt("id" ,user.userId);
-        myServices.sharedPreferences.setString("email" ,user.usersEmail!);
-        myServices.sharedPreferences.setString("location" ,user.usersLocation!);
-        print(res['data'][0]) ;
-        if(user.type == 0 ){ ///////////user  //////////////////
-            Get.toNamed("/homepage");
-        }else{
-            Get.toNamed("/homepage");
+        if (user.usersEmail == "omar@gmail.com" ||
+            user.usersEmail == "abdallah@gmail.com" ||
+            user.usersEmail == "elshair@gmail.com" ||
+            user.usersEmail == "khaled@gmail.com" ||
+            user.usersEmail == "yazn@gmail.com") {
+          isAdmin = true;
+        } else {
+          isAdmin = false;
         }
-      
+        myServices.sharedPreferences.setString("step", "3");
+        myServices.sharedPreferences.setString("name", user.usersFirstName!);
+        myServices.sharedPreferences.setInt("id", user.userId);
+        myServices.sharedPreferences.setString("email", user.usersEmail!);
+        myServices.sharedPreferences.setString("location", user.usersLocation!);
+        print(res['data'][0]);
+        if (user.type == 0) {
+          print(user.type);
+          ///////////user  //////////////////
+          Get.toNamed("/homepage");
+        } else {
+          print(user.type);
+          print("this is doc");
+          Get.toNamed("/homepage");
+        }
       } else {
         isLoading = false;
         Get.snackbar(

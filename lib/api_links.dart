@@ -27,5 +27,6 @@ const String linkViewAdditionalInfo =
     "$linkServerName/profile/view_additional_info.php";
 const String linkViewUser = "$linkServerName/adopt&help/view_user.php";
 const String linkAddClinic = "$linkServerName/clinic/add.php";
-
-
+const String linkGetUserName =
+    "https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/adopt&help/view_user.php";
+int? userType;

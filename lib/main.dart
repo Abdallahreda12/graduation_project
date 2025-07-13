@@ -15,7 +15,8 @@ import 'package:graduation_project/view/bookPages/BookingPage/bookPage.dart';
 import 'package:graduation_project/view/bookPages/DoctorDetailsPage/DoctorDetailsPage.dart';
 import 'package:graduation_project/view/bookPages/mainBookPage/mainBookPage.dart';
 import 'package:graduation_project/view/bookPages/select_packgae/select_package.dart';
-import 'package:graduation_project/view/chat/chat.dart';
+import 'package:graduation_project/view/dashboard/AdminDashboard.dart';
+//import 'package:graduation_project/view/chat/chat.dart';
 import 'package:graduation_project/view/reset%20password%20page/create%20new%20password/createNewPasswordPage.dart';
 import 'package:graduation_project/view/reset%20password%20page/email%20entry%20page/emailEntryPage.dart';
 import 'package:graduation_project/view/help%20Details%20page/helpDetailsPage.dart';
@@ -46,7 +47,7 @@ void main() async {
   final translations = await TranslationService.loadTranslations();
   final localeController = Get.put(MylocaleController());
   await localeController.initLang();
-   await intialService();
+  await intialService();
   //final themeController = Get.put(ThemeController());
   runApp(MainApp(
     translations: translations,
@@ -71,9 +72,11 @@ class MainApp extends StatelessWidget {
       //darkTheme: ThemeData.dark(),
       //themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
       fallbackLocale: TranslationService.fallbackLocale,
+
       getPages: [
-        GetPage(name: "/", page: () => SplashPage(),
-       // middlewares: [MyMiddleWare()] 
+        GetPage(
+          name: "/", page: () => SplashPage(),
+          // middlewares: [MyMiddleWare()]
         ),
         GetPage(name: "/selectlangpage", page: () => SelectLangPage()),
         GetPage(name: "/onboarding", page: () => OnboardingPage()),
@@ -105,7 +108,7 @@ class MainApp extends StatelessWidget {
             page: () => Signup4Page(
                   typeOfUser: 'Doctor',
                 )),
-     
+
         GetPage(
             name: "/signup5userpage",
             page: () => Signup5Page(
@@ -117,7 +120,6 @@ class MainApp extends StatelessWidget {
                   typeOfUser: 'Doctor',
                 )),
         GetPage(
-          
             name: "/signupcompletedpage", page: () => SignupCompletedPage()),
         GetPage(name: "/homepage", page: () => HomePage()),
         GetPage(name: "/adoptionandhelp", page: () => AdoptionAndHelpPage()),
@@ -147,7 +149,8 @@ class MainApp extends StatelessWidget {
         GetPage(name: "/mainbookpage", page: () => MainBookPage()),
         GetPage(name: "/DoctorDetailsPage", page: () => DoctorDetailsPage()),
         GetPage(name: "/bookpage", page: () => BookingPage()),
-        GetPage(name: "/PackageSelectionPage", page: () => PackageSelectionPage()),
+        GetPage(
+            name: "/PackageSelectionPage", page: () => PackageSelectionPage()),
         GetPage(name: "/animalownerpage", page: () => AnimalOwnerPage()),
         GetPage(name: "/emailentrypage", page: () => EmailEntryPage()),
         GetPage(name: "/phoneentrypage", page: () => PhoneEntryPage()),
@@ -159,7 +162,7 @@ class MainApp extends StatelessWidget {
             name: "/tipsandtricksforyourpetspage",
             page: () => TipsAndTricksForYourPetsPage()),
         GetPage(name: "/informationpage", page: () => InformationPage()),
-        GetPage(name: "/ChatView", page: () => ChatView()),
+        //GetPage(name: "/ChatView", page: () => ChatView()),
         GetPage(name: "/myrequestspage", page: () => MyRequestsPage()),
         GetPage(name: "/verifypage", page: () => VerifyPage()),
       ],

@@ -41,6 +41,18 @@ class _CustomSignUp4TextFieldDoctorColumnState
     });
   }
 
+  void addNewPackage(int clinicIndex) {
+    setState(() {
+      controller.clinics[clinicIndex].packages.add(PackageModel());
+    });
+  }
+
+  void removePackage(int clinicIndex, int packageIndex) {
+    setState(() {
+      controller.clinics[clinicIndex].packages.removeAt(packageIndex);
+    });
+  }
+
   void pickTime(int index, bool isStart) async {
     TimeOfDay? picked = await showTimePicker(
       context: context,
@@ -65,6 +77,92 @@ class _CustomSignUp4TextFieldDoctorColumnState
         controller.clinics[index].file = File(result.files.single.path!);
       });
     }
+  }
+
+  Widget buildPackageForm(int clinicIndex, int packageIndex) {
+    PackageModel package =
+        controller.clinics[clinicIndex].packages[packageIndex];
+    final List<String> packageOptions = [
+      "Voice Call",
+      "Messaging",
+      "Video Call",
+      "Visit Clinic"
+    ];
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Package ${packageIndex + 1}",
+                style: AppStyles.urbanistMedium16(context),
+              ),
+              IconButton(
+                onPressed: () => removePackage(clinicIndex, packageIndex),
+                icon: const Icon(Icons.delete, color: Colors.red),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // Package Name Dropdown
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Package Name",
+                style: AppStyles.urbanistMedium14(context),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: package.name.isEmpty ? null : package.name,
+                    hint: const Text("Select Package Type"),
+                    isExpanded: true,
+                    items: packageOptions.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        package.name = newValue ?? '';
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 15),
+
+          CustomTextField(
+            onDataChanged: (value) => package.price = value,
+            text: "Package Price",
+            hintText: "e.g., 100, 200, 300",
+            borderradius: 20,
+            validator: (String? value) {},
+          ),
+        ],
+      ),
+    );
   }
 
   Widget buildClinicForm(int index) {
@@ -94,6 +192,10 @@ class _CustomSignUp4TextFieldDoctorColumnState
           borderradius: 20,
           validator: (String? value) {},
         ),
+
+        // Days selection
+        Text("Working Days", style: AppStyles.urbanistMedium16(context)),
+        const SizedBox(height: 10),
         Wrap(
           children: [
             for (var day in [
@@ -123,6 +225,11 @@ class _CustomSignUp4TextFieldDoctorColumnState
               ),
           ],
         ),
+
+        // Time selection
+        const SizedBox(height: 15),
+        Text("Working Hours", style: AppStyles.urbanistMedium16(context)),
+        const SizedBox(height: 10),
         Row(
           children: [
             ElevatedButton(
@@ -150,6 +257,9 @@ class _CustomSignUp4TextFieldDoctorColumnState
             ),
           ],
         ),
+
+        // File selection
+        const SizedBox(height: 15),
         ElevatedButton(
           style: ButtonStyle(
               backgroundColor:
@@ -163,7 +273,35 @@ class _CustomSignUp4TextFieldDoctorColumnState
                 .copyWith(color: Colors.white),
           ),
         ),
+
+        // Packages section
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Packages", style: AppStyles.urbanistMedium18(context)),
+            ElevatedButton.icon(
+              style: ButtonStyle(
+                  backgroundColor:
+                      WidgetStatePropertyAll<Color>(ColorsApp.primaryColor)),
+              onPressed: () => addNewPackage(index),
+              icon: const Icon(Icons.add, color: Colors.white, size: 16),
+              label: Text(
+                "Add Package",
+                style: AppStyles.urbanistReqular12(context)
+                    .copyWith(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+
+        // Display packages
+        for (int i = 0; i < clinic.packages.length; i++)
+          buildPackageForm(index, i),
+
         const Divider(thickness: 1),
+        const SizedBox(height: 20),
       ],
     );
   }
@@ -210,7 +348,7 @@ class _CustomSignUp4TextFieldDoctorColumnState
               backgroundColor:
                   WidgetStatePropertyAll<Color>(ColorsApp.primaryColor)),
           onPressed: addNewClinic,
-          icon: Icon(
+          icon: const Icon(
             Icons.add,
             color: Colors.white,
           ),

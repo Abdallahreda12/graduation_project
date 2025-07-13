@@ -14,23 +14,24 @@ class UserInfoModel {
   String turnOnNotification;
   String location;
   String? usersPhotoUrl;
+  int? type;
 
-  UserInfoModel({
-    required this.firstName,
-    required this.lastName,
-    required this.gender,
-    required this.emailAddress,
-    required this.phoneNumber,
-    required this.birthday,
-    required this.ageRangeOfAnimal,
-    required this.lookingForAdoption,
-    required this.animalsAdoptionPreferred,
-    required this.haveYouAdoptBefore,
-    required this.haveExperienceWithAnimalCare,
-    required this.turnOnNotification,
-    required this.location,
-    required this.usersPhotoUrl,
-  });
+  UserInfoModel(
+      {required this.firstName,
+      required this.lastName,
+      required this.gender,
+      required this.emailAddress,
+      required this.phoneNumber,
+      required this.birthday,
+      required this.ageRangeOfAnimal,
+      required this.lookingForAdoption,
+      required this.animalsAdoptionPreferred,
+      required this.haveYouAdoptBefore,
+      required this.haveExperienceWithAnimalCare,
+      required this.turnOnNotification,
+      required this.location,
+      required this.usersPhotoUrl,
+      this.type});
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) {
     return UserInfoModel(
@@ -49,6 +50,7 @@ class UserInfoModel {
       turnOnNotification: json['turn_on_notification'] ?? '',
       location: json['location'] ?? '',
       usersPhotoUrl: "",
+      type: json['users_type'],
     );
   }
 }

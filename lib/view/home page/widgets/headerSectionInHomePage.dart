@@ -5,6 +5,7 @@ import 'package:graduation_project/controller/HomePageController.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/core/util/appImages.dart';
+import 'package:graduation_project/view/dashboard/AdminDashboard.dart';
 
 class HeaderSectionInHomePage extends StatelessWidget {
   const HeaderSectionInHomePage({super.key});
@@ -68,6 +69,28 @@ class HeaderSectionInHomePage extends StatelessWidget {
                     )),
               ),
             ),
+            SizedBox(
+              width: 10,
+            ),
+            controller.isAdmin
+                ? GestureDetector(
+                    onTap: () {
+                      Get.to(AdminDashboard());
+                    },
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: ColorsApp.primaryColorOpicaty),
+                      child: FittedBox(
+                          fit: BoxFit.none,
+                          child: SvgPicture.asset(
+                            Assets.imagesAdminIcon,
+                          )),
+                    ),
+                  )
+                : Text('')
           ],
         )
       ],

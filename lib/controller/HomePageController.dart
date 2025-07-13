@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:graduation_project/api_links.dart';
 import 'package:graduation_project/controller/ViewMyRequestsController.dart';
+import 'package:graduation_project/controller/loginController.dart';
 import 'package:graduation_project/core/services/services.dart';
 import 'package:graduation_project/core/util/appImages.dart';
 import 'package:graduation_project/data/models/adoptionModel.dart';
@@ -22,12 +24,12 @@ abstract class HomePageController extends GetxController {
 
 class HomePageControllerImp extends HomePageController {
   late int userId;
-   String firstName = "" ; 
+  String firstName = "";
   bool hasRequests = true;
   bool isLoading = false;
   final List<AdoptionModel> adoptions = [];
   final List<HelpRequestModel> helpRequests = [];
-  MyServices myServices = Get.find(); 
+  MyServices myServices = Get.find();
   List<UnifiedItem> mergedItems = [];
   //this list that will shown it in the home page (Take care the names must be the same in the TipsAndTricksForYOurPetsData)
   final List<String> tipsAndTricksList = [
@@ -56,11 +58,15 @@ class HomePageControllerImp extends HomePageController {
 //titles for tipsAndTricksCard
   List<String> headers = [];
 
+  late bool isAdmin;
+
   @override
   void onInit() async {
-
-    userId =    myServices.sharedPreferences.getInt("id")! ;
-    firstName = myServices.sharedPreferences.getString("name")! ;
+    final loginController = Get.find<LoginControllerImp>();
+    userType = loginController.user.type;
+    isAdmin = loginController.isAdmin;
+    userId = myServices.sharedPreferences.getInt("id")!;
+    firstName = myServices.sharedPreferences.getString("name")!;
     await getRequest();
     Get.put(ViewMyRequestsControllerImp());
     //Get.delete<LoginControllerImp>();

@@ -24,6 +24,23 @@ class AdoptionDetailsPage extends StatefulWidget {
 
 class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
   final controller = Get.find<ViewMyRequestsControllerImp>();
+  String? username;
+
+  @override
+  void initState() {
+    super.initState();
+    final UnifiedItem item = Get.arguments;
+    final AdoptionModel adoptionRequest = item.data as AdoptionModel;
+    loadUserName(adoptionRequest.userId);
+  }
+
+  void loadUserName(int userId) async {
+    var name = await controller.getUserName(userId);
+    setState(() {
+      username = name;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final UnifiedItem item = Get.arguments;
@@ -47,9 +64,6 @@ class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
             padding: const EdgeInsets.only(left: 27, right: 27, top: 35),
             child: Column(
               children: [
-                //
-                //header section
-                //
                 TextAndBackArrowHeader(
                   onTap: () {
                     Get.toNamed("/homepage");
@@ -57,41 +71,23 @@ class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
                   texts: ["Adoption", " Details"],
                   colorsOfTexts: [ColorsApp.primaryColor, Colors.black],
                 ),
-                SizedBox(
-                  height: 25,
-                ),
-                //
-                //content section
-                //
+                const SizedBox(height: 25),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //
-                        //images slider section
-                        //
                         CustomImagesSlider(
                           imagePaths: imagePaths,
                           colorsOfDots: ColorsApp.primaryColor,
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        //
-                        //title text Section
-                        //
+                        const SizedBox(height: 10),
                         Text(
                           adoptionRequest.title,
                           style: AppStyles.urbanistSemiBold16(context),
                           maxLines: 3,
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        //
-                        //request information Sction
-                        //
+                        const SizedBox(height: 10),
                         RequestInformationInAdoptionDetailsPage(
                           gender: adoptionRequest.gender,
                           type: adoptionRequest.type,
@@ -99,37 +95,19 @@ class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
                           age: adoptionRequest.age.toString(),
                           location: adoptionRequest.location,
                         ),
-                        widget.enableDeleteButton
-                            ? SizedBox(
-                                height: 0,
-                              )
-                            : SizedBox(
-                                height: 10,
-                              ),
-                        //
-                        //Personal Card Section
-                        //
-                        widget.enableDeleteButton
-                            ? Text("")
-                            : PersonalCard(
-                                image: Assets.imagesProfilePhoto,
-                                name: "James Parlor",
-                                des: "Pet Owner"),
-                        widget.enableDeleteButton
-                            ? SizedBox(
-                                height: 0,
-                              )
-                            : SizedBox(
-                                height: 10,
-                              ),
-                        //
-                        //about Pet Section
-                        //
+                        if (!widget.enableDeleteButton)
+                          const SizedBox(height: 10),
+                        if (!widget.enableDeleteButton)
+                          PersonalCard(
+                            image: Assets.imagesProfilePhoto,
+                            name: username ?? "Loading...",
+                            des: "Pet Owner",
+                          ),
+                        const SizedBox(height: 10),
                         AboutPetInAdoptionDetailsPage(
-                            aboutPet: adoptionRequest.description),
-                        SizedBox(
-                          height: 10,
+                          aboutPet: adoptionRequest.description,
                         ),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ),
@@ -147,7 +125,6 @@ class _AdoptionDetailsPageState extends State<AdoptionDetailsPage> {
                   await controller.deleteAdoptionRequest(
                       adoptionRequest.adoptionId, adoptionRequest.photoUrl);
                   await controller.getRequest();
-                  //Get.back();
                   Get.offNamed("/myrequestspage");
                 },
                 style: ElevatedButton.styleFrom(

@@ -95,7 +95,7 @@ class _AdditionalInfoEditPageState extends State<AdditionalInfoEditPage> {
                       ),
                       CustomCheckListTile(
                         defualtAnswer:
-                            controller.fullInfoForUser!.ageRangeOfAnimal,
+                            controller.fullInfoForUser?.ageRangeOfAnimal ?? "",
                         options: ["Puppy/Kitten", "Young", "Adult"],
                         question: "Age Range of animals that you preferred",
                         onDataChanged: (p0) {

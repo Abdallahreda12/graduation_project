@@ -6,12 +6,14 @@ import 'package:graduation_project/data/models/adoptionModel.dart';
 import 'package:graduation_project/data/models/helpModel.dart';
 import 'package:graduation_project/data/services/deleteAdoptionRequestData.dart';
 import 'package:graduation_project/data/services/deleteHelpRequestData.dart';
+import 'package:graduation_project/data/services/getUserNmaeData.dart';
 import 'package:graduation_project/data/services/viewMyRequestsData.dart';
 
 abstract class ViewMyRequestsController extends GetxController {
   getRequest();
   deleteAdoptionRequest(id, images);
   deleteHelpRequest(id, images);
+  getUserName(UserId);
 }
 
 class ViewMyRequestsControllerImp extends ViewMyRequestsController {
@@ -21,12 +23,11 @@ class ViewMyRequestsControllerImp extends ViewMyRequestsController {
   final List<AdoptionModel> adoptions = [];
   final List<HelpRequestModel> helpRequests = [];
   List<UnifiedItem> mergedItems = [];
-  MyServices myServices = Get.find(); 
+  MyServices myServices = Get.find();
 
   @override
   void onInit() async {
-   
-    userId =    myServices.sharedPreferences.getInt("id")! ;
+    userId = myServices.sharedPreferences.getInt("id")!;
     await getRequest();
     // Get.delete<LoginControllerImp>();
     super.onInit();
@@ -144,5 +145,30 @@ class ViewMyRequestsControllerImp extends ViewMyRequestsController {
     }
     isLoading = false;
     update();
+  }
+
+  @override
+  getUserName(UserId) async {
+    try {
+      var res = await GetUserNameData().getUserData(userId: UserId);
+      print(res);
+      if (res['status'] == "success") {
+        // Access the first user in the list
+        var user = res['data'][0];
+        String firstName = user['users_first_name'] ?? '';
+        String lastName = user['users_last_name'] ?? '';
+        String fullName = '$firstName $lastName'.trim();
+
+        print("✅ First Name: $firstName");
+        print("✅ Full Name: $fullName");
+
+        return fullName.isNotEmpty ? fullName : 'Unknown User';
+      } else {
+        return 'Unknown User';
+      }
+    } catch (e) {
+      print('Error fetching username: $e');
+      return 'Unknown User';
+    }
   }
 }

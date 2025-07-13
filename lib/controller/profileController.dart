@@ -29,7 +29,7 @@ class ProfileControllerImp extends ProfileController {
   DoctorInfoModel? additionalInfoForDoctor;
 
   bool isLoading = false;
-  MyServices myServices = Get.find() ;
+  MyServices myServices = Get.find();
 
   late UserModel user;
 
@@ -212,7 +212,8 @@ class ProfileControllerImp extends ProfileController {
     try {
       var response =
           await ViewAddionalInfoData().postDataForUser(userId: user.userId);
-      update();
+      print("✅sssssssss Response: $response");
+
       print("✅sssssssss Response: $response");
       if (response['status'] == 'success') {
         final userInfoMap = response['data'][0];
@@ -239,8 +240,11 @@ class ProfileControllerImp extends ProfileController {
           "turn_on_notification": "",
           "location": user.usersFullAddress ?? '',
           "users_photo_url": user.usersPhotoUrl ?? '',
+          "users_type": user.type
         });
       }
+      print("gggggggggggggggggggggggggggggggggggggggggggggggggggg");
+      print(fullInfoForUser?.firstName);
       update();
     } catch (e) {
       print("❌ Exception in viewAdditionalInfo: $e");

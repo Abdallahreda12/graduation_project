@@ -70,7 +70,7 @@ class _Signup2PageState extends State<Signup2Page> {
                   TypeUserBox(
                     isSelected: typeUser == "User",
                     onDataChanged: updateData,
-                    text: "User",
+                    text: "Pet Owner",
                     icon: Assets.imagesUser,
                   ),
                   TypeUserBox(

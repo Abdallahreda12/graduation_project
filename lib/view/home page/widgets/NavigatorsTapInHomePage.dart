@@ -134,12 +134,11 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
         //
         GestureDetector(
           onTap: () {
-            try{
-                 controller.goToDoctors();
-            }catch(e){
-              print(e) ;
+            try {
+              controller.goToDoctors();
+            } catch (e) {
+              print(e);
             }
-          
           },
           child: Container(
             //28 -> 25 padding + 3 space between two item
@@ -235,14 +234,14 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Requests",
+                        "Requests & Appointments",
                         style: AppStyles.urbanistMedium16(context),
                       ),
                       Center(
                         widthFactor: 1,
                         child: Text(
                           softWrap: true,
-                          "see all your requests",
+                          "see all your requests and appoinments",
                           style: AppStyles.urbanistReqular14(context),
                         ),
                       ),

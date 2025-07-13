@@ -41,6 +41,16 @@ class ClinicController extends GetxController {
       request.fields['day_of_week'] = clinic.dayOfWeek.toString();
       request.fields['start_time'] = clinic.startTime;
       request.fields['end_time'] = clinic.endTime;
+
+      // Add packages data
+      List<String> packageNames =
+          clinic.packages.map((pkg) => pkg.name).toList();
+      List<String> packagePrices =
+          clinic.packages.map((pkg) => pkg.price).toList();
+
+      request.fields['packages_name'] = packageNames.toString();
+      request.fields['packages_price'] = packagePrices.toString();
+
       print(clinic.startTime);
 
       if (clinic.file != null) {
@@ -71,8 +81,3 @@ class ClinicController extends GetxController {
     }
   }
 }
-
-//////////////////////////////////////////////////////////////////////////////////
-//there something error when push data 
-//don't forget edite userId
-//////////////////////////////////////////////////////////////////////////////////

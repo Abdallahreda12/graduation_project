@@ -29,10 +29,11 @@ class BookingController extends GetxController {
       update();
 
       final data = await Api().post(
-        uri: 'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/clinic/view.php',
+        uri:
+            'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/clinic/view.php',
         body: {"userid": doctor.doctorsUserId.toString()},
       );
-
+      print(data);
       if (data['status'] == 'success') {
         clinics = _parseClinics(data['data']);
       }
@@ -50,7 +51,9 @@ class BookingController extends GetxController {
       if (!clinicMap.containsKey(clinicId)) {
         clinicMap[clinicId] = Clinic.fromJson(item);
       }
-      clinicMap[clinicId]!.availabilities.add(ClinicAvailability.fromJson(item));
+      clinicMap[clinicId]!
+          .availabilities
+          .add(ClinicAvailability.fromJson(item));
     }
 
     return clinicMap.values.toList();
@@ -111,8 +114,10 @@ class BookingController extends GetxController {
     if (selectedClinic == null) return [];
 
     final List<Map<String, dynamic>> availableDays = [];
-    final DateTime firstDayOfMonth = DateTime(currentMonth.year, currentMonth.month, 1);
-    final DateTime lastDayOfMonth = DateTime(currentMonth.year, currentMonth.month + 1, 0);
+    final DateTime firstDayOfMonth =
+        DateTime(currentMonth.year, currentMonth.month, 1);
+    final DateTime lastDayOfMonth =
+        DateTime(currentMonth.year, currentMonth.month + 1, 0);
     final DateTime today = DateTime.now();
 
     final availableDaysOfWeek = selectedClinic!.availabilities
@@ -120,7 +125,8 @@ class BookingController extends GetxController {
         .toSet();
 
     for (int day = 1; day <= lastDayOfMonth.day; day++) {
-      final DateTime date = DateTime(currentMonth.year, currentMonth.month, day);
+      final DateTime date =
+          DateTime(currentMonth.year, currentMonth.month, day);
       if (date.isBefore(DateTime(today.year, today.month, today.day))) {
         continue;
       }
@@ -167,7 +173,8 @@ class BookingController extends GetxController {
       update();
 
       final data = await Api().post(
-        uri: 'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/book/view__availabile_time_slots.php',
+        uri:
+            'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/book/view__availabile_time_slots.php',
         body: {
           "clinic_id": selectedClinic!.clinicId.toString(),
           "bookings_appointment_date": selectedDate!,
@@ -177,11 +184,13 @@ class BookingController extends GetxController {
       if (data['status'] == 'success') {
         reservedTimes = List<String>.from(data['data']);
         // Generate all possible time slots for the selected date
-        final dayOfWeek = DateFormat('EEEE').format(DateTime.parse(selectedDate!));
-        final availability = selectedClinic!.availabilities
-            .firstWhereOrNull((a) => a.dayOfWeek.toLowerCase() == dayOfWeek.toLowerCase());
+        final dayOfWeek =
+            DateFormat('EEEE').format(DateTime.parse(selectedDate!));
+        final availability = selectedClinic!.availabilities.firstWhereOrNull(
+            (a) => a.dayOfWeek.toLowerCase() == dayOfWeek.toLowerCase());
         if (availability != null) {
-          availableTimes = _generateTimeSlots(availability.startTime, availability.endTime);
+          availableTimes =
+              _generateTimeSlots(availability.startTime, availability.endTime);
         } else {
           availableTimes = [];
         }
@@ -201,10 +210,12 @@ class BookingController extends GetxController {
 
   List<Map<String, dynamic>> getAvailableTimesForSelectedDate() {
     // Return time slots with availability status
-    return availableTimes.map((time) => {
-          'time': time,
-          'isReserved': reservedTimes.contains(time),
-        }).toList();
+    return availableTimes
+        .map((time) => {
+              'time': time,
+              'isReserved': reservedTimes.contains(time),
+            })
+        .toList();
   }
 
   List<String> _generateTimeSlots(String startTime, String endTime) {

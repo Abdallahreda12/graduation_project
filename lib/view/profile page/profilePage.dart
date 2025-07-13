@@ -62,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           PersonCardInProfilePage(
                             name:
-                                '${controller.fullInfoForUser?.firstName} ${controller.fullInfoForUser?.lastName}',
+                                '${controller.user.usersFirstName} ${controller.user.usersLastName}',
                             image:
                                 '$linkServerImage${controller.user.usersPhotoUrl}',
                             gmail: controller.user.usersEmail,

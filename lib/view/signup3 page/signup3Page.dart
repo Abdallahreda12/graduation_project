@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project/controller/signUpController.dart';
+
 import 'package:graduation_project/core/class/handleWidgets.dart';
 import 'package:graduation_project/core/util/styles.dart';
 import 'package:graduation_project/view/signup%20page/widgets/buttonsRow.dart';
@@ -149,7 +150,7 @@ class _Signup3PageState extends State<Signup3Page> {
                       },
                       selectedGender: controller.doctorInfo?.gender,
                       onGenderSelected: (value) {
-                        controller.doctorInfo?.gender = value;
+                        //  controller.doctorInfo?.gender = value;
                         controller.updateDoctorInfo(gender: value);
                       },
                     ),
