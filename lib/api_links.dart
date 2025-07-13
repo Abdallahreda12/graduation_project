@@ -1,5 +1,6 @@
 const String linkServerName =
-    "https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net";
+    "http://10.0.2.2/help_animals" ;
+    //"https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net";
 const String linkServerImage =
     'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/upload/';
 //auth
@@ -26,6 +27,5 @@ const String linkEditAdditionalInfo =
 const String linkViewAdditionalInfo =
     "$linkServerName/profile/view_additional_info.php";
 const String linkViewUser = "$linkServerName/adopt&help/view_user.php";
+const String linkChat = "$linkServerName/chat";
 const String linkAddClinic = "$linkServerName/clinic/add.php";
-
-

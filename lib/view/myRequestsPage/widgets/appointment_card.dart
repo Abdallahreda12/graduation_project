@@ -7,12 +7,14 @@ class AppointmentCard extends StatelessWidget {
   final AppointmentModel appointment;
   final VoidCallback? onTap;
   final VoidCallback? onCancel;
+  final VoidCallback? onRate;
 
   const AppointmentCard({
     Key? key,
     required this.appointment,
     this.onTap,
     this.onCancel,
+    this.onRate,
   }) : super(key: key);
 
   @override
@@ -222,7 +224,57 @@ class AppointmentCard extends StatelessWidget {
                   ),
                 ],
                 
-                // Action buttons (if appointment is pending)
+                // Rating display for completed appointments
+                if (appointment.status.toLowerCase() == 'completed' && 
+                    appointment.isRated && 
+                    appointment.userRating != null) ...[
+                  SizedBox(height: 12),
+                  Container(
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.green[50],
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.green[200]!),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle,
+                          color: Colors.green,
+                          size: 18,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'You rated this appointment',
+                          style: AppStyles.urbanistMedium12(context).copyWith(
+                            color: Colors.green[700],
+                          ),
+                        ),
+                        Spacer(),
+                        Row(
+                          children: [
+                            ...List.generate(5, (index) {
+                              return Icon(
+                                index < appointment.userRating! ? Icons.star : Icons.star_border,
+                                color: Colors.amber,
+                                size: 14,
+                              );
+                            }),
+                            SizedBox(width: 4),
+                            Text(
+                              '${appointment.userRating}',
+                              style: AppStyles.urbanistMedium12(context).copyWith(
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+                
+                // Action buttons
                 if (appointment.status.toLowerCase() == 'pending') ...[
                   SizedBox(height: 16),
                   Row(
@@ -263,6 +315,85 @@ class AppointmentCard extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                ] else if (appointment.status.toLowerCase() == 'completed') ...[
+                  SizedBox(height: 16),
+                  if (!appointment.isRated && onRate != null) ...[
+                    // Show rate button if not rated
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed: onRate,
+                            icon: Icon(Icons.star_rate, size: 18),
+                            label: Text('Rate Experience'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.amber,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: onTap,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorsApp.primaryColor,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            child: Text(
+                              'View Details',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ] else ...[
+                    // Show only view details if already rated
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: onTap,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorsApp.primaryColor,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Text(
+                          'View Details',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    ),
+                  ],
+                ] else ...[
+                  // For other statuses (confirmed, cancelled)
+                  SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: onTap,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorsApp.primaryColor,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        'View Details',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ),
                   ),
                 ],
               ],

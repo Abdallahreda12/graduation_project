@@ -97,7 +97,9 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                     Get.toNamed("/AiChatScreen" );
+                  },
                   icon: SvgPicture.asset(
                     Assets.imagesAIIcon,
                     width: 24,
@@ -110,7 +112,11 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                     Get.toNamed("/ConversationsPage", );
+                  
+                  },
                   icon: SvgPicture.asset(
                     Assets.imagesChatIcon,
                     width: 20,

@@ -14,9 +14,11 @@ class AppointmentModel {
   final String problemDescription;
   final int clinicId;
   final String clinicName;
-  final int doctorUserId;
+  final int doctorId;
   final String doctorFirstName;
   final String doctorLastName;
+   final bool isRated;
+  final double? userRating;
 
   AppointmentModel({
     required this.bookingId,
@@ -34,9 +36,11 @@ class AppointmentModel {
     required this.problemDescription,
     required this.clinicId,
     required this.clinicName,
-    required this.doctorUserId,
+    required this.doctorId,
     required this.doctorFirstName,
     required this.doctorLastName,
+     required   this.isRated ,
+   required this.userRating,
   });
 
   factory AppointmentModel.fromJson(Map<String, dynamic> json) {
@@ -56,9 +60,13 @@ class AppointmentModel {
       problemDescription: json['sick_animals_problem_description'] ?? '',
       clinicId: json['clinic_id'] ?? 0,
       clinicName: json['clinics_name'] ?? '',
-      doctorUserId: json['doctor_user_id'] ?? 0,
+      doctorId: json['doctor_id'] ?? 0,
       doctorFirstName: json['doctor_first_name'] ?? '',
       doctorLastName: json['doctor_last_name'] ?? '',
+      isRated: json['is_rated'] == 1,
+      userRating: json['user_rating'] != null
+          ? double.tryParse(json['user_rating'].toString())
+          : null,
     );
   }
 
@@ -79,7 +87,7 @@ class AppointmentModel {
       'sick_animals_problem_description': problemDescription,
       'clinic_id': clinicId,
       'clinics_name': clinicName,
-      'doctor_user_id': doctorUserId,
+      'doctor_id': doctorId,
       'doctor_first_name': doctorFirstName,
       'doctor_last_name': doctorLastName,
     };
@@ -87,7 +95,7 @@ class AppointmentModel {
 
   String get doctorFullName => '$doctorFirstName $doctorLastName';
   String get userFullName => '$userFirstName $userLastName';
-  
+
   String get formattedDate {
     try {
       final date = DateTime.parse(appointmentDate);
@@ -96,7 +104,7 @@ class AppointmentModel {
       return appointmentDate;
     }
   }
-  
+
   String get formattedTime {
     try {
       final time = appointmentTime.split(':');

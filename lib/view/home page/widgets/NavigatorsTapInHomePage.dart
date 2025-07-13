@@ -102,22 +102,27 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                       SizedBox(
                         height: 8,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Chats",
-                            style: AppStyles.urbanistMedium16(context),
-                          ),
-                          Center(
-                            widthFactor: 1,
-                            child: Text(
-                              softWrap: true,
-                              "Direct chat between users and doctors for quick health advice.",
-                              style: AppStyles.urbanistReqular14(context),
+                      GestureDetector(
+                        onTap: (){
+                          Get.toNamed("/ConversationsPage");
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Chats",
+                              style: AppStyles.urbanistMedium16(context),
                             ),
-                          ),
-                        ],
+                            Center(
+                              widthFactor: 1,
+                              child: Text(
+                                softWrap: true,
+                                "Direct chat between users and doctors for quick health advice.",
+                                style: AppStyles.urbanistReqular14(context),
+                              ),
+                            ),
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -235,14 +240,14 @@ class NavigatorsTapsInHomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Requests",
+                        "Requests & Appointments",
                         style: AppStyles.urbanistMedium16(context),
                       ),
                       Center(
                         widthFactor: 1,
                         child: Text(
                           softWrap: true,
-                          "see all your requests",
+                          "see all your requests & appointments",
                           style: AppStyles.urbanistReqular14(context),
                         ),
                       ),

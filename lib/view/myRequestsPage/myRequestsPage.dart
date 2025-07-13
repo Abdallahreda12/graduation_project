@@ -15,6 +15,257 @@ import 'package:graduation_project/view/adoption%20And%20Help%20Page/widgets/sea
 import 'package:graduation_project/view/myRequestsPage/widgets/adoptionAndHelpCardInMyRequestsPage.dart';
 import 'package:graduation_project/view/myRequestsPage/widgets/appointment_card.dart';
 
+// Rating Dialog Widget
+class RatingDialog extends StatefulWidget {
+  final AppointmentModel appointment;
+  final Function(double rating) onRatingSubmitted;
+
+  const RatingDialog({
+    Key? key,
+    required this.appointment,
+    required this.onRatingSubmitted,
+  }) : super(key: key);
+
+  @override
+  State<RatingDialog> createState() => _RatingDialogState();
+}
+
+class _RatingDialogState extends State<RatingDialog> {
+  double _rating = 0.0;
+  final TextEditingController _commentController = TextEditingController();
+
+  @override
+  void dispose() {
+    _commentController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Rate Your Experience',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: ColorsApp.primaryColor,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: Icon(Icons.close),
+                  padding: EdgeInsets.zero,
+                  constraints: BoxConstraints(),
+                ),
+              ],
+            ),
+            
+            SizedBox(height: 16),
+            
+            // Doctor info
+            Container(
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.grey[50],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.local_hospital,
+                    color: ColorsApp.primaryColor,
+                    size: 20,
+                  ),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Dr. ${widget.appointment.doctorFullName}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Text(
+                          widget.appointment.clinicName,
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            
+            SizedBox(height: 20),
+            
+            // Rating stars
+            Text(
+              'How would you rate your experience?',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey[700],
+              ),
+            ),
+            
+            SizedBox(height: 12),
+            
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(5, (index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _rating = index + 1.0;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      child: Icon(
+                        index < _rating ? Icons.star : Icons.star_border,
+                        color: Colors.amber,
+                        size: 36,
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
+            
+            SizedBox(height: 16),
+            
+            // Rating text
+            if (_rating > 0)
+              Center(
+                child: Text(
+                  _getRatingText(_rating),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey[600],
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            
+            SizedBox(height: 20),
+            
+            // Comment section (optional)
+            // Text(
+            //   'Additional Comments (Optional)',
+            //   style: TextStyle(
+            //     fontSize: 14,
+            //     fontWeight: FontWeight.w600,
+            //     color: Colors.grey[700],
+            //   ),
+            // ),
+            
+            // SizedBox(height: 8),
+            
+            // TextField(
+            //   controller: _commentController,
+            //   maxLines: 3,
+            //   decoration: InputDecoration(
+            //     hintText: 'Share your experience...',
+            //     border: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(8),
+            //       borderSide: BorderSide(color: Colors.grey[300]!),
+            //     ),
+            //     enabledBorder: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(8),
+            //       borderSide: BorderSide(color: Colors.grey[300]!),
+            //     ),
+            //     focusedBorder: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(8),
+            //       borderSide: BorderSide(color: ColorsApp.primaryColor),
+            //     ),
+            //   ),
+            // ),
+            
+            SizedBox(height: 20),
+            
+            // Action buttons
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: Colors.grey[400]!),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.grey[600]),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _rating > 0 ? () {
+                      widget.onRatingSubmitted(_rating);
+                      Navigator.of(context).pop();
+                    } : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ColorsApp.primaryColor,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                    ),
+                    child: Text('Submit Rating'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _getRatingText(double rating) {
+    switch (rating.toInt()) {
+      case 1:
+        return 'Poor';
+      case 2:
+        return 'Fair';
+      case 3:
+        return 'Good';
+      case 4:
+        return 'Very Good';
+      case 5:
+        return 'Excellent';
+      default:
+        return '';
+    }
+  }
+}
+
 class MyRequestsPage extends StatefulWidget {
   const MyRequestsPage({super.key});
 
@@ -158,32 +409,6 @@ class _MyRequestsPageState extends State<MyRequestsPage>
                                     padding: EdgeInsets.all(16),
                                     child: Column(
                                       children: [
-                                        // Search bar
-                                        TextField(
-                                          controller: _searchController,
-                                          decoration: InputDecoration(
-                                            hintText: 'Search appointments...',
-                                            prefixIcon: Icon(Icons.search),
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(12),
-                                              borderSide: BorderSide(color: Colors.grey[300]!),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(12),
-                                              borderSide: BorderSide(color: Colors.grey[300]!),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(12),
-                                              borderSide: BorderSide(color: ColorsApp.primaryColor),
-                                            ),
-                                          ),
-                                          onChanged: (value) {
-                                            appointmentsController.filterAppointments(value);
-                                          },
-                                        ),
-                                        
-                                        SizedBox(height: 12),
-                                        
                                         // Status filter chips - Always visible
                                         SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
@@ -229,6 +454,11 @@ class _MyRequestsPageState extends State<MyRequestsPage>
                                                               _showCancelConfirmation(appointment, appointmentsController);
                                                             }
                                                           : null,
+                                                      onRate: appointment.status.toLowerCase() == 'completed' && !appointment.isRated
+                                                          ? () {
+                                                              _showRatingDialog(appointment);
+                                                            }
+                                                          : null,
                                                     );
                                                   },
                                                 ),
@@ -248,6 +478,38 @@ class _MyRequestsPageState extends State<MyRequestsPage>
           ),
         );
       }),
+    );
+  }
+
+  // Show rating dialog
+  void _showRatingDialog(AppointmentModel appointment) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return RatingDialog(
+          appointment: appointment,
+          onRatingSubmitted: (rating) {
+            final appointmentsController = Get.find<AppointmentsController>();
+            final userId = appointmentsController.myServices.sharedPreferences.getInt("id");
+            
+            if (userId != null) {
+              appointmentsController.addRating(
+                appointment.bookingId,
+                appointment.doctorId,
+                rating,
+              );
+            } else {
+              Get.snackbar(
+                'Error',
+                'User not found. Please login again.',
+                snackPosition: SnackPosition.TOP,
+                backgroundColor: Colors.red,
+                colorText: Colors.white,
+              );
+            }
+          },
+        );
+      },
     );
   }
 
@@ -401,6 +663,57 @@ class _MyRequestsPageState extends State<MyRequestsPage>
                 _buildDetailRow('Owner', appointment.animalOwnerName),
                 _buildDetailRow('Animal', '${appointment.animalGender}, ${appointment.animalAge} years old'),
                 
+                // Show rating if appointment is completed and rated
+                if (appointment.status.toLowerCase() == 'completed' && 
+                    appointment.isRated && 
+                    appointment.userRating != null) ...[
+                  SizedBox(height: 12),
+                  Container(
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.green[50],
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.green[200]!),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                          size: 20,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'Your Rating: ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            ...List.generate(5, (index) {
+                              return Icon(
+                                index < appointment.userRating! ? Icons.star : Icons.star_border,
+                                color: Colors.amber,
+                                size: 16,
+                              );
+                            }),
+                            SizedBox(width: 4),
+                            Text(
+                              '${appointment.userRating}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey[700],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+                
                 if (appointment.problemDescription.isNotEmpty) ...[
                   SizedBox(height: 12),
                   Text(
@@ -430,21 +743,48 @@ class _MyRequestsPageState extends State<MyRequestsPage>
                 
                 SizedBox(height: 20),
                 
-                // Close button
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorsApp.primaryColor,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                // Action buttons
+                Row(
+                  children: [
+                    // Show rate button if completed but not rated
+                    if (appointment.status.toLowerCase() == 'completed' && !appointment.isRated) ...[
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _showRatingDialog(appointment);
+                          },
+                          icon: Icon(Icons.star_rate, size: 18),
+                          label: Text('Rate'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.amber,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 12),
+                      SizedBox(width: 12),
+                    ],
+                    
+                    // Close button
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorsApp.primaryColor,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                        ),
+                        child: Text('Close'),
+                      ),
                     ),
-                    child: Text('Close'),
-                  ),
+                  ],
                 ),
               ],
             ),
@@ -515,7 +855,7 @@ class _MyRequestsPageState extends State<MyRequestsPage>
             ),
             ElevatedButton(
               onPressed: () {
-                controller.cansel(appointment.bookingId);
+                controller.cancel(appointment.bookingId);
                 Navigator.of(context).pop();
                 _cancelAppointment(appointment, controller);
               },

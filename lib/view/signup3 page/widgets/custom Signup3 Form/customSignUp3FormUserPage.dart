@@ -1,7 +1,9 @@
+// Update your CustomSignUp3FormUserPage to include location selector
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/Widgets/customTextField.dart';
 import 'package:graduation_project/core/util/colors.dart';
 import 'package:graduation_project/core/util/styles.dart';
+import 'package:graduation_project/view/signup3%20page/widgets/location_selector.dart';
 import 'package:intl/intl.dart';
 
 class CustomSignUp3FormUserPage extends StatefulWidget {
@@ -13,6 +15,9 @@ class CustomSignUp3FormUserPage extends StatefulWidget {
   final Function(String) onPhoneChanged;
   final String? selectedGender;
   final Function(String?) onGenderChanged;
+  final Function(String, String) onLocationSelected; // Add this
+  final String? initialGovernorate; // Add this
+  final String? initialCity; // Add this
 
   const CustomSignUp3FormUserPage({
     super.key,
@@ -24,6 +29,9 @@ class CustomSignUp3FormUserPage extends StatefulWidget {
     required this.selectedGender,
     required this.onGenderChanged,
     required this.onLastNameChanged,
+    required this.onLocationSelected, // Add this
+    this.initialGovernorate, // Add this
+    this.initialCity, // Add this
   });
 
   @override
@@ -91,7 +99,7 @@ class _CustomSignUp3FormUserPageState extends State<CustomSignUp3FormUserPage> {
                           onSurface: Colors.black,
                         )),
                         child: child!,
-                      ); // Body text color, child: child)
+                      );
                     },
                     context: context,
                     initialDate: DateTime.now(),
@@ -103,7 +111,6 @@ class _CustomSignUp3FormUserPageState extends State<CustomSignUp3FormUserPage> {
                       _selectedDate = pickedDate;
                       widget.dateOfBirthController.text =
                           DateFormat('yyyy-MM-dd').format(_selectedDate!);
-                      //widget.onDatePicked(selectedDate!);
                     });
                   }
                 },
@@ -151,11 +158,26 @@ class _CustomSignUp3FormUserPageState extends State<CustomSignUp3FormUserPage> {
           CustomTextField(
             onDataChanged: widget.onPhoneChanged,
             text: "Phone Number",
-            hintText: "What’s your phone number",
+            hintText: "What's your phone number",
             borderradius: 20,
             validator: (value) =>
                 value!.length < 11 ? "Please enter a valid phone number" : null,
           ),
+          const SizedBox(height: 10),
+          
+          // Add the location selector here
+          LocationSelector(
+            onLocationSelected: widget.onLocationSelected,
+            initialGovernorate: widget.initialGovernorate,
+            initialCity: widget.initialCity,
+          ),
+          
+          // Or use the version with search:
+          // LocationSelectorWithSearch(
+          //   onLocationSelected: widget.onLocationSelected,
+          //   initialGovernorate: widget.initialGovernorate,
+          //   initialCity: widget.initialCity,
+          // ),
         ],
       ),
     );

@@ -19,7 +19,8 @@ class DoctorDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Initialize the controller
-     final DoctorDetailsController controller = Get.put(DoctorDetailsController());
+    final DoctorDetailsController controller =
+        Get.put(DoctorDetailsController());
 
     return Scaffold(
       backgroundColor: ColorsApp.backGroundColor,
@@ -42,38 +43,44 @@ class DoctorDetailsPage extends StatelessWidget {
                   child: Column(
                     children: [
                       // Section 1 "Doctor Card"
-                        DoctorCardOnDoctorDetailsPage(
-                          doctor: controller.doctor,
-                          onMessageTap: (){},
-                          onCallTap: ()async{
-                            
-                            await launchUrl(Uri(scheme: 'tel', path: controller.doctor.phone));
-                          },
-                        ),
-                        //
-                        //Section 2
-                        //
-                        Section2InDoctorDetailsPage(
-                          doctor: controller.doctor,
-                        ),
-                        //
-                        //section 3 'About'
-                        //
-                        Section3InDoctorDetailsPage(
-                         doctor: controller.doctor,
-                        ),
-                        //
-                        //section 4 'Education'
-                        //
-                        Section4InDoctorDetailsPage(
-                         doctor: controller.doctor,
-                        ),
-                        //
-                        //section 5 "Location"
-                        //
-                        Section5InDoctorDetailsPage(
-                          doctor: controller.doctor,
-                        ),
+                      DoctorCardOnDoctorDetailsPage(
+                        doctor: controller.doctor,
+                        onMessageTap: () {
+                          Get.toNamed("/ChatPage", arguments: {
+                            'other_user_id': controller.doctor.doctorsUserId,
+                            'peer_name':  controller.doctor.fullName,
+                             "photo" : controller.doctor.usersPhotoUrl
+                          });
+                        },
+                        onCallTap: () async {
+                          await launchUrl(Uri(
+                              scheme: 'tel', path: controller.doctor.phone));
+                        },
+                      ),
+                      //
+                      //Section 2
+                      //
+                      Section2InDoctorDetailsPage(
+                        doctor: controller.doctor,
+                      ),
+                      //
+                      //section 3 'About'
+                      //
+                      Section3InDoctorDetailsPage(
+                        doctor: controller.doctor,
+                      ),
+                      //
+                      //section 4 'Education'
+                      //
+                      Section4InDoctorDetailsPage(
+                        doctor: controller.doctor,
+                      ),
+                      //
+                      //section 5 "Location"
+                      //
+                      Section5InDoctorDetailsPage(
+                        doctor: controller.doctor,
+                      ),
                     ],
                   ),
                 ),
@@ -91,7 +98,7 @@ class DoctorDetailsPage extends StatelessWidget {
               text: 'Book an appointment',
               width: MediaQuery.sizeOf(context).width,
               onTap: () {
-                Get.toNamed("/bookpage" , arguments: controller.doctor);
+                Get.toNamed("/bookpage", arguments: controller.doctor);
               },
             ),
           ),
