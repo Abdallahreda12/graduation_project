@@ -2,7 +2,10 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import 'dart:convert';
 
 class WebSocketService {
-  static const String wsUrl = 'ws://192.168.1.6:9090';
+  static const String wsUrl =  
+  //"ws://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net:9090" ;
+  "ws://10.0.2.2:9090" ;
+  //'ws://192.168.1.6:9090';
   
   WebSocketChannel? _channel;
   Function(Map<String, dynamic>)? onMessageReceived;
@@ -15,7 +18,7 @@ class WebSocketService {
       _channel = WebSocketChannel.connect(Uri.parse(wsUrl));
       _channel!.stream.listen(
         (message) {
-        //  print(message) ; ///////////////////////////////////////////////////
+          print(message) ; ///////////////////////////////////////////////////
           final data = json.decode(message);
           _handleMessage(data);
         },
@@ -49,6 +52,7 @@ class WebSocketService {
   }
 
   void authenticate(int userId) {
+    print(userId) ;
     _send({
       'action': 'auth',
       'user_id': userId,

@@ -1,10 +1,12 @@
+import 'package:graduation_project/api_links.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ApiService {
-  static const String baseUrl =  
+  static const String baseUrl =  linkChat ;
+  //"http://10.0.2.2s/help_animals/chat"; 
   //"http://192.168.1.6/help_animals/chat" ;
-  'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/chat';
+  //'https://myphpapp-e4fjcnf2azfsazh8.uaenorth-01.azurewebsites.net/chat';
 
   static Future<Map<String, dynamic>> createConversation(int userId1, int userId2) async {
     try {
@@ -35,7 +37,7 @@ class ApiService {
           'userId': userId.toString(),
         },
       );
-
+       print(response.body);
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {

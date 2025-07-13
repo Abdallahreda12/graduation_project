@@ -43,8 +43,8 @@ class ChatController extends GetxController {
     
     // Get current user ID from MyServices
     MyServices myServices = Get.find();
-    currentUserId = myServices.sharedPreferences.getInt("id")!;
-    currentUserId = 1; // For testing
+    currentUserId = myServices.sharedPreferences.getInt("id")?? 0;
+    //currentUserId = 1; // For testing
     
     // Get parameters from Get.arguments
     if (Get.arguments != null) {
@@ -54,7 +54,7 @@ class ChatController extends GetxController {
       photo = Get.arguments['photo'] ?? '';
     }
     
-    otherUserId = 1; // For testing
+    //otherUserId = 2; // For testing
     
     _setupWebSocket();
     _setupScrollListener();

@@ -21,7 +21,7 @@ class ConversationsController extends GetxController {
     // Get current user ID from MyServices
     MyServices myServices = Get.find();
     currentUserId = myServices.sharedPreferences.getInt("id") ?? 0;
-    currentUserId = 2 ; ////////////////////////////////////////////////
+    //currentUserId = 1 ; ////////////////////////////////////////////////
     _setupWebSocket();
     loadConversations();
   }
@@ -60,8 +60,8 @@ class ConversationsController extends GetxController {
             print(response['data']) ;
         errorMessage = '';
       } else {
-        errorMessage = 'Failed to load conversations';
-        conversations = [];
+        // errorMessage = 'Failed to load conversations';
+        // conversations = [];
       }
     } catch (e) {
       errorMessage = 'Error loading conversations: $e';

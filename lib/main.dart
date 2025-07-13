@@ -75,7 +75,7 @@ class MainApp extends StatelessWidget {
       fallbackLocale: TranslationService.fallbackLocale,
       getPages: [
        GetPage(name: "/", page: () => SplashPage(),
-        middlewares: [MyMiddleWare()] 
+       middlewares: [MyMiddleWare()] 
         ),
         GetPage(name: "/selectlangpage", page: () => SelectLangPage()),
         GetPage(name: "/onboarding", page: () => OnboardingPage()),

@@ -99,26 +99,26 @@ class ChatPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 2),
-                    Row(
-                      children: [
-                        Container(
-                          width: 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: controller.getPeerStatusColor(),
-                          ),
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          controller.getPeerStatusText(),
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Container(
+                    //       width: 8,
+                    //       height: 8,
+                    //       decoration: BoxDecoration(
+                    //         shape: BoxShape.circle,
+                    //         color: controller.getPeerStatusColor(),
+                    //       ),
+                    //     ),
+                    //     const SizedBox(width: 6),
+                    //     Text(
+                    //       controller.getPeerStatusText(),
+                    //       style: TextStyle(
+                    //         fontSize: 12,
+                    //         color: Colors.grey[600],
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
